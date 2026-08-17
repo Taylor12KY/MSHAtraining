@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=video-guidance-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-guidance-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=allen-brand-refresh-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -45,6 +45,16 @@ test('HTML loads external CSS, content, and app files in order', () => {
   assert.ok(html.indexOf('js/video-library.js') < html.indexOf('js/app.js'));
   assert.doesNotMatch(html, /<style>/i);
   assert.doesNotMatch(html, /<script>\s*[^<]/i);
+});
+
+test('branded learner experience keeps regulatory context and a clear next action', () => {
+  assert.match(html, /data:image\/webp;base64,/);
+  assert.match(html, /The Allen Company — Serving Kentucky since 1939/);
+  assert.match(html, /Mine Safety and Health Administration emblem/);
+  assert.match(html, /does not imply MSHA endorsement or certification/);
+  assert.match(html, /id="btn-continue-training"/);
+  assert.match(app, /function continueTraining\(\)/);
+  assert.match(app, /div\.addEventListener\('keydown'/);
 });
 
 test('program contains modules 1-13 totaling exactly 32 hours', () => {
