@@ -26,7 +26,7 @@ const REQUIRED_VIDEOS = [
   {
     id: "_s2x4dmQgjU",
     moduleId: 5,
-    title: "MSHA â€“ Good Berms Save Lives",
+    title: "MSHA – Good Berms Save Lives",
     author: "Cranesville Block Co., Inc",
     durationSeconds: 825,
     description: "Berm construction and edge protection around haul roads and dump points."
@@ -66,7 +66,7 @@ const REQUIRED_VIDEOS = [
   {
     id: "4rQwxVnYcLk",
     moduleId: 7,
-    title: "Rock Falls â€“ Preventing Rock Fall Injuries",
+    title: "Rock Falls – Preventing Rock Fall Injuries",
     author: "Underground Life",
     durationSeconds: 1223,
     description: "Recognition and control of loose-ground and rock-fall hazards."
@@ -114,7 +114,7 @@ const REQUIRED_VIDEOS = [
   {
     id: "4MjKwOI2LrE",
     moduleId: 12,
-    title: "Tony Crow â€“ Safety Is Not Just About Me",
+    title: "Tony Crow – Safety Is Not Just About Me",
     author: "Pick Up Your Heart",
     durationSeconds: 357,
     description: "Personal account emphasizing communication, PPE, and how one unsafe decision affects others."
@@ -122,7 +122,7 @@ const REQUIRED_VIDEOS = [
   {
     id: "gbaGN7JQoO4",
     moduleId: 12,
-    title: "Explosives Underground â€“ Handling Explosives in Modern Mines",
+    title: "Explosives Underground – Handling Explosives in Modern Mines",
     author: "PublicResourceOrg",
     durationSeconds: 900,
     description: "Task-specific overview of transporting, storing, loading, and detonating explosives underground."
@@ -132,4 +132,3 @@ const REQUIRED_VIDEOS = [
 function getRequiredVideos(moduleId) {
   return REQUIRED_VIDEOS.filter(video => video.moduleId === moduleId);
 }
-

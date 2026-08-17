@@ -79,4 +79,3 @@ test('every site orientation requires current-plan instructor review', () => {
     assert.match(siteContent, new RegExp(`${site}[\\s\\S]*?current written plans`, 'i'));
   }
 });
-

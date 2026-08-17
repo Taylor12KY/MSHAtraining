@@ -209,7 +209,7 @@ function showDashboard() {
   currentModuleId = null;
   hideAll();
   document.getElementById('screen-dashboard').classList.remove('hidden');
-  document.getElementById('dash-name').textContent = state.name || 'â€”';
+  document.getElementById('dash-name').textContent = state.name || '—';
   document.getElementById('dash-mine').textContent = state.mine || '';
 
   const modules = getModules();
@@ -240,10 +240,10 @@ function showDashboard() {
     div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '');
     
     div.innerHTML = `
-      <div class="mod-num">${isDone ? 'âœ“' : m.id}</div>
+      <div class="mod-num">${isDone ? '✓' : m.id}</div>
       <div class="mod-info">
         <div class="mod-title">${m.title}</div>
-        <div class="mod-meta">${m.hours} hrs Â· ${m.questions.length} quiz questions</div>
+        <div class="mod-meta">${m.hours} hrs · ${m.questions.length} quiz questions</div>
       </div>
       <span class="status-badge ${statusClass}">${statusText}</span>
     `;
@@ -328,7 +328,7 @@ function requiredVideoControls(video) {
   return `
     <div class="video-watch-controls">
       <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
-      <span class="video-watch-status" id="video-status-${video.id}">Required viewing Â· 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
+      <span class="video-watch-status" id="video-status-${video.id}">Required viewing · 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
     </div>
     <div class="video-watch-track" aria-hidden="true"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
     <p class="video-watch-note" id="video-note-${video.id}">Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.</p>
@@ -375,13 +375,13 @@ function renderRequiredVideos(moduleId) {
       box = document.createElement('div');
       box.className = 'video-box';
       box.innerHTML = `
-        <p class="video-title">${escapeHtml(video.title)} Â· ${formatVideoTime(video.durationSeconds)}</p>
+        <p class="video-title">${escapeHtml(video.title)} · ${formatVideoTime(video.durationSeconds)}</p>
         <p class="video-description">${escapeHtml(video.description)} <span class="video-source">Source: ${escapeHtml(video.author)}</span></p>
         <div class="managed-video-frame">
           <iframe id="yt-player-${video.id}" src="${managedYouTubeUrl(video.id)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
         ${requiredVideoControls(video)}
-        <p class="video-fallback"><a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener">Open on YouTube â†—</a> <span>(external viewing cannot receive completion credit)</span></p>
+        <p class="video-fallback"><a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener">Open on YouTube ↗</a> <span>(external viewing cannot receive completion credit)</span></p>
       `;
       section.appendChild(box);
       iframe = box.querySelector('iframe');
@@ -472,7 +472,7 @@ function onRequiredVideoStateChange(event, videoId) {
       record.complete = true;
       record.updatedAt = new Date().toISOString();
       saveState();
-      setRequiredVideoNote(videoId, 'Video complete âœ“', false);
+      setRequiredVideoNote(videoId, 'Video complete ✓', false);
       updateRequiredVideoUI(meta.moduleId, videoId);
       updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
     } else {
@@ -572,8 +572,8 @@ function updateRequiredVideoUI(moduleId, videoId) {
   const fill = document.getElementById('video-fill-' + videoId);
   if (status) {
     status.textContent = record.complete
-      ? 'Complete âœ“ Â· ' + formatVideoTime(duration)
-      : 'Required viewing Â· ' + formatVideoTime(watched) + ' / ' + formatVideoTime(duration);
+      ? 'Complete ✓ · ' + formatVideoTime(duration)
+      : 'Required viewing · ' + formatVideoTime(watched) + ' / ' + formatVideoTime(duration);
     status.classList.toggle('complete', record.complete);
   }
   if (fill) fill.style.width = (duration ? Math.min(100, (watched / duration) * 100) : 0) + '%';
@@ -608,7 +608,7 @@ function updateQuizButton(id) {
   btn.classList.remove('hidden');
   if (canTakeQuiz(id)) {
     btn.disabled = false;
-    btn.textContent = 'Go to Quiz â†’';
+    btn.textContent = 'Go to Quiz →';
   } else {
     btn.disabled = true;
     const need = [];
@@ -630,27 +630,27 @@ function updateProgressUI(id, totalSec) {
   const metaEl = document.getElementById('prog-meta');
   if (timeEl) {
     if (state.timersDone[id] || state.completed.includes(id)) {
-      timeEl.textContent = 'Time complete âœ“';
+      timeEl.textContent = 'Time complete ✓';
     } else {
-      timeEl.textContent = formatTimer(remaining) + ' remaining  Â·  ' + Math.floor(pct) + '%';
+      timeEl.textContent = formatTimer(remaining) + ' remaining  ·  ' + Math.floor(pct) + '%';
     }
   }
   if (fillEl) fillEl.style.width = ((state.timersDone[id] || state.completed.includes(id)) ? 100 : pct) + '%';
   if (metaEl) {
     const parts = [];
     if (state.timersDone[id] || state.completed.includes(id)) {
-      parts.push('<span class="ok">âœ“ Required time done</span>');
+      parts.push('<span class="ok">✓ Required time done</span>');
     } else if (document.hidden) {
-      parts.push('<span class="wait">â¸ Paused â€” return to this tab to continue</span>');
+      parts.push('<span class="wait">⏸ Paused — return to this tab to continue</span>');
     } else if (Date.now() - lastActivityAt >= ACTIVITY_TIMEOUT_MS) {
-      parts.push('<span class="wait">â¸ Paused for inactivity â€” interact with the page to continue</span>');
+      parts.push('<span class="wait">⏸ Paused for inactivity — interact with the page to continue</span>');
     } else {
-      parts.push('<span class="wait">â± Time running while this tab is visible</span>');
+      parts.push('<span class="wait">⏱ Time running while this tab is visible</span>');
     }
     if (state.scrollDone[id] || state.completed.includes(id)) {
-      parts.push('<span class="ok">âœ“ Content scrolled</span>');
+      parts.push('<span class="ok">✓ Content scrolled</span>');
     } else {
-      parts.push('<span class="wait">â†“ Scroll to the bottom of this module</span>');
+      parts.push('<span class="wait">↓ Scroll to the bottom of this module</span>');
     }
     const videos = getRequiredVideos(id);
     if (videos.length) {
@@ -659,12 +659,12 @@ function updateProgressUI(id, totalSec) {
         state.videoProgress[id][video.id] && state.videoProgress[id][video.id].complete
       ).length;
       if (completedVideos === videos.length) {
-        parts.push('<span class="ok">âœ“ Required videos done</span>');
+        parts.push('<span class="ok">✓ Required videos done</span>');
       } else {
-        parts.push('<span class="wait">â–¶ Videos ' + completedVideos + '/' + videos.length + '</span>');
+        parts.push('<span class="wait">▶ Videos ' + completedVideos + '/' + videos.length + '</span>');
       }
     }
-    metaEl.innerHTML = parts.join(' &nbsp;Â·&nbsp; ');
+    metaEl.innerHTML = parts.join(' &nbsp;·&nbsp; ');
   }
   updateQuizButton(id);
 }
@@ -744,7 +744,7 @@ function openModule(id) {
   document.getElementById('screen-module').classList.remove('hidden');
   document.getElementById('mod-breadcrumb').textContent = 'Module ' + m.id + ' of ' + getModules().length;
   document.getElementById('mod-title').textContent = m.title;
-  document.getElementById('mod-hours').textContent = m.hours + ' classroom hours (required seat time)' + (state.mine ? ' Â· ' + state.mine : '');
+  document.getElementById('mod-hours').textContent = m.hours + ' classroom hours (required seat time)' + (state.mine ? ' · ' + state.mine : '');
 
   // Ensure state bags exist (older saved sessions)
   if (!state.timerElapsed) state.timerElapsed = {};
@@ -756,7 +756,7 @@ function openModule(id) {
   html += '</ul></div>';
   html += m.content;
   html += '<div class="scroll-marker" id="scroll-end-marker"></div>';
-  html += '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">â†“ Scroll to the end of this content (required) Â· Required time runs automatically while this tab is open</p>';
+  html += '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">↓ Scroll to the end of this content (required) · Required time runs automatically while this tab is open</p>';
 
   document.getElementById('mod-content').innerHTML = html;
 
@@ -809,7 +809,7 @@ function showQuiz() {
   }
   hideAll();
   document.getElementById('screen-quiz').classList.remove('hidden');
-  document.getElementById('quiz-title').textContent = 'Module ' + m.id + ' Quiz â€“ ' + m.title;
+  document.getElementById('quiz-title').textContent = 'Module ' + m.id + ' Quiz – ' + m.title;
   document.getElementById('quiz-result').classList.add('hidden');
   document.getElementById('quiz-result').innerHTML = '';
 
@@ -864,7 +864,7 @@ function submitQuiz() {
   resultEl.classList.remove('hidden');
 
   if (percent >= 80) {
-    resultEl.innerHTML = '<p class="result-pass">PASSED â€“ ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Module unlocked for completion. You may return to the dashboard.</p>';
+    resultEl.innerHTML = '<p class="result-pass">PASSED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Module unlocked for completion. You may return to the dashboard.</p>';
     if (!state.completed.includes(m.id)) {
       state.completed.push(m.id);
     }
@@ -874,7 +874,7 @@ function submitQuiz() {
     setTimeout(() => showDashboard(), 1200);
   } else {
     saveState();
-    resultEl.innerHTML = '<p class="result-fail">NOT PASSED â€“ ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>You need at least 80%. Review the module content and try again.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Retry Quiz</button>';
+    resultEl.innerHTML = '<p class="result-fail">NOT PASSED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>You need at least 80%. Review the module content and try again.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Retry Quiz</button>';
   }
 }
 
@@ -897,12 +897,12 @@ function showCertificate() {
   const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   let rows = '';
   modules.forEach(m => {
-    const score = state.scores[m.id] != null ? state.scores[m.id] + '%' : 'â€”';
+    const score = state.scores[m.id] != null ? state.scores[m.id] + '%' : '—';
     rows += '<tr><td>' + m.id + '. ' + m.title + '</td><td>' + m.hours + ' hrs</td><td>' + score + '</td></tr>';
   });
   document.getElementById('cert-body').innerHTML = `
     <h2>Certificate of Classroom Completion</h2>
-    <p style="font-size:0.9rem;color:#444;">MSHA Part 48 New Miner Training â€“ Classroom Portion</p>
+    <p style="font-size:0.9rem;color:#444;">MSHA Part 48 New Miner Training – Classroom Portion</p>
     <p style="margin-top:20px;">This certifies that</p>
     <div class="name">${escapeHtml(state.name)}</div>
     <p>${state.mine ? escapeHtml(state.mine) + '<br>' : ''}has completed the <strong>${hours.toFixed(1)}-hour classroom portion</strong><br>of Part 48 New Miner Training topics on</p>
@@ -918,7 +918,7 @@ function showCertificate() {
       and oversight by an MSHA-approved instructor under an approved training plan are still required.
       Attach supporting records to the official MSHA Form 5000-23 as directed by the operator and instructor.
     </p>
-    <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool Â· Progress stored locally</p>
+    <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool · Progress stored locally</p>
   `;
 }
 
@@ -980,4 +980,3 @@ function hideAll() {
 // Init
 loadState();
 showStart();
-
