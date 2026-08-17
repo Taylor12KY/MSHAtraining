@@ -46,7 +46,7 @@ const MODULES_PART_2 = [
       { q: "If you observe cracking, spalling, or other signs of unstable ground you should:", options: ["Ignore it if production is busy", "Report it and stay clear / follow company procedures", "Only tell a co-worker at lunch", "Continue working carefully under it"], answer: 1 },
       { q: "The ground control plan and ventilation plan are:", options: ["Optional guidance documents", "Approved plans that must be followed and that new miners must be introduced to", "Only for coal mines", "Secret documents only supervisors may see"], answer: 1 },
       { q: "True or False: Anyone may permanently alter major ventilation controls without authorization.", options: ["True", "False"], answer: 1 },
-      { q: "Ventilation in an underground mine primarily serves to:", options: ["Only cool the air for comfort", "Supply fresh air and dilute/remove contaminants", "Increase production speed", "Replace the need for SCSRs"], answer: 1 },
+      { q: "Ventilation in an underground mine primarily serves to:", options: ["Only cool the air for comfort", "Supply fresh air and dilute/remove contaminants", "Increase production speed", "Replace the emergency evacuation plan"], answer: 1 },
       { q: "Highwalls at surface operations also require:", options: ["No examination because they are outside", "Examination and control of loose material as part of ground control", "Only visual checks from the office", "No special attention"], answer: 1 }
     ]
   },
@@ -205,7 +205,7 @@ const MODULES_PART_2 = [
       { q: "Carbon monoxide is dangerous because it is:", options: ["Always visible as black smoke", "Odorless, colorless, and binds to hemoglobin reducing oxygen delivery", "Only a problem in surface mines", "Harmless at low concentrations forever"], answer: 1 },
       { q: "True or False: You can reliably detect all dangerous mine gases by smell.", options: ["True", "False"], answer: 1 },
       { q: "Oxygen deficiency can cause:", options: ["Only mild headache", "Rapid impairment, unconsciousness, and death", "No symptoms until it is too late to matter", "Only problems for people with asthma"], answer: 1 },
-      { q: "The primary engineering control for many mine gas hazards is:", options: ["Working faster", "Adequate ventilation and atmospheric monitoring", "Ignoring the issue", "Only using SCSRs every day"], answer: 1 },
+      { q: "The primary engineering control for many mine gas hazards is:", options: ["Working faster", "Adequate ventilation and atmospheric monitoring", "Ignoring the issue", "Relying only on emergency escape equipment"], answer: 1 },
       { q: "Before entering an area with potentially dangerous atmosphere you must:", options: ["Just hold your breath", "Follow the mine’s testing, permitting, and protection procedures", "Ask a co-worker if it “smells okay”", "Enter quickly and leave quickly"], answer: 1 }
     ]
   },
@@ -263,7 +263,7 @@ const MODULES_PART_2 = [
         <p>You have now covered the major required classroom topics for Part 48 new miner training (Subpart A underground focus with surface relevance). Before the final quiz, mentally review:</p>
         <ul>
           <li>Miners’ rights and the duty to report hazards</li>
-          <li>SCSR purpose, limitations, and the continuing need for hands-on practice</li>
+          <li>MSA W65 purpose, limitations, and the continuing need for hands-on practice</li>
           <li>Transportation, communication, and check-in/out discipline</li>
           <li>Hazard recognition in both underground and surface environments</li>
           <li>Escapeways, maps, and emergency response</li>
@@ -271,7 +271,7 @@ const MODULES_PART_2 = [
           <li>Health, HazCom, electrical safety, first aid, and mine gases</li>
           <li>Task training requirements and accident prevention</li>
         </ul>
-        <div class="warning-box"><strong>Still required after this classroom portion:</strong> Approximately 8 hours of mine-site specific training, hands-on SCSR work, and any additional elements required by your approved training plan and the District Manager. An MSHA-approved instructor must oversee the overall program and issue or sign the appropriate 5000-23 records.</div>
+        <div class="warning-box"><strong>Still required after this classroom portion:</strong> Approximately 8 hours of mine-site specific training, hands-on practice with the MSA W65 used at these operations, and any additional elements required by your approved training plan and the District Manager. An MSHA-approved instructor must oversee the overall program and issue or sign the appropriate 5000-23 records.</div>
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time – Final Review</p>
@@ -282,7 +282,7 @@ const MODULES_PART_2 = [
     `,
     questions: [
       { q: "The classroom portion of new miner training under the common 32 + 8 model is typically followed by:", options: ["Nothing else", "Approximately 8 hours of mine-site specific training", "Immediate full production work with no further training", "Only a written test"], answer: 1 },
-      { q: "True or False: Completing this computer-based support tool alone fully satisfies all Part 48 new miner requirements including hands-on SCSR training.", options: ["True", "False"], answer: 1 },
+      { q: "True or False: Completing this computer-based support tool alone replaces mine-site training and hands-on practice with the MSA W65.", options: ["True", "False"], answer: 1 },
       { q: "A miner who has completed the required new miner training still needs:", options: ["No further training ever", "Annual refresher training and task training when assigned new tasks", "Only refresher training every five years", "Nothing if they stay at the same mine"], answer: 1 },
       { q: "The primary purpose of this entire training program is to:", options: ["Meet a paperwork quota", "Give new miners the knowledge and skills to work safely and to recognize and avoid hazards", "Increase production numbers immediately", "Replace the need for supervisors"], answer: 1 },
       { q: "If you are ever unsure about a safety procedure or hazard you should:", options: ["Guess and hope for the best", "Ask a supervisor or qualified person and follow the approved procedures", "Ignore it", "Only ask after an incident occurs"], answer: 1 },

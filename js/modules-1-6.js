@@ -92,41 +92,38 @@ const MODULES_PART_1 = [
     title: "Self-Rescue & Respiratory Devices",
     hours: 3.5,
     objectives: [
-      "Distinguish filter self-rescuers (e.g. MSA W65) from self-contained self-rescuers (SCSRs)",
-      "Describe purpose, limitations, inspection, and basic donning of devices used for escape",
-      "Understand that hands-on practice with the exact units at your mine is still required"
+      "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
+      "Describe inspection, carrying, storage, and basic donning requirements for the W65",
+      "Understand that hands-on practice with an approved W65 training unit is still required"
     ],
     content: `
       <div class="content-section">
-        <h3>Two Main Types of Self-Rescuers</h3>
-        <p><strong>1. Filter Self-Rescuers (e.g. MSA W65)</strong><br>
-        These convert carbon monoxide (CO) to carbon dioxide using a catalyst (Hopcalite). They do <strong>not</strong> supply oxygen. They only work if enough oxygen is still present in the air. They are one-time escape devices primarily for CO from fires or explosions.</p>
-        <p><strong>2. Self-Contained Self-Rescuers (SCSRs)</strong><br>
-        These generate or carry their own oxygen supply (chemical oxygen or compressed oxygen). They protect in oxygen-deficient atmospheres as well as toxic gas. Common examples include CSE SR-100 / SRLD, Ocenco, Dräger, MSA Lifesaver, etc.</p>
-        <div class="key-box"><strong>Know your mine’s devices.</strong> Training must cover the exact models used at the operation where you will work. Never assume a filter device will protect you if oxygen is low.</div>
+        <h3>The MSA W65 Used at These Operations</h3>
+        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
+        <div class="key-box"><strong>Critical limitation:</strong> The W65 does not protect in an oxygen-deficient atmosphere. Use it only for emergency escape, follow the mine emergency plan, and move promptly toward fresh air by the designated escapeway.</div>
       </div>
       <div class="content-section">
-        <h3>MSA W65 Filter Self-Rescuer – Key Points</h3>
+        <h3>MSA W65 Inspection, Carrying & Use</h3>
         <ul>
-          <li>Approved for self-rescue from carbon monoxide.</li>
-          <li>Typical rated protection ~60 minutes against 1% CO (conditions matter).</li>
-          <li>Must be carried ready for immediate use; inspect for dents, seal damage, and weight gain (moisture).</li>
-          <li>Donning is a practiced sequence: open container, remove unit, insert mouthpiece, apply nose clip, position head harness, replace hard hat, move to fresh air.</li>
-          <li>Do not remove until you are certain you are in fresh air.</li>
-          <li>If the container is badly dented and the unit will not come out, you can still breathe through the filter while it remains in the container (higher resistance).</li>
+          <li>Carry the sealed unit in the approved belt or shoulder location so it is immediately available.</li>
+          <li>Inspect the container and protective equipment as required by the mine procedure and current MSA instructions. Report dents, punctures, an opened or damaged seal, or any other questionable condition immediately.</li>
+          <li>Do not open a service unit for practice. Use the designated W65 training unit during hands-on instruction.</li>
+          <li>Practice the sequence: open the container, remove and unfold the unit, insert the mouthpiece, apply the nose clip, position the head harness, replace the hard hat, and begin escape.</li>
+          <li>Breathe through the mouthpiece, keep the nose clip in place, and do not remove the device until you are confirmed to be in fresh air.</li>
+          <li>The sealed W65 is a one-use escape device. After it is opened or used, follow site procedures to remove it from service.</li>
         </ul>
       </div>
       <div class="content-section">
-        <h3>SCSR Core Knowledge</h3>
+        <h3>Hands-On W65 Practice</h3>
         <ul>
-          <li>Daily/shift inspection: damage, seals, indicators, service life/expiration.</li>
-          <li>Donning: open, activate starter/oxygen, mouthpiece, nose clip, straps/goggles as required.</li>
-          <li>Practice transferring between units without prolonged loss of protection.</li>
-          <li>Common rating is about 60 minutes – plan the escape route accordingly.</li>
+          <li>Locate the W65 before entering the underground area and verify that it is carried as the site requires.</li>
+          <li>Use an approved trainer to practice every donning step until the sequence can be performed under stress.</li>
+          <li>Know the designated escapeways and the actions required by the site emergency plan.</li>
+          <li>Report a missing, damaged, opened, or improperly stored unit before going underground.</li>
         </ul>
-        <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace required hands-on donning and transfer practice with actual or approved training units under an MSHA-approved instructor.</div>
+        <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace instructor-led donning practice with the approved MSA W65 training unit and the procedures in the current mine training plan.</div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes W65 demo (13:39), donning video, SCSR video, and study time. Start the timer, stay on this page, and complete the content. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Video 1 – MSA W65 Demo (Fred Raubach) · 13:39</p>
         <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Watch the full demonstration. Do not skip.</p>
@@ -144,25 +141,19 @@ const MODULES_PART_1 = [
         <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=AU07-U96dfw" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
       </div>
       <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 3 – SCSR Inspection, Care &amp; Use (MSHA-style)</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">SCSR care and use (CSE SR-100 example). Useful even if your mine uses a different brand.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/dfsXnqrtYR4?rel=0&modestbranding=1&playsinline=1" title="SCSR Training" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=dfsXnqrtYR4" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
+        <p style="font-weight:600;">Required Attention Time</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Watch both W65 videos, complete instructor-led hands-on practice, and review the site emergency plan. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started – start the timer, then watch all videos above without leaving this page</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
       </div>
     `,
     questions: [
       { q: "When must self-rescue device training be given to a new underground miner under Part 48?", options: ["Within 60 days of starting work", "Before the miner goes underground", "Only during annual refresher", "After the first production shift"], answer: 1 },
-      { q: "The MSA W65 is primarily a:", options: ["Self-contained self-rescuer that supplies oxygen", "Filter self-rescuer that converts carbon monoxide (does not supply oxygen)", "Dust mask for silica", "Full-face supplied-air respirator"], answer: 1 },
+      { q: "The MSA W65 is primarily a:", options: ["Routine-use respirator that supplies breathing air", "Filter self-rescuer that converts carbon monoxide (does not supply oxygen)", "Dust mask for silica", "Full-face supplied-air respirator"], answer: 1 },
       { q: "True or False: A filter self-rescuer such as the W65 will protect you in an oxygen-deficient atmosphere.", options: ["True", "False"], answer: 1 },
-      { q: "True or False: Watching videos alone fully satisfies the hands-on donning and transfer requirements of § 48.5(b)(2).", options: ["True", "False"], answer: 1 },
-      { q: "What should you check during inspection of a self-rescuer?", options: ["Only the color of the case", "Damage, seals, indicators (if any), service life/expiration, and for filter units weight gain from moisture", "Only whether it is still in the pouch", "Nothing – they are sealed for life"], answer: 1 },
-      { q: "SCSRs are commonly rated for approximately how long of use?", options: ["5–10 minutes", "30 minutes", "60 minutes (1 hour) common rating", "8 hours"], answer: 2 },
-      { q: "Why is practicing the transfer between two SCSRs important?", options: ["It is optional entertainment", "In a long escape you may need to switch units without losing protection", "Only supervisors need to know how", "It is only required for coal mines"], answer: 1 }
+      { q: "True or False: Watching videos alone replaces instructor-led hands-on practice with a W65 training unit.", options: ["True", "False"], answer: 1 },
+      { q: "What should you do if the W65 container or seal appears damaged?", options: ["Carry it anyway", "Open it to test it", "Report it immediately and follow the site procedure for removing it from service", "Repair it with tape"], answer: 2 }
     ]
   },
   {
@@ -331,7 +322,7 @@ const MODULES_PART_1 = [
       <div class="content-section">
         <h3>Barricading</h3>
         <p>Where barricading is part of the mine's emergency plan, know the locations of materials and the basic principles of constructing a seal that can protect against irrespirable atmospheres for a limited time while awaiting rescue. Barricading is a last-resort option when escape is not possible.</p>
-        <div class="warning-box">Never wait to start an escape if conditions allow a safe exit. SCSRs and knowledge of escapeways are your first lines of defense.</div>
+        <div class="warning-box">Never delay an escape when the emergency plan directs evacuation. Prompt action, the W65 used at this operation, and knowledge of the designated escapeways are critical.</div>
       </div>
 
       <div class="video-box">
@@ -355,9 +346,9 @@ const MODULES_PART_1 = [
     questions: [
       { q: "You should always use which version of the mine map?", options: ["Any old map you find", "The current posted/updated map", "A map from a different mine", "Only digital maps on your phone"], answer: 1 },
       { q: "How many escapeways should you know from your normal work area?", options: ["Only one is required knowledge", "At least two", "None – follow the crowd", "Only the primary intake"], answer: 1 },
-      { q: "Barricading is generally considered:", options: ["The first action in every emergency", "A last-resort option when escape is not possible", "Unnecessary if you have an SCSR", "Only for surface mines"], answer: 1 },
+      { q: "Barricading is generally considered:", options: ["The first action in every emergency", "A last-resort option when escape is not possible", "A replacement for knowing the escapeways", "Only for surface mines"], answer: 1 },
       { q: "True or False: Emergency evacuation drills are optional if you already know the way out.", options: ["True", "False"], answer: 1 },
-      { q: "In smoke-filled conditions a good practice is to:", options: ["Stand upright and run as fast as possible", "Stay low, move deliberately, and maintain contact with the group or guidance system", "Remove your SCSR to see better", "Wait in place indefinitely without communicating"], answer: 1 }
+      { q: "In smoke-filled conditions a good practice is to:", options: ["Stand upright and run as fast as possible", "Stay low, move deliberately, and maintain contact with the group or guidance system", "Remove the W65 before reaching confirmed fresh air", "Wait in place indefinitely without communicating"], answer: 1 }
     ]
   },
 ];

@@ -454,8 +454,25 @@ function configureRequiredVideoBox(box, iframe, video) {
   iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
   const frame = iframe.parentElement;
   if (frame) frame.classList.add('managed-video-frame');
+  box.querySelectorAll('p').forEach(paragraph => {
+    const text = paragraph.textContent || '';
+    if (
+      text.includes('Open on YouTube') ||
+      text.includes('Open W65 video on Vimeo') ||
+      text.includes('YouTube cannot fully lock seeking') ||
+      text.includes('If the player shows')
+    ) {
+      paragraph.remove();
+    }
+  });
   if (!box.querySelector('.video-watch-controls')) {
     box.insertAdjacentHTML('beforeend', requiredVideoControls(video));
+  }
+  if (!box.querySelector('.video-fallback')) {
+    box.insertAdjacentHTML(
+      'beforeend',
+      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} â†—</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
+    );
   }
   const button = box.querySelector('.video-play-toggle');
   if (button) button.addEventListener('click', () => toggleRequiredVideo(video.id));
@@ -1202,7 +1219,7 @@ function showCertificate() {
     <p style="font-size:0.8rem;margin-top:20px;color:#555;text-align:left;">
       <strong>Important:</strong> This document records completion of the classroom support modules only.
       It does <em>not</em> by itself constitute full compliance with 30 CFR Part 48.
-      Approximately 8 hours of mine-site specific training, required hands-on SCSR training,
+      Approximately 8 hours of mine-site specific training, required hands-on practice with the MSA W65 used at these operations,
       and oversight by an MSHA-approved instructor under an approved training plan are still required.
       Attach supporting records to the official MSHA Form 5000-23 as directed by the operator and instructor.
     </p>

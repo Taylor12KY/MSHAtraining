@@ -33,14 +33,6 @@ const REQUIRED_VIDEOS = [
     description: "Short step-by-step W65 donning animation."
   },
   {
-    id: "dfsXnqrtYR4",
-    moduleId: 3,
-    title: "Self-Contained Self-Rescuer: Inspection, Care and Use",
-    author: "PublicResourceOrg",
-    durationSeconds: 1066,
-    description: "Inspection, care, and use of the CSE SR-100 self-contained self-rescuer."
-  },
-  {
     id: "NH7vatxj_t0",
     moduleId: 4,
     title: "Powered Haulage: Be Alert, Be Ready!",
@@ -218,7 +210,7 @@ const FIRST_VIDEO_BATCH_IDS = new Set([
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
-  "QGkT8Ahh1-E", "98555798", "AU07-U96dfw", "dfsXnqrtYR4", "NH7vatxj_t0",
+  "QGkT8Ahh1-E", "98555798", "AU07-U96dfw", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
   "wal2KP1bbIY"
 ]);

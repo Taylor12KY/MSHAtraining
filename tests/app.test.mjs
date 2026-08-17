@@ -12,6 +12,7 @@ const modulesPartOne = read('js/modules-1-6.js');
 const modulesPartTwo = read('js/modules-7-13.js');
 const modulesSource = modulesPartOne + '\n' + modulesPartTwo;
 const siteContent = read('js/site-content.js');
+const quizExpansions = read('js/quiz-expansions.js');
 const videoLibrary = read('js/video-library.js');
 const app = read('js/app.js');
 const instructorAuth = read('src/instructor-auth.js');
@@ -23,21 +24,24 @@ test('JavaScript files parse', () => {
   new vm.Script(modulesPartOne, { filename: 'js/modules-1-6.js' });
   new vm.Script(modulesPartTwo, { filename: 'js/modules-7-13.js' });
   new vm.Script(siteContent, { filename: 'js/site-content.js' });
+  new vm.Script(quizExpansions, { filename: 'js/quiz-expansions.js' });
   new vm.Script(videoLibrary, { filename: 'js/video-library.js' });
   new vm.Script(app, { filename: 'js/app.js' });
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=instructor-access-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=instructor-access-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=content-refresh-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=content-refresh-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
-  assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/video-library.js'));
+  assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
+  assert.ok(html.indexOf('js/quiz-expansions.js') < html.indexOf('js/video-library.js'));
   assert.ok(html.indexOf('js/video-library.js') < html.indexOf('js/app.js'));
   assert.doesNotMatch(html, /<style>/i);
   assert.doesNotMatch(html, /<script>\s*[^<]/i);
@@ -48,6 +52,16 @@ test('program contains modules 1-13 totaling exactly 32 hours', () => {
     .map(match => ({ id: Number(match[1]), hours: Number(match[3]) }));
   assert.deepEqual(modules.map(module => module.id), Array.from({ length: 13 }, (_, index) => index + 1));
   assert.equal(modules.reduce((sum, module) => sum + module.hours, 0), 32);
+});
+
+test('every module and site-specific orientation has exactly 10 quiz questions', () => {
+  const context = {};
+  new vm.Script(`${modulesSource}\n${siteContent}\n${quizExpansions}\nthis.modules = MODULES; this.sites = SITE_CONTENT;`)
+    .runInNewContext(context);
+  assert.equal(context.modules.length, 13);
+  assert.ok(context.modules.filter(module => module.id !== 1).every(module => module.questions.length === 10));
+  assert.equal(Object.keys(context.sites).length, 3);
+  assert.ok(Object.values(context.sites).every(site => site.questions.length === 10));
 });
 
 test('instructor access has no client-side shared password or signup path', () => {
@@ -85,31 +99,45 @@ test('completion controls and record export remain present', () => {
   assert.match(app, /Forward seeking is disabled/);
 });
 
-test('all 26 videos are uniquely assigned and the first batch remains intact', () => {
+test('all 25 videos are uniquely assigned and the first batch remains intact', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const ids = context.videos.map(video => video.id);
   const firstBatch = context.videos.filter(video => context.firstIds.includes(video.id));
-  assert.equal(context.videos.length, 26);
-  assert.equal(new Set(ids).size, 26);
+  assert.equal(context.videos.length, 25);
+  assert.equal(new Set(ids).size, 25);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 16);
   assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 11206);
 });
 
-test('all 11 pre-existing embeds use the tracked YouTube/Vimeo player system', () => {
+test('all 10 retained pre-existing embeds use the tracked YouTube/Vimeo player system', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const preExisting = context.videos.filter(video => context.preExistingIds.includes(video.id));
-  assert.equal(context.preExistingIds.length, 11);
-  assert.equal(preExisting.length, 11);
+  assert.equal(context.preExistingIds.length, 10);
+  assert.equal(preExisting.length, 10);
   assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 1);
   assert.match(app, /function loadVimeoApi/);
   assert.match(app, /player\.setCurrentTime\(record\.watchedSeconds\)/);
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
+});
+
+test('training content is W65-specific and contains no SCSR material', () => {
+  const source = html + modulesSource + siteContent + quizExpansions + videoLibrary + app;
+  assert.doesNotMatch(source, /\bSCSR\b|self-contained self-rescuer|CSE SR-100/i);
+  assert.match(source, /MSA W65/);
+  assert.match(modulesPartOne, /does not protect in an oxygen-deficient atmosphere/i);
+});
+
+test('managed video notices accurately describe verified in-player completion', () => {
+  assert.match(app, /Forward seeking is disabled/);
+  assert.match(app, /external playback cannot be verified and does not receive completion credit/);
+  assert.match(app, /text\.includes\('YouTube cannot fully lock seeking'\)/);
+  assert.match(app, /text\.includes\('If the player shows'\)/);
 });
 
 test('every site orientation requires current-plan instructor review', () => {

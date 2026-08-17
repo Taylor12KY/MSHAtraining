@@ -1,0 +1,115 @@
+/* Ten-question quiz banks added after the core module and site data load. */
+const MODULE_QUIZ_ADDITIONS = {
+  2: [
+    { q: "A miners' representative may:", options: ["Accompany an MSHA inspector during an inspection", "Issue federal citations", "Ignore mine safety rules", "Assign production quotas"], answer: 0 },
+    { q: "Required training time is generally:", options: ["Unpaid volunteer time", "Paid training time", "Paid only after one year", "Deducted from vacation"], answer: 1 },
+    { q: "After reporting a serious hazard, a miner should:", options: ["Follow the mine's reporting and documentation procedure", "Remove the report if production is delayed", "Assume no follow-up is needed", "Discuss it only off site"], answer: 0 },
+    { q: "Who is responsible for providing or arranging required task training?", options: ["The supervisor or operator", "The newest miner", "Equipment vendors only", "Visitors"], answer: 0 }
+  ],
+  3: [
+    { q: "The MSA W65 is intended primarily for:", options: ["Routine dust control", "Emergency escape from carbon monoxide produced by a fire or explosion", "Underwater rescue", "Welding fumes during normal work"], answer: 1 },
+    { q: "Why must a service W65 not be opened for practice?", options: ["It is a sealed, one-use escape device; an approved trainer is used for practice", "It is too heavy", "It has no mouthpiece", "It can only be opened outdoors"], answer: 0 },
+    { q: "Which items are part of proper W65 donning?", options: ["Mouthpiece, nose clip, and head harness", "Safety glasses only", "Earplugs and gloves", "A welding hood"], answer: 0 },
+    { q: "When should the W65 be removed during an escape?", options: ["As soon as breathing feels warm", "Only after you are confirmed to be in fresh air", "At the first intersection", "Whenever you need to speak"], answer: 1 },
+    { q: "What should you do if your W65 is missing, opened, or damaged before going underground?", options: ["Go underground and borrow one later", "Report it immediately and obtain an acceptable unit under site procedure", "Repair the seal with tape", "Carry it only if an inspector is present"], answer: 1 }
+  ],
+  4: [
+    { q: "A miner may tag in or check in for another person:", options: ["Whenever the crew is late", "Only with a text message", "Never", "Only on night shift"], answer: 2 },
+    { q: "Before approaching mobile equipment, you should:", options: ["Enter the operator's blind spot", "Establish positive communication with the operator", "Assume the operator sees you", "Wave from behind the machine"], answer: 1 },
+    { q: "Mine transportation should use:", options: ["Only approved conveyances and designated travelways", "Any available vehicle", "Conveyor belts", "Unmarked shortcuts"], answer: 0 },
+    { q: "The check-in/check-out system primarily supports:", options: ["Payroll only", "Emergency accountability for people at the mine", "Equipment maintenance", "Product inventory"], answer: 1 },
+    { q: "Emergency radio communication should be:", options: ["Clear, calm, and consistent with site procedure", "Delayed until the end of shift", "Limited to rumors", "Replaced by hand signals from any distance"], answer: 0 }
+  ],
+  5: [
+    { q: "When a load is suspended overhead, you should:", options: ["Walk beneath it quickly", "Stay clear of the suspended-load area", "Hold it steady by hand", "Stand under it to guide the operator"], answer: 1 },
+    { q: "Stored-energy hazards can include:", options: ["Hydraulic pressure, gravity, springs, and electrical energy", "Only gasoline", "Only moving trucks", "Paperwork"], answer: 0 },
+    { q: "Hazard recognition should occur:", options: ["Continuously before and during work", "Only during annual refresher", "Only after an accident", "Only when MSHA is present"], answer: 0 },
+    { q: "Barricades, tags, and danger signs should be:", options: ["Obeyed and bypassed only under authorized procedure", "Moved whenever inconvenient", "Ignored by experienced miners", "Used only outdoors"], answer: 0 }
+  ],
+  6: [
+    { q: "A mine map used for emergency preparation should identify:", options: ["Escapeways, ventilation controls, refuge or gathering locations, and major hazards", "Only office furniture", "Only property taxes", "Production bonuses"], answer: 0 },
+    { q: "The purpose of evacuation drills is to:", options: ["Make emergency actions and routes familiar before an emergency", "Replace the written emergency plan", "Test production speed", "Eliminate the need for communication"], answer: 0 },
+    { q: "If an escapeway or mine map changes, miners should:", options: ["Keep following the old map", "Review the current route and procedure with the mine", "Choose any shorter route", "Wait for an emergency to learn it"], answer: 1 },
+    { q: "During an underground emergency, movement should follow:", options: ["The current mine emergency plan and designated route toward fresh air", "A social-media post", "The normal production schedule", "Any unexamined opening"], answer: 0 },
+    { q: "Barricading materials and procedures should be used:", options: ["Only as directed by the mine's emergency plan and training", "Whenever a miner wants privacy", "Instead of evacuation in every emergency", "To block required travelways during normal work"], answer: 0 }
+  ],
+  7: [
+    { q: "If unsupported ground is observed, you should:", options: ["Stay clear and report it immediately", "Work beneath it briefly", "Strike it with equipment", "Ignore it if no rock has fallen"], answer: 0 },
+    { q: "Possible warning signs of unstable ground include:", options: ["Cracking, spalling, water, and unusual sounds", "Fresh paint", "A clean floor", "Normal radio traffic"], answer: 0 },
+    { q: "Scaling should be performed only by someone who is:", options: ["Trained, authorized, and following the ground-control procedure", "New to the mine", "Working alone without tools", "Standing under loose ground"], answer: 0 },
+    { q: "Mine ventilation helps control:", options: ["Diesel contaminants, dust, and blast fumes", "Payroll records", "Stockpile inventory", "Traffic signs"], answer: 0 },
+    { q: "A ventilation control may be altered:", options: ["Only when authorized and under the applicable plan or procedure", "Whenever it blocks a shortcut", "By any visitor", "Without notifying anyone"], answer: 0 }
+  ],
+  8: [
+    { q: "A Safety Data Sheet provides information about:", options: ["Chemical hazards, safe handling, protective measures, and emergency response", "Production rates only", "Mine maps only", "Employee schedules"], answer: 0 },
+    { q: "Exposure sampling is used to:", options: ["Evaluate hazards and whether controls are effective", "Replace all engineering controls", "Measure equipment fuel use", "Set production targets"], answer: 0 },
+    { q: "The mine's written hazard-communication information should be:", options: ["Available to miners as required", "Kept secret", "Destroyed after orientation", "Used only by vendors"], answer: 0 },
+    { q: "For dust, noise, or chemical exposure, miners should:", options: ["Follow required controls and use assigned PPE correctly", "Remove guards to work faster", "Rely only on smell", "Wait for symptoms before acting"], answer: 0 },
+    { q: "Silica dust and excessive noise can cause:", options: ["Serious long-term health effects", "Only temporary inconvenience", "No harm if invisible", "Only equipment damage"], answer: 0 }
+  ],
+  9: [
+    { q: "Water, conductive dust, and damaged insulation can:", options: ["Increase electrical risk", "Make electricity harmless", "Replace grounding", "Eliminate stored energy"], answer: 0 },
+    { q: "Electrical repairs should be performed by:", options: ["Qualified and authorized persons following procedure", "Any nearby worker", "Visitors", "The least experienced employee"], answer: 0 },
+    { q: "After isolating electrical energy, a tryout or test helps verify:", options: ["The energy has actually been controlled", "The production count", "The weather forecast", "The shift schedule"], answer: 0 },
+    { q: "A damaged extension cord should be:", options: ["Removed from service and reported", "Wrapped with paper", "Used only in wet areas", "Hidden from inspection"], answer: 0 },
+    { q: "Lower-voltage equipment:", options: ["Can still shock, burn, or kill", "Is always safe to touch", "Needs no inspection", "Cannot start a fire"], answer: 0 }
+  ],
+  10: [
+    { q: "Before giving first aid, first confirm:", options: ["The scene is safe to enter", "The injured person can finish the shift", "Production has stopped everywhere", "A report has already been written"], answer: 0 },
+    { q: "The mine's emergency medical response should generally be activated:", options: ["Early when serious injury or illness is suspected", "Only after the shift", "Only by email", "After all supplies are used"], answer: 0 },
+    { q: "A basic initial action for life-threatening external bleeding is:", options: ["Apply direct pressure with an appropriate dressing", "Give food", "Have the person walk", "Delay care until a supervisor arrives"], answer: 0 },
+    { q: "A first-aid provider should:", options: ["Work within their training and get higher-level help", "Attempt unfamiliar procedures", "Diagnose every condition", "Move every injured person immediately"], answer: 0 },
+    { q: "First aid serves as:", options: ["A bridge until professional medical care takes over", "A replacement for all medical care", "A disciplinary procedure", "A production tool"], answer: 0 }
+  ],
+  11: [
+    { q: "Carbon monoxide is commonly produced by:", options: ["Incomplete combustion", "Clean drinking water", "Fresh air", "Limestone alone"], answer: 0 },
+    { q: "Carbon dioxide can create danger by:", options: ["Displacing oxygen", "Supplying breathing oxygen", "Neutralizing every toxic gas", "Making gas monitors unnecessary"], answer: 0 },
+    { q: "An atmosphere of unknown quality requires:", options: ["Testing and the mine's required authorization and protection", "A smell check only", "Quick entry without a monitor", "No special action"], answer: 0 },
+    { q: "Why must miners not rely on smell to detect mine gases?", options: ["Some dangerous gases are odorless or cannot be reliably detected by smell", "All mine gases smell pleasant", "Ventilation removes the sense of smell", "Gas detectors use smell"], answer: 0 },
+    { q: "An oxygen-deficient atmosphere can:", options: ["Rapidly impair or kill a person", "Improve alertness", "Be made safe by a dust mask", "Be identified by color alone"], answer: 0 }
+  ],
+  12: [
+    { q: "Required task training should occur:", options: ["Before a miner performs a covered new task", "After the first accident", "Only during annual refresher", "Only after six months"], answer: 0 },
+    { q: "Serious incidents often involve:", options: ["A combination of hazards, human factors, and procedure or training issues", "Only bad weather", "Only new equipment", "No identifiable factors"], answer: 0 },
+    { q: "A 'see something, say something' safety culture means:", options: ["Report hazards and concerns promptly", "Discuss hazards only at home", "Wait for an inspection", "Ignore near misses"], answer: 0 },
+    { q: "Workplace examinations support prevention by:", options: ["Identifying hazards so they can be corrected promptly", "Replacing task training", "Eliminating the need for procedures", "Measuring production only"], answer: 0 },
+    { q: "Task-specific instruction should cover:", options: ["Safe procedures, applicable standards, hazards, and protective measures", "Only the task name", "Only production speed", "Unrelated office rules"], answer: 0 }
+  ],
+  13: [
+    { q: "A critical limitation of the MSA W65 is that it:", options: ["Does not supply oxygen or protect in an oxygen-deficient atmosphere", "Cannot be carried underground", "Is intended for routine dust control", "Replaces the mine emergency plan"], answer: 0 },
+    { q: "When app content and the mine's current approved plan differ, miners should follow:", options: ["The current mine plan and qualified instructor's direction", "An old screenshot", "A guess", "The shortest answer"], answer: 0 },
+    { q: "The classroom certificate from this support tool:", options: ["Does not replace the operator's required training records or Form 5000-23", "Is automatically an MSHA-issued 5000-23", "Authorizes every mining task", "Eliminates site-specific training"], answer: 0 },
+    { q: "If a hazard or procedure remains unclear after training, you should:", options: ["Stop and ask a supervisor or qualified person before proceeding", "Proceed and learn by trial and error", "Ignore it", "Wait until annual refresher"], answer: 0 }
+  ]
+};
+
+const SITE_QUIZ_ADDITIONS = {
+  "Boonesboro Quarry": [
+    { q: "How many underground levels does Boonesboro Quarry have?", options: ["One", "Two", "Three", "Five"], answer: 2 },
+    { q: "The Boonesboro Liwell plant produces:", options: ["A clean screened product used in asphalt mix", "Coal slurry", "Electrical power", "Concrete blocks"], answer: 0 },
+    { q: "The Boonesboro mine shop is located on:", options: ["Level 1", "Level 2", "Level 3", "The KY 627 bridge"], answer: 0 }
+  ],
+  "Clover Bottom Quarry": [
+    { q: "The old and new Clover Bottom underground mines are each:", options: ["One-level room-and-pillar mines", "Three-level coal mines", "Surface-only pits", "Inactive offices"], answer: 0 },
+    { q: "Before entering underground at Clover Bottom, a miner must confirm:", options: ["Whether the assignment is in the old mine or new mine and use that mine's procedure", "Only the weather", "The asphalt price", "Which personal vehicle arrived first"], answer: 0 }
+  ],
+  "Dix River Stone": [
+    { q: "How many underground levels does Dix River Stone have?", options: ["One", "Two", "Three", "Four"], answer: 1 },
+    { q: "At Dix River Stone, material moves from the surface primary crusher through:", options: ["The surge silo to the secondary plant", "The Kentucky River", "The mine office", "BT3"], answer: 0 }
+  ]
+};
+
+MODULES.forEach(module => {
+  if (module.id === 1) return;
+  module.questions = [...module.questions, ...(MODULE_QUIZ_ADDITIONS[module.id] || [])];
+  if (module.questions.length !== 10) {
+    throw new Error(`Module ${module.id} must have exactly 10 quiz questions.`);
+  }
+});
+
+Object.entries(SITE_CONTENT).forEach(([siteName, site]) => {
+  site.questions = [...site.questions, ...(SITE_QUIZ_ADDITIONS[siteName] || [])];
+  if (site.questions.length !== 10) {
+    throw new Error(`${siteName} must have exactly 10 quiz questions.`);
+  }
+});
