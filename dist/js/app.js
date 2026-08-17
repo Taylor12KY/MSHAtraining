@@ -38,6 +38,7 @@ let state = {
   scrollDone: {},         // id -> true when content scrolled to end
   videoProgress: {},      // module id -> video id -> watched position/completion
   quizAttempts: {},       // id -> recent timestamped quiz attempts
+  quizReview: {},         // id -> missed-question remediation plan
   startedAt: null
 };
 
@@ -57,6 +58,107 @@ let currentQuizQuestions = [];
 let lastActivityAt = Date.now();
 const ACTIVITY_TIMEOUT_MS = 15 * 60 * 1000;
 const VALID_MINES = ['Boonesboro Quarry', 'Clover Bottom Quarry', 'Dix River Stone'];
+const QUIZ_PASSING_SCORE = 100;
+
+const QUIZ_REVIEW_SECTIONS = {
+  1: {
+    sections: [
+      { topic: 'Site overview and layout', focus: 'Review the selected mine’s levels, facilities, material flow, named work areas, and location-specific facts.' },
+      { topic: 'Site-specific policies', focus: 'Review the instructor-confirmed rules for check-in, PPE, traffic, reporting, communication, evacuation, and restricted areas.' }
+    ],
+    rules: [{ pattern: /policy|procedure|report|ppe|traffic|emergency|alarm|check.?in|supervisor|restricted|communication/i, sectionIndex: 1 }]
+  },
+  2: {
+    sections: [
+      { topic: 'Statutory rights of miners', focus: 'Review protected activities, discrimination protections, inspection participation, training rights, and paid training time.' },
+      { topic: 'Supervisor authority and responsibility', focus: 'Review who directs work and the responsibility supervisors have for compliance and safe performance.' },
+      { topic: 'Company rules and hazard reporting', focus: 'Review immediate reporting, documentation, follow-up, stop-work expectations, and protection for good-faith safety concerns.' }
+    ],
+    rules: [
+      { pattern: /supervisor|direct work|authority and responsibility/i, sectionIndex: 1 },
+      { pattern: /report|hazard|company rule|documentation|follow.?up|serious condition/i, sectionIndex: 2 }
+    ]
+  },
+  3: {
+    sections: [
+      { topic: 'MSA W65 purpose and limitations', focus: 'Review what the W65 protects against, oxygen limitations, when it is used, and when it may be removed.' },
+      { topic: 'W65 inspection, carrying, and use', focus: 'Review the container, seal, service condition, reporting defects, carrying requirements, and the complete donning sequence.' },
+      { topic: 'Hands-on W65 practice', focus: 'Review why an approved training unit and instructor-led practice are required and why a service unit must remain sealed.' }
+    ],
+    rules: [
+      { pattern: /practice|trainer|training unit|opened for practice|watching videos/i, sectionIndex: 2 },
+      { pattern: /inspect|seal|container|damaged|missing|mouthpiece|nose clip|head harness|donning/i, sectionIndex: 1 }
+    ]
+  },
+  4: {
+    sections: [
+      { topic: 'Check-in and check-out systems', focus: 'Review individual check-in responsibility and how the system supports emergency accountability.' },
+      { topic: 'Transportation controls', focus: 'Review approved conveyances, designated travelways, blind spots, seat belts, safe approach, and positive communication.' },
+      { topic: 'Communications and warning signals', focus: 'Review radio discipline, traffic signs, warning signals, emergency messages, and location-specific communication procedures.' }
+    ],
+    rules: [
+      { pattern: /check.?in|check.?out|tag in|accountability|who is underground/i, sectionIndex: 0 },
+      { pattern: /radio|communication|warning signal|directional sign|emergency message/i, sectionIndex: 2 }
+    ],
+    defaultSectionIndex: 1
+  },
+  5: {
+    sections: [
+      { topic: 'Work environment overview', focus: 'Review underground and surface work areas, equipment interactions, processes, and changing mine conditions.' },
+      { topic: 'Core hazard categories', focus: 'Review workplace examinations, mobile equipment, ground, conveyors, stored energy, respiratory hazards, and prompt correction.' },
+      { topic: 'Personal practices', focus: 'Review situational awareness, required PPE, suspended-load exclusion, housekeeping, authorization, and asking before acting.' }
+    ],
+    rules: [
+      { pattern: /ppe|hard hat|suspended|personal practice|housekeeping|ask before|authorized/i, sectionIndex: 2 },
+      { pattern: /workplace examination|stored energy|conveyor|blind spot|silica|diesel|hazard recognition|hazard category|loader|haul truck/i, sectionIndex: 1 }
+    ]
+  },
+  6: {
+    sections: [
+      { topic: 'Mine maps', focus: 'Review the current map, work locations, ventilation controls, emergency features, and how map changes are communicated.' },
+      { topic: 'Escapeways and evacuation', focus: 'Review primary and alternate routes, drills, fresh-air movement, communication, group accountability, and self-rescue priorities.' },
+      { topic: 'Barricading', focus: 'Review why barricading is a last resort and when it may be used under the current emergency plan.' }
+    ],
+    rules: [
+      { pattern: /map/i, sectionIndex: 0 },
+      { pattern: /barricad/i, sectionIndex: 2 }
+    ],
+    defaultSectionIndex: 1
+  },
+  7: {
+    sections: [
+      { topic: 'Ground control', focus: 'Review warning signs, examinations, highwalls, unsupported ground, installed support, scaling, reporting, and the approved ground-control plan.' },
+      { topic: 'Ventilation', focus: 'Review fresh-air supply, contaminant removal, air direction, fans and controls, blast fumes, and authorization before changes.' }
+    ],
+    rules: [{ pattern: /ventilat|air flow|fresh air|contaminant|diesel|blast fumes/i, sectionIndex: 1 }]
+  },
+  8: {
+    sections: [
+      { topic: 'Health measurements and controls', focus: 'Review dust, silica, noise, sampling, engineering and administrative controls, PPE, and long-term health effects.' },
+      { topic: 'Hazard communication', focus: 'Review labels, Safety Data Sheets, chemical hazards, protective measures, emergency information, and the written HazCom program.' }
+    ],
+    rules: [{ pattern: /sds|safety data|hazcom|chemical|label|written hazard/i, sectionIndex: 1 }]
+  },
+  9: { sections: [{ topic: 'Electrical hazards and energy control', focus: 'Review qualification, damaged equipment, shock and arc-flash hazards, lockout/tagout/tryout, stored energy, and verification.' }] },
+  10: { sections: [{ topic: 'First aid in the mine environment', focus: 'Review scene safety, activating help, bleeding control, AEDs and supplies, limits of training, and the bridge to professional care.' }] },
+  11: { sections: [{ topic: 'Mine gases and atmospheric controls', focus: 'Review oxygen deficiency, carbon monoxide, carbon dioxide, detection, ventilation, testing, authorization, and why smell is unreliable.' }] },
+  12: {
+    sections: [
+      { topic: 'Accident prevention', focus: 'Review workplace examinations, human factors, procedure compliance, speaking up, near misses, and prompt hazard correction.' },
+      { topic: 'Task-specific health and safety', focus: 'Review required task training, authorization, safe procedures, standards, chemical hazards, and protective measures before new work.' }
+    ],
+    rules: [{ pattern: /task|assigned|training|authorized|new work/i, sectionIndex: 1 }]
+  },
+  13: { sections: [{ topic: 'Final comprehensive review', focus: 'Return to the final review checklist and revisit every listed program topic before attempting the comprehensive quiz again.' }] }
+};
+
+function getQuizReviewGuide(moduleId, questionText) {
+  const config = QUIZ_REVIEW_SECTIONS[moduleId] || QUIZ_REVIEW_SECTIONS[13];
+  const matchedRule = (config.rules || []).find(rule => rule.pattern.test(questionText));
+  const sectionIndex = matchedRule ? matchedRule.sectionIndex : (config.defaultSectionIndex || 0);
+  const section = config.sections[sectionIndex] || config.sections[0];
+  return { sectionIndex, topic: section.topic, focus: section.focus };
+}
 
 ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventName => {
   window.addEventListener(eventName, () => { lastActivityAt = Date.now(); }, { passive: true });
@@ -106,6 +208,7 @@ function sanitizeState(candidate) {
     scrollDone: {},
     videoProgress: {},
     quizAttempts: {},
+    quizReview: {},
     startedAt: typeof candidate.startedAt === 'string' ? candidate.startedAt : null
   };
 
@@ -134,11 +237,21 @@ function sanitizeState(candidate) {
       clean.quizAttempts[id] = candidate.quizAttempts[id].slice(-20).map(a => ({
         at: typeof a.at === 'string' ? a.at : '',
         score: Math.max(0, Math.min(100, Number(a.score) || 0)),
-        passed: a.passed === true
+        passed: Number(a.score) === QUIZ_PASSING_SCORE
+      }));
+    }
+    if (candidate.quizReview && Array.isArray(candidate.quizReview[id])) {
+      clean.quizReview[id] = candidate.quizReview[id].slice(0, 10).map(item => ({
+        question: typeof item.question === 'string' ? item.question.slice(0, 500) : '',
+        selectedAnswer: typeof item.selectedAnswer === 'string' ? item.selectedAnswer.slice(0, 500) : '',
+        topic: typeof item.topic === 'string' ? item.topic.slice(0, 200) : '',
+        focus: typeof item.focus === 'string' ? item.focus.slice(0, 800) : '',
+        sectionIndex: Math.max(0, Math.min(10, Number(item.sectionIndex) || 0)),
+        reviewed: item.reviewed === true
       }));
     }
     if (validIds.has(id) && Array.isArray(candidate.completed) && candidate.completed.includes(id) &&
-        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] >= 80 &&
+        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] === QUIZ_PASSING_SCORE &&
         requiredVideosComplete(id, clean)) {
       clean.completed.push(id);
     }
@@ -179,6 +292,7 @@ function startTraining() {
     delete state.timerElapsed[1];
     delete state.scrollDone[1];
     if (state.quizAttempts) delete state.quizAttempts[1];
+    if (state.quizReview) delete state.quizReview[1];
   }
   state.name = name;
   state.mine = mine;
@@ -197,7 +311,7 @@ function resetAll() {
       if (HAS_LOCAL_STORAGE) localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
     memoryStore = null;
-    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, videoProgress: {}, quizAttempts: {}, startedAt: null };
+    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, videoProgress: {}, quizAttempts: {}, quizReview: {}, startedAt: null };
     document.getElementById('input-name').value = '';
     document.getElementById('input-mine').value = '';
     showStart();
@@ -251,15 +365,20 @@ function showDashboard() {
     const prevDone = idx === 0 || state.completed.includes(modules[idx - 1].id);
     const isLocked = !instructorPreviewMode && !isDone && !prevDone;
     const isCurrent = !instructorPreviewMode && !isDone && prevDone;
+    const needsQuizReview = !instructorPreviewMode && !isDone && getQuizReviewItems(m.id).length > 0;
 
     let statusClass = 'status-locked';
     let statusText = 'Locked';
     if (isDone) { statusClass = 'status-done'; statusText = 'Completed'; }
     else if (isCurrent) { statusClass = 'status-available'; statusText = 'Available'; }
+    if (needsQuizReview) {
+      statusClass = 'status-review';
+      statusText = quizReviewReady(m.id) ? 'Retake Quiz' : 'Review';
+    }
     if (instructorPreviewMode) { statusClass = 'status-available'; statusText = 'Preview'; }
 
     const div = document.createElement('div');
-    div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '') + (instructorPreviewMode ? ' preview-module' : '');
+    div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '') + (needsQuizReview ? ' review-needed' : '') + (instructorPreviewMode ? ' preview-module' : '');
     div.setAttribute('role', 'button');
     div.setAttribute('aria-disabled', String(isLocked));
     div.tabIndex = isLocked ? -1 : 0;
@@ -292,12 +411,16 @@ function showDashboard() {
     : modules.find(m => !state.completed.includes(m.id));
   const nextTitle = document.getElementById('dash-next-title');
   const continueButton = document.getElementById('btn-continue-training');
-  if (nextTitle) nextTitle.textContent = nextModule ? `Module ${nextModule.id}: ${nextModule.title}` : 'Course complete';
+  const nextNeedsReview = nextModule && getQuizReviewItems(nextModule.id).length > 0;
+  if (nextTitle) {
+    const prefix = nextNeedsReview ? (quizReviewReady(nextModule.id) ? 'Retake Quiz · ' : 'Review · ') : '';
+    nextTitle.textContent = nextModule ? `${prefix}Module ${nextModule.id}: ${nextModule.title}` : 'Course complete';
+  }
   if (continueButton) {
     continueButton.classList.toggle('hidden', !instructorPreviewMode && allDone);
     continueButton.innerHTML = instructorPreviewMode
       ? 'Preview Module 1 <span aria-hidden="true">→</span>'
-      : 'Continue Training <span aria-hidden="true">→</span>';
+      : (nextNeedsReview ? 'Continue Review <span aria-hidden="true">→</span>' : 'Continue Training <span aria-hidden="true">→</span>');
   }
   document.getElementById('btn-cert').classList.toggle('hidden', instructorPreviewMode || !allDone);
   const recordButton = document.getElementById('btn-training-record');
@@ -330,6 +453,7 @@ function startInstructorPreview(identity) {
     scrollDone: {},
     videoProgress: {},
     quizAttempts: {},
+    quizReview: {},
     startedAt: null
   };
   instructorPreviewMode = true;
@@ -940,13 +1064,126 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
+function getQuizReviewItems(id) {
+  return state.quizReview && Array.isArray(state.quizReview[id]) ? state.quizReview[id] : [];
+}
+
+function quizReviewReady(id) {
+  const items = getQuizReviewItems(id);
+  return !items.length || items.every(item => item.reviewed === true);
+}
+
+function ensureLegacyQuizReview(id) {
+  if (state.completed.includes(id) || getQuizReviewItems(id).length) return;
+  const attempts = state.quizAttempts && Array.isArray(state.quizAttempts[id]) ? state.quizAttempts[id] : [];
+  const bestScore = Number(state.scores && state.scores[id]);
+  if (!attempts.length || !Number.isFinite(bestScore) || bestScore >= QUIZ_PASSING_SCORE) return;
+  const guide = getQuizReviewGuide(id, '');
+  if (!state.quizReview) state.quizReview = {};
+  state.quizReview[id] = [{
+    question: 'A previous quiz score no longer satisfies the updated 100% completion requirement.',
+    selectedAnswer: '',
+    topic: 'Full module review',
+    focus: guide.focus,
+    sectionIndex: guide.sectionIndex,
+    reviewed: false
+  }];
+  saveState();
+}
+
+function renderQuizReviewPanel(id) {
+  if (instructorPreviewMode) return;
+  ensureLegacyQuizReview(id);
+  const container = document.getElementById('mod-content');
+  if (!container) return;
+  container.querySelector('#quiz-review-panel')?.remove();
+  const sections = Array.from(container.querySelectorAll('.content-section'));
+  sections.forEach((section, index) => {
+    section.id = `module-${id}-review-section-${index}`;
+    section.setAttribute('tabindex', '-1');
+  });
+  const items = getQuizReviewItems(id);
+  if (!items.length) return;
+
+  const bestScore = Number(state.scores && state.scores[id]);
+  const panel = document.createElement('aside');
+  panel.id = 'quiz-review-panel';
+  panel.className = 'quiz-review-panel';
+  panel.setAttribute('aria-labelledby', 'quiz-review-heading');
+  panel.innerHTML = `
+    <div class="quiz-review-header">
+      <div>
+        <span class="eyebrow">Required remediation</span>
+        <h3 id="quiz-review-heading">Review missed topics before retaking the quiz</h3>
+        <p>A perfect 10 out of 10 is required. Open each assigned section below, review the material, and then retake the complete quiz.</p>
+      </div>
+      <div class="quiz-review-score"><strong>${Number.isFinite(bestScore) ? bestScore : 0}%</strong><span>Best score</span></div>
+    </div>
+    <div class="quiz-review-items">
+      ${items.map((item, index) => `
+        <article class="quiz-review-item${item.reviewed ? ' reviewed' : ''}">
+          <div class="quiz-review-item-heading">
+            <span>Missed topic ${index + 1}</span>
+            <strong>${item.reviewed ? 'Section reviewed ✓' : 'Review required'}</strong>
+          </div>
+          <p class="quiz-review-question">${escapeHtml(item.question)}</p>
+          ${item.selectedAnswer ? `<p class="quiz-review-answer"><strong>Your answer:</strong> ${escapeHtml(item.selectedAnswer)}</p>` : ''}
+          <p><strong>Return to:</strong> ${escapeHtml(item.topic)}</p>
+          <p class="quiz-review-focus">${escapeHtml(item.focus)}</p>
+          <button class="btn btn-outline btn-sm quiz-review-link" type="button" data-review-section="${item.sectionIndex}">${item.reviewed ? 'Review Section Again' : 'Open Review Section'}</button>
+        </article>
+      `).join('')}
+    </div>
+    <div class="quiz-review-actions">
+      <p id="quiz-review-status">${quizReviewReady(id) ? 'All assigned sections have been opened. You may retake the full quiz.' : 'Open every assigned review section to enable the retake.'}</p>
+      <button class="btn" id="quiz-review-retake" type="button" ${quizReviewReady(id) ? '' : 'disabled'}>Retake Full 10-Question Quiz</button>
+    </div>
+  `;
+  container.prepend(panel);
+  panel.querySelectorAll('.quiz-review-link').forEach(button => {
+    button.addEventListener('click', () => markQuizReviewSectionVisited(id, Number(button.dataset.reviewSection)));
+  });
+  panel.querySelector('#quiz-review-retake')?.addEventListener('click', showQuiz);
+}
+
+function markQuizReviewSectionVisited(id, sectionIndex) {
+  const items = getQuizReviewItems(id);
+  items.forEach(item => {
+    if (item.sectionIndex === sectionIndex) item.reviewed = true;
+  });
+  saveState();
+  renderQuizReviewPanel(id);
+  updateQuizButton(id);
+  const section = document.getElementById(`module-${id}-review-section-${sectionIndex}`) ||
+    document.querySelector('#mod-content .content-section');
+  if (section) {
+    section.classList.add('quiz-review-highlight');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section.focus({ preventScroll: true });
+    window.setTimeout(() => section.classList.remove('quiz-review-highlight'), 4000);
+  }
+}
+
+function openModuleReview(id) {
+  openModule(id);
+  window.setTimeout(() => {
+    const panel = document.getElementById('quiz-review-panel');
+    if (panel) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      panel.setAttribute('tabindex', '-1');
+      panel.focus({ preventScroll: true });
+    }
+  }, 50);
+}
+
 function canTakeQuiz(id) {
   if (instructorPreviewMode) return true;
   if (state.completed.includes(id)) return true;
   const timeOk = !!state.timersDone[id];
   const scrollOk = !!state.scrollDone[id];
   const videosOk = requiredVideosComplete(id);
-  return timeOk && scrollOk && videosOk;
+  const reviewOk = quizReviewReady(id);
+  return timeOk && scrollOk && videosOk && reviewOk;
 }
 
 function updateQuizButton(id) {
@@ -962,6 +1199,7 @@ function updateQuizButton(id) {
     if (!state.timersDone[id] && !state.completed.includes(id)) need.push('required time');
     if (!state.scrollDone[id] && !state.completed.includes(id)) need.push('scroll through content');
     if (!requiredVideosComplete(id) && !state.completed.includes(id)) need.push('required videos');
+    if (!quizReviewReady(id) && !state.completed.includes(id)) need.push('missed-topic review');
     btn.textContent = need.length ? ('Complete: ' + need.join(' + ')) : 'Complete requirements first';
   }
 }
@@ -1125,6 +1363,7 @@ function openModule(id) {
 
   document.getElementById('mod-content').innerHTML = html;
 
+  renderQuizReviewPanel(id);
   renderRequiredVideos(id);
 
   // Hide legacy manual timer UI inside module content (time is auto now)
@@ -1183,7 +1422,7 @@ function showQuiz() {
   const instructions = document.getElementById('quiz-instructions');
   if (instructions) instructions.textContent = instructorPreviewMode
     ? 'Instructor preview: answer the questions to demonstrate scoring. The result will not be saved.'
-    : 'You must score at least 80% to unlock the next module. Answer all questions.';
+    : 'You must answer all 10 questions correctly to unlock the next module. Missed topics require review before a full retake.';
   document.getElementById('quiz-result').classList.add('hidden');
   document.getElementById('quiz-result').innerHTML = '';
 
@@ -1217,12 +1456,15 @@ function submitQuiz() {
   if (!m) return;
   let correct = 0;
   let answered = 0;
+  const missed = [];
   currentQuizQuestions.forEach((item, qi) => {
     const q = item.q;
     const selected = document.querySelector('input[name="q' + qi + '"]:checked');
     if (selected) {
       answered++;
-      if (parseInt(selected.value, 10) === q.answer) correct++;
+      const selectedIndex = parseInt(selected.value, 10);
+      if (selectedIndex === q.answer) correct++;
+      else missed.push({ question: q, selectedIndex });
     }
   });
   if (answered < m.questions.length) {
@@ -1233,28 +1475,64 @@ function submitQuiz() {
   const resultEl = document.getElementById('quiz-result');
   resultEl.classList.remove('hidden');
   if (instructorPreviewMode) {
-    const resultClass = percent >= 80 ? 'result-pass' : 'result-fail';
-    const resultLabel = percent >= 80 ? 'PREVIEW PASS' : 'PREVIEW SCORE';
-    resultEl.innerHTML = '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Demonstration only — this score was not saved and no module completion was awarded.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Try Preview Again</button>';
+    const previewPassed = percent === QUIZ_PASSING_SCORE;
+    const resultClass = previewPassed ? 'result-pass' : 'result-fail';
+    const resultLabel = previewPassed ? 'PREVIEW PASS' : 'PREVIEW REVIEW REQUIRED';
+    resultEl.innerHTML = '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>A learner must earn 100%. Demonstration only — this score was not saved and no module completion was awarded.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Try Preview Again</button>';
     return;
   }
+
   if (!state.quizAttempts) state.quizAttempts = {};
   if (!Array.isArray(state.quizAttempts[m.id])) state.quizAttempts[m.id] = [];
-  state.quizAttempts[m.id].push({ at: new Date().toISOString(), score: percent, passed: percent >= 80 });
+  state.quizAttempts[m.id].push({
+    at: new Date().toISOString(),
+    score: percent,
+    passed: percent === QUIZ_PASSING_SCORE
+  });
   state.quizAttempts[m.id] = state.quizAttempts[m.id].slice(-20);
-  if (percent >= 80) {
-    resultEl.innerHTML = '<p class="result-pass">PASSED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Module unlocked for completion. You may return to the dashboard.</p>';
-    if (!state.completed.includes(m.id)) {
-      state.completed.push(m.id);
-    }
-    state.scores[m.id] = percent;
+
+  if (percent === QUIZ_PASSING_SCORE) {
+    resultEl.innerHTML = '<p class="result-pass">PASSED – 100% (10/10)</p><p>Perfect score achieved. The module is complete and the next section is now available.</p>';
+    if (!state.completed.includes(m.id)) state.completed.push(m.id);
+    state.scores[m.id] = QUIZ_PASSING_SCORE;
+    if (state.quizReview) delete state.quizReview[m.id];
     saveState();
-    // Auto-advance option
-    setTimeout(() => showDashboard(), 1200);
-  } else {
-    saveState();
-    resultEl.innerHTML = '<p class="result-fail">NOT PASSED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>You need at least 80%. Review the module content and try again.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Retry Quiz</button>';
+    setTimeout(() => showDashboard(), 1600);
+    return;
   }
+
+  if (state.completed.includes(m.id) && Number(state.scores[m.id]) === QUIZ_PASSING_SCORE) {
+    saveState();
+    resultEl.innerHTML = '<p class="result-fail">PRACTICE SCORE – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Your previously recorded 100% completion remains valid. Review the missed material before trying this practice quiz again.</p><button class="btn btn-outline btn-sm" onclick="showDashboard()" style="margin-top:10px;">Return to Dashboard</button>';
+    return;
+  }
+
+  if (!state.quizReview) state.quizReview = {};
+  state.quizReview[m.id] = missed.map(item => {
+    const guide = getQuizReviewGuide(m.id, item.question.q);
+    return {
+      question: item.question.q,
+      selectedAnswer: item.question.options[item.selectedIndex],
+      topic: guide.topic,
+      focus: guide.focus,
+      sectionIndex: guide.sectionIndex,
+      reviewed: false
+    };
+  });
+  state.scores[m.id] = Math.max(Number(state.scores[m.id]) || 0, percent);
+  saveState();
+
+  const remediationSummary = state.quizReview[m.id].map(item =>
+    '<article><strong>' + escapeHtml(item.topic) + '</strong><p>' +
+    escapeHtml(item.question) + '</p><span>Your answer: ' +
+    escapeHtml(item.selectedAnswer) + '</span></article>'
+  ).join('');
+  resultEl.innerHTML =
+    '<p class="result-fail">REVIEW REQUIRED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p>' +
+    '<p>A perfect score is required. Review the ' + missed.length + ' missed topic' +
+    (missed.length === 1 ? '' : 's') + ' below before the full quiz can be retaken.</p>' +
+    '<div class="quiz-remediation-summary">' + remediationSummary + '</div>' +
+    '<button class="btn" onclick="openModuleReview(' + m.id + ')">Review Missed Topics →</button>';
 }
 
 function showCertificate() {
@@ -1267,11 +1545,11 @@ function showCertificate() {
     state.completed.includes(m.id) &&
     state.timersDone[m.id] === true &&
     state.scrollDone[m.id] === true &&
-    Number(state.scores[m.id]) >= 80 &&
+    Number(state.scores[m.id]) === QUIZ_PASSING_SCORE &&
     requiredVideosComplete(m.id)
   );
   if (!validCompletion) {
-    alert('Every module must have completed seat time, content review, and a passing quiz score before a certificate can be generated.');
+    alert('Every module must have completed seat time, content review, required videos, and a perfect 100% quiz score before a certificate can be generated.');
     return;
   }
   hideAll();
@@ -1318,6 +1596,7 @@ function downloadTrainingRecord() {
     mine: state.mine,
     startedAt: state.startedAt,
     totalProgramHours: modules.reduce((sum, m) => sum + m.hours, 0),
+    requiredQuizScore: QUIZ_PASSING_SCORE,
     modules: modules.map(m => ({
       id: m.id,
       title: m.title,
@@ -1338,7 +1617,8 @@ function downloadTrainingRecord() {
         };
       }),
       bestScore: state.scores[m.id] == null ? null : Number(state.scores[m.id]),
-      quizAttempts: (state.quizAttempts && state.quizAttempts[m.id]) || []
+      quizAttempts: (state.quizAttempts && state.quizAttempts[m.id]) || [],
+      pendingQuizReview: (state.quizReview && state.quizReview[m.id]) || []
     })),
     notice: 'Browser-generated support record. Instructor verification and official MSHA records remain required.'
   };

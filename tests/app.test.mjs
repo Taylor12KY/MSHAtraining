@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/app\.js\?v=video-sequence-3"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-sequence-3"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=quiz-mastery-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -101,12 +101,29 @@ test('instructor preview is non-persistent and cannot issue completion records',
 test('completion controls and record export remain present', () => {
   assert.match(app, /sanitizeState/);
   assert.match(app, /ACTIVITY_TIMEOUT_MS/);
+  assert.match(app, /const QUIZ_PASSING_SCORE = 100/);
   assert.match(app, /quizAttempts/);
   assert.match(app, /downloadTrainingRecord/);
   assert.match(app, /state\.timersDone\[m\.id\] === true/);
-  assert.match(app, /Number\(state\.scores\[m\.id\]\) >= 80/);
+  assert.match(app, /Number\(state\.scores\[m\.id\]\) === QUIZ_PASSING_SCORE/);
+  assert.match(app, /percent === QUIZ_PASSING_SCORE/);
   assert.match(app, /requiredVideosComplete\(m\.id\)/);
   assert.match(app, /Forward seeking is disabled/);
+  assert.doesNotMatch(html + app, /at least 80%|>= 80/);
+});
+
+test('missed quiz questions create a required topic-review loop before retake', () => {
+  assert.match(app, /const QUIZ_REVIEW_SECTIONS = \{/);
+  assert.match(app, /function getQuizReviewGuide/);
+  assert.match(app, /state\.quizReview\[m\.id\] = missed\.map/);
+  assert.match(app, /function renderQuizReviewPanel/);
+  assert.match(app, /function markQuizReviewSectionVisited/);
+  assert.match(app, /item\.reviewed = true/);
+  assert.match(app, /missed-topic review/);
+  assert.match(app, /Retake Full 10-Question Quiz/);
+  assert.match(app, /function openModuleReview/);
+  assert.match(app, /if \(state\.quizReview\) delete state\.quizReview\[m\.id\]/);
+  assert.match(html, /answer all 10 questions correctly/i);
 });
 
 test('all 55 videos are uniquely assigned and all submitted batches remain intact', () => {
