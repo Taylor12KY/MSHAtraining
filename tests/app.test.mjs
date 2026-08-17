@@ -24,12 +24,12 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="assets\/styles\.css"/);
-  assert.match(html, /src="js\/modules-1-6\.js"/);
-  assert.match(html, /src="js\/modules-7-13\.js"/);
-  assert.match(html, /src="js\/site-content\.js"/);
-  assert.match(html, /src="js\/video-library\.js"/);
-  assert.match(html, /src="js\/app\.js"/);
+  assert.match(html, /href="assets\/styles\.css\?v=video-batch-1"/);
+  assert.match(html, /src="js\/modules-1-6\.js\?v=video-batch-1"/);
+  assert.match(html, /src="js\/modules-7-13\.js\?v=video-batch-1"/);
+  assert.match(html, /src="js\/site-content\.js\?v=video-batch-1"/);
+  assert.match(html, /src="js\/video-library\.js\?v=video-batch-1"/);
+  assert.match(html, /src="js\/app\.js\?v=video-batch-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/video-library.js'));
