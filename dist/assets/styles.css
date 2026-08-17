@@ -188,6 +188,26 @@
   }
   .required-video-section > h3 { margin-bottom: 6px; }
   .required-video-section > p { color: var(--text-muted); font-size: 0.9rem; }
+  .video-sequence-label {
+    display: inline-flex; align-items: center; margin: 0 0 10px; padding: 4px 9px;
+    border-radius: 999px; background: #f2e3b8; color: #74550a;
+    font-size: 0.68rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
+  }
+  .video-sequence-transition {
+    position: relative; margin: 9px 0 13px; padding: 13px 16px 13px 45px;
+    border: 1px solid #d9d3c5; border-radius: 11px; background: #fff;
+    color: #48525a; text-align: left;
+  }
+  .video-sequence-transition::before {
+    content: "↓"; position: absolute; left: 15px; top: 15px;
+    display: grid; place-items: center; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--charcoal); color: #e5bd4d; font-size: 0.72rem; font-weight: 900;
+  }
+  .video-sequence-transition span {
+    display: block; margin-bottom: 3px; color: #88670e; font-size: 0.66rem;
+    font-weight: 850; letter-spacing: 0.09em; text-transform: uppercase;
+  }
+  .video-sequence-transition p { margin: 0; font-size: 0.82rem; line-height: 1.48; }
   .video-title { font-weight: 700; margin-bottom: 7px; }
   .video-description { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; }
   .video-source { display: block; margin-top: 4px; font-size: 0.75rem; }

@@ -488,6 +488,18 @@ function requiredVideoTrainingMemo(video) {
   `;
 }
 
+function requiredVideoTransition(video, index, total) {
+  if (index === 0) return '';
+  const transition = VIDEO_SEQUENCE_TRANSITIONS[video.id] ||
+    `Continue to ${video.title} and connect its examples to the hazards and controls introduced in the previous video.`;
+  return `
+    <div class="video-sequence-transition" aria-label="Transition to video ${index + 1} of ${total}">
+      <span>Continue the sequence</span>
+      <p>${escapeHtml(transition)}</p>
+    </div>
+  `;
+}
+
 function configureRequiredVideoBox(box, iframe, video) {
   box.classList.add('managed-video-box');
   box.dataset.videoId = video.id;
@@ -539,10 +551,10 @@ function renderRequiredVideos(moduleId) {
   section.className = 'required-video-section';
   section.innerHTML = `
     <h3>Required Module Videos</h3>
-    <p>Complete all ${videos.length} assigned video${videos.length === 1 ? '' : 's'} in this player before the module quiz unlocks. Videos may be watched in any order.</p>
+    <p>Follow the listed sequence and complete all ${videos.length} assigned video${videos.length === 1 ? '' : 's'} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
   `;
 
-  videos.forEach(video => {
+  videos.forEach((video, index) => {
     ensureVideoProgress(moduleId, video);
     let iframe = container.querySelector(`iframe[src*="${video.id}"]`);
     let box = iframe && iframe.closest('.video-box');
@@ -562,6 +574,15 @@ function renderRequiredVideos(moduleId) {
       iframe = box.querySelector('iframe');
     }
     configureRequiredVideoBox(box, iframe, video);
+    let sequenceLabel = box.querySelector('.video-sequence-label');
+    if (!sequenceLabel) {
+      sequenceLabel = document.createElement('div');
+      sequenceLabel.className = 'video-sequence-label';
+      box.prepend(sequenceLabel);
+    }
+    sequenceLabel.textContent = `Video ${index + 1} of ${videos.length}`;
+    if (index > 0) section.insertAdjacentHTML('beforeend', requiredVideoTransition(video, index, videos.length));
+    section.appendChild(box);
     updateRequiredVideoUI(moduleId, video.id);
   });
 

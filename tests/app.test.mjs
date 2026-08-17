@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=allen-brand-refresh-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=allen-brand-refresh-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/app\.js\?v=video-sequence-3"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-sequence-3"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -109,23 +109,45 @@ test('completion controls and record export remain present', () => {
   assert.match(app, /Forward seeking is disabled/);
 });
 
-test('all 41 videos are uniquely assigned and both submitted batches remain intact', () => {
+test('all 55 videos are uniquely assigned and all submitted batches remain intact', () => {
   const context = {};
-  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const ids = context.videos.map(video => video.id);
   const firstBatch = context.videos.filter(video => context.firstIds.includes(video.id));
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
-  assert.equal(context.videos.length, 41);
-  assert.equal(new Set(ids).size, 41);
+  const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
+  assert.equal(context.videos.length, 55);
+  assert.equal(new Set(ids).size, 55);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 16);
   assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 11206);
   assert.equal(secondBatch.length, 16);
   assert.equal(secondBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 16276);
+  assert.equal(thirdBatch.length, 14);
+  assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 10076);
+  assert.equal(context.thirdSubmittedIds.length, 17);
   assert.equal(ids.filter(id => id === 'X5r4upNwIGk').length, 1);
   assert.equal(ids.filter(id => id === 'yEwFZHVLsso').length, 1);
+  assert.equal(ids.filter(id => id === 'TM8DYUKbjsw').length, 1);
+  assert.equal(ids.filter(id => id === 'OxOwJC5wHyc').length, 1);
+  assert.equal(ids.filter(id => id === 'ddermx9hJ7k').length, 0);
+  assert.equal(context.contentDuplicates.ddermx9hJ7k, 'X5r4upNwIGk');
+});
+
+test('module videos use a complete instructional sequence with transitions', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.transitions = VIDEO_SEQUENCE_TRANSITIONS;')
+    .runInNewContext(context);
+  for (const [moduleId, sequence] of Object.entries(context.sequences)) {
+    const assignedIds = context.videos.filter(video => video.moduleId === Number(moduleId)).map(video => video.id);
+    assert.equal(sequence.length, assignedIds.length, `Module ${moduleId} sequence length differs from its assigned videos`);
+    assert.deepEqual([...sequence].sort(), [...assignedIds].sort(), `Module ${moduleId} sequence omits or duplicates a video`);
+    assert.ok(sequence.slice(1).every(id => context.transitions[id]), `Module ${moduleId} is missing transition language`);
+  }
+  assert.match(app, /section\.appendChild\(box\)/);
+  assert.match(app, /requiredVideoTransition/);
 });
 
 test('required video time fits within each assigned module', () => {
