@@ -47,6 +47,7 @@ let videoPlayers = {};
 let videoPlayerMeta = {};
 let videoWatchIntervals = {};
 let youtubeApiPromise = null;
+let vimeoApiPromise = null;
 let scrollObserver = null;
 let currentQuizQuestions = [];
 let lastActivityAt = Date.now();
@@ -324,6 +325,36 @@ function managedYouTubeUrl(videoId) {
   return 'https://www.youtube-nocookie.com/embed/' + videoId + '?' + params.toString();
 }
 
+function videoProvider(video) {
+  return video.provider === 'vimeo' ? 'vimeo' : 'youtube';
+}
+
+function videoPlayerElementId(video) {
+  return videoProvider(video) + '-player-' + video.id;
+}
+
+function managedVimeoUrl(videoId) {
+  const params = new URLSearchParams({
+    controls: '0',
+    title: '0',
+    byline: '0',
+    portrait: '0',
+    autopause: '1',
+    dnt: '1'
+  });
+  return 'https://player.vimeo.com/video/' + videoId + '?' + params.toString();
+}
+
+function managedVideoUrl(video) {
+  return videoProvider(video) === 'vimeo' ? managedVimeoUrl(video.id) : managedYouTubeUrl(video.id);
+}
+
+function externalVideoUrl(video) {
+  return videoProvider(video) === 'vimeo'
+    ? 'https://vimeo.com/' + video.id
+    : 'https://www.youtube.com/watch?v=' + video.id;
+}
+
 function requiredVideoControls(video) {
   return `
     <div class="video-watch-controls">
@@ -338,10 +369,12 @@ function requiredVideoControls(video) {
 function configureRequiredVideoBox(box, iframe, video) {
   box.classList.add('managed-video-box');
   box.dataset.videoId = video.id;
-  iframe.id = 'yt-player-' + video.id;
-  iframe.src = managedYouTubeUrl(video.id);
+  box.dataset.videoProvider = videoProvider(video);
+  iframe.id = videoPlayerElementId(video);
+  iframe.src = managedVideoUrl(video);
   iframe.title = video.title;
   iframe.removeAttribute('allowfullscreen');
+  iframe.setAttribute('tabindex', '-1');
   iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
   iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
   const frame = iframe.parentElement;
@@ -378,10 +411,10 @@ function renderRequiredVideos(moduleId) {
         <p class="video-title">${escapeHtml(video.title)} · ${formatVideoTime(video.durationSeconds)}</p>
         <p class="video-description">${escapeHtml(video.description)} <span class="video-source">Source: ${escapeHtml(video.author)}</span></p>
         <div class="managed-video-frame">
-          <iframe id="yt-player-${video.id}" src="${managedYouTubeUrl(video.id)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe id="${videoPlayerElementId(video)}" src="${managedVideoUrl(video)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
         </div>
         ${requiredVideoControls(video)}
-        <p class="video-fallback"><a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener">Open on YouTube ↗</a> <span>(external viewing cannot receive completion credit)</span></p>
+        <p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(external viewing cannot receive completion credit)</span></p>
       `;
       section.appendChild(box);
       iframe = box.querySelector('iframe');
@@ -415,15 +448,37 @@ function loadYouTubeApi() {
   return youtubeApiPromise;
 }
 
+function loadVimeoApi() {
+  if (window.Vimeo && window.Vimeo.Player) return Promise.resolve(window.Vimeo);
+  if (vimeoApiPromise) return vimeoApiPromise;
+  vimeoApiPromise = new Promise((resolve, reject) => {
+    let script = document.getElementById('vimeo-player-api');
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'vimeo-player-api';
+      script.src = 'https://player.vimeo.com/api/player.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener('load', () => resolve(window.Vimeo), { once: true });
+    script.addEventListener('error', () => reject(new Error('Vimeo player API could not load')), { once: true });
+  });
+  return vimeoApiPromise;
+}
+
 function initializeRequiredVideos(moduleId) {
   const videos = getRequiredVideos(moduleId);
   if (!videos.length) return;
+  const youtubeVideos = videos.filter(video => videoProvider(video) === 'youtube');
+  const vimeoVideos = videos.filter(video => videoProvider(video) === 'vimeo');
+
+  if (youtubeVideos.length) {
   loadYouTubeApi().then(() => {
     if (currentModuleId !== moduleId) return;
-    videos.forEach(video => {
-      const elementId = 'yt-player-' + video.id;
+    youtubeVideos.forEach(video => {
+      const elementId = videoPlayerElementId(video);
       if (!document.getElementById(elementId) || videoPlayers[video.id]) return;
-      videoPlayerMeta[video.id] = { moduleId, video, suppressSeekUntil: 0, lastSavedSecond: -1 };
+      videoPlayerMeta[video.id] = { moduleId, video, provider: 'youtube', suppressSeekUntil: 0, lastSavedSecond: -1, isPlaying: false };
       videoPlayers[video.id] = new YT.Player(elementId, {
         events: {
           onReady: event => onRequiredVideoReady(event, video.id),
@@ -433,8 +488,52 @@ function initializeRequiredVideos(moduleId) {
       });
     });
   }).catch(() => {
-    videos.forEach(video => setRequiredVideoNote(video.id, 'The tracked video player could not load. Check the network and reload this module.', true));
+    youtubeVideos.forEach(video => setRequiredVideoNote(video.id, 'The tracked YouTube player could not load. Check the network and reload this module.', true));
   });
+  }
+
+  if (vimeoVideos.length) {
+    loadVimeoApi().then(() => {
+      if (currentModuleId !== moduleId) return;
+      vimeoVideos.forEach(video => initializeVimeoVideo(moduleId, video));
+    }).catch(() => {
+      vimeoVideos.forEach(video => setRequiredVideoNote(video.id, 'The tracked Vimeo player could not load. Check the network and reload this module.', true));
+    });
+  }
+}
+
+function initializeVimeoVideo(moduleId, video) {
+  const iframe = document.getElementById(videoPlayerElementId(video));
+  if (!iframe || videoPlayers[video.id]) return;
+  const meta = { moduleId, video, provider: 'vimeo', suppressSeekUntil: 0, lastSavedSecond: -1, isPlaying: false };
+  const player = new Vimeo.Player(iframe);
+  videoPlayerMeta[video.id] = meta;
+  videoPlayers[video.id] = player;
+
+  player.ready().then(async () => {
+    const record = ensureVideoProgress(moduleId, video);
+    const duration = Number(await player.getDuration()) || video.durationSeconds;
+    record.durationSeconds = Math.round(duration);
+    if (!record.complete && record.watchedSeconds > 2) {
+      meta.suppressSeekUntil = Date.now() + 2500;
+      await player.setCurrentTime(record.watchedSeconds);
+    }
+    updateRequiredVideoUI(moduleId, video.id);
+  }).catch(() => setRequiredVideoNote(video.id, 'This Vimeo video could not initialize. Reload the module or ask the instructor for assistance.', true));
+
+  player.on('play', () => {
+    meta.isPlaying = true;
+    pauseOtherRequiredVideos(video.id);
+    updateRequiredVideoButton(video.id);
+  });
+  player.on('pause', () => {
+    meta.isPlaying = false;
+    updateRequiredVideoButton(video.id);
+  });
+  player.on('timeupdate', data => trackVimeoRequiredVideo(video.id, data));
+  player.on('seeked', data => trackVimeoRequiredVideo(video.id, data));
+  player.on('ended', data => completeVimeoRequiredVideo(video.id, data));
+  player.on('error', () => setRequiredVideoNote(video.id, 'This Vimeo video could not load. Check the network and ask the instructor for assistance.', true));
 }
 
 function onRequiredVideoReady(event, videoId) {
@@ -450,17 +549,27 @@ function onRequiredVideoReady(event, videoId) {
   updateRequiredVideoUI(meta.moduleId, videoId);
 }
 
+function pauseOtherRequiredVideos(activeVideoId) {
+  Object.keys(videoPlayers).forEach(otherId => {
+    if (otherId === activeVideoId) return;
+    const otherPlayer = videoPlayers[otherId];
+    const otherMeta = videoPlayerMeta[otherId];
+    try {
+      if (otherMeta && otherMeta.provider === 'vimeo') otherPlayer.pause();
+      else otherPlayer.pauseVideo();
+    } catch (e) {}
+  });
+}
+
 function onRequiredVideoStateChange(event, videoId) {
   const meta = videoPlayerMeta[videoId];
   if (!meta) return;
   if (event.data === YT.PlayerState.PLAYING) {
-    Object.keys(videoPlayers).forEach(otherId => {
-      if (otherId !== videoId) {
-        try { videoPlayers[otherId].pauseVideo(); } catch (e) {}
-      }
-    });
+    meta.isPlaying = true;
+    pauseOtherRequiredVideos(videoId);
     startRequiredVideoWatch(videoId);
   } else {
+    meta.isPlaying = false;
     stopRequiredVideoWatch(videoId);
   }
   if (event.data === YT.PlayerState.ENDED) {
@@ -480,6 +589,61 @@ function onRequiredVideoStateChange(event, videoId) {
       event.target.seekTo(record.watchedSeconds, true);
       setRequiredVideoNote(videoId, 'Forward jump blocked. Resume from your last verified position.', true);
     }
+  }
+  updateRequiredVideoButton(videoId);
+}
+
+function trackVimeoRequiredVideo(videoId, data) {
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!player || !meta || currentModuleId !== meta.moduleId) return;
+  if (document.hidden) {
+    player.pause().catch(() => {});
+    return;
+  }
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const current = Number(data && data.seconds) || 0;
+  const duration = Number(data && data.duration) || record.durationSeconds || meta.video.durationSeconds;
+  if (Date.now() >= meta.suppressSeekUntil && current > record.watchedSeconds + 3) {
+    meta.suppressSeekUntil = Date.now() + 2000;
+    player.setCurrentTime(record.watchedSeconds).catch(() => {});
+    setRequiredVideoNote(videoId, 'Forward seeking is disabled. Playback returned to your last verified position.', true);
+    return;
+  }
+  if (current <= record.watchedSeconds + 3) {
+    record.watchedSeconds = Math.min(duration, Math.max(record.watchedSeconds, current));
+    record.durationSeconds = Math.round(duration);
+    record.updatedAt = new Date().toISOString();
+    lastActivityAt = Date.now();
+    const wholeSecond = Math.floor(record.watchedSeconds);
+    if (wholeSecond % 5 === 0 && wholeSecond !== meta.lastSavedSecond) {
+      meta.lastSavedSecond = wholeSecond;
+      saveState();
+    }
+  }
+  updateRequiredVideoUI(meta.moduleId, videoId);
+}
+
+function completeVimeoRequiredVideo(videoId, data) {
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!player || !meta) return;
+  meta.isPlaying = false;
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const duration = Number(data && data.duration) || record.durationSeconds || meta.video.durationSeconds;
+  if (record.watchedSeconds >= duration - 3) {
+    record.watchedSeconds = duration;
+    record.durationSeconds = Math.round(duration);
+    record.complete = true;
+    record.updatedAt = new Date().toISOString();
+    saveState();
+    setRequiredVideoNote(videoId, 'Video complete ✓', false);
+    updateRequiredVideoUI(meta.moduleId, videoId);
+    updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+  } else {
+    meta.suppressSeekUntil = Date.now() + 2000;
+    player.setCurrentTime(record.watchedSeconds).catch(() => {});
+    setRequiredVideoNote(videoId, 'Forward jump blocked. Resume from your last verified position.', true);
   }
   updateRequiredVideoButton(videoId);
 }
@@ -536,6 +700,22 @@ function toggleRequiredVideo(videoId) {
     setRequiredVideoNote(videoId, 'Player is still loading. Try again in a moment.', true);
     return;
   }
+  if (meta.provider === 'vimeo') {
+    const record = ensureVideoProgress(meta.moduleId, meta.video);
+    if (meta.isPlaying) {
+      player.pause().catch(() => setRequiredVideoNote(videoId, 'The player could not pause. Try again.', true));
+    } else {
+      const startPlayback = async () => {
+        if (record.complete) {
+          meta.suppressSeekUntil = Date.now() + 2000;
+          await player.setCurrentTime(0);
+        }
+        await player.play();
+      };
+      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module.', true));
+    }
+    return;
+  }
   const playerState = player.getPlayerState();
   if (playerState === YT.PlayerState.PLAYING) {
     player.pauseVideo();
@@ -556,9 +736,7 @@ function updateRequiredVideoButton(videoId) {
   const meta = videoPlayerMeta[videoId];
   const record = meta && ensureVideoProgress(meta.moduleId, meta.video);
   let label = record && record.complete ? 'Replay' : 'Start / Resume';
-  try {
-    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) label = 'Pause';
-  } catch (e) {}
+  if (meta && meta.isPlaying) label = 'Pause';
   button.textContent = label;
 }
 
@@ -590,7 +768,12 @@ function setRequiredVideoNote(videoId, message, isWarning) {
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden) return;
   Object.keys(videoPlayers).forEach(videoId => {
-    try { videoPlayers[videoId].pauseVideo(); } catch (e) {}
+    const player = videoPlayers[videoId];
+    const meta = videoPlayerMeta[videoId];
+    try {
+      if (meta && meta.provider === 'vimeo') player.pause();
+      else player.pauseVideo();
+    } catch (e) {}
   });
 });
 

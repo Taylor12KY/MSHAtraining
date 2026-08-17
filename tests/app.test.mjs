@@ -24,12 +24,12 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="assets\/styles\.css\?v=video-batch-1"/);
-  assert.match(html, /src="js\/modules-1-6\.js\?v=video-batch-1"/);
-  assert.match(html, /src="js\/modules-7-13\.js\?v=video-batch-1"/);
-  assert.match(html, /src="js\/site-content\.js\?v=video-batch-1"/);
-  assert.match(html, /src="js\/video-library\.js\?v=video-batch-1"/);
-  assert.match(html, /src="js\/app\.js\?v=video-batch-1"/);
+  assert.match(html, /href="assets\/styles\.css\?v=video-standard-2"/);
+  assert.match(html, /src="js\/modules-1-6\.js\?v=video-standard-2"/);
+  assert.match(html, /src="js\/modules-7-13\.js\?v=video-standard-2"/);
+  assert.match(html, /src="js\/site-content\.js\?v=video-standard-2"/);
+  assert.match(html, /src="js\/video-library\.js\?v=video-standard-2"/);
+  assert.match(html, /src="js\/app\.js\?v=video-standard-2"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/video-library.js'));
@@ -61,17 +61,31 @@ test('completion controls and record export remain present', () => {
   assert.match(app, /Forward seeking is disabled/);
 });
 
-test('first video batch contains 16 unique, timed, module-assigned YouTube videos', () => {
-  const ids = [...videoLibrary.matchAll(/\bid:\s*"([\w-]{11})"/g)].map(match => match[1]);
-  const moduleIds = [...videoLibrary.matchAll(/\bmoduleId:\s*(\d+)/g)].map(match => Number(match[1]));
-  const durations = [...videoLibrary.matchAll(/\bdurationSeconds:\s*(\d+)/g)].map(match => Number(match[1]));
-  assert.equal(ids.length, 16);
-  assert.equal(new Set(ids).size, 16);
-  assert.equal(moduleIds.length, 16);
-  assert.ok(moduleIds.every(id => id >= 1 && id <= 13));
-  assert.equal(durations.length, 16);
-  assert.ok(durations.every(seconds => seconds > 0));
-  assert.equal(durations.reduce((sum, seconds) => sum + seconds, 0), 11206);
+test('all 26 videos are uniquely assigned and the first batch remains intact', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
+    .runInNewContext(context);
+  const ids = context.videos.map(video => video.id);
+  const firstBatch = context.videos.filter(video => context.firstIds.includes(video.id));
+  assert.equal(context.videos.length, 26);
+  assert.equal(new Set(ids).size, 26);
+  assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
+  assert.ok(context.videos.every(video => video.durationSeconds > 0));
+  assert.equal(firstBatch.length, 16);
+  assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 11206);
+});
+
+test('all 11 pre-existing embeds use the tracked YouTube/Vimeo player system', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
+    .runInNewContext(context);
+  const preExisting = context.videos.filter(video => context.preExistingIds.includes(video.id));
+  assert.equal(context.preExistingIds.length, 11);
+  assert.equal(preExisting.length, 11);
+  assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 1);
+  assert.match(app, /function loadVimeoApi/);
+  assert.match(app, /player\.setCurrentTime\(record\.watchedSeconds\)/);
+  assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
 });
 
 test('every site orientation requires current-plan instructor review', () => {
