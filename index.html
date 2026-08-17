@@ -191,20 +191,6 @@
 
 <div class="container" id="app">
 
-  <!-- Instructor Login Modal -->
-  <div id="instructor-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:16px;">
-    <div class="card" style="max-width:360px;width:100%;margin:0;">
-      <h2 style="font-size:1.1rem;margin-bottom:8px;">Instructor Login</h2>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px;">Enter the instructor override password.</p>
-      <input type="password" id="instructor-pw" placeholder="Password" autocomplete="off" style="width:100%;padding:12px;border-radius:8px;border:1px solid var(--border);background:#0f172a;color:var(--text);font-size:1rem;margin-bottom:14px;" onkeydown="if(event.key==='Enter'){event.preventDefault();submitInstructorLogin();}">
-      <div id="instructor-error" style="color:#ef4444;font-size:0.85rem;margin-bottom:10px;display:none;">Incorrect password. Try again.</div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn" type="button" onclick="submitInstructorLogin()">Login</button>
-        <button class="btn btn-outline" type="button" onclick="closeInstructorModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-
   <!-- START SCREEN -->
   <div id="screen-start">
     
@@ -230,7 +216,6 @@
       </select>
       <button class="btn" onclick="startTraining()">Begin / Resume Training</button>
       <button class="btn btn-outline btn-sm" style="margin-left:8px;" onclick="resetAll()">Reset All Progress</button>
-      <button class="btn btn-outline btn-sm" style="margin-left:8px;" onclick="openInstructorModal()">Instructor Login</button>
     </div>
   </div>
 
@@ -245,25 +230,11 @@
         </div>
         <div style="text-align:right;">
           <div style="font-size:0.8rem;color:var(--text-muted);">Classroom Progress</div>
-          <div style="font-weight:700;font-size:1.3rem;" id="dash-hours">0.0 / 33.0 hrs</div>
+          <div style="font-weight:700;font-size:1.3rem;" id="dash-hours">0.0 / 32.0 hrs</div>
         </div>
       </div>
       <div class="progress-bar-outer"><div class="progress-bar-inner" id="dash-bar" style="width:0%"></div></div>
       <div style="font-size:0.8rem;color:var(--text-muted);" id="dash-status">0 of 12 modules completed</div>
-    </div>
-
-    <!-- Instructor panel (shown only when authenticated) -->
-    <div id="instructor-panel" class="card hidden" style="border-color:#f59e0b;background:#422006;">
-      <h3 style="color:#fbbf24;margin-bottom:10px;font-size:1rem;">Instructor Override Panel</h3>
-      <p style="font-size:0.85rem;color:#fde68a;margin-bottom:12px;">You are logged in as instructor. Use the controls below carefully.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-        <button class="btn btn-sm" onclick="instructorUnlockAll()">Unlock All Modules</button>
-        <button class="btn btn-sm" onclick="instructorCompleteAll()">Mark All Complete</button>
-        <button class="btn btn-sm btn-outline" onclick="instructorLogout()">Logout Instructor</button>
-      </div>
-      <div style="font-size:0.85rem;color:#fde68a;">
-        Per-module controls appear on each module row when instructor mode is active.
-      </div>
     </div>
 
     <h2 style="font-size:1.05rem;margin:18px 0 12px;">Training Modules</h2>
@@ -271,7 +242,7 @@
 
     <div class="nav-btns">
       <button class="btn btn-outline btn-sm" onclick="showStart()">â† Change User</button>
-      <button class="btn btn-outline btn-sm" onclick="openInstructorModal()">Instructor Login</button>
+      <button class="btn btn-outline btn-sm" onclick="downloadTrainingRecord()">Download Training Record</button>
       <button class="btn btn-success btn-sm hidden" id="btn-cert" onclick="showCertificate()">View / Print Certificate</button>
     </div>
   </div>
@@ -943,7 +914,7 @@ const MODULES = [
   {
     id: 13,
     title: "Final Review, Comprehensive Quiz & Classroom Certificate",
-    hours: 1.5,
+    hours: 0.5,
     objectives: [
       "Demonstrate retention of key concepts from the 32-hour classroom topics",
       "Receive documentation of classroom portion completion"
@@ -966,8 +937,8 @@ const MODULES = [
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time â€“ Final Review</p>
-        <div class="timer-display" id="timer-13">90:00</div>
-        <button class="btn btn-sm" id="btn-timer-13" onclick="startTimer(13, 90)">Start 1.5-hour Required Timer (90 min)</button>
+        <div class="timer-display" id="timer-13">30:00</div>
+        <button class="btn btn-sm" id="btn-timer-13" onclick="startTimer(13, 30)">Start 30-minute Required Timer</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-13">Timer not started</p>
       </div>
     `,
@@ -1190,14 +1161,21 @@ let state = {
   timersDone: {},         // id -> true when required time completed
   timerElapsed: {},       // id -> seconds accumulated (KnowBe4-style resume)
   scrollDone: {},         // id -> true when content scrolled to end
+  quizAttempts: {},       // id -> recent timestamped quiz attempts
   startedAt: null
 };
 
 let currentModuleId = null;
 let timerIntervals = {};
 let scrollObserver = null;
-let instructorMode = false;   // session-only, not persisted
-const INSTRUCTOR_PASSWORD = 'msha48train';
+let currentQuizQuestions = [];
+let lastActivityAt = Date.now();
+const ACTIVITY_TIMEOUT_MS = 15 * 60 * 1000;
+const VALID_MINES = ['Boonesboro Quarry', 'Clover Bottom Quarry', 'Dix River Stone'];
+
+['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(eventName => {
+  window.addEventListener(eventName, () => { lastActivityAt = Date.now(); }, { passive: true });
+});
 
 // Safe storage: localStorage when available, otherwise in-memory only
 // (sandboxed viewers / some iframes block localStorage and throw SecurityError)
@@ -1220,14 +1198,53 @@ function loadState() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        state = Object.assign(state, parsed);
+        state = sanitizeState(Object.assign({}, state, parsed));
       }
     } else if (memoryStore) {
-      state = Object.assign(state, memoryStore);
+      state = sanitizeState(Object.assign({}, state, memoryStore));
     }
   } catch (e) {
     console.warn('Could not load training progress:', e);
   }
+}
+
+function sanitizeState(candidate) {
+  const modules = getModules();
+  const validIds = new Set(modules.map(m => m.id));
+  const clean = {
+    name: typeof candidate.name === 'string' ? candidate.name.slice(0, 120) : '',
+    mine: VALID_MINES.includes(candidate.mine) ? candidate.mine : '',
+    completed: [],
+    scores: {},
+    timersDone: {},
+    timerElapsed: {},
+    scrollDone: {},
+    quizAttempts: {},
+    startedAt: typeof candidate.startedAt === 'string' ? candidate.startedAt : null
+  };
+
+  modules.forEach(m => {
+    const id = m.id;
+    const total = Math.round(m.hours * 3600);
+    const score = Number(candidate.scores && candidate.scores[id]);
+    const elapsed = Math.max(0, Math.min(total, Number(candidate.timerElapsed && candidate.timerElapsed[id]) || 0));
+    clean.timerElapsed[id] = elapsed;
+    clean.timersDone[id] = candidate.timersDone && candidate.timersDone[id] === true && elapsed >= total;
+    clean.scrollDone[id] = candidate.scrollDone && candidate.scrollDone[id] === true;
+    if (Number.isFinite(score) && score >= 0 && score <= 100) clean.scores[id] = Math.round(score);
+    if (candidate.quizAttempts && Array.isArray(candidate.quizAttempts[id])) {
+      clean.quizAttempts[id] = candidate.quizAttempts[id].slice(-20).map(a => ({
+        at: typeof a.at === 'string' ? a.at : '',
+        score: Math.max(0, Math.min(100, Number(a.score) || 0)),
+        passed: a.passed === true
+      }));
+    }
+    if (validIds.has(id) && Array.isArray(candidate.completed) && candidate.completed.includes(id) &&
+        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] >= 80) {
+      clean.completed.push(id);
+    }
+  });
+  return clean;
 }
 
 function saveState() {
@@ -1259,6 +1276,9 @@ function startTraining() {
     state.completed = state.completed.filter(id => id !== 1);
     delete state.scores[1];
     delete state.timersDone[1];
+    delete state.timerElapsed[1];
+    delete state.scrollDone[1];
+    if (state.quizAttempts) delete state.quizAttempts[1];
   }
   state.name = name;
   state.mine = mine;
@@ -1273,123 +1293,11 @@ function resetAll() {
       if (HAS_LOCAL_STORAGE) localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
     memoryStore = null;
-    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, startedAt: null };
+    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, quizAttempts: {}, startedAt: null };
     document.getElementById('input-name').value = '';
     document.getElementById('input-mine').value = '';
-    instructorMode = false;
     showStart();
   }
-}
-
-function openInstructorModal() {
-  const modal = document.getElementById('instructor-modal');
-  const pwInput = document.getElementById('instructor-pw');
-  const err = document.getElementById('instructor-error');
-  if (err) err.style.display = 'none';
-  if (pwInput) pwInput.value = '';
-  modal.style.display = 'flex';
-  setTimeout(function() { if (pwInput) pwInput.focus(); }, 100);
-}
-
-function closeInstructorModal() {
-  const modal = document.getElementById('instructor-modal');
-  if (modal) modal.style.display = 'none';
-}
-
-function submitInstructorLogin() {
-  const pwInput = document.getElementById('instructor-pw');
-  const err = document.getElementById('instructor-error');
-  const pw = (pwInput && pwInput.value) ? pwInput.value.trim() : '';
-  if (pw === INSTRUCTOR_PASSWORD) {
-    instructorMode = true;
-    closeInstructorModal();
-    // Update any visible Instructor Login buttons to show status
-    document.querySelectorAll('button').forEach(function(b) {
-      if (b.textContent.trim() === 'Instructor Login') {
-        b.textContent = 'Instructor: ON';
-        b.style.borderColor = '#f59e0b';
-        b.style.color = '#fbbf24';
-      }
-    });
-    if (state.name) {
-      showDashboard();
-    }
-  } else {
-    if (err) err.style.display = 'block';
-    if (pwInput) {
-      pwInput.value = '';
-      pwInput.focus();
-    }
-  }
-}
-
-function instructorLogout() {
-  instructorMode = false;
-  document.querySelectorAll('button').forEach(function(b) {
-    if (b.textContent.trim() === 'Instructor: ON') {
-      b.textContent = 'Instructor Login';
-      b.style.borderColor = '';
-      b.style.color = '';
-    }
-  });
-  showDashboard();
-}
-
-function instructorUnlockAll() {
-  if (!instructorMode) return;
-  if (!state.timerElapsed) state.timerElapsed = {};
-  if (!state.scrollDone) state.scrollDone = {};
-  getModules().forEach(m => {
-    state.timersDone[m.id] = true;
-    state.scrollDone[m.id] = true;
-    const total = Math.round(m.hours * 3600);
-    state.timerElapsed[m.id] = total;
-  });
-  saveState();
-  alert('All modules unlocked (viewing timers marked complete). Trainees can still be required to take quizzes unless you also mark modules complete.');
-  showDashboard();
-}
-
-function instructorCompleteAll() {
-  if (!instructorMode) return;
-  if (!confirm('Mark ALL modules as completed for the current trainee? This will allow the certificate to be printed.')) return;
-  if (!state.timerElapsed) state.timerElapsed = {};
-  if (!state.scrollDone) state.scrollDone = {};
-  getModules().forEach(m => {
-    if (!state.completed.includes(m.id)) state.completed.push(m.id);
-    state.timersDone[m.id] = true;
-    state.scrollDone[m.id] = true;
-    state.timerElapsed[m.id] = Math.round(m.hours * 3600);
-    if (state.scores[m.id] == null) state.scores[m.id] = 100;
-  });
-  saveState();
-  showDashboard();
-}
-
-function instructorCompleteModule(id) {
-  if (!instructorMode) return;
-  if (!state.timerElapsed) state.timerElapsed = {};
-  if (!state.scrollDone) state.scrollDone = {};
-  if (!state.completed.includes(id)) state.completed.push(id);
-  state.timersDone[id] = true;
-  state.scrollDone[id] = true;
-  const m = getModule(id);
-  state.timerElapsed[id] = Math.round((m ? m.hours : 1) * 3600);
-  if (state.scores[id] == null) state.scores[id] = 100;
-  saveState();
-  showDashboard();
-}
-
-function instructorUnlockModule(id) {
-  if (!instructorMode) return;
-  if (!state.timerElapsed) state.timerElapsed = {};
-  if (!state.scrollDone) state.scrollDone = {};
-  state.timersDone[id] = true;
-  state.scrollDone[id] = true;
-  const m = getModule(id);
-  state.timerElapsed[id] = Math.round((m ? m.hours : 1) * 3600);
-  saveState();
-  showDashboard();
 }
 
 function showStart() {
@@ -1411,27 +1319,23 @@ function showDashboard() {
   document.getElementById('dash-mine').textContent = state.mine || '';
 
   const modules = getModules();
+  const totalHours = modules.reduce((sum, m) => sum + m.hours, 0);
   let hoursDone = 0;
   state.completed.forEach(id => {
     const m = modules.find(x => x.id === id);
     if (m) hoursDone += m.hours;
   });
-  document.getElementById('dash-hours').textContent = hoursDone.toFixed(1) + ' / 33.0 hrs';
-  document.getElementById('dash-bar').style.width = Math.min(100, (hoursDone / 33.0) * 100) + '%';
+  document.getElementById('dash-hours').textContent = hoursDone.toFixed(1) + ' / ' + totalHours.toFixed(1) + ' hrs';
+  document.getElementById('dash-bar').style.width = Math.min(100, (hoursDone / totalHours) * 100) + '%';
   document.getElementById('dash-status').textContent = state.completed.length + ' of ' + modules.length + ' modules completed';
-
-  // Show / hide instructor panel
-  const panel = document.getElementById('instructor-panel');
-  if (panel) panel.classList.toggle('hidden', !instructorMode);
 
   const list = document.getElementById('module-list');
   list.innerHTML = '';
   modules.forEach((m, idx) => {
     const isDone = state.completed.includes(m.id);
     const prevDone = idx === 0 || state.completed.includes(modules[idx - 1].id);
-    // Instructor mode removes sequential lock
-    const isLocked = !instructorMode && !isDone && !prevDone;
-    const isCurrent = !isDone && (prevDone || instructorMode);
+    const isLocked = !isDone && !prevDone;
+    const isCurrent = !isDone && prevDone;
 
     let statusClass = 'status-locked';
     let statusText = 'Locked';
@@ -1441,15 +1345,6 @@ function showDashboard() {
     const div = document.createElement('div');
     div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '');
     
-    let instructorBtns = '';
-    if (instructorMode && !isDone) {
-      instructorBtns = `
-        <div style="display:flex;gap:6px;margin-left:8px;flex-shrink:0;">
-          <button class="btn btn-sm" style="padding:4px 8px;font-size:0.7rem;" onclick="event.stopPropagation();instructorUnlockModule(${m.id})">Unlock</button>
-          <button class="btn btn-sm btn-success" style="padding:4px 8px;font-size:0.7rem;" onclick="event.stopPropagation();instructorCompleteModule(${m.id})">Complete</button>
-        </div>`;
-    }
-
     div.innerHTML = `
       <div class="mod-num">${isDone ? 'âœ“' : m.id}</div>
       <div class="mod-info">
@@ -1457,7 +1352,6 @@ function showDashboard() {
         <div class="mod-meta">${m.hours} hrs Â· ${m.questions.length} quiz questions</div>
       </div>
       <span class="status-badge ${statusClass}">${statusText}</span>
-      ${instructorBtns}
     `;
     if (!isLocked) {
       div.onclick = () => openModule(m.id);
@@ -1465,7 +1359,7 @@ function showDashboard() {
     list.appendChild(div);
   });
 
-  const allDone = state.completed.length === modules.length;
+  const allDone = modules.every(m => state.completed.includes(m.id));
   document.getElementById('btn-cert').classList.toggle('hidden', !allDone);
 }
 
@@ -1481,7 +1375,7 @@ function stopActiveTimers() {
 }
 
 function canTakeQuiz(id) {
-  if (instructorMode || state.completed.includes(id)) return true;
+  if (state.completed.includes(id)) return true;
   const timeOk = !!state.timersDone[id];
   const scrollOk = !!state.scrollDone[id];
   return timeOk && scrollOk;
@@ -1526,6 +1420,8 @@ function updateProgressUI(id, totalSec) {
       parts.push('<span class="ok">âœ“ Required time done</span>');
     } else if (document.hidden) {
       parts.push('<span class="wait">â¸ Paused â€” return to this tab to continue</span>');
+    } else if (Date.now() - lastActivityAt >= ACTIVITY_TIMEOUT_MS) {
+      parts.push('<span class="wait">â¸ Paused for inactivity â€” interact with the page to continue</span>');
     } else {
       parts.push('<span class="wait">â± Time running while this tab is visible</span>');
     }
@@ -1540,7 +1436,7 @@ function updateProgressUI(id, totalSec) {
 }
 
 function setupScrollTracking(id) {
-  if (state.scrollDone[id] || state.completed.includes(id) || instructorMode) {
+  if (state.scrollDone[id] || state.completed.includes(id)) {
     state.scrollDone[id] = true;
     return;
   }
@@ -1573,13 +1469,6 @@ function autoStartModuleTimer(id, hours) {
     updateProgressUI(id, Math.round(hours * 3600));
     return;
   }
-  if (instructorMode) {
-    state.timersDone[id] = true;
-    state.scrollDone[id] = true;
-    updateProgressUI(id, Math.round(hours * 3600));
-    return;
-  }
-
   const totalSec = Math.round(hours * 3600);
   if (timerIntervals[id]) clearInterval(timerIntervals[id]);
 
@@ -1591,7 +1480,7 @@ function autoStartModuleTimer(id, hours) {
       delete timerIntervals[id];
       return;
     }
-    if (document.hidden) {
+    if (document.hidden || Date.now() - lastActivityAt >= ACTIVITY_TIMEOUT_MS) {
       updateProgressUI(id, totalSec);
       return;
     }
@@ -1688,14 +1577,19 @@ function showQuiz() {
 
   const container = document.getElementById('quiz-questions');
   container.innerHTML = '';
-  m.questions.forEach((q, qi) => {
+  currentQuizQuestions = m.questions.map((q, originalIndex) => ({ q, originalIndex }))
+    .sort(() => Math.random() - 0.5);
+  currentQuizQuestions.forEach((item, qi) => {
+    const q = item.q;
     const div = document.createElement('div');
     div.className = 'quiz-q';
     div.innerHTML = '<h4>' + (qi + 1) + '. ' + q.q + '</h4>';
-    q.options.forEach((opt, oi) => {
+    q.options.map((opt, originalIndex) => ({ opt, originalIndex }))
+      .sort(() => Math.random() - 0.5)
+      .forEach(({ opt, originalIndex }) => {
       const label = document.createElement('label');
       label.className = 'quiz-option';
-      label.innerHTML = '<input type="radio" name="q' + qi + '" value="' + oi + '"> ' + opt;
+      label.innerHTML = '<input type="radio" name="q' + qi + '" value="' + originalIndex + '"> ' + opt;
       label.onclick = function() {
         div.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
         label.classList.add('selected');
@@ -1711,7 +1605,8 @@ function submitQuiz() {
   if (!m) return;
   let correct = 0;
   let answered = 0;
-  m.questions.forEach((q, qi) => {
+  currentQuizQuestions.forEach((item, qi) => {
+    const q = item.q;
     const selected = document.querySelector('input[name="q' + qi + '"]:checked');
     if (selected) {
       answered++;
@@ -1723,6 +1618,10 @@ function submitQuiz() {
     return;
   }
   const percent = Math.round((correct / m.questions.length) * 100);
+  if (!state.quizAttempts) state.quizAttempts = {};
+  if (!Array.isArray(state.quizAttempts[m.id])) state.quizAttempts[m.id] = [];
+  state.quizAttempts[m.id].push({ at: new Date().toISOString(), score: percent, passed: percent >= 80 });
+  state.quizAttempts[m.id] = state.quizAttempts[m.id].slice(-20);
   const resultEl = document.getElementById('quiz-result');
   resultEl.classList.remove('hidden');
 
@@ -1736,14 +1635,21 @@ function submitQuiz() {
     // Auto-advance option
     setTimeout(() => showDashboard(), 1200);
   } else {
+    saveState();
     resultEl.innerHTML = '<p class="result-fail">NOT PASSED â€“ ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>You need at least 80%. Review the module content and try again.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Retry Quiz</button>';
   }
 }
 
 function showCertificate() {
   const modules = getModules();
-  if (state.completed.length < modules.length) {
-    alert('Complete all modules first.');
+  const validCompletion = modules.every(m =>
+    state.completed.includes(m.id) &&
+    state.timersDone[m.id] === true &&
+    state.scrollDone[m.id] === true &&
+    Number(state.scores[m.id]) >= 80
+  );
+  if (!validCompletion) {
+    alert('Every module must have completed seat time, content review, and a passing quiz score before a certificate can be generated.');
     return;
   }
   hideAll();
@@ -1775,6 +1681,40 @@ function showCertificate() {
     </p>
     <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool Â· Progress stored locally</p>
   `;
+}
+
+function downloadTrainingRecord() {
+  const modules = getModules();
+  const record = {
+    format: 'msha48-training-record-v1',
+    exportedAt: new Date().toISOString(),
+    trainee: state.name,
+    mine: state.mine,
+    startedAt: state.startedAt,
+    totalProgramHours: modules.reduce((sum, m) => sum + m.hours, 0),
+    modules: modules.map(m => ({
+      id: m.id,
+      title: m.title,
+      creditedHours: m.hours,
+      completed: state.completed.includes(m.id),
+      seatTimeSeconds: Math.min(Math.round(m.hours * 3600), Number(state.timerElapsed[m.id]) || 0),
+      seatTimeComplete: state.timersDone[m.id] === true,
+      contentReviewed: state.scrollDone[m.id] === true,
+      bestScore: state.scores[m.id] == null ? null : Number(state.scores[m.id]),
+      quizAttempts: (state.quizAttempts && state.quizAttempts[m.id]) || []
+    })),
+    notice: 'Browser-generated support record. Instructor verification and official MSHA records remain required.'
+  };
+  const safeName = (state.name || 'trainee').replace(/[^a-z0-9_-]+/gi, '-').replace(/^-|-$/g, '') || 'trainee';
+  const blob = new Blob([JSON.stringify(record, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = safeName + '-msha-training-record.json';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 function escapeHtml(str) {
