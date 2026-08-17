@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=video-guidance-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-guidance-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/app\.js\?v=video-guidance-2"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-guidance-2"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -153,6 +153,18 @@ test('Sago and Granite Mountain guidance frames the intended case-study lessons'
   assert.match(granite, /ventilation/i);
   assert.match(granite, /carbon monoxide/i);
   assert.match(granite, /escape/i);
+});
+
+test('Sunshine Mine guidance explains its regulatory legacy', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.guidance = VIDEO_TRAINING_GUIDANCE;')
+    .runInNewContext(context);
+  const sunshine = `${context.guidance.WTKCluA6lgE.focus} ${context.guidance.WTKCluA6lgE.scope}`;
+  assert.match(sunshine, /catalyst/i);
+  assert.match(sunshine, /1977/);
+  assert.match(sunshine, /MSHA/);
+  assert.match(sunshine, /evacuation/i);
+  assert.match(sunshine, /ventilation/i);
 });
 
 test('all 10 retained pre-existing embeds use the tracked YouTube/Vimeo player system', () => {
