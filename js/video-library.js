@@ -350,6 +350,72 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
   "wal2KP1bbIY"
 ]);
 
+const MODULE_VIDEO_SCOPE = {
+  2: "Use the video to understand miners' rights, responsibilities, and regulatory history. Current law, the approved training plan, and instructor guidance control if an older presentation differs.",
+  3: "Use only the current MSA W65 instructions and this mine's procedures. Video viewing does not replace hands-on practice with an approved W65 training unit.",
+  4: "Transfer the communication, visibility, seat-belt, guarding, and isolation principles to this operation. The video is not task authorization or equipment-specific operating instruction.",
+  5: "Concentrate on recognizing and controlling hazards. Do not enter restricted areas or perform specialized work without site authorization and task training.",
+  6: "Treat incident footage as a case study. In an emergency, follow the current mine emergency plan, designated escapeways, communications, and instructor direction.",
+  7: "Apply the warning signs and control principles through the current ground-control and ventilation plans. Historical conditions and another mine's methods are context, not local procedure.",
+  8: "Focus on exposure recognition and controls. Follow current sampling, HazCom, respiratory-protection, hearing-conservation, and PPE requirements at the mine.",
+  9: "This is hazard-awareness instruction, not electrical qualification. Only qualified and authorized persons may perform electrical work under the mine's energy-control procedures.",
+  10: "This video supports first-aid awareness and refresher discussion; it is not a certification course. Work within your training and activate professional emergency response promptly.",
+  12: "Use the incident or task example to strengthen prevention and decision-making. It does not authorize a task or replace task-specific training and site procedures."
+};
+
+const VIDEO_TRAINING_GUIDANCE = {
+  "VEOVVx3rDyI": { focus: "Identify MSHA's enforcement, education, training, and technical-support roles and how they affect daily mine safety." },
+  "QGkT8Ahh1-E": { focus: "Listen for miners' protected rights, personal responsibilities, hazard-reporting options, and protections against retaliation." },
+  "98555798": { focus: "Watch the complete W65 inspection and donning sequence, including the mouthpiece, nose clip, head harness, and immediate movement toward fresh air." },
+  "AU07-U96dfw": { focus: "Use the animation to reinforce the order of W65 donning steps before practicing them with the approved trainer." },
+  "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
+  "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },
+  "mSt9lHz22xM": { focus: "Observe the underground traffic pattern, dumping area, equipment clearances, visibility limits, and interaction with the crusher area." },
+  "_s2x4dmQgjU": { focus: "Understand how properly constructed and maintained berms protect equipment at roadway edges and dump points." },
+  "GSPRVJsu3_A": { focus: "Practice noticing conditions during a workplace examination, deciding what must be corrected, and communicating hazards promptly." },
+  "qDDg-CbOTmw": { focus: "Apply Stop, Look, Analyze, and Manage before beginning work and whenever conditions or the task change." },
+  "MziZesbb32Q": { focus: "Connect the impact demonstration to falling-object hazards, correct hard-hat use, and keeping clear of overhead work." },
+  "9wnDBLifDB4": { focus: "Recognize blast areas, warning signals, exclusion zones, flyrock risk, and the need to obey the site's all-clear procedure." },
+  "Oaxs7EEIp4k": { focus: "Use the overview to understand room-and-pillar layout, travelways, active faces, and why ground-control discipline matters." },
+  "e8mGpQ9W4_w": { focus: "Identify ignition prevention, early warning, prompt reporting, initial response limits, and the decision to evacuate." },
+  "j9DNL0DnKmU": { focus: "Watch for leadership, communication, route selection, accountability, and decisions made under limited visibility and time." },
+  "4rQwxVnYcLk": { focus: "Identify loose-ground warning signs, exposure beneath unsupported ground, and controls that prevent rock-fall injuries." },
+  "OxOwJC5wHyc": { focus: "Use each scenario to practice asking what could happen, who is exposed, and which control should be in place before work continues." },
+  "528dJg0lESM": { focus: "Observe how mechanical scaling removes loose material while the operator maintains distance and protected positioning." },
+  "1OJUEmUAPmc": { focus: "Connect invisible respirable dust exposure to long-term disease and the importance of engineering controls and correct PPE." },
+  "CHTJ8i55HUk": { focus: "Understand why respirable-dust sampling is performed, how samples represent exposure, and why equipment must not be disturbed." },
+  "X5r4upNwIGk": { focus: "Look for noise-exposure limits, hearing-protection selection and use, audiometric monitoring, and conservation-program responsibilities." },
+  "iX8j7h7bJF4": { focus: "Recognize the consequences of arc flash and why de-energizing, isolation, verification, boundaries, and qualified work are essential." },
+  "wal2KP1bbIY": { focus: "Identify electrical warning signs and the safe actions expected of workers who are not qualified electricians." },
+  "4MjKwOI2LrE": { focus: "Consider how one person's shortcut affects coworkers and family, and why speaking up, PPE, and procedure compliance matter." },
+  "gbaGN7JQoO4": { focus: "Build awareness of explosives storage, transport, loading, blast-area security, communication, and the role of licensed personnel." },
+  "kjCsEVjRrlg": {
+    focus: "Track how fire heat reversed the ventilation flow, carried carbon monoxide through connected workings, and made blocked escape routes deadly.",
+    scope: "Focus on ventilation behavior, fire loading, two-way escapeways, and early evacuation. The 1917 equipment, construction, and response practices are historical context—not procedures for these operations."
+  },
+  "IGb20ZDbjkY": {
+    focus: "Watch how information, accountability, families, the operator, state agencies, MSHA, the command center, and rescue teams interact during a prolonged mine emergency.",
+    scope: "The first priority is prompt self-rescue and evacuation when a usable route is available. Do not interpret barricading as preferable to an available escape route. Historical coal-mine devices and refuge requirements shown in this case are not the W65 procedures used at these operations."
+  },
+  "NjHDUhWA6Lo": { focus: "Follow the rollover sequence and identify how the seat belt, protective cab, equipment condition, and operator decisions affected survival." },
+  "eFTnBiAvxxg": { focus: "Look for cracks, sloughing, overhangs, changing weather or water conditions, and safe positioning beside a highwall." },
+  "Ok2p6cUe_sM": { focus: "Practice a deliberate highwall examination: scan the crest, face, toe, nearby equipment routes, and recent changes before entering the area." },
+  "ZrnWnmhGpQY": { focus: "Use the incident accounts to identify guarding, blocking against motion, lockout/tagout, safe maintenance, and entanglement hazards." },
+  "q_4q8lm0tCs": { focus: "Identify practical controls for visibility, seat belts, traffic patterns, proximity detection, berms, and pedestrian-equipment separation." },
+  "hQiYjxSC9bI": { focus: "Review scene safety, activating help, cardiac emergencies, AED use, severe bleeding, electrical injuries, burns, and emotional support." },
+  "2cyQ5QTPOek": { focus: "Identify unstable slopes, hidden voids, bridging, engulfment, dumping hazards, and safe loader and pedestrian positioning around stockpiles." },
+  "1u6c7YMgkB8": { focus: "Understand how benching and pillar geometry can contribute to progressive or massive collapse and why exclusion zones and plan compliance matter." },
+  "WTKCluA6lgE": {
+    focus: "Study the Sunshine Mine fire as a human-factors and emergency-preparedness case: warning, communication, smoke movement, escape decisions, and lessons learned.",
+    scope: "Keep attention on decisions and system failures that improve today's prevention and evacuation. Historical equipment and regulations shown are context; current site plans and W65 instruction control here."
+  },
+  "eEj1JOVu_eY": { focus: "Identify protected activities, inspection participation, hazard reporting, training rights, and the responsibilities miners retain for safe work." },
+  "SN4Sfuhvs2Y": { focus: "Use this short review to reinforce the statutory rights a miner can exercise without retaliation." },
+  "WrnHZK9GhlM": { focus: "Connect major mine disasters and legislative milestones to MSHA's present enforcement and prevention mission." },
+  "F7AOWLOOT-U": { focus: "Use the company-town history to understand the power imbalance surrounding early mine labor and why enforceable worker protections developed." },
+  "TM8DYUKbjsw": { focus: "Follow the progression from limited federal authority to inspections, enforcement, broader coverage, miner protections, and the 1977 Mine Act." }
+};
+
 function getRequiredVideos(moduleId) {
   return REQUIRED_VIDEOS.filter(video => video.moduleId === moduleId);
 }

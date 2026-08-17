@@ -441,6 +441,20 @@ function requiredVideoControls(video) {
   `;
 }
 
+function requiredVideoTrainingMemo(video) {
+  const guidance = VIDEO_TRAINING_GUIDANCE[video.id] || {};
+  const focus = guidance.focus || video.description;
+  const scope = guidance.scope || MODULE_VIDEO_SCOPE[video.moduleId] ||
+    "Use this video to support the module objectives. Follow the current mine plan, site procedures, and instructor direction whenever details differ.";
+  return `
+    <aside class="video-training-memo" aria-label="Training focus for ${escapeHtml(video.title)}">
+      <p class="video-training-memo-label">Training Focus</p>
+      <p>${escapeHtml(focus)}</p>
+      <p class="video-training-memo-scope"><strong>Keep in perspective:</strong> ${escapeHtml(scope)}</p>
+    </aside>
+  `;
+}
+
 function configureRequiredVideoBox(box, iframe, video) {
   box.classList.add('managed-video-box');
   box.dataset.videoId = video.id;
@@ -454,6 +468,9 @@ function configureRequiredVideoBox(box, iframe, video) {
   iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
   const frame = iframe.parentElement;
   if (frame) frame.classList.add('managed-video-frame');
+  if (frame && !box.querySelector('.video-training-memo')) {
+    frame.insertAdjacentHTML('beforebegin', requiredVideoTrainingMemo(video));
+  }
   box.querySelectorAll('p').forEach(paragraph => {
     const text = paragraph.textContent || '';
     if (

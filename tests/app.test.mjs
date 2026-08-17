@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=video-batch-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-batch-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=video-guidance-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=video-guidance-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -128,6 +128,31 @@ test('required video time fits within each assigned module', () => {
       .reduce((sum, video) => sum + video.durationSeconds, 0);
     assert.ok(videoSeconds <= module.hours * 3600, `Module ${module.id} has more video time than credited time`);
   }
+});
+
+test('every required video has trainee guidance shown before playback', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.guidance = VIDEO_TRAINING_GUIDANCE;')
+    .runInNewContext(context);
+  assert.equal(Object.keys(context.guidance).length, context.videos.length);
+  assert.ok(context.videos.every(video => context.guidance[video.id]?.focus));
+  assert.match(app, /function requiredVideoTrainingMemo/);
+  assert.match(app, /frame\.insertAdjacentHTML\('beforebegin', requiredVideoTrainingMemo\(video\)\)/);
+  assert.match(app, /Keep in perspective:/);
+});
+
+test('Sago and Granite Mountain guidance frames the intended case-study lessons', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.guidance = VIDEO_TRAINING_GUIDANCE;')
+    .runInNewContext(context);
+  const sago = `${context.guidance.IGb20ZDbjkY.focus} ${context.guidance.IGb20ZDbjkY.scope}`;
+  const granite = `${context.guidance.kjCsEVjRrlg.focus} ${context.guidance.kjCsEVjRrlg.scope}`;
+  assert.match(sago, /MSHA|command center/i);
+  assert.match(sago, /self-rescue/i);
+  assert.match(sago, /barricading/i);
+  assert.match(granite, /ventilation/i);
+  assert.match(granite, /carbon monoxide/i);
+  assert.match(granite, /escape/i);
 });
 
 test('all 10 retained pre-existing embeds use the tracked YouTube/Vimeo player system', () => {

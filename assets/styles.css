@@ -186,6 +186,20 @@
   .video-title { font-weight: 700; margin-bottom: 7px; }
   .video-description { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; }
   .video-source { display: block; margin-top: 4px; font-size: 0.75rem; }
+  .video-training-memo {
+    background: linear-gradient(135deg, rgba(14, 116, 144, 0.2), rgba(30, 58, 95, 0.48));
+    border: 1px solid rgba(56, 189, 248, 0.38); border-left: 4px solid var(--accent);
+    border-radius: 8px; margin: 12px 0 14px; padding: 12px 14px; text-align: left;
+  }
+  .video-training-memo p { margin: 0; font-size: 0.86rem; line-height: 1.5; }
+  .video-training-memo-label {
+    color: #7dd3fc; font-size: 0.72rem !important; font-weight: 800;
+    letter-spacing: 0.08em; margin-bottom: 5px !important; text-transform: uppercase;
+  }
+  .video-training-memo-scope {
+    border-top: 1px solid rgba(148, 163, 184, 0.25); color: var(--text-muted);
+    margin-top: 9px !important; padding-top: 8px;
+  }
   .managed-video-frame {
     position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
     border-radius: 8px; margin-bottom: 12px; background: #000;
