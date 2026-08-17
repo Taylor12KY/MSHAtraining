@@ -2,7 +2,13 @@
   "name": "msha-part48-training",
   "private": true,
   "scripts": {
+    "build": "node scripts/build.mjs",
     "test": "node tests/app.test.mjs"
+  },
+  "dependencies": {
+    "@netlify/identity": "1.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
   }
 }
-

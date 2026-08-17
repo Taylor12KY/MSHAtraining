@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MSHA Part 48 – 32-Hour Classroom New Miner Training</title>
-  <link rel="stylesheet" href="assets/styles.css?v=video-standard-2">
+  <link rel="stylesheet" href="/assets/styles.css?v=instructor-access-1">
 </head>
 <body>
 <header>
@@ -13,6 +13,28 @@
     <div class="sub">New Miner Training Support Tool · Subpart A (Underground) &amp; Subpart B (Surface)</div>
   </div>
 </header>
+
+<aside class="instructor-preview-banner hidden" id="instructor-preview-banner" aria-label="Instructor preview controls">
+  <div class="instructor-preview-inner">
+    <div>
+      <strong>Instructor Preview</strong>
+      <span>Requirements are bypassed for demonstration only. Nothing is recorded.</span>
+    </div>
+    <label>
+      Preview location
+      <select id="instructor-preview-mine">
+        <option value="Boonesboro Quarry">Boonesboro Quarry</option>
+        <option value="Clover Bottom Quarry">Clover Bottom Quarry</option>
+        <option value="Dix River Stone">Dix River Stone</option>
+      </select>
+    </label>
+    <div class="instructor-preview-actions">
+      <span id="instructor-preview-identity"></span>
+      <button class="btn btn-outline btn-sm" type="button" id="instructor-exit-preview">Exit Preview</button>
+      <button class="btn btn-outline btn-sm" type="button" id="instructor-sign-out">Sign Out</button>
+    </div>
+  </div>
+</aside>
 
 <div class="container" id="app">
 
@@ -41,6 +63,10 @@
       </select>
       <button class="btn" onclick="startTraining()">Begin / Resume Training</button>
       <button class="btn btn-outline btn-sm" style="margin-left:8px;" onclick="resetAll()">Reset All Progress</button>
+      <div class="instructor-access-row">
+        <span>Showing the course to a group?</span>
+        <button class="btn btn-outline btn-sm" type="button" id="instructor-open-access">Instructor Sign In</button>
+      </div>
     </div>
   </div>
 
@@ -66,8 +92,8 @@
     <div id="module-list"></div>
 
     <div class="nav-btns">
-      <button class="btn btn-outline btn-sm" onclick="showStart()">← Change User</button>
-      <button class="btn btn-outline btn-sm" onclick="downloadTrainingRecord()">Download Training Record</button>
+      <button class="btn btn-outline btn-sm" id="btn-change-user" onclick="showStart()">← Change User</button>
+      <button class="btn btn-outline btn-sm" id="btn-training-record" onclick="downloadTrainingRecord()">Download Training Record</button>
       <button class="btn btn-success btn-sm hidden" id="btn-cert" onclick="showCertificate()">View / Print Certificate</button>
     </div>
   </div>
@@ -96,7 +122,7 @@
   <div id="screen-quiz" class="hidden">
     <div class="card">
       <h2 style="font-size:1.15rem;margin-bottom:6px;" id="quiz-title">Module Quiz</h2>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">You must score at least 80% to unlock the next module. Answer all questions.</p>
+      <p id="quiz-instructions" style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">You must score at least 80% to unlock the next module. Answer all questions.</p>
       <div id="quiz-questions"></div>
       <div class="nav-btns">
         <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
@@ -119,14 +145,62 @@
 
 </div>
 
+<div class="auth-overlay hidden" id="instructor-auth-modal" role="dialog" aria-modal="true" aria-labelledby="instructor-auth-title">
+  <div class="auth-dialog">
+    <button class="auth-close" id="instructor-auth-close" type="button" aria-label="Close instructor sign in">&times;</button>
+    <h2 id="instructor-auth-title">Instructor Access</h2>
+    <p class="auth-intro">Sign in with an invited instructor account. Learner progress and certificates are disabled in preview mode.</p>
+
+    <form id="instructor-login-form" class="auth-form">
+      <label for="instructor-email">Email</label>
+      <input id="instructor-email" type="email" autocomplete="username" required>
+      <label for="instructor-password">Password</label>
+      <input id="instructor-password" type="password" autocomplete="current-password" required>
+      <button class="btn" type="submit">Sign In</button>
+      <button class="auth-link" id="instructor-forgot-password" type="button">Forgot password?</button>
+    </form>
+
+    <form id="instructor-invite-form" class="auth-form hidden">
+      <h3>Accept Instructor Invitation</h3>
+      <p>Choose a password to finish creating your instructor account.</p>
+      <label for="instructor-invite-password">New password</label>
+      <input id="instructor-invite-password" type="password" autocomplete="new-password" minlength="8" required>
+      <label for="instructor-invite-confirm">Confirm password</label>
+      <input id="instructor-invite-confirm" type="password" autocomplete="new-password" minlength="8" required>
+      <button class="btn" type="submit">Create Account &amp; Open Preview</button>
+    </form>
+
+    <form id="instructor-recovery-request-form" class="auth-form hidden">
+      <h3>Reset Password</h3>
+      <p>We will email a secure password-reset link to your instructor account.</p>
+      <label for="instructor-recovery-email">Email</label>
+      <input id="instructor-recovery-email" type="email" autocomplete="email" required>
+      <button class="btn" type="submit">Send Reset Link</button>
+      <button class="auth-link" id="instructor-back-to-login" type="button">Back to sign in</button>
+    </form>
+
+    <form id="instructor-recovery-form" class="auth-form hidden">
+      <h3>Set a New Password</h3>
+      <label for="instructor-new-password">New password</label>
+      <input id="instructor-new-password" type="password" autocomplete="new-password" minlength="8" required>
+      <label for="instructor-new-password-confirm">Confirm password</label>
+      <input id="instructor-new-password-confirm" type="password" autocomplete="new-password" minlength="8" required>
+      <button class="btn" type="submit">Update Password &amp; Open Preview</button>
+    </form>
+
+    <p class="auth-status hidden" id="instructor-auth-status" role="status"></p>
+  </div>
+</div>
+
 <div class="footer-note no-print">
   Support tool only · Not official MSHA certification · Site-specific training &amp; approved instructor still required · Progress stored locally in this browser
 </div>
 
-<script src="js/modules-1-6.js?v=video-standard-2"></script>
-<script src="js/modules-7-13.js?v=video-standard-2"></script>
-<script src="js/site-content.js?v=video-standard-2"></script>
-<script src="js/video-library.js?v=video-standard-2"></script>
-<script src="js/app.js?v=video-standard-2"></script>
+<script src="/js/modules-1-6.js?v=instructor-access-1"></script>
+<script src="/js/modules-7-13.js?v=instructor-access-1"></script>
+<script src="/js/site-content.js?v=instructor-access-1"></script>
+<script src="/js/video-library.js?v=instructor-access-1"></script>
+<script src="/js/app.js?v=instructor-access-1"></script>
+<script src="/js/instructor-auth.js?v=instructor-access-1"></script>
 </body>
 </html>

@@ -14,6 +14,10 @@ const modulesSource = modulesPartOne + '\n' + modulesPartTwo;
 const siteContent = read('js/site-content.js');
 const videoLibrary = read('js/video-library.js');
 const app = read('js/app.js');
+const instructorAuth = read('src/instructor-auth.js');
+const instructorSession = read('netlify/functions/instructor-session.mjs');
+const identitySignup = read('netlify/functions/identity-signup.mjs');
+const netlifyConfig = read('netlify.toml');
 
 test('JavaScript files parse', () => {
   new vm.Script(modulesPartOne, { filename: 'js/modules-1-6.js' });
@@ -24,12 +28,13 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="assets\/styles\.css\?v=video-standard-2"/);
-  assert.match(html, /src="js\/modules-1-6\.js\?v=video-standard-2"/);
-  assert.match(html, /src="js\/modules-7-13\.js\?v=video-standard-2"/);
-  assert.match(html, /src="js\/site-content\.js\?v=video-standard-2"/);
-  assert.match(html, /src="js\/video-library\.js\?v=video-standard-2"/);
-  assert.match(html, /src="js\/app\.js\?v=video-standard-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=instructor-access-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=instructor-access-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/video-library.js'));
@@ -45,9 +50,28 @@ test('program contains modules 1-13 totaling exactly 32 hours', () => {
   assert.equal(modules.reduce((sum, module) => sum + module.hours, 0), 32);
 });
 
-test('removed client-side instructor override cannot regress', () => {
-  const source = html + modulesSource + siteContent + app;
-  assert.doesNotMatch(source, /INSTRUCTOR_PASSWORD|instructorMode|Instructor Login/);
+test('instructor access has no client-side shared password or signup path', () => {
+  const source = html + modulesSource + siteContent + app + instructorAuth;
+  assert.doesNotMatch(source, /INSTRUCTOR_PASSWORD|sharedInstructorPassword|signup\s*\(/);
+  assert.match(instructorAuth, /login\(email, password\)/);
+  assert.match(instructorAuth, /fetch\('\/api\/instructor-session'/);
+});
+
+test('instructor route and server endpoint both require the instructor role', () => {
+  assert.match(netlifyConfig, /from = "\/instructor\/\*"[\s\S]*?conditions = \{ Role = \["instructor"\] \}/);
+  assert.match(netlifyConfig, /to = "\/\?instructor=unauthorized"/);
+  assert.match(instructorSession, /getUser/);
+  assert.match(instructorSession, /roles\.includes\('instructor'\)/);
+  assert.match(identitySignup, /roles: \['instructor'\]/);
+});
+
+test('instructor preview is non-persistent and cannot issue completion records', () => {
+  assert.match(app, /if \(instructorPreviewMode\) return;[\s\S]*?localStorage\.setItem/);
+  assert.match(app, /Certificates are disabled in instructor preview/);
+  assert.match(app, /Training-record exports are disabled in instructor preview/);
+  assert.match(app, /Demonstration only — this score was not saved/);
+  assert.match(app, /if \(instructorPreviewMode\) return true;/);
+  assert.match(app, /Video controls remain non-seekable/);
 });
 
 test('completion controls and record export remain present', () => {

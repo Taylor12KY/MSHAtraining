@@ -41,6 +41,10 @@ let state = {
   startedAt: null
 };
 
+let instructorPreviewMode = false;
+let learnerStateSnapshot = null;
+let instructorIdentity = null;
+
 let currentModuleId = null;
 let timerIntervals = {};
 let videoPlayers = {};
@@ -143,6 +147,7 @@ function sanitizeState(candidate) {
 }
 
 function saveState() {
+  if (instructorPreviewMode) return;
   try {
     if (HAS_LOCAL_STORAGE) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -183,6 +188,10 @@ function startTraining() {
 }
 
 function resetAll() {
+  if (instructorPreviewMode) {
+    alert('Reset is disabled in instructor preview because no learner progress is being recorded.');
+    return;
+  }
   if (confirm('This will erase all progress for this browser. Continue?')) {
     try {
       if (HAS_LOCAL_STORAGE) localStorage.removeItem(STORAGE_KEY);
@@ -196,6 +205,10 @@ function resetAll() {
 }
 
 function showStart() {
+  if (instructorPreviewMode) {
+    exitInstructorPreview();
+    return;
+  }
   hideAll();
   document.getElementById('screen-start').classList.remove('hidden');
   if (state.name) {
@@ -210,7 +223,7 @@ function showDashboard() {
   currentModuleId = null;
   hideAll();
   document.getElementById('screen-dashboard').classList.remove('hidden');
-  document.getElementById('dash-name').textContent = state.name || '—';
+  document.getElementById('dash-name').textContent = instructorPreviewMode ? 'Instructor Preview' : (state.name || '—');
   document.getElementById('dash-mine').textContent = state.mine || '';
 
   const modules = getModules();
@@ -220,25 +233,32 @@ function showDashboard() {
     const m = modules.find(x => x.id === id);
     if (m) hoursDone += m.hours;
   });
-  document.getElementById('dash-hours').textContent = hoursDone.toFixed(1) + ' / ' + totalHours.toFixed(1) + ' hrs';
-  document.getElementById('dash-bar').style.width = Math.min(100, (hoursDone / totalHours) * 100) + '%';
-  document.getElementById('dash-status').textContent = state.completed.length + ' of ' + modules.length + ' modules completed';
+  document.getElementById('dash-hours').textContent = instructorPreviewMode
+    ? totalHours.toFixed(1) + ' hrs total'
+    : hoursDone.toFixed(1) + ' / ' + totalHours.toFixed(1) + ' hrs';
+  document.getElementById('dash-bar').style.width = instructorPreviewMode
+    ? '100%'
+    : Math.min(100, (hoursDone / totalHours) * 100) + '%';
+  document.getElementById('dash-status').textContent = instructorPreviewMode
+    ? 'All ' + modules.length + ' modules available · Preview does not record completion'
+    : state.completed.length + ' of ' + modules.length + ' modules completed';
 
   const list = document.getElementById('module-list');
   list.innerHTML = '';
   modules.forEach((m, idx) => {
     const isDone = state.completed.includes(m.id);
     const prevDone = idx === 0 || state.completed.includes(modules[idx - 1].id);
-    const isLocked = !isDone && !prevDone;
-    const isCurrent = !isDone && prevDone;
+    const isLocked = !instructorPreviewMode && !isDone && !prevDone;
+    const isCurrent = !instructorPreviewMode && !isDone && prevDone;
 
     let statusClass = 'status-locked';
     let statusText = 'Locked';
     if (isDone) { statusClass = 'status-done'; statusText = 'Completed'; }
     else if (isCurrent) { statusClass = 'status-available'; statusText = 'Available'; }
+    if (instructorPreviewMode) { statusClass = 'status-available'; statusText = 'Preview'; }
 
     const div = document.createElement('div');
-    div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '');
+    div.className = 'module-item' + (isDone ? ' completed' : '') + (isCurrent ? ' current' : '') + (isLocked ? ' locked' : '') + (instructorPreviewMode ? ' preview-module' : '');
     
     div.innerHTML = `
       <div class="mod-num">${isDone ? '✓' : m.id}</div>
@@ -255,8 +275,60 @@ function showDashboard() {
   });
 
   const allDone = modules.every(m => state.completed.includes(m.id));
-  document.getElementById('btn-cert').classList.toggle('hidden', !allDone);
+  document.getElementById('btn-cert').classList.toggle('hidden', instructorPreviewMode || !allDone);
+  const recordButton = document.getElementById('btn-training-record');
+  if (recordButton) recordButton.classList.toggle('hidden', instructorPreviewMode);
+  const changeButton = document.getElementById('btn-change-user');
+  if (changeButton) changeButton.textContent = instructorPreviewMode ? '← Exit Preview' : '← Change User';
 }
+
+function startInstructorPreview(identity) {
+  if (document.body.dataset.instructorPreview !== 'true' || instructorPreviewMode) return;
+  learnerStateSnapshot = JSON.parse(JSON.stringify(state));
+  instructorIdentity = identity || {};
+  const previewMine = VALID_MINES.includes(learnerStateSnapshot.mine) ? learnerStateSnapshot.mine : VALID_MINES[0];
+  state = {
+    name: 'Instructor Preview',
+    mine: previewMine,
+    completed: [],
+    scores: {},
+    timersDone: {},
+    timerElapsed: {},
+    scrollDone: {},
+    videoProgress: {},
+    quizAttempts: {},
+    startedAt: null
+  };
+  instructorPreviewMode = true;
+  document.body.classList.add('instructor-preview-active', 'instructor-ready');
+  document.getElementById('instructor-preview-banner')?.classList.remove('hidden');
+  const mineSelect = document.getElementById('instructor-preview-mine');
+  if (mineSelect) mineSelect.value = previewMine;
+  const identityEl = document.getElementById('instructor-preview-identity');
+  if (identityEl) identityEl.textContent = instructorIdentity.email || instructorIdentity.name || 'Instructor';
+  showDashboard();
+}
+
+function setInstructorPreviewMine(mine) {
+  if (!instructorPreviewMode || !VALID_MINES.includes(mine)) return;
+  stopActiveTimers();
+  state.mine = mine;
+  state.videoProgress = {};
+  showDashboard();
+}
+
+function exitInstructorPreview() {
+  stopActiveTimers();
+  if (learnerStateSnapshot) state = learnerStateSnapshot;
+  instructorPreviewMode = false;
+  learnerStateSnapshot = null;
+  instructorIdentity = null;
+  window.location.assign('/');
+}
+
+window.addEventListener('msha:instructor-authorized', event => startInstructorPreview(event.detail));
+window.setInstructorPreviewMine = setInstructorPreviewMine;
+window.exitInstructorPreview = exitInstructorPreview;
 
 function stopActiveTimers() {
   Object.keys(timerIntervals).forEach(k => {
@@ -356,13 +428,16 @@ function externalVideoUrl(video) {
 }
 
 function requiredVideoControls(video) {
+  const viewingNote = instructorPreviewMode
+    ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved.'
+    : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.';
   return `
     <div class="video-watch-controls">
       <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
       <span class="video-watch-status" id="video-status-${video.id}">Required viewing · 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
     </div>
     <div class="video-watch-track" aria-hidden="true"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
-    <p class="video-watch-note" id="video-note-${video.id}">Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.</p>
+    <p class="video-watch-note" id="video-note-${video.id}">${viewingNote}</p>
   `;
 }
 
@@ -778,6 +853,7 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function canTakeQuiz(id) {
+  if (instructorPreviewMode) return true;
   if (state.completed.includes(id)) return true;
   const timeOk = !!state.timersDone[id];
   const scrollOk = !!state.scrollDone[id];
@@ -791,7 +867,7 @@ function updateQuizButton(id) {
   btn.classList.remove('hidden');
   if (canTakeQuiz(id)) {
     btn.disabled = false;
-    btn.textContent = 'Go to Quiz →';
+    btn.textContent = instructorPreviewMode ? 'Preview Quiz →' : 'Go to Quiz →';
   } else {
     btn.disabled = true;
     const need = [];
@@ -811,6 +887,13 @@ function updateProgressUI(id, totalSec) {
   const timeEl = document.getElementById('prog-time');
   const fillEl = document.getElementById('prog-fill');
   const metaEl = document.getElementById('prog-meta');
+  if (instructorPreviewMode) {
+    if (timeEl) timeEl.textContent = 'Instructor preview · No time recorded';
+    if (fillEl) fillEl.style.width = '100%';
+    if (metaEl) metaEl.innerHTML = '<span class="ok">✓ Seat time and content gates bypassed for demonstration</span> &nbsp;·&nbsp; <span class="wait">Video controls remain non-seekable</span>';
+    updateQuizButton(id);
+    return;
+  }
   if (timeEl) {
     if (state.timersDone[id] || state.completed.includes(id)) {
       timeEl.textContent = 'Time complete ✓';
@@ -927,7 +1010,9 @@ function openModule(id) {
   document.getElementById('screen-module').classList.remove('hidden');
   document.getElementById('mod-breadcrumb').textContent = 'Module ' + m.id + ' of ' + getModules().length;
   document.getElementById('mod-title').textContent = m.title;
-  document.getElementById('mod-hours').textContent = m.hours + ' classroom hours (required seat time)' + (state.mine ? ' · ' + state.mine : '');
+  document.getElementById('mod-hours').textContent = m.hours + ' classroom hours' +
+    (instructorPreviewMode ? ' · Instructor preview' : ' (required seat time)') +
+    (state.mine ? ' · ' + state.mine : '');
 
   // Ensure state bags exist (older saved sessions)
   if (!state.timerElapsed) state.timerElapsed = {};
@@ -939,7 +1024,9 @@ function openModule(id) {
   html += '</ul></div>';
   html += m.content;
   html += '<div class="scroll-marker" id="scroll-end-marker"></div>';
-  html += '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">↓ Scroll to the end of this content (required) · Required time runs automatically while this tab is open</p>';
+  html += instructorPreviewMode
+    ? '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">Instructor preview · Content and quiz are available without recording progress</p>'
+    : '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">↓ Scroll to the end of this content (required) · Required time runs automatically while this tab is open</p>';
 
   document.getElementById('mod-content').innerHTML = html;
 
@@ -955,8 +1042,12 @@ function openModule(id) {
     el.style.display = 'none';
   });
 
-  setupScrollTracking(id);
-  autoStartModuleTimer(id, m.hours);
+  if (instructorPreviewMode) {
+    updateProgressUI(id, Math.round(m.hours * 3600));
+  } else {
+    setupScrollTracking(id);
+    autoStartModuleTimer(id, m.hours);
+  }
   initializeRequiredVideos(id);
   updateQuizButton(id);
 }
@@ -974,6 +1065,7 @@ function formatTimer(sec) {
 
 // Kept for any leftover onclick handlers in content; routes to auto system
 function startTimer(id, minutes) {
+  if (instructorPreviewMode) return;
   const m = getModule(id);
   autoStartModuleTimer(id, m ? m.hours : (minutes / 60));
 }
@@ -993,6 +1085,10 @@ function showQuiz() {
   hideAll();
   document.getElementById('screen-quiz').classList.remove('hidden');
   document.getElementById('quiz-title').textContent = 'Module ' + m.id + ' Quiz – ' + m.title;
+  const instructions = document.getElementById('quiz-instructions');
+  if (instructions) instructions.textContent = instructorPreviewMode
+    ? 'Instructor preview: answer the questions to demonstrate scoring. The result will not be saved.'
+    : 'You must score at least 80% to unlock the next module. Answer all questions.';
   document.getElementById('quiz-result').classList.add('hidden');
   document.getElementById('quiz-result').innerHTML = '';
 
@@ -1039,13 +1135,18 @@ function submitQuiz() {
     return;
   }
   const percent = Math.round((correct / m.questions.length) * 100);
+  const resultEl = document.getElementById('quiz-result');
+  resultEl.classList.remove('hidden');
+  if (instructorPreviewMode) {
+    const resultClass = percent >= 80 ? 'result-pass' : 'result-fail';
+    const resultLabel = percent >= 80 ? 'PREVIEW PASS' : 'PREVIEW SCORE';
+    resultEl.innerHTML = '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Demonstration only — this score was not saved and no module completion was awarded.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Try Preview Again</button>';
+    return;
+  }
   if (!state.quizAttempts) state.quizAttempts = {};
   if (!Array.isArray(state.quizAttempts[m.id])) state.quizAttempts[m.id] = [];
   state.quizAttempts[m.id].push({ at: new Date().toISOString(), score: percent, passed: percent >= 80 });
   state.quizAttempts[m.id] = state.quizAttempts[m.id].slice(-20);
-  const resultEl = document.getElementById('quiz-result');
-  resultEl.classList.remove('hidden');
-
   if (percent >= 80) {
     resultEl.innerHTML = '<p class="result-pass">PASSED – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>Module unlocked for completion. You may return to the dashboard.</p>';
     if (!state.completed.includes(m.id)) {
@@ -1062,6 +1163,10 @@ function submitQuiz() {
 }
 
 function showCertificate() {
+  if (instructorPreviewMode) {
+    alert('Certificates are disabled in instructor preview because no learner completion is recorded.');
+    return;
+  }
   const modules = getModules();
   const validCompletion = modules.every(m =>
     state.completed.includes(m.id) &&
@@ -1106,6 +1211,10 @@ function showCertificate() {
 }
 
 function downloadTrainingRecord() {
+  if (instructorPreviewMode) {
+    alert('Training-record exports are disabled in instructor preview.');
+    return;
+  }
   const modules = getModules();
   const record = {
     format: 'msha48-training-record-v1',
