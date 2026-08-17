@@ -36,12 +36,17 @@ let state = {
   timersDone: {},         // id -> true when required time completed
   timerElapsed: {},       // id -> seconds accumulated (KnowBe4-style resume)
   scrollDone: {},         // id -> true when content scrolled to end
+  videoProgress: {},      // module id -> video id -> watched position/completion
   quizAttempts: {},       // id -> recent timestamped quiz attempts
   startedAt: null
 };
 
 let currentModuleId = null;
 let timerIntervals = {};
+let videoPlayers = {};
+let videoPlayerMeta = {};
+let videoWatchIntervals = {};
+let youtubeApiPromise = null;
 let scrollObserver = null;
 let currentQuizQuestions = [];
 let lastActivityAt = Date.now();
@@ -94,6 +99,7 @@ function sanitizeState(candidate) {
     timersDone: {},
     timerElapsed: {},
     scrollDone: {},
+    videoProgress: {},
     quizAttempts: {},
     startedAt: typeof candidate.startedAt === 'string' ? candidate.startedAt : null
   };
@@ -106,6 +112,18 @@ function sanitizeState(candidate) {
     clean.timerElapsed[id] = elapsed;
     clean.timersDone[id] = candidate.timersDone && candidate.timersDone[id] === true && elapsed >= total;
     clean.scrollDone[id] = candidate.scrollDone && candidate.scrollDone[id] === true;
+    const requiredVideos = getRequiredVideos(id);
+    if (requiredVideos.length) clean.videoProgress[id] = {};
+    requiredVideos.forEach(video => {
+      const saved = candidate.videoProgress && candidate.videoProgress[id] && candidate.videoProgress[id][video.id];
+      const watchedSeconds = Math.max(0, Math.min(video.durationSeconds, Number(saved && saved.watchedSeconds) || 0));
+      clean.videoProgress[id][video.id] = {
+        watchedSeconds,
+        durationSeconds: video.durationSeconds,
+        complete: saved && saved.complete === true && watchedSeconds >= video.durationSeconds - 3,
+        updatedAt: saved && typeof saved.updatedAt === 'string' ? saved.updatedAt : ''
+      };
+    });
     if (Number.isFinite(score) && score >= 0 && score <= 100) clean.scores[id] = Math.round(score);
     if (candidate.quizAttempts && Array.isArray(candidate.quizAttempts[id])) {
       clean.quizAttempts[id] = candidate.quizAttempts[id].slice(-20).map(a => ({
@@ -115,7 +133,8 @@ function sanitizeState(candidate) {
       }));
     }
     if (validIds.has(id) && Array.isArray(candidate.completed) && candidate.completed.includes(id) &&
-        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] >= 80) {
+        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] >= 80 &&
+        requiredVideosComplete(id, clean)) {
       clean.completed.push(id);
     }
   });
@@ -168,7 +187,7 @@ function resetAll() {
       if (HAS_LOCAL_STORAGE) localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
     memoryStore = null;
-    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, quizAttempts: {}, startedAt: null };
+    state = { name: '', mine: '', completed: [], scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, videoProgress: {}, quizAttempts: {}, startedAt: null };
     document.getElementById('input-name').value = '';
     document.getElementById('input-mine').value = '';
     showStart();
@@ -243,17 +262,344 @@ function stopActiveTimers() {
     clearInterval(timerIntervals[k]);
     delete timerIntervals[k];
   });
+  Object.keys(videoWatchIntervals).forEach(k => {
+    clearInterval(videoWatchIntervals[k]);
+    delete videoWatchIntervals[k];
+  });
+  Object.keys(videoPlayers).forEach(k => {
+    try { videoPlayers[k].destroy(); } catch (e) {}
+    delete videoPlayers[k];
+    delete videoPlayerMeta[k];
+  });
   if (scrollObserver) {
     try { scrollObserver.disconnect(); } catch (e) {}
     scrollObserver = null;
   }
 }
 
+function requiredVideosComplete(moduleId, progressState = state) {
+  const videos = getRequiredVideos(moduleId);
+  if (!videos.length) return true;
+  return videos.every(video =>
+    progressState.videoProgress &&
+    progressState.videoProgress[moduleId] &&
+    progressState.videoProgress[moduleId][video.id] &&
+    progressState.videoProgress[moduleId][video.id].complete === true
+  );
+}
+
+function ensureVideoProgress(moduleId, video) {
+  if (!state.videoProgress) state.videoProgress = {};
+  if (!state.videoProgress[moduleId]) state.videoProgress[moduleId] = {};
+  if (!state.videoProgress[moduleId][video.id]) {
+    state.videoProgress[moduleId][video.id] = {
+      watchedSeconds: 0,
+      durationSeconds: video.durationSeconds,
+      complete: false,
+      updatedAt: ''
+    };
+  }
+  return state.videoProgress[moduleId][video.id];
+}
+
+function formatVideoTime(seconds) {
+  const safe = Math.max(0, Math.floor(Number(seconds) || 0));
+  const minutes = Math.floor(safe / 60);
+  const secs = safe % 60;
+  return minutes + ':' + String(secs).padStart(2, '0');
+}
+
+function managedYouTubeUrl(videoId) {
+  const params = new URLSearchParams({
+    enablejsapi: '1',
+    controls: '0',
+    disablekb: '1',
+    fs: '0',
+    rel: '0',
+    playsinline: '1',
+    cc_load_policy: '1',
+    iv_load_policy: '3'
+  });
+  if (/^https?:$/.test(window.location.protocol)) params.set('origin', window.location.origin);
+  return 'https://www.youtube-nocookie.com/embed/' + videoId + '?' + params.toString();
+}
+
+function requiredVideoControls(video) {
+  return `
+    <div class="video-watch-controls">
+      <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
+      <span class="video-watch-status" id="video-status-${video.id}">Required viewing Â· 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
+    </div>
+    <div class="video-watch-track" aria-hidden="true"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
+    <p class="video-watch-note" id="video-note-${video.id}">Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.</p>
+  `;
+}
+
+function configureRequiredVideoBox(box, iframe, video) {
+  box.classList.add('managed-video-box');
+  box.dataset.videoId = video.id;
+  iframe.id = 'yt-player-' + video.id;
+  iframe.src = managedYouTubeUrl(video.id);
+  iframe.title = video.title;
+  iframe.removeAttribute('allowfullscreen');
+  iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+  iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+  const frame = iframe.parentElement;
+  if (frame) frame.classList.add('managed-video-frame');
+  if (!box.querySelector('.video-watch-controls')) {
+    box.insertAdjacentHTML('beforeend', requiredVideoControls(video));
+  }
+  const button = box.querySelector('.video-play-toggle');
+  if (button) button.addEventListener('click', () => toggleRequiredVideo(video.id));
+}
+
+function renderRequiredVideos(moduleId) {
+  const videos = getRequiredVideos(moduleId);
+  if (!videos.length) return;
+  const container = document.getElementById('mod-content');
+  const marker = document.getElementById('scroll-end-marker');
+  if (!container || !marker) return;
+
+  const section = document.createElement('section');
+  section.className = 'required-video-section';
+  section.innerHTML = `
+    <h3>Required Module Videos</h3>
+    <p>Complete all ${videos.length} assigned video${videos.length === 1 ? '' : 's'} in this player before the module quiz unlocks. Videos may be watched in any order.</p>
+  `;
+
+  videos.forEach(video => {
+    ensureVideoProgress(moduleId, video);
+    let iframe = container.querySelector(`iframe[src*="${video.id}"]`);
+    let box = iframe && iframe.closest('.video-box');
+    if (!iframe || !box) {
+      box = document.createElement('div');
+      box.className = 'video-box';
+      box.innerHTML = `
+        <p class="video-title">${escapeHtml(video.title)} Â· ${formatVideoTime(video.durationSeconds)}</p>
+        <p class="video-description">${escapeHtml(video.description)} <span class="video-source">Source: ${escapeHtml(video.author)}</span></p>
+        <div class="managed-video-frame">
+          <iframe id="yt-player-${video.id}" src="${managedYouTubeUrl(video.id)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        ${requiredVideoControls(video)}
+        <p class="video-fallback"><a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" rel="noopener">Open on YouTube â†—</a> <span>(external viewing cannot receive completion credit)</span></p>
+      `;
+      section.appendChild(box);
+      iframe = box.querySelector('iframe');
+    }
+    configureRequiredVideoBox(box, iframe, video);
+    updateRequiredVideoUI(moduleId, video.id);
+  });
+
+  if (section.querySelector('.video-box')) marker.before(section);
+}
+
+function loadYouTubeApi() {
+  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+  if (youtubeApiPromise) return youtubeApiPromise;
+  youtubeApiPromise = new Promise((resolve, reject) => {
+    const previousReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof previousReady === 'function') previousReady();
+      resolve(window.YT);
+    };
+    let script = document.getElementById('youtube-iframe-api');
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'youtube-iframe-api';
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      script.onerror = () => reject(new Error('YouTube player API could not load'));
+      document.head.appendChild(script);
+    }
+  });
+  return youtubeApiPromise;
+}
+
+function initializeRequiredVideos(moduleId) {
+  const videos = getRequiredVideos(moduleId);
+  if (!videos.length) return;
+  loadYouTubeApi().then(() => {
+    if (currentModuleId !== moduleId) return;
+    videos.forEach(video => {
+      const elementId = 'yt-player-' + video.id;
+      if (!document.getElementById(elementId) || videoPlayers[video.id]) return;
+      videoPlayerMeta[video.id] = { moduleId, video, suppressSeekUntil: 0, lastSavedSecond: -1 };
+      videoPlayers[video.id] = new YT.Player(elementId, {
+        events: {
+          onReady: event => onRequiredVideoReady(event, video.id),
+          onStateChange: event => onRequiredVideoStateChange(event, video.id),
+          onError: () => setRequiredVideoNote(video.id, 'This video could not load. Check the network or use the YouTube link, then ask the instructor for assistance.', true)
+        }
+      });
+    });
+  }).catch(() => {
+    videos.forEach(video => setRequiredVideoNote(video.id, 'The tracked video player could not load. Check the network and reload this module.', true));
+  });
+}
+
+function onRequiredVideoReady(event, videoId) {
+  const meta = videoPlayerMeta[videoId];
+  if (!meta) return;
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const reportedDuration = Number(event.target.getDuration()) || meta.video.durationSeconds;
+  record.durationSeconds = Math.round(reportedDuration);
+  if (!record.complete && record.watchedSeconds > 2) {
+    meta.suppressSeekUntil = Date.now() + 2500;
+    event.target.seekTo(record.watchedSeconds, true);
+  }
+  updateRequiredVideoUI(meta.moduleId, videoId);
+}
+
+function onRequiredVideoStateChange(event, videoId) {
+  const meta = videoPlayerMeta[videoId];
+  if (!meta) return;
+  if (event.data === YT.PlayerState.PLAYING) {
+    Object.keys(videoPlayers).forEach(otherId => {
+      if (otherId !== videoId) {
+        try { videoPlayers[otherId].pauseVideo(); } catch (e) {}
+      }
+    });
+    startRequiredVideoWatch(videoId);
+  } else {
+    stopRequiredVideoWatch(videoId);
+  }
+  if (event.data === YT.PlayerState.ENDED) {
+    const record = ensureVideoProgress(meta.moduleId, meta.video);
+    const duration = Number(event.target.getDuration()) || record.durationSeconds || meta.video.durationSeconds;
+    if (record.watchedSeconds >= duration - 3) {
+      record.watchedSeconds = duration;
+      record.durationSeconds = Math.round(duration);
+      record.complete = true;
+      record.updatedAt = new Date().toISOString();
+      saveState();
+      setRequiredVideoNote(videoId, 'Video complete âœ“', false);
+      updateRequiredVideoUI(meta.moduleId, videoId);
+      updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+    } else {
+      meta.suppressSeekUntil = Date.now() + 2000;
+      event.target.seekTo(record.watchedSeconds, true);
+      setRequiredVideoNote(videoId, 'Forward jump blocked. Resume from your last verified position.', true);
+    }
+  }
+  updateRequiredVideoButton(videoId);
+}
+
+function startRequiredVideoWatch(videoId) {
+  stopRequiredVideoWatch(videoId);
+  videoWatchIntervals[videoId] = setInterval(() => trackRequiredVideo(videoId), 1000);
+  trackRequiredVideo(videoId);
+}
+
+function stopRequiredVideoWatch(videoId) {
+  if (videoWatchIntervals[videoId]) {
+    clearInterval(videoWatchIntervals[videoId]);
+    delete videoWatchIntervals[videoId];
+  }
+}
+
+function trackRequiredVideo(videoId) {
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!player || !meta || currentModuleId !== meta.moduleId) return;
+  if (document.hidden) {
+    try { player.pauseVideo(); } catch (e) {}
+    return;
+  }
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const current = Number(player.getCurrentTime()) || 0;
+  const duration = Number(player.getDuration()) || record.durationSeconds || meta.video.durationSeconds;
+  if (Date.now() >= meta.suppressSeekUntil && current > record.watchedSeconds + 3) {
+    meta.suppressSeekUntil = Date.now() + 2000;
+    player.seekTo(record.watchedSeconds, true);
+    setRequiredVideoNote(videoId, 'Forward seeking is disabled. Playback returned to your last verified position.', true);
+    return;
+  }
+  if (current <= record.watchedSeconds + 3) {
+    record.watchedSeconds = Math.min(duration, Math.max(record.watchedSeconds, current));
+    record.durationSeconds = Math.round(duration);
+    record.updatedAt = new Date().toISOString();
+    lastActivityAt = Date.now();
+    const wholeSecond = Math.floor(record.watchedSeconds);
+    if (wholeSecond % 5 === 0 && wholeSecond !== meta.lastSavedSecond) {
+      meta.lastSavedSecond = wholeSecond;
+      saveState();
+    }
+  }
+  updateRequiredVideoUI(meta.moduleId, videoId);
+}
+
+function toggleRequiredVideo(videoId) {
+  lastActivityAt = Date.now();
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!player || !meta) {
+    setRequiredVideoNote(videoId, 'Player is still loading. Try again in a moment.', true);
+    return;
+  }
+  const playerState = player.getPlayerState();
+  if (playerState === YT.PlayerState.PLAYING) {
+    player.pauseVideo();
+  } else {
+    const record = ensureVideoProgress(meta.moduleId, meta.video);
+    if (playerState === YT.PlayerState.ENDED || (record.complete && player.getCurrentTime() >= record.durationSeconds - 3)) {
+      meta.suppressSeekUntil = Date.now() + 2000;
+      player.seekTo(0, true);
+    }
+    player.playVideo();
+  }
+}
+
+function updateRequiredVideoButton(videoId) {
+  const button = document.querySelector(`.video-play-toggle[data-video-id="${videoId}"]`);
+  if (!button) return;
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  const record = meta && ensureVideoProgress(meta.moduleId, meta.video);
+  let label = record && record.complete ? 'Replay' : 'Start / Resume';
+  try {
+    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) label = 'Pause';
+  } catch (e) {}
+  button.textContent = label;
+}
+
+function updateRequiredVideoUI(moduleId, videoId) {
+  const video = getRequiredVideos(moduleId).find(item => item.id === videoId);
+  if (!video) return;
+  const record = ensureVideoProgress(moduleId, video);
+  const duration = record.durationSeconds || video.durationSeconds;
+  const watched = Math.min(duration, record.watchedSeconds || 0);
+  const status = document.getElementById('video-status-' + videoId);
+  const fill = document.getElementById('video-fill-' + videoId);
+  if (status) {
+    status.textContent = record.complete
+      ? 'Complete âœ“ Â· ' + formatVideoTime(duration)
+      : 'Required viewing Â· ' + formatVideoTime(watched) + ' / ' + formatVideoTime(duration);
+    status.classList.toggle('complete', record.complete);
+  }
+  if (fill) fill.style.width = (duration ? Math.min(100, (watched / duration) * 100) : 0) + '%';
+  updateRequiredVideoButton(videoId);
+}
+
+function setRequiredVideoNote(videoId, message, isWarning) {
+  const note = document.getElementById('video-note-' + videoId);
+  if (!note) return;
+  note.textContent = message;
+  note.classList.toggle('warning', !!isWarning);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) return;
+  Object.keys(videoPlayers).forEach(videoId => {
+    try { videoPlayers[videoId].pauseVideo(); } catch (e) {}
+  });
+});
+
 function canTakeQuiz(id) {
   if (state.completed.includes(id)) return true;
   const timeOk = !!state.timersDone[id];
   const scrollOk = !!state.scrollDone[id];
-  return timeOk && scrollOk;
+  const videosOk = requiredVideosComplete(id);
+  return timeOk && scrollOk && videosOk;
 }
 
 function updateQuizButton(id) {
@@ -268,6 +614,7 @@ function updateQuizButton(id) {
     const need = [];
     if (!state.timersDone[id] && !state.completed.includes(id)) need.push('required time');
     if (!state.scrollDone[id] && !state.completed.includes(id)) need.push('scroll through content');
+    if (!requiredVideosComplete(id) && !state.completed.includes(id)) need.push('required videos');
     btn.textContent = need.length ? ('Complete: ' + need.join(' + ')) : 'Complete requirements first';
   }
 }
@@ -304,6 +651,18 @@ function updateProgressUI(id, totalSec) {
       parts.push('<span class="ok">âœ“ Content scrolled</span>');
     } else {
       parts.push('<span class="wait">â†“ Scroll to the bottom of this module</span>');
+    }
+    const videos = getRequiredVideos(id);
+    if (videos.length) {
+      const completedVideos = videos.filter(video =>
+        state.videoProgress && state.videoProgress[id] &&
+        state.videoProgress[id][video.id] && state.videoProgress[id][video.id].complete
+      ).length;
+      if (completedVideos === videos.length) {
+        parts.push('<span class="ok">âœ“ Required videos done</span>');
+      } else {
+        parts.push('<span class="wait">â–¶ Videos ' + completedVideos + '/' + videos.length + '</span>');
+      }
     }
     metaEl.innerHTML = parts.join(' &nbsp;Â·&nbsp; ');
   }
@@ -401,6 +760,8 @@ function openModule(id) {
 
   document.getElementById('mod-content').innerHTML = html;
 
+  renderRequiredVideos(id);
+
   // Hide legacy manual timer UI inside module content (time is auto now)
   document.querySelectorAll('#mod-content .video-box .timer-display, #mod-content .video-box [id^="btn-timer-"], #mod-content .video-box [id^="timer-status-"]').forEach(el => {
     el.style.display = 'none';
@@ -413,6 +774,7 @@ function openModule(id) {
 
   setupScrollTracking(id);
   autoStartModuleTimer(id, m.hours);
+  initializeRequiredVideos(id);
   updateQuizButton(id);
 }
 
@@ -441,6 +803,7 @@ function showQuiz() {
     const missing = [];
     if (!state.timersDone[m.id] && !state.completed.includes(m.id)) missing.push('required seat time');
     if (!state.scrollDone[m.id] && !state.completed.includes(m.id)) missing.push('scroll through all content');
+    if (!requiredVideosComplete(m.id) && !state.completed.includes(m.id)) missing.push('all required videos');
     alert('Complete these before the quiz: ' + missing.join(' and ') + '.');
     return;
   }
@@ -521,7 +884,8 @@ function showCertificate() {
     state.completed.includes(m.id) &&
     state.timersDone[m.id] === true &&
     state.scrollDone[m.id] === true &&
-    Number(state.scores[m.id]) >= 80
+    Number(state.scores[m.id]) >= 80 &&
+    requiredVideosComplete(m.id)
   );
   if (!validCompletion) {
     alert('Every module must have completed seat time, content review, and a passing quiz score before a certificate can be generated.');
@@ -575,6 +939,17 @@ function downloadTrainingRecord() {
       seatTimeSeconds: Math.min(Math.round(m.hours * 3600), Number(state.timerElapsed[m.id]) || 0),
       seatTimeComplete: state.timersDone[m.id] === true,
       contentReviewed: state.scrollDone[m.id] === true,
+      requiredVideos: getRequiredVideos(m.id).map(video => {
+        const progress = state.videoProgress && state.videoProgress[m.id] && state.videoProgress[m.id][video.id];
+        return {
+          id: video.id,
+          title: video.title,
+          durationSeconds: video.durationSeconds,
+          watchedSeconds: Math.min(video.durationSeconds, Number(progress && progress.watchedSeconds) || 0),
+          complete: progress && progress.complete === true,
+          completedAt: progress && progress.complete ? progress.updatedAt : null
+        };
+      }),
       bestScore: state.scores[m.id] == null ? null : Number(state.scores[m.id]),
       quizAttempts: (state.quizAttempts && state.quizAttempts[m.id]) || []
     })),
