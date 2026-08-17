@@ -199,6 +199,134 @@ const REQUIRED_VIDEOS = [
     author: "PublicResourceOrg",
     durationSeconds: 900,
     description: "Task-specific overview of transporting, storing, loading, and detonating explosives underground."
+  },
+  {
+    id: "kjCsEVjRrlg",
+    moduleId: 7,
+    title: "The Granite Mountain Shaft: 168 Miners Dead",
+    author: "Steel & Sacrifice",
+    durationSeconds: 1655,
+    description: "Historical case study of a shaft fire, ventilation reversal, carbon monoxide migration, and blocked escape routes."
+  },
+  {
+    id: "IGb20ZDbjkY",
+    moduleId: 6,
+    title: "Sago Mine Disaster",
+    author: "Distant Appalachian",
+    durationSeconds: 2613,
+    description: "Historical emergency case study supporting discussion of evacuation, communication, barricading, and mine-emergency readiness. Follow the current site plan and W65 procedures at these operations."
+  },
+  {
+    id: "NjHDUhWA6Lo",
+    moduleId: 4,
+    title: "Stay in the Cab and Keep It On! A Survivor's Story",
+    author: "PublicResourceOrg",
+    durationSeconds: 682,
+    description: "MSHA rollover-survivor account emphasizing seat-belt use and staying inside the protective equipment cab."
+  },
+  {
+    id: "eFTnBiAvxxg",
+    moduleId: 7,
+    title: "Safety Tips: Working Beside Highwalls",
+    author: "PublicResourceOrg",
+    durationSeconds: 295,
+    description: "MSHA highwall-safety walkthrough focused on observation, positioning, and changing ground conditions."
+  },
+  {
+    id: "Ok2p6cUe_sM",
+    moduleId: 7,
+    title: "Highwall Hazard Recognition",
+    author: "PublicResourceOrg",
+    durationSeconds: 320,
+    description: "Experienced-driver orientation to recognizing and avoiding highwall hazards."
+  },
+  {
+    id: "ZrnWnmhGpQY",
+    moduleId: 4,
+    title: "Surface Mine Conveyor Safety",
+    author: "USDepartmentofLabor",
+    durationSeconds: 1103,
+    description: "Conveyor guarding, blocking against motion, lockout/tagout, maintenance, and incident lessons."
+  },
+  {
+    id: "q_4q8lm0tCs",
+    moduleId: 4,
+    title: "Preventing Powered Haulage Accidents at Surface Mines",
+    author: "USDepartmentofLabor",
+    durationSeconds: 374,
+    description: "Safety practices and technologies for preventing powered-haulage accidents at surface operations."
+  },
+  {
+    id: "hQiYjxSC9bI",
+    moduleId: 10,
+    title: "First Aid for the Mining Industry",
+    author: "Health and Safety Training Center",
+    durationSeconds: 1939,
+    description: "Mining scenarios covering first aid, cardiac arrest, AEDs, bleeding, electrical injuries, burns, and emotional considerations."
+  },
+  {
+    id: "2cyQ5QTPOek",
+    moduleId: 5,
+    title: "Stockpile Safety",
+    author: "Ontario Stone, Sand & Gravel Association",
+    durationSeconds: 622,
+    description: "Stockpile hazards and safe practices for aggregate quarries and sand-and-gravel operations."
+  },
+  {
+    id: "1u6c7YMgkB8",
+    moduleId: 7,
+    title: "Dangers of Stone Mine Massive Pillar Collapses",
+    author: "USDepartmentofLabor",
+    durationSeconds: 357,
+    description: "MSHA overview of massive pillar-collapse hazards associated with stone-mine benching."
+  },
+  {
+    id: "WTKCluA6lgE",
+    moduleId: 12,
+    title: "You Are My Sunshine: The Sunshine Mine Disaster",
+    author: "PublicResourceOrg",
+    durationSeconds: 4077,
+    description: "NIOSH historical case study of the 1972 Sunshine Mine fire, emergency response, and lessons that shaped metal/nonmetal safety."
+  },
+  {
+    id: "eEj1JOVu_eY",
+    moduleId: 2,
+    title: "Miners' Rights and Responsibilities",
+    author: "CaliforniaDIR",
+    durationSeconds: 850,
+    description: "Summary of rights and responsibilities granted to miners, representatives, and mine-job applicants by the Mine Act."
+  },
+  {
+    id: "SN4Sfuhvs2Y",
+    moduleId: 2,
+    title: "Statutory Rights",
+    author: "Colorado Division of Reclamation, Mining and Safety",
+    durationSeconds: 150,
+    description: "Short review of statutory rights relevant to miners."
+  },
+  {
+    id: "WrnHZK9GhlM",
+    moduleId: 2,
+    title: "What Is MSHA and Why Does It Exist?",
+    author: "Ally Safety",
+    durationSeconds: 540,
+    description: "History of mine-safety laws, the creation of MSHA, and the agency's role in miner protection."
+  },
+  {
+    id: "F7AOWLOOT-U",
+    moduleId: 2,
+    title: "The Coal Town System",
+    author: "American Experience | PBS",
+    durationSeconds: 158,
+    description: "Brief historical context on company-owned coal towns and the conditions surrounding early mine labor."
+  },
+  {
+    id: "TM8DYUKbjsw",
+    moduleId: 2,
+    title: "History of Mine Safety and Health Legislation in the USA",
+    author: "markdcatlin",
+    durationSeconds: 541,
+    description: "Timeline from the first federal mine-safety statute through the 1977 Mine Act and modern MSHA authority."
   }
 ];
 
@@ -207,6 +335,13 @@ const FIRST_VIDEO_BATCH_IDS = new Set([
   "4rQwxVnYcLk", "MziZesbb32Q", "X5r4upNwIGk", "4MjKwOI2LrE",
   "iX8j7h7bJF4", "e8mGpQ9W4_w", "VEOVVx3rDyI", "gbaGN7JQoO4",
   "9wnDBLifDB4", "mSt9lHz22xM", "528dJg0lESM", "Oaxs7EEIp4k"
+]);
+
+const SECOND_VIDEO_BATCH_IDS = new Set([
+  "kjCsEVjRrlg", "IGb20ZDbjkY", "NjHDUhWA6Lo", "eFTnBiAvxxg",
+  "Ok2p6cUe_sM", "ZrnWnmhGpQY", "q_4q8lm0tCs", "hQiYjxSC9bI",
+  "2cyQ5QTPOek", "1u6c7YMgkB8", "WTKCluA6lgE", "eEj1JOVu_eY",
+  "SN4Sfuhvs2Y", "WrnHZK9GhlM", "F7AOWLOOT-U", "TM8DYUKbjsw"
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
