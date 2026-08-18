@@ -45,6 +45,11 @@ let state = {
 let instructorPreviewMode = false;
 let learnerStateSnapshot = null;
 let instructorIdentity = null;
+let learnerAccount = null;
+let learnerHydrated = false;
+let learnerRecordMeta = null;
+let serverSyncTimer = null;
+let syncInFlight = false;
 
 let currentModuleId = null;
 let timerIntervals = {};
@@ -268,7 +273,7 @@ function saveState() {
   if (instructorPreviewMode) return;
   try {
     if (HAS_LOCAL_STORAGE) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(learnerAccount ? accountStorageKey(learnerAccount.id) : STORAGE_KEY, JSON.stringify(state));
     } else {
       memoryStore = JSON.parse(JSON.stringify(state));
     }
@@ -276,9 +281,156 @@ function saveState() {
     console.warn('Could not save training progress:', e);
     try { memoryStore = JSON.parse(JSON.stringify(state)); } catch (e2) {}
   }
+  if (learnerAccount && learnerHydrated) scheduleServerSync();
+}
+
+function emptyLearnerState(name = '') {
+  return {
+    name,
+    mine: '',
+    completed: [],
+    scores: {},
+    timersDone: {},
+    timerElapsed: {},
+    scrollDone: {},
+    videoProgress: {},
+    quizAttempts: {},
+    quizReview: {},
+    startedAt: null
+  };
+}
+
+function accountStorageKey(userId) {
+  return STORAGE_KEY + ':account:' + String(userId);
+}
+
+function readStoredState(key) {
+  if (!HAS_LOCAL_STORAGE) return memoryStore ? JSON.parse(JSON.stringify(memoryStore)) : null;
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeAccountBackup() {
+  if (!learnerAccount || !HAS_LOCAL_STORAGE) return;
+  try { localStorage.setItem(accountStorageKey(learnerAccount.id), JSON.stringify(state)); } catch {}
+}
+
+function setSyncStatus(message, stateName = '') {
+  const status = document.getElementById('learner-sync-status');
+  if (status) {
+    status.textContent = message;
+    status.dataset.state = stateName;
+  }
+  const dashboardStatus = document.getElementById('dash-record-status');
+  if (dashboardStatus) {
+    dashboardStatus.textContent = message;
+    dashboardStatus.dataset.state = stateName;
+  }
+}
+
+function setLearnerAuthStatus(message, isError = false) {
+  const status = document.getElementById('learner-auth-status');
+  if (!status) return;
+  status.textContent = message;
+  status.classList.toggle('hidden', !message);
+  status.classList.toggle('auth-error', isError);
+}
+
+function normalizedName(value) {
+  return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function stateHasProgress(candidate) {
+  return Boolean(candidate && (
+    candidate.startedAt ||
+    candidate.mine ||
+    (Array.isArray(candidate.completed) && candidate.completed.length) ||
+    Object.values(candidate.timerElapsed || {}).some(value => Number(value) > 0)
+  ));
+}
+
+async function hydrateLearnerAccount(account) {
+  learnerAccount = account;
+  learnerHydrated = false;
+  setSyncStatus('Loading secure server record…', 'syncing');
+  const accountBackup = readStoredState(accountStorageKey(account.id));
+  const legacyCandidate = stateHasProgress(state) && normalizedName(state.name) === normalizedName(account.name)
+    ? state
+    : null;
+  const localCandidate = accountBackup || legacyCandidate;
+  try {
+    const response = localCandidate
+      ? await window.mshaIdentity.request('/api/learner-progress', {
+          method: 'PUT',
+          body: JSON.stringify({ state: localCandidate })
+        })
+      : await window.mshaIdentity.request('/api/learner-progress');
+    learnerRecordMeta = response.record || null;
+    state = learnerRecordMeta?.state
+      ? sanitizeState(learnerRecordMeta.state)
+      : sanitizeState(emptyLearnerState(account.name));
+    if (!state.name) state.name = account.name || '';
+    learnerHydrated = true;
+    writeAccountBackup();
+    setSyncStatus(
+      learnerRecordMeta?.updatedAt
+        ? 'Server record saved · ' + new Date(learnerRecordMeta.updatedAt).toLocaleString()
+        : 'Secure record ready. Progress will save automatically.',
+      'saved'
+    );
+    setLearnerAuthStatus('Secure training record loaded.');
+  } catch (error) {
+    state = sanitizeState(localCandidate || emptyLearnerState(account.name));
+    if (!state.name) state.name = account.name || '';
+    learnerHydrated = true;
+    setSyncStatus('Offline recovery mode · progress is backed up locally until the server reconnects.', 'offline');
+    setLearnerAuthStatus('The server record is temporarily unavailable. Local recovery backup is active.', true);
+  }
+  document.getElementById('input-name').value = state.name || account.name || '';
+  document.getElementById('input-mine').value = state.mine || '';
+  window.dispatchEvent(new CustomEvent('msha:learner-progress-ready', { detail: { account, record: learnerRecordMeta } }));
+}
+
+function scheduleServerSync() {
+  if (!learnerAccount || !learnerHydrated || !window.mshaIdentity) return;
+  window.clearTimeout(serverSyncTimer);
+  serverSyncTimer = window.setTimeout(() => syncLearnerProgress(), 1800);
+}
+
+async function syncLearnerProgress(force = false) {
+  if (!learnerAccount || !learnerHydrated || !window.mshaIdentity) return false;
+  if (syncInFlight) return false;
+  syncInFlight = true;
+  window.clearTimeout(serverSyncTimer);
+  setSyncStatus('Saving secure server record…', 'syncing');
+  try {
+    const response = await window.mshaIdentity.request('/api/learner-progress', {
+      method: 'PUT',
+      body: JSON.stringify({ state })
+    });
+    learnerRecordMeta = response.record;
+    if (learnerRecordMeta?.state) state = sanitizeState(learnerRecordMeta.state);
+    writeAccountBackup();
+    setSyncStatus('Server record saved · ' + new Date(learnerRecordMeta.updatedAt).toLocaleString(), 'saved');
+    return true;
+  } catch (error) {
+    writeAccountBackup();
+    setSyncStatus('Server unavailable · local recovery backup saved; retrying when online.', 'offline');
+    return false;
+  } finally {
+    syncInFlight = false;
+  }
 }
 
 function startTraining() {
+  if (!learnerAccount || !learnerHydrated) {
+    alert('Please sign in and wait for your training record to load before beginning.');
+    return;
+  }
   const name = document.getElementById('input-name').value.trim();
   const mine = document.getElementById('input-mine').value;
   if (!name) {
@@ -309,6 +461,10 @@ function startTraining() {
 function resetAll() {
   if (instructorPreviewMode) {
     alert('Reset is disabled in instructor preview because no learner progress is being recorded.');
+    return;
+  }
+  if (learnerAccount) {
+    alert('Authenticated training records cannot be erased from the learner screen. Contact an instructor if a record needs review or correction.');
     return;
   }
   if (confirm('This will erase all progress for this browser. Continue?')) {
@@ -489,6 +645,16 @@ function exitInstructorPreview() {
 }
 
 window.addEventListener('msha:instructor-authorized', event => startInstructorPreview(event.detail));
+window.addEventListener('msha:learner-authenticated', event => hydrateLearnerAccount(event.detail.user));
+window.addEventListener('msha:learner-signed-out', () => {
+  stopActiveTimers();
+  learnerAccount = null;
+  learnerHydrated = false;
+  learnerRecordMeta = null;
+  state = emptyLearnerState();
+  showStart();
+});
+window.addEventListener('online', () => syncLearnerProgress());
 window.setInstructorPreviewMine = setInstructorPreviewMine;
 window.exitInstructorPreview = exitInstructorPreview;
 
@@ -1592,11 +1758,16 @@ function submitQuiz() {
     '<button class="btn" onclick="openModuleReview(' + m.id + ')">Review Missed Topics →</button>';
 }
 
-function showCertificate() {
+async function showCertificate() {
   if (instructorPreviewMode) {
     alert('Certificates are disabled in instructor preview because no learner completion is recorded.');
     return;
   }
+  if (!learnerAccount) {
+    alert('Sign in to your learner account before generating a classroom completion certificate.');
+    return;
+  }
+  await syncLearnerProgress(true);
   const modules = getModules();
   const validCompletion = modules.every(m =>
     state.completed.includes(m.id) &&
@@ -1613,6 +1784,8 @@ function showCertificate() {
   document.getElementById('screen-cert').classList.remove('hidden');
   const hours = modules.reduce((s, m) => s + m.hours, 0);
   const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const signoffs = learnerRecordMeta?.signoffs || {};
+  const signoffMark = key => signoffs[key] ? '☑' : '☐';
   let rows = '';
   modules.forEach(m => {
     const score = state.scores[m.id] != null ? state.scores[m.id] + '%' : '—';
@@ -1637,31 +1810,39 @@ function showCertificate() {
       Attach supporting records to the official MSHA Form 5000-23 as directed by the operator and instructor.
     </p>
     <div class="instructor-verification-checklist" style="margin-top:20px;padding:16px;border:2px solid #374151;text-align:left;">
-      <h3 style="margin-top:0;">Instructor Verification — Required Outside This App</h3>
+      <h3 style="margin-top:0;">Instructor Verification — Authenticated Record</h3>
       <p>This classroom certificate is not a final Part 48 training certificate. The operator and MSHA-approved instructor must verify and document, as required by the approved plan:</p>
       <ul>
-        <li>Approximately 8 hours of mine-site training, including the mine tour and observation of the mining method.</li>
-        <li>Current site-specific plans, escapeways, emergency procedures, and applicable demonstrations or hands-on activities.</li>
-        <li>MSA W65 instruction, demonstration, and any practice required by the approved plan.</li>
-        <li>New-task training, supervised practice, and demonstrated safe procedures before independent assignment, where applicable.</li>
-        <li>Completion and certification on MSHA Form 5000-23 or an MSHA-approved alternate form.</li>
+        <li>${signoffMark('siteTraining')} Approximately 8 hours of mine-site training.</li>
+        <li>${signoffMark('mineTour')} Mine tour and observation of the mining method.</li>
+        <li>${signoffMark('plansProcedures')} Current site-specific plans, escapeways, emergency procedures, and applicable demonstrations.</li>
+        <li>${signoffMark('w65Practice')} MSA W65 instruction, demonstration, and hands-on practice required by the approved plan.</li>
+        <li>${signoffMark('taskTraining')} Applicable new-task training, supervised practice, and demonstrated safe procedures.</li>
+        <li>${signoffMark('form5000_23')} MSHA Form 5000-23 or an approved alternate form completed.</li>
       </ul>
-      <p><strong>Instructor:</strong> ____________________ &nbsp; <strong>Approval/ID:</strong> __________</p>
-      <p><strong>Signature:</strong> ____________________ &nbsp; <strong>Date:</strong> __________</p>
+      <p>Checked items reflect authenticated instructor signoffs saved to the server record. Any unchecked item remains outstanding.</p>
     </div>
-    <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool · Progress stored locally</p>
+    <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool · Account ${escapeHtml(learnerAccount.email || '')} · Server record ${escapeHtml(learnerRecordMeta?.updatedAt || 'pending sync')}</p>
   `;
 }
 
-function downloadTrainingRecord() {
+async function downloadTrainingRecord() {
   if (instructorPreviewMode) {
     alert('Training-record exports are disabled in instructor preview.');
     return;
   }
+  if (!learnerAccount) {
+    alert('Sign in to your learner account before exporting a training record.');
+    return;
+  }
+  await syncLearnerProgress(true);
   const modules = getModules();
   const record = {
-    format: 'msha48-training-record-v1',
+    format: 'msha48-training-record-v2',
     exportedAt: new Date().toISOString(),
+    serverRecordUpdatedAt: learnerRecordMeta?.updatedAt || null,
+    serverRecordVersion: learnerRecordMeta?.version || null,
+    learnerAccount: { id: learnerAccount.id, email: learnerAccount.email },
     trainee: state.name,
     mine: state.mine,
     startedAt: state.startedAt,
@@ -1676,6 +1857,9 @@ function downloadTrainingRecord() {
       'Applicable new-task training, supervised practice, and demonstrated safe procedures',
       'Operator or instructor certification on MSHA Form 5000-23 or approved alternate'
     ],
+    instructorSignoffs: learnerRecordMeta?.signoffs || {},
+    instructorSignoffDetails: learnerRecordMeta?.signoffDetails || {},
+    instructorNotes: learnerRecordMeta?.instructorNotes || '',
     modules: modules.map(m => ({
       id: m.id,
       title: m.title,
@@ -1726,4 +1910,3 @@ function hideAll() {
 // Init
 loadState();
 showStart();
-

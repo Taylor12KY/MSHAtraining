@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import vm from 'node:vm';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = relativePath => fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -18,7 +18,12 @@ const app = read('js/app.js');
 const instructorAuth = read('src/instructor-auth.js');
 const instructorSession = read('netlify/functions/instructor-session.mjs');
 const identitySignup = read('netlify/functions/identity-signup.mjs');
+const learnerProgress = read('netlify/functions/learner-progress.mjs');
+const instructorRecords = read('netlify/functions/instructor-records.mjs');
+const trainingRecords = read('netlify/lib/training-records.mjs');
+const packageJson = read('package.json');
 const netlifyConfig = read('netlify.toml');
+const recordLibrary = await import(pathToFileURL(path.join(root, 'netlify/lib/training-records.mjs')).href);
 
 test('JavaScript files parse', () => {
   new vm.Script(modulesPartOne, { filename: 'js/modules-1-6.js' });
@@ -30,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=compliance-guards-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=compliance-guards-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=account-records-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=account-records-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -74,11 +79,14 @@ test('every module and site-specific orientation has exactly 10 quiz questions',
   assert.ok(Object.values(context.sites).every(site => site.questions.length === 10));
 });
 
-test('instructor access has no client-side shared password or signup path', () => {
+test('instructor access has no client-side shared password and learner signup cannot choose roles', () => {
   const source = html + modulesSource + siteContent + app + instructorAuth;
-  assert.doesNotMatch(source, /INSTRUCTOR_PASSWORD|sharedInstructorPassword|signup\s*\(/);
+  assert.doesNotMatch(source, /INSTRUCTOR_PASSWORD|sharedInstructorPassword/);
   assert.match(instructorAuth, /login\(email, password\)/);
-  assert.match(instructorAuth, /fetch\('\/api\/instructor-session'/);
+  assert.match(instructorAuth, /const user = await signup\(email, password, \{ full_name: fullName \}\)/);
+  assert.match(instructorAuth, /if \(!user\.confirmedAt\)/);
+  assert.doesNotMatch(instructorAuth, /signup\([^\n]*roles/);
+  assert.match(instructorAuth, /authenticatedRequest\('\/api\/instructor-session'/);
 });
 
 test('instructor route and server endpoint both require the instructor role', () => {
@@ -86,7 +94,66 @@ test('instructor route and server endpoint both require the instructor role', ()
   assert.match(netlifyConfig, /to = "\/\?instructor=unauthorized"/);
   assert.match(instructorSession, /getUser/);
   assert.match(instructorSession, /roles\.includes\('instructor'\)/);
-  assert.match(identitySignup, /roles: \['instructor'\]/);
+  assert.match(identitySignup, /currentRoles\.includes\('instructor'\) \? \['instructor'\] : \['trainee'\]/);
+  assert.doesNotMatch(identitySignup, /roles:\s*\['instructor'\]/);
+});
+
+test('authenticated learner progress is server-owned, validated, and durably stored', () => {
+  assert.match(packageJson, /"@netlify\/blobs": "10\.7\.12"/);
+  assert.match(learnerProgress, /getUser/);
+  assert.match(learnerProgress, /recordKey\(user\.id\)/);
+  assert.doesNotMatch(learnerProgress, /payload\.(userId|learnerId)/);
+  assert.match(learnerProgress, /mergeTrainingStates/);
+  assert.match(learnerProgress, /appendAuditEvent/);
+  assert.match(trainingRecords, /getStore\(\{ name: 'msha-training-records', consistency: 'strong' \}\)/);
+  assert.match(trainingRecords, /MODULE_REQUIREMENTS/);
+  assert.match(trainingRecords, /clean\.scores\[id\] === 100/);
+  assert.match(trainingRecords, /videosComplete/);
+  assert.match(app, /msha:learner-authenticated/);
+  assert.match(app, /syncLearnerProgress/);
+  assert.match(app, /accountStorageKey/);
+});
+
+test('server validator rejects fabricated completion and requires known video durations', () => {
+  const fabricated = recordLibrary.sanitizeTrainingState({
+    name: 'Test Learner',
+    mine: 'Boonesboro Quarry',
+    completed: Array.from({ length: 13 }, (_, index) => index + 1),
+    timersDone: Object.fromEntries(Array.from({ length: 13 }, (_, index) => [index + 1, true])),
+    scrollDone: Object.fromEntries(Array.from({ length: 13 }, (_, index) => [index + 1, true])),
+    scores: Object.fromEntries(Array.from({ length: 13 }, (_, index) => [index + 1, 100]))
+  });
+  assert.deepEqual(fabricated.completed, []);
+
+  const moduleOne = recordLibrary.sanitizeTrainingState({
+    mine: 'Boonesboro Quarry',
+    timerElapsed: { 1: 5400 },
+    timersDone: { 1: true },
+    scrollDone: { 1: true },
+    scores: { 1: 100 }
+  });
+  assert.deepEqual(moduleOne.completed, [1]);
+
+  const missingVideos = recordLibrary.sanitizeTrainingState({
+    timerElapsed: { 2: 7200 },
+    timersDone: { 2: true },
+    scrollDone: { 2: true },
+    scores: { 2: 100 },
+    videoProgress: { 2: { VEOVVx3rDyI: { watchedSeconds: 999999, complete: true } } }
+  });
+  assert.ok(!missingVideos.completed.includes(2));
+  assert.equal(missingVideos.videoProgress[2].VEOVVx3rDyI.watchedSeconds, 528);
+});
+
+test('instructor records and signoffs require the instructor role and preserve audit identity', () => {
+  assert.match(instructorRecords, /rolesFor\(user\)\.includes\('instructor'\)/);
+  assert.match(instructorRecords, /authorization\.user\.id/);
+  assert.match(instructorRecords, /authorization\.user\.email/);
+  assert.match(instructorRecords, /appendAuditEvent/);
+  assert.match(instructorRecords, /changedKeys/);
+  assert.match(html, /id="instructor-open-records"/);
+  assert.match(html, /id="instructor-records-modal"/);
+  assert.match(instructorAuth, /Save Verified Signoffs/);
 });
 
 test('instructor preview is non-persistent and cannot issue completion records', () => {
@@ -131,11 +198,12 @@ test('missed quiz questions create a required topic-review loop before retake', 
 
 
 test('classroom completion requires an explicit instructor and official-record handoff', () => {
-  assert.match(app, /Instructor Verification — Required Outside This App/);
+  assert.match(app, /Instructor Verification — Authenticated Record/);
   assert.match(app, /Approximately 8 hours of mine-site training/);
-  assert.match(app, /MSHA Form 5000-23 or an MSHA-approved alternate form/);
+  assert.match(app, /MSHA Form 5000-23 or an approved alternate form/);
   assert.match(app, /recordType: 'classroom-support-record'/);
   assert.match(app, /externalVerificationRequired/);
+  assert.match(app, /instructorSignoffs/);
 });
 
 test('all 55 videos are uniquely assigned and all submitted batches remain intact', () => {

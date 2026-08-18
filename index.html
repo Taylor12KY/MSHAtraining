@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MSHA Part 48 – 32-Hour Classroom New Miner Training</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=compliance-guards-1">
+  <link rel="stylesheet" href="/assets/styles.css?v=account-records-1">
 </head>
 <body>
 <header class="site-header">
@@ -40,6 +40,7 @@
     </label>
     <div class="instructor-preview-actions">
       <span id="instructor-preview-identity"></span>
+      <button class="btn btn-outline btn-sm" type="button" id="instructor-open-records">Trainee Records</button>
       <button class="btn btn-outline btn-sm" type="button" id="instructor-exit-preview">Exit Preview</button>
       <button class="btn btn-outline btn-sm" type="button" id="instructor-sign-out">Sign Out</button>
     </div>
@@ -71,15 +72,48 @@
         </div>
       </div>
 
-      <form class="card start-card" onsubmit="event.preventDefault(); startTraining()">
+      <section class="card start-card">
         <span class="eyebrow">Learner access</span>
         <h2>Start or resume training</h2>
-        <p class="form-intro">Your progress is saved automatically in this browser.</p>
-        <div class="form-field">
+        <p class="form-intro">Sign in to keep a durable training record across browsers and devices.</p>
+
+        <div id="learner-signed-out" class="learner-account-panel">
+          <form id="learner-login-form" class="auth-form learner-auth-form">
+            <label for="learner-email">Email</label>
+            <input id="learner-email" type="email" autocomplete="username" required>
+            <label for="learner-password">Password</label>
+            <input id="learner-password" type="password" autocomplete="current-password" required>
+            <button class="btn" type="submit">Sign In</button>
+            <div class="learner-auth-links">
+              <button class="auth-link" id="learner-forgot-password" type="button">Forgot password?</button>
+              <button class="auth-link" id="learner-show-signup" type="button">Create learner account</button>
+            </div>
+          </form>
+          <form id="learner-signup-form" class="auth-form learner-auth-form hidden">
+            <label for="learner-signup-name">Full legal name</label>
+            <input id="learner-signup-name" type="text" autocomplete="name" maxlength="120" required>
+            <label for="learner-signup-email">Email</label>
+            <input id="learner-signup-email" type="email" autocomplete="email" required>
+            <label for="learner-signup-password">Password</label>
+            <input id="learner-signup-password" type="password" autocomplete="new-password" minlength="8" required>
+            <label for="learner-signup-confirm">Confirm password</label>
+            <input id="learner-signup-confirm" type="password" autocomplete="new-password" minlength="8" required>
+            <button class="btn" type="submit">Create Learner Account</button>
+            <button class="auth-link" id="learner-show-login" type="button">Back to sign in</button>
+          </form>
+        </div>
+
+        <div id="learner-signed-in" class="learner-signed-in hidden">
+          <div><span>Signed in securely</span><strong id="learner-account-identity"></strong></div>
+          <button class="btn btn-outline btn-sm" id="learner-sign-out" type="button">Sign Out</button>
+        </div>
+        <p class="auth-status hidden" id="learner-auth-status" role="status"></p>
+
+        <div class="form-field learner-course-field">
           <label for="input-name">Full name <span aria-hidden="true">*</span></label>
           <input type="text" id="input-name" placeholder="John D. Miner" autocomplete="name" required>
         </div>
-        <div class="form-field">
+        <div class="form-field learner-course-field">
           <label for="input-mine">Work location <span aria-hidden="true">*</span></label>
           <select id="input-mine" required>
             <option value="">Select a location</option>
@@ -89,14 +123,14 @@
           </select>
         </div>
         <div class="form-actions">
-          <button class="btn btn-wide" onclick="startTraining()">Begin or Resume Training <span aria-hidden="true">→</span></button>
-          <button class="text-button" type="button" onclick="resetAll()">Reset saved progress</button>
+          <button class="btn btn-wide" id="learner-start-button" type="button" onclick="startTraining()" disabled>Sign In to Begin Training</button>
+          <span class="server-record-note" id="learner-sync-status">Account sign-in is required for recorded progress.</span>
         </div>
         <div class="instructor-access-row">
           <span><strong>Instructor?</strong> Open every module for a guided demonstration.</span>
           <button class="btn btn-outline btn-sm" type="button" id="instructor-open-access">Instructor Sign In</button>
         </div>
-      </form>
+      </section>
     </section>
 
     <section class="start-notices" aria-label="Important training information">
@@ -124,6 +158,7 @@
         <span class="eyebrow">Training dashboard</span>
         <h2 id="dash-name">—</h2>
         <p id="dash-mine"></p>
+        <p class="dashboard-record-status" id="dash-record-status">Secure server record connected.</p>
       </div>
       <div class="dashboard-progress-block">
         <div class="dashboard-progress-heading">
@@ -215,7 +250,7 @@
   <div class="auth-dialog">
     <button class="auth-close" id="instructor-auth-close" type="button" aria-label="Close instructor sign in">&times;</button>
     <h2 id="instructor-auth-title">Instructor Access</h2>
-    <p class="auth-intro">Sign in with an invited instructor account. Learner progress and certificates are disabled in preview mode.</p>
+    <p class="auth-intro" id="instructor-auth-intro">Sign in with an invited instructor account. Learner progress and certificates are disabled in preview mode.</p>
 
     <form id="instructor-login-form" class="auth-form">
       <label for="instructor-email">Email</label>
@@ -227,13 +262,13 @@
     </form>
 
     <form id="instructor-invite-form" class="auth-form hidden">
-      <h3>Accept Instructor Invitation</h3>
-      <p>Choose a password to finish creating your instructor account.</p>
+      <h3>Accept Account Invitation</h3>
+      <p>Choose a password to finish creating your account.</p>
       <label for="instructor-invite-password">New password</label>
       <input id="instructor-invite-password" type="password" autocomplete="new-password" minlength="8" required>
       <label for="instructor-invite-confirm">Confirm password</label>
       <input id="instructor-invite-confirm" type="password" autocomplete="new-password" minlength="8" required>
-      <button class="btn" type="submit">Create Account &amp; Open Preview</button>
+      <button class="btn" type="submit">Create Account</button>
     </form>
 
     <form id="instructor-recovery-request-form" class="auth-form hidden">
@@ -251,10 +286,26 @@
       <input id="instructor-new-password" type="password" autocomplete="new-password" minlength="8" required>
       <label for="instructor-new-password-confirm">Confirm password</label>
       <input id="instructor-new-password-confirm" type="password" autocomplete="new-password" minlength="8" required>
-      <button class="btn" type="submit">Update Password &amp; Open Preview</button>
+      <button class="btn" type="submit">Update Password</button>
     </form>
 
     <p class="auth-status hidden" id="instructor-auth-status" role="status"></p>
+  </div>
+</div>
+
+<div class="auth-overlay hidden" id="instructor-records-modal" role="dialog" aria-modal="true" aria-labelledby="instructor-records-title">
+  <div class="records-dialog">
+    <button class="auth-close" id="instructor-records-close" type="button" aria-label="Close trainee records">&times;</button>
+    <div class="records-dialog-heading">
+      <span class="eyebrow">Instructor-only workspace</span>
+      <h2 id="instructor-records-title">Trainee Records &amp; Signoffs</h2>
+      <p>Review server-recorded classroom progress and document required instructor verification. Saved changes include your account identity and server time.</p>
+    </div>
+    <p class="auth-status hidden" id="instructor-records-status" role="status"></p>
+    <div class="records-layout">
+      <aside class="record-list" id="instructor-record-list" aria-label="Trainee records"></aside>
+      <section class="record-detail hidden" id="instructor-record-detail"></section>
+    </div>
   </div>
 </div>
 
@@ -262,16 +313,16 @@
   <div class="footer-inner">
     <img class="footer-logo" src="data:image/webp;base64,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" alt="The Allen Company">
     <p>Training support tool only · Not official MSHA certification · Approved instructor and site-specific training required</p>
-    <span>Progress is stored locally in this browser.</span>
+    <span>Authenticated progress is saved to a server record with local recovery backup.</span>
   </div>
 </footer>
 
-<script src="/js/modules-1-6.js?v=compliance-guards-1"></script>
-<script src="/js/modules-7-13.js?v=compliance-guards-1"></script>
-<script src="/js/site-content.js?v=compliance-guards-1"></script>
-<script src="/js/quiz-expansions.js?v=compliance-guards-1"></script>
-<script src="/js/video-library.js?v=compliance-guards-1"></script>
-<script src="/js/app.js?v=compliance-guards-1"></script>
-<script src="/js/instructor-auth.js?v=compliance-guards-1"></script>
+<script src="/js/modules-1-6.js?v=account-records-1"></script>
+<script src="/js/modules-7-13.js?v=account-records-1"></script>
+<script src="/js/site-content.js?v=account-records-1"></script>
+<script src="/js/quiz-expansions.js?v=account-records-1"></script>
+<script src="/js/video-library.js?v=account-records-1"></script>
+<script src="/js/app.js?v=account-records-1"></script>
+<script src="/js/instructor-auth.js?v=account-records-1"></script>
 </body>
 </html>
