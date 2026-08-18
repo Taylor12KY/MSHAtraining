@@ -35,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=remediation-status-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=remediation-status-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=fall-gas-training-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
