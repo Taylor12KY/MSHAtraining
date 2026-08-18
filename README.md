@@ -22,6 +22,9 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Inactivity-aware seat-time tracking with progress validation
 - Randomized quiz presentation with recent attempt history
 - Missed-topic remediation with a focused knowledge check before a full quiz retake
+- Current fall-protection sequence with the 2026 OSHA personal fall-arrest webinar, NIOSH prevention guidance, MSHA incident review, and instructor equipment verification
+- MSA ALTAIR 4X mine-gas lesson with required bump-test video, current manufacturer/MSHA references, and instructor hands-on verification
+- Current MSHA silica and NIOSH mining heat-stress learning material
 - Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
 - Downloadable trainee progress records tied to the authenticated account

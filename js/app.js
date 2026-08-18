@@ -1852,6 +1852,8 @@ async function showCertificate() {
         <li>${signoffMark('mineTour')} Mine tour and observation of the mining method.</li>
         <li>${signoffMark('plansProcedures')} Current site-specific plans, escapeways, emergency procedures, and applicable demonstrations.</li>
         <li>${signoffMark('w65Practice')} MSA W65 instruction, demonstration, and hands-on practice required by the approved plan.</li>
+        <li>${signoffMark('fallProtectionPractice')} Harness, lanyard, and SRL inspection, fit, compatibility, tie-off, clearance, and rescue demonstration.</li>
+        <li>${signoffMark('gasMonitorPractice')} MSA ALTAIR 4X startup, bump test, alarm response, failed-test response, and hands-on verification.</li>
         <li>${signoffMark('taskTraining')} Applicable new-task training, supervised practice, and demonstrated safe procedures.</li>
         <li>${signoffMark('form5000_23')} MSHA Form 5000-23 or an approved alternate form completed.</li>
       </ul>

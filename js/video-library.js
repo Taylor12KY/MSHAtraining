@@ -81,14 +81,6 @@ const REQUIRED_VIDEOS = [
     description: "Stop, Look, Analyze, and Manage risk assessment for common mining hazards."
   },
   {
-    id: "MziZesbb32Q",
-    moduleId: 5,
-    title: "Hard Hat Safety Demonstration",
-    author: "Victory Electric Cooperative",
-    durationSeconds: 315,
-    description: "Demonstration of head protection and the consequences of falling-object hazards."
-  },
-  {
     id: "9wnDBLifDB4",
     moduleId: 5,
     title: "A Look Inside an Open-Pit Blasting Process",
@@ -337,14 +329,6 @@ const REQUIRED_VIDEOS = [
     description: "Controlled lockout/tagout procedure for isolating hazardous energy before equipment service or repair."
   },
   {
-    id: "W4uQqiHnXUI",
-    moduleId: 5,
-    title: "We Are Miners",
-    author: "Health and Safety Training Center",
-    durationSeconds: 1792,
-    description: "Documentary introduction to mining's role, workforce, technology, and commitment to safe production."
-  },
-  {
     id: "GN3OBFAVHt4",
     moduleId: 7,
     title: "Roofbolter – Underground Limestone",
@@ -439,6 +423,38 @@ const REQUIRED_VIDEOS = [
     author: "PublicResourceOrg",
     durationSeconds: 881,
     description: "MSHA overview of roof and rib evaluation, control plans, hazard sources, and installed support systems."
+  },
+  {
+    id: "oJ834e9wDQ4",
+    moduleId: 5,
+    title: "Hard Hats and Helmets: Keeping Workers Safe",
+    author: "Centers for Disease Control and Prevention (CDC/NIOSH)",
+    durationSeconds: 303,
+    description: "Current head-protection guidance covering traumatic brain injury, struck-by hazards, falls, and selecting appropriate head protection."
+  },
+  {
+    id: "DfiBLI8lGM8",
+    moduleId: 5,
+    title: "Falls Prevention Through Design",
+    author: "Centers for Disease Control and Prevention (CDC/NIOSH)",
+    durationSeconds: 113,
+    description: "Short introduction to preventing falls by designing out hazards and applying higher-level controls before relying on personal fall arrest."
+  },
+  {
+    id: "Ka9UKa_xYNU",
+    moduleId: 5,
+    title: "Stand Up for Safety and Health: Personal Fall Arrest Systems",
+    author: "U.S. Department of Labor / OSHA",
+    durationSeconds: 3676,
+    description: "Detailed 2026 webinar on personal fall-arrest components, selection, inspection, compatibility, fit, anchorage, clearance, and rescue planning."
+  },
+  {
+    id: "b7mhJ8viccI",
+    moduleId: 11,
+    title: "MSA ALTAIR 4X: How to Manually Bump Test",
+    author: "Frontline Safety UK Ltd",
+    durationSeconds: 129,
+    description: "Instrument-specific demonstration of a manual bump test on the MSA ALTAIR 4X multigas detector."
   }
 ];
 
@@ -472,6 +488,15 @@ const VIDEO_CONTENT_DUPLICATES = {
   ddermx9hJ7k: "X5r4upNwIGk"
 };
 
+const RETIRED_VIDEO_IDS = {
+  MziZesbb32Q: "Replaced by the newer CDC/NIOSH head-protection presentation.",
+  W4uQqiHnXUI: "Retired to preserve instructional time for the current fall-protection sequence."
+};
+
+const CURRENT_RESOURCE_VIDEO_IDS = new Set([
+  "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "b7mhJ8viccI"
+]);
+
 const PRE_EXISTING_VIDEO_IDS = new Set([
   "QGkT8Ahh1-E", "98555798", "AU07-U96dfw", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
@@ -482,12 +507,13 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["98555798", "AU07-U96dfw"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "xtb61bDBc6o", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["W4uQqiHnXUI", "H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "MziZesbb32Q", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk"],
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI"],
+  11: ["b7mhJ8viccI"],
   12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "v26fTGBEi9E", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "WTKCluA6lgE"]
 };
 
@@ -511,7 +537,9 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "GSPRVJsu3_A": "Now practice recognizing conditions in that environment through a deliberate workplace examination.",
   "qDDg-CbOTmw": "Turn hazard recognition into action by applying the Stop, Look, Analyze, and Manage decision process.",
   "addOUsx6760": "Apply the same process to mobile equipment examinations, defect correction, and required records.",
-  "MziZesbb32Q": "Next, focus on one basic protective control and the forces a properly worn hard hat is designed to reduce.",
+  "oJ834e9wDQ4": "After equipment examinations, shift to personal protective equipment and choose head protection for the hazards actually present.",
+  "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
+  "Ka9UKa_xYNU": "When a fall hazard remains and personal fall arrest is required, examine how the complete system must be selected, inspected, fitted, connected, and supported by a rescue plan.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
   "2cyQ5QTPOek": "Continue to material-handling hazards by studying unstable slopes, voids, and safe positioning around stockpiles.",
   "9wnDBLifDB4": "Close the hazard-recognition sequence with a specialized restricted operation: recognizing blast areas and obeying warning controls.",
@@ -529,6 +557,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "X5r4upNwIGk": "Then apply the same exposure-control mindset to noise, hearing protection, and conservation-program responsibilities.",
   "is77KiZ16_o": "Move from basic electrical awareness to the controlled isolation of hazardous energy before service or repair.",
   "iX8j7h7bJF4": "Finish with an arc-flash fatality case that shows why qualification, isolation, verification, and safe boundaries are essential.",
+  "b7mhJ8viccI": "Use the instrument demonstration to reinforce the hands-on ALTAIR 4X inspection, startup, bump test, alarm-response, and shutdown practice led by the instructor.",
   "Km8XxRCuCho": "With attention and distraction in mind, consider the worker's personal role in recognizing and managing risk.",
   "EQ1OPz1p0U4": "Now clarify that personal responsibility includes looking beyond minimum compliance when a hazard remains uncontrolled.",
   "4MjKwOI2LrE": "Connect that principle to the human consequences one person's shortcut can create for coworkers and family.",
@@ -549,6 +578,7 @@ const MODULE_VIDEO_SCOPE = {
   8: "Focus on exposure recognition and controls. Follow current sampling, HazCom, respiratory-protection, hearing-conservation, and PPE requirements at the mine.",
   9: "This is hazard-awareness instruction, not electrical qualification. Only qualified and authorized persons may perform electrical work under the mine's energy-control procedures.",
   10: "This video supports first-aid awareness and refresher discussion; it is not a certification course. Work within your training and activate professional emergency response promptly.",
+  11: "Use current MSA ALTAIR 4X instructions, the mine's atmospheric-testing procedures, the correct calibration gas, and instructor direction. A detector warns of hazards; it does not make an unsafe atmosphere safe.",
   12: "Use the incident or task example to strengthen prevention and decision-making. It does not authorize a task or replace task-specific training and site procedures."
 };
 
@@ -563,7 +593,18 @@ const VIDEO_TRAINING_GUIDANCE = {
   "_s2x4dmQgjU": { focus: "Understand how properly constructed and maintained berms protect equipment at roadway edges and dump points." },
   "GSPRVJsu3_A": { focus: "Practice noticing conditions during a workplace examination, deciding what must be corrected, and communicating hazards promptly." },
   "qDDg-CbOTmw": { focus: "Apply Stop, Look, Analyze, and Manage before beginning work and whenever conditions or the task change." },
-  "MziZesbb32Q": { focus: "Connect the impact demonstration to falling-object hazards, correct hard-hat use, and keeping clear of overhead work." },
+  "oJ834e9wDQ4": {
+    focus: "Compare hard hats and safety helmets, then connect selection, fit, retention, inspection, and replacement to falling-object, struck-by, and fall hazards.",
+    scope: "The examples come from construction research, but the head-protection principles transfer to mining. Use only company-approved PPE selected for the mine hazard, compatible with other PPE, and maintained under manufacturer and site requirements."
+  },
+  "DfiBLI8lGM8": {
+    focus: "Apply the hierarchy of controls to work at height: eliminate the exposure, use engineered prevention or restraint where feasible, and use personal fall arrest only as part of a complete system.",
+    scope: "This brief NIOSH construction presentation establishes a general prevention principle. The current mine plan, MSHA requirements, site procedure, competent-person evaluation, and equipment instructions control the actual work."
+  },
+  "Ka9UKa_xYNU": {
+    focus: "Identify the complete personal fall-arrest system, inspect each component, check connector and anchorage compatibility, fit the harness correctly, account for clearance and swing-fall exposure, and plan prompt rescue before work begins.",
+    scope: "This is a 2026 OSHA construction webinar used for broadly applicable fall-protection principles. Mining work remains governed by applicable MSHA standards, the approved training plan, company procedures, the hazard assessment, and each manufacturer's instructions. Generic examples do not authorize a tie-off point or equipment combination."
+  },
   "9wnDBLifDB4": { focus: "Recognize blast areas, warning signals, exclusion zones, flyrock risk, and the need to obey the site's all-clear procedure." },
   "Oaxs7EEIp4k": { focus: "Use the overview to understand room-and-pillar layout, travelways, active faces, and why ground-control discipline matters." },
   "e8mGpQ9W4_w": { focus: "Identify ignition prevention, early warning, prompt reporting, initial response limits, and the decision to evacuate." },
@@ -607,7 +648,6 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Follow the full hazardous-energy-control sequence: notify affected workers, identify every energy source, shut down, isolate, lock and tag, release stored energy, verify zero-energy state, and control restoration.",
     scope: "This is a general OSHA-oriented presentation. Apply the mine's current MSHA-compliant lockout/tagout and energy-control procedures; it does not qualify or authorize anyone to perform electrical or maintenance work."
   },
-  "W4uQqiHnXUI": { focus: "Use the documentary to understand the value of mining, the range of mining careers and technologies, and why disciplined safety performance is essential to responsible production." },
   "GN3OBFAVHt4": {
     focus: "Observe the roof-bolting work area, machine position, operator protection, and the relationship between installed support and the ground-control plan.",
     scope: "This short field clip is awareness only. It is not roof-bolter task training, authorization, or a substitute for this mine's ground-control plan and equipment procedures."
@@ -649,6 +689,10 @@ const VIDEO_TRAINING_GUIDANCE = {
   "dIreslbUgwY": {
     focus: "Look for roof and rib warning signs, examination practices, plan requirements, support functions, and the principle of staying out from under unsupported or hazardous ground.",
     scope: "This presentation centers on underground coal mining. Do not apply its support systems or retreat-mining methods as local procedure; use only the current stone-mine ground-control and ventilation plans."
+  },
+  "b7mhJ8viccI": {
+    focus: "Follow the exact manual bump-test sequence: inspect the ALTAIR 4X and accessories, verify the cylinder concentration, seat the calibration cap, apply gas at the correct flow, confirm every installed sensor responds and alarms, and recognize BUMP PASS versus BUMP ERROR.",
+    scope: "This concise vendor demonstration shows the ALTAIR 4X but is not an MSA-produced certification course. The current MSA user instructions and Allen Company gas-detection program control. Perform a bump test before each day's use; if the instrument fails, remove it from use and complete the required calibration or service before relying on it. Hands-on instructor verification is required."
   }
 };
 

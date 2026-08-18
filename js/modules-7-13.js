@@ -74,6 +74,18 @@ const MODULES_PART_2 = [
         </ul>
         <div class="key-box">Part of new miner training includes information about the physical and health hazards of chemicals in the work area and the contents of the mine's HazCom program.</div>
       </div>
+      <div class="content-section">
+        <h3>Respirable Crystalline Silica: Current Miner Guidance</h3>
+        <p>Cutting, drilling, crushing, conveying, cleanup, and vehicle movement can create respirable crystalline silica. Because the smallest particles may be invisible, visible dust and personal comfort are not reliable measures of exposure.</p>
+        <ul>
+          <li>Use effective engineering controls such as water, ventilation, enclosed filtered cabs, isolation, and properly maintained dust collection.</li>
+          <li>Keep cab doors and windows closed when the cab is part of the exposure control.</li>
+          <li>Do not use compressed air or dry sweeping where it creates avoidable airborne exposure.</li>
+          <li>Wear sampling equipment as instructed and do not disturb it. Results are used to evaluate exposure and control performance.</li>
+          <li>Use respiratory protection only under the mine's respiratory-protection program; it does not replace feasible engineering controls.</li>
+        </ul>
+        <p><a href="https://www.msha.gov/education-resources-miners" target="_blank" rel="noopener">Review MSHA's current silica education materials for miners</a> with the instructor.</p>
+      </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
         <div class="timer-display" id="timer-8">150:00</div>
@@ -158,6 +170,17 @@ const MODULES_PART_2 = [
         </ul>
         <div class="key-box">First aid is a bridge to professional care. The goal is to preserve life and prevent further harm until EMTs, paramedics, or hospital care can take over.</div>
       </div>
+      <div class="content-section">
+        <h3>Heat Stress: Recognize It Early</h3>
+        <p>Hot conditions can occur underground, on surface equipment, near asphalt operations, during strenuous work, and while wearing protective equipment. Risk increases with heat, humidity, workload, radiant heat, limited air movement, dehydration, illness, medication, and lack of acclimatization.</p>
+        <ul>
+          <li>Use hydration, work/rest controls, shade or cooling, ventilation, acclimatization, and the buddy system required by the site.</li>
+          <li>Report headache, dizziness, unusual fatigue, cramps, nausea, confusion, loss of coordination, fainting, or other concerning changes immediately.</li>
+          <li>Move the person to a cooler area, begin appropriate cooling, and activate the mine's emergency medical response. Confusion, collapse, seizure, or loss of consciousness is an emergency.</li>
+          <li>Do not leave a symptomatic worker alone or tell them simply to finish the shift.</li>
+        </ul>
+        <p><a href="https://www.cdc.gov/niosh/docs/mining/works/coversheet2226.html" target="_blank" rel="noopener">NIOSH Keeping Cool: Training to Reduce Heat Stress Incidents in Mines</a> supplies the instructor activity and discussion guide used with this lesson.</p>
+      </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
         <div class="timer-display" id="timer-10">210:00</div>
@@ -180,22 +203,52 @@ const MODULES_PART_2 = [
     objectives: [
       "Identify major mine gases of concern and their primary hazards",
       "Understand the importance of detection and ventilation in controlling gas hazards",
+      "Interpret the typical oxygen, combustible-gas, carbon-monoxide, and hydrogen-sulfide channels on an MSA ALTAIR 4X",
+      "Distinguish a bump test from calibration and respond correctly to an alarm, fault, or failed test",
       "Know never to enter an area with unknown or dangerous atmosphere without proper protection and authorization"
     ],
     content: `
       <div class="content-section">
-        <h3>Common Mine Gases</h3>
+        <h3>Mine Atmospheres and Where Hazards Come From</h3>
         <ul>
           <li><strong>Oxygen deficiency</strong> – can occur in poorly ventilated or sealed areas; causes rapid impairment and death.</li>
           <li><strong>Carbon monoxide (CO)</strong> – product of incomplete combustion; odorless, colorless, binds to hemoglobin.</li>
           <li><strong>Carbon dioxide (CO₂)</strong> – can displace oxygen; product of combustion and respiration.</li>
-          <li><strong>Nitrogen oxides, hydrogen sulfide, methane</strong> (where present), and diesel-related contaminants.</li>
+          <li><strong>Methane and other combustible gases</strong> – can create a fire or explosion hazard when mixed with air and an ignition source.</li>
+          <li><strong>Hydrogen sulfide (H₂S)</strong> – highly toxic; odor cannot be relied on because the sense of smell can rapidly fatigue.</li>
+          <li><strong>Nitrogen oxides and blast fumes</strong> – may be produced by blasting and combustion and can cause serious delayed lung injury.</li>
         </ul>
-        <p>Detection instruments, continuous monitors, and proper ventilation are the primary engineering controls. Never rely on your sense of smell alone.</p>
-        <div class="warning-box">Never enter a confined space, sealed area, or atmosphere of unknown quality without proper testing, permits, and respiratory protection as required by the mine’s procedures and standards.</div>
+        <p>Fires, diesel or gasoline engines, blasting, welding and cutting, battery charging, poor ventilation, sealed or low areas, and disturbed ground can change the atmosphere. Airflow and ventilation controls determine where gases travel; do not rely only on whether a gas is described as lighter or heavier than air.</p>
+        <div class="warning-box">Never rely on color, smell, taste, or symptoms to decide that air is safe. Never enter a sealed, confined, unventilated, or unknown atmosphere without the testing, authorization, controls, and protection required by the mine's procedure.</div>
+      </div>
+      <div class="content-section">
+        <h3>Reading the MSA ALTAIR 4X</h3>
+        <p>The typical four-gas configuration displays four different measurements. Confirm the actual sensor configuration, alarm settings, units, and calibration gas assigned to your instrument.</p>
+        <ul>
+          <li><strong>O₂ — percent by volume:</strong> both low and high oxygen can be hazardous. A normal-looking reading at one moment does not guarantee the area will remain safe.</li>
+          <li><strong>COMB/EX — percent of the lower explosive limit (%LEL):</strong> this is not the same as percent gas by volume. Any alarm requires the site's immediate response; a reading below an alarm is not permission to ignore an uncontrolled source.</li>
+          <li><strong>CO — parts per million (ppm):</strong> may indicate fire, exhaust, or incomplete combustion. CO cannot be detected reliably by human senses.</li>
+          <li><strong>H₂S — parts per million (ppm):</strong> highly toxic. Never use odor as confirmation that H₂S is absent.</li>
+        </ul>
+        <div class="key-box">Know the audible, visual, and vibrating alarms. If the detector alarms, faults, becomes blocked, loses power, or shows an unexpected reading: stop, withdraw toward known fresh air under the mine procedure, warn others, and report it. Do not silence the warning and continue working.</div>
+      </div>
+      <div class="content-section">
+        <h3>Bump Test, Calibration, and Daily Use</h3>
+        <ol>
+          <li><strong>Inspect:</strong> check the case, display, sensor openings, filter, battery charge, calibration cap, tubing, regulator, and cylinder condition.</li>
+          <li><strong>Start in known clean air:</strong> allow the complete startup and self-check sequence to finish. A fresh-air setup or zero must never be performed in questionable air.</li>
+          <li><strong>Bump test before each day's use:</strong> verify the cylinder concentrations match the instrument settings, apply the correct known gas through the proper fixed-flow regulator, and confirm every installed sensor responds and alarms.</li>
+          <li><strong>Respond to failure:</strong> BUMP ERROR, a failed sensor, blocked inlet, expired gas, wrong gas, or other fault means the detector is not ready. Remove it from use and complete the required calibration, troubleshooting, or service.</li>
+          <li><strong>Calibrate as required:</strong> calibration adjusts the instrument to a known gas concentration. It is different from a bump test and must follow the current MSA instructions and company schedule.</li>
+          <li><strong>Use and store correctly:</strong> keep sensor openings exposed, protect the instrument from contamination and damage, watch the display as conditions change, and charge/store it under the site program.</li>
+        </ol>
+        <p>Reference: <a href="https://docs.msasafety.com/altair4x/en-us/ALTAIR%204X%20US%20OPM%2010105903/PDF%20Download/OPM%20Altair%204X%2010105903_r6_US.pdf" target="_blank" rel="noopener">current MSA ALTAIR 4X user instructions</a> and <a href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener">MSHA's 2026 Unified Mine Rescue Training guide, Module 2</a>.</p>
+        <div class="key-box"><strong>Required hands-on verification:</strong> with the instructor, identify each channel and alarm, inspect the assigned ALTAIR 4X, complete startup and a bump test with the correct gas, recognize a failed test, and state the site's alarm and reporting response. Video viewing alone does not satisfy this demonstration.</div>
+        <div class="warning-box">The ALTAIR 4X is a warning and measurement tool—not respiratory protection. The MSA W65 does not supply oxygen and does not protect in an oxygen-deficient atmosphere.</div>
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the mine-gas lesson, required ALTAIR 4X video, and instructor-led hands-on verification. Full module seat time remains 2.0 hours.</p>
         <div class="timer-display" id="timer-11">120:00</div>
         <button class="btn btn-sm" id="btn-timer-11" onclick="startTimer(11, 120)">Start 2-hour Required Timer (120 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-11">Timer not started</p>
@@ -203,10 +256,10 @@ const MODULES_PART_2 = [
     `,
     questions: [
       { q: "Carbon monoxide is dangerous because it is:", options: ["Always visible as black smoke", "Odorless, colorless, and binds to hemoglobin reducing oxygen delivery", "Only a problem in surface mines", "Harmless at low concentrations forever"], answer: 1 },
-      { q: "True or False: You can reliably detect all dangerous mine gases by smell.", options: ["True", "False"], answer: 1 },
+      { q: "A successful ALTAIR 4X bump test demonstrates that:", options: ["The installed sensors respond to the applied test gas and alarms operate", "The atmosphere will remain safe for the entire shift", "Calibration is never needed", "The W65 will supply oxygen"], answer: 0 },
       { q: "Oxygen deficiency can cause:", options: ["Only mild headache", "Rapid impairment, unconsciousness, and death", "No symptoms until it is too late to matter", "Only problems for people with asthma"], answer: 1 },
       { q: "The primary engineering control for many mine gas hazards is:", options: ["Working faster", "Adequate ventilation and atmospheric monitoring", "Ignoring the issue", "Relying only on emergency escape equipment"], answer: 1 },
-      { q: "Before entering an area with potentially dangerous atmosphere you must:", options: ["Just hold your breath", "Follow the mine’s testing, permitting, and protection procedures", "Ask a co-worker if it “smells okay”", "Enter quickly and leave quickly"], answer: 1 }
+      { q: "If the ALTAIR 4X shows BUMP ERROR or a sensor fails to respond, you must:", options: ["Remove it from use and complete required calibration, troubleshooting, or service", "Use it only in low areas", "Silence it and continue", "Rely on smell instead"], answer: 0 }
     ]
   },
   {

@@ -365,6 +365,8 @@ const SIGNOFF_LABELS = {
   mineTour: 'Mine tour and observation of the mining method',
   plansProcedures: 'Current plans, escapeways, emergency procedures, and required demonstrations',
   w65Practice: 'Instructor-led MSA W65 instruction and hands-on practice',
+  fallProtectionPractice: 'Harness, lanyard, and SRL inspection, fit, compatibility, tie-off, clearance, and rescue demonstration',
+  gasMonitorPractice: 'Instructor-led MSA ALTAIR 4X startup, bump-test, alarm-response, and failed-test practice',
   taskTraining: 'Applicable new-task training and demonstrated safe procedures',
   form5000_23: 'MSHA Form 5000-23 or approved alternate completed'
 };

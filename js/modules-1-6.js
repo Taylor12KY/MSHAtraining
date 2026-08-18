@@ -229,7 +229,8 @@ const MODULES_PART_1 = [
     objectives: [
       "Recognize major categories of hazards in underground limestone and surface aggregate operations",
       "Understand the importance of workplace examinations and personal situational awareness",
-      "Identify common sources of serious injury (mobile equipment, ground control, conveyors, energy sources)"
+      "Identify common sources of serious injury, including mobile equipment, ground control, conveyors, hazardous energy, and falls",
+      "Select, inspect, and use personal protective equipment as the final layer in a complete hazard-control system"
     ],
     content: `
       <div class="content-section">
@@ -249,6 +250,26 @@ const MODULES_PART_1 = [
         </ul>
         <div class="key-box">Hazard recognition is not a one-time classroom topic. It is a continuous skill. Workplace examinations (required under Part 57 and related standards) are a formal part of that process.</div>
       </div>
+      <div class="content-section">
+        <h3>PPE and Fall Protection: A Complete System</h3>
+        <p>PPE does not remove the hazard. Start by eliminating the exposure where possible, then use engineering controls such as guarded platforms, covers, railings, or restraint systems. When personal fall arrest is required, every component must work together and the plan must address what happens after a fall.</p>
+        <ul>
+          <li><strong>Plan the work:</strong> identify edges, openings, unstable surfaces, climbing, equipment access, overhead hazards, and the rescue method before exposure begins.</li>
+          <li><strong>Inspect before use:</strong> check harness webbing, stitching, labels, D-rings, buckles, and impact indicators. Check lanyards and self-retracting lifelines (SRLs) for damaged connectors, cuts, burns, chemical damage, broken strands, housing damage, correct retraction, and evidence of deployment.</li>
+          <li><strong>Verify compatibility:</strong> use only approved connectors and anchorage arrangements. A hook that appears to close can still roll out or fail if connected to an incompatible object.</li>
+          <li><strong>Fit and connect correctly:</strong> follow the harness and connecting-device manufacturer instructions. Do not improvise an anchorage or mix components merely because they can be physically connected.</li>
+          <li><strong>Control clearance and swing:</strong> account for free fall, deceleration, worker height, connector length, lifeline behavior, lower obstructions, and lateral swing-fall exposure.</li>
+          <li><strong>Plan prompt rescue:</strong> a suspended worker may be unable to self-rescue. The plan, trained personnel, equipment, communication, and access must be in place before work starts.</li>
+        </ul>
+        <div class="warning-box">Never tie off to a handrail, pipe, cable tray, equipment part, or other convenient object unless it has been specifically approved for that fall-protection use. The competent person, site procedure, and manufacturer instructions determine acceptable systems.</div>
+      </div>
+      <div class="content-section">
+        <h3>Recent Mining Fall Case Study</h3>
+        <p>In an August 2024 quarry incident, a contractor fell approximately 21 feet through an opening while installing a material feeder and later died. Use the case to ask: Was the opening controlled? Was safe access maintained? Was the fall-arrest system connected to an acceptable anchorage? Had rescue been planned?</p>
+        <p><a href="https://www.msha.gov/data-reports/fatality-reports/2024/august-22-2024-fatality/fatality-alert" target="_blank" rel="noopener">Review the MSHA fatality alert</a> and the <a href="https://www.msha.gov/sites/default/files/Alerts-Hazards/Safety_Alert-Fall_Protection-2025.pdf" target="_blank" rel="noopener">2025 MSHA fall-protection safety alert</a> with the instructor.</p>
+        <div class="key-box"><strong>Hands-on verification:</strong> the instructor will demonstrate a pre-use inspection and proper fit using representative Allen Company harnesses, lanyards, and SRLs. Brand-specific labels and instructions always control.</div>
+      </div>
+
       <div class="content-section">
         <h3>Personal Practices</h3>
         <ul>
@@ -281,7 +302,7 @@ const MODULES_PART_1 = [
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Watch the videos above and complete instructor discussion of site hazards. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the required video sequence, fall-protection demonstration, and instructor discussion of site hazards. Full module seat time remains 3.5 hours.</p>
         <div class="timer-display" id="timer-5">210:00</div>
         <button class="btn btn-sm" id="btn-timer-5" onclick="startTimer(5, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-5">Timer not started</p>
@@ -290,10 +311,10 @@ const MODULES_PART_1 = [
     questions: [
       { q: "Which of the following is a major hazard category in both underground limestone and surface aggregate operations?", options: ["Only office ergonomics", "Mobile equipment and ground control", "Only weather-related hazards", "Only chemical spills in the lab"], answer: 1 },
       { q: "Workplace examinations are:", options: ["Optional if the mine is small", "A formal, required process to identify and correct hazards", "Only performed by MSHA", "Only needed after an accident"], answer: 1 },
-      { q: "True or False: Once you have completed new miner training you no longer need to actively look for hazards.", options: ["True", "False"], answer: 1 },
+      { q: "When controlling a fall hazard, the preferred first step is to:", options: ["Eliminate the exposure or use higher-level prevention controls where feasible", "Put on any available harness", "Choose the longest lanyard", "Rely on a rescue after the fall"], answer: 0 },
       { q: "Conveyor systems commonly present which type of hazard?", options: ["Only noise", "Nip points, entanglement, and the need for proper guarding and lockout", "Only electrical shock", "No significant hazards if running slowly"], answer: 1 },
       { q: "When working around large loaders or haul trucks you should:", options: ["Assume the operator sees you", "Make positive communication and stay out of blind spots", "Walk closely behind them so they know you are there", "Rely only on backup alarms"], answer: 1 },
-      { q: "Silica and diesel particulate are examples of:", options: ["Ground control hazards", "Respiratory / health hazards that require controls and sometimes monitoring", "Only surface hazards", "Hazards that only affect supervisors"], answer: 1 }
+      { q: "Before using a harness, lanyard, or SRL, the worker must:", options: ["Inspect it, verify component and anchorage compatibility, and understand the rescue plan", "Connect to the nearest handrail", "Assume all brands can be mixed in every configuration", "Use it even if an impact indicator shows deployment"], answer: 0 }
     ]
   },
   {

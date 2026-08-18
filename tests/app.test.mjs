@@ -161,6 +161,10 @@ test('instructor records and signoffs require the instructor role and preserve a
   assert.match(html, /id="instructor-open-records"/);
   assert.match(html, /id="instructor-records-modal"/);
   assert.match(instructorAuth, /Save Verified Signoffs/);
+  assert.match(instructorAuth, /fallProtectionPractice/);
+  assert.match(instructorAuth, /gasMonitorPractice/);
+  assert.match(trainingRecords, /'fallProtectionPractice'/);
+  assert.match(trainingRecords, /'gasMonitorPractice'/);
 });
 
 test('instructor preview is non-persistent and cannot issue completion records', () => {
@@ -217,24 +221,27 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 55 videos are uniquely assigned and all submitted batches remain intact', () => {
+test('all 57 active videos are unique and retired submissions are documented', () => {
   const context = {};
-  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
   const ids = context.videos.map(video => video.id);
   const firstBatch = context.videos.filter(video => context.firstIds.includes(video.id));
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
-  assert.equal(context.videos.length, 55);
-  assert.equal(new Set(ids).size, 55);
+  const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
+  assert.equal(context.videos.length, 57);
+  assert.equal(new Set(ids).size, 57);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
-  assert.equal(firstBatch.length, 16);
-  assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 11206);
+  assert.equal(firstBatch.length, 15);
+  assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 10891);
   assert.equal(secondBatch.length, 16);
   assert.equal(secondBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 16276);
-  assert.equal(thirdBatch.length, 14);
-  assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 10076);
+  assert.equal(thirdBatch.length, 13);
+  assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 8284);
+  assert.equal(currentResources.length, 4);
+  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4221);
   assert.equal(context.thirdSubmittedIds.length, 17);
   assert.equal(ids.filter(id => id === 'X5r4upNwIGk').length, 1);
   assert.equal(ids.filter(id => id === 'yEwFZHVLsso').length, 1);
@@ -242,6 +249,11 @@ test('all 55 videos are uniquely assigned and all submitted batches remain intac
   assert.equal(ids.filter(id => id === 'OxOwJC5wHyc').length, 1);
   assert.equal(ids.filter(id => id === 'ddermx9hJ7k').length, 0);
   assert.equal(context.contentDuplicates.ddermx9hJ7k, 'X5r4upNwIGk');
+  assert.equal(ids.filter(id => id === 'MziZesbb32Q').length, 0);
+  assert.equal(ids.filter(id => id === 'W4uQqiHnXUI').length, 0);
+  assert.match(context.retiredIds.MziZesbb32Q, /Replaced/);
+  assert.match(context.retiredIds.W4uQqiHnXUI, /Retired/);
+  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI']) assert.ok(ids.includes(id));
 });
 
 test('module videos use a complete instructional sequence with transitions', () => {
@@ -267,6 +279,17 @@ test('required video time fits within each assigned module', () => {
       .filter(video => video.moduleId === module.id)
       .reduce((sum, video) => sum + video.durationSeconds, 0);
     assert.ok(videoSeconds <= module.hours * 3600, `Module ${module.id} has more video time than credited time`);
+  }
+});
+
+test('client and server require the same active videos and verified durations', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS;').runInNewContext(context);
+  for (const moduleId of Object.keys(recordLibrary.MODULE_REQUIREMENTS).map(Number)) {
+    const clientVideos = Object.fromEntries(context.videos
+      .filter(video => video.moduleId === moduleId)
+      .map(video => [video.id, video.durationSeconds]));
+    assert.deepEqual(clientVideos, recordLibrary.MODULE_REQUIREMENTS[moduleId].videos, `Module ${moduleId} client/server video requirements differ`);
   }
 });
 

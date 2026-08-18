@@ -22,9 +22,9 @@ const MODULE_QUIZ_ADDITIONS = {
   ],
   5: [
     { q: "When a load is suspended overhead, you should:", options: ["Walk beneath it quickly", "Stay clear of the suspended-load area", "Hold it steady by hand", "Stand under it to guide the operator"], answer: 1 },
-    { q: "Stored-energy hazards can include:", options: ["Hydraulic pressure, gravity, springs, and electrical energy", "Only gasoline", "Only moving trucks", "Paperwork"], answer: 0 },
+    { q: "A personal fall-arrest system should be used only after:", options: ["The hazard is assessed, higher-level controls are considered, components and anchorage are approved, and rescue is planned", "The worker finds any nearby object for tie-off", "Different components are connected without checking compatibility", "The free-fall distance is ignored"], answer: 0 },
     { q: "Hazard recognition should occur:", options: ["Continuously before and during work", "Only during annual refresher", "Only after an accident", "Only when MSHA is present"], answer: 0 },
-    { q: "Barricades, tags, and danger signs should be:", options: ["Obeyed and bypassed only under authorized procedure", "Moved whenever inconvenient", "Ignored by experienced miners", "Used only outdoors"], answer: 0 }
+    { q: "A harness, lanyard, or SRL showing damage or evidence of deployment should be:", options: ["Removed from service and handled under the manufacturer and site procedure", "Used for one more shift", "Repaired with tape", "Connected to a handrail"], answer: 0 }
   ],
   6: [
     { q: "A mine map used for emergency preparation should identify:", options: ["Escapeways, ventilation controls, refuge or gathering locations, and major hazards", "Only office furniture", "Only property taxes", "Production bonuses"], answer: 0 },
@@ -58,15 +58,15 @@ const MODULE_QUIZ_ADDITIONS = {
     { q: "Before giving first aid, first confirm:", options: ["The scene is safe to enter", "The injured person can finish the shift", "Production has stopped everywhere", "A report has already been written"], answer: 0 },
     { q: "The mine's emergency medical response should generally be activated:", options: ["Early when serious injury or illness is suspected", "Only after the shift", "Only by email", "After all supplies are used"], answer: 0 },
     { q: "A basic initial action for life-threatening external bleeding is:", options: ["Apply direct pressure with an appropriate dressing", "Give food", "Have the person walk", "Delay care until a supervisor arrives"], answer: 0 },
-    { q: "A first-aid provider should:", options: ["Work within their training and get higher-level help", "Attempt unfamiliar procedures", "Diagnose every condition", "Move every injured person immediately"], answer: 0 },
+    { q: "Confusion, collapse, seizure, or loss of consciousness during hot work should be treated as:", options: ["A medical emergency requiring prompt cooling and activation of emergency response", "Normal acclimatization", "A reason to leave the person alone", "A condition to reassess after the shift"], answer: 0 },
     { q: "First aid serves as:", options: ["A bridge until professional medical care takes over", "A replacement for all medical care", "A disciplinary procedure", "A production tool"], answer: 0 }
   ],
   11: [
     { q: "Carbon monoxide is commonly produced by:", options: ["Incomplete combustion", "Clean drinking water", "Fresh air", "Limestone alone"], answer: 0 },
-    { q: "Carbon dioxide can create danger by:", options: ["Displacing oxygen", "Supplying breathing oxygen", "Neutralizing every toxic gas", "Making gas monitors unnecessary"], answer: 0 },
-    { q: "An atmosphere of unknown quality requires:", options: ["Testing and the mine's required authorization and protection", "A smell check only", "Quick entry without a monitor", "No special action"], answer: 0 },
+    { q: "A fresh-air setup or zero on the ALTAIR 4X should be performed:", options: ["Only in air known to be clean and under the current instrument procedure", "Inside an unknown atmosphere", "After silencing an alarm in place", "Using exhaled breath"], answer: 0 },
+    { q: "The COMB/EX channel on a typical ALTAIR 4X reports:", options: ["Percent of the lower explosive limit, not percent gas by volume", "Oxygen percent", "Carbon monoxide in ppm", "Battery charge only"], answer: 0 },
     { q: "Why must miners not rely on smell to detect mine gases?", options: ["Some dangerous gases are odorless or cannot be reliably detected by smell", "All mine gases smell pleasant", "Ventilation removes the sense of smell", "Gas detectors use smell"], answer: 0 },
-    { q: "An oxygen-deficient atmosphere can:", options: ["Rapidly impair or kill a person", "Improve alertness", "Be made safe by a dust mask", "Be identified by color alone"], answer: 0 }
+    { q: "When the ALTAIR 4X alarms or shows an unexpected hazardous reading, the correct action is to:", options: ["Follow the site response, withdraw toward known fresh air, warn others, and report it", "Silence it and keep working", "Cover the sensor openings", "Use a dust mask and continue"], answer: 0 }
   ],
   12: [
     { q: "Required task training should occur:", options: ["Before a miner performs a covered new task", "After the first accident", "Only during annual refresher", "Only after six months"], answer: 0 },
