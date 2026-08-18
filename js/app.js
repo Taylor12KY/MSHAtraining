@@ -1266,7 +1266,6 @@ function ensureLegacyQuizReview(id) {
 }
 
 function renderQuizReviewPanel(id) {
-  if (instructorPreviewMode) return;
   ensureLegacyQuizReview(id);
   const container = document.getElementById('mod-content');
   if (!container) return;
@@ -1397,7 +1396,7 @@ function openModuleReview(id) {
 }
 
 function canTakeQuiz(id) {
-  if (instructorPreviewMode) return true;
+  if (instructorPreviewMode) return quizReviewReady(id);
   if (state.completed.includes(id)) return true;
   const timeOk = !!state.timersDone[id];
   const scrollOk = !!state.scrollDone[id];
@@ -1633,6 +1632,7 @@ function showQuiz() {
     if (!state.timersDone[m.id] && !state.completed.includes(m.id)) missing.push('required seat time');
     if (!state.scrollDone[m.id] && !state.completed.includes(m.id)) missing.push('scroll through all content');
     if (!requiredVideosComplete(m.id) && !state.completed.includes(m.id)) missing.push('all required videos');
+    if (!quizReviewReady(m.id) && !state.completed.includes(m.id)) missing.push('missed-topic review');
     alert('Complete these before the quiz: ' + missing.join(' and ') + '.');
     return;
   }
@@ -1698,7 +1698,37 @@ function submitQuiz() {
     const previewPassed = percent === QUIZ_PASSING_SCORE;
     const resultClass = previewPassed ? 'result-pass' : 'result-fail';
     const resultLabel = previewPassed ? 'PREVIEW PASS' : 'PREVIEW REVIEW REQUIRED';
-    resultEl.innerHTML = '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>A learner must earn 100%. Demonstration only — this score was not saved and no module completion was awarded.</p><button class="btn btn-sm" onclick="showQuiz()" style="margin-top:10px;">Try Preview Again</button>';
+    if (previewPassed) {
+      if (state.quizReview) delete state.quizReview[m.id];
+      resultEl.innerHTML = '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p><p>A learner must earn 100%. Demonstration only — this score was not saved and no module completion was awarded.</p><button class="btn btn-outline btn-sm" onclick="showDashboard()" style="margin-top:10px;">Return to Preview Dashboard</button>';
+      return;
+    }
+    if (!state.quizReview) state.quizReview = {};
+    state.quizReview[m.id] = missed.map(item => {
+      const guide = getQuizReviewGuide(m.id, item.question.q);
+      return {
+        question: item.question.q,
+        selectedAnswer: item.question.options[item.selectedIndex],
+        topic: guide.topic,
+        focus: guide.focus,
+        sectionIndex: guide.sectionIndex,
+        reviewed: false,
+        checkPassed: false,
+        options: item.question.options.slice(),
+        correctIndex: item.question.answer
+      };
+    });
+    state.scores[m.id] = Math.max(Number(state.scores[m.id]) || 0, percent);
+    const previewRemediation = state.quizReview[m.id].map(item =>
+      '<article><strong>' + escapeHtml(item.topic) + '</strong><p>' +
+      escapeHtml(item.question) + '</p><span>Your answer: ' +
+      escapeHtml(item.selectedAnswer) + '</span></article>'
+    ).join('');
+    resultEl.innerHTML =
+      '<p class="' + resultClass + '">' + resultLabel + ' – ' + percent + '% (' + correct + '/' + m.questions.length + ')</p>' +
+      '<p>A learner must earn 100%. Demonstration only — this score and review activity will not be saved.</p>' +
+      '<div class="quiz-remediation-summary">' + previewRemediation + '</div>' +
+      '<button class="btn" onclick="openModuleReview(' + m.id + ')">Preview Missed-Topic Review →</button>';
     return;
   }
 

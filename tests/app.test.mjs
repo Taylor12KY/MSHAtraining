@@ -35,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=invite-accounts-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=invite-accounts-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=preview-remediation-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=preview-remediation-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -168,7 +168,10 @@ test('instructor preview is non-persistent and cannot issue completion records',
   assert.match(app, /Certificates are disabled in instructor preview/);
   assert.match(app, /Training-record exports are disabled in instructor preview/);
   assert.match(app, /Demonstration only — this score was not saved/);
-  assert.match(app, /if \(instructorPreviewMode\) return true;/);
+  assert.match(app, /if \(instructorPreviewMode\) return quizReviewReady\(id\);/);
+  assert.doesNotMatch(app, /Try Preview Again/);
+  assert.doesNotMatch(app, /function renderQuizReviewPanel\(id\) \{\s*if \(instructorPreviewMode\) return;/);
+  assert.match(app, /Preview Missed-Topic Review/);
   assert.match(app, /Video controls remain non-seekable/);
 });
 
