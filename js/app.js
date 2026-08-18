@@ -247,7 +247,12 @@ function sanitizeState(candidate) {
         topic: typeof item.topic === 'string' ? item.topic.slice(0, 200) : '',
         focus: typeof item.focus === 'string' ? item.focus.slice(0, 800) : '',
         sectionIndex: Math.max(0, Math.min(10, Number(item.sectionIndex) || 0)),
-        reviewed: item.reviewed === true
+        reviewed: item.reviewed === true,
+        checkPassed: item.checkPassed === true,
+        options: Array.isArray(item.options)
+          ? item.options.slice(0, 8).map(option => typeof option === 'string' ? option.slice(0, 500) : '')
+          : [],
+        correctIndex: Number.isInteger(Number(item.correctIndex)) ? Number(item.correctIndex) : -1
       }));
     }
     if (validIds.has(id) && Array.isArray(candidate.completed) && candidate.completed.includes(id) &&
@@ -1070,7 +1075,7 @@ function getQuizReviewItems(id) {
 
 function quizReviewReady(id) {
   const items = getQuizReviewItems(id);
-  return !items.length || items.every(item => item.reviewed === true);
+  return !items.length || items.every(item => item.reviewed === true && item.checkPassed === true);
 }
 
 function ensureLegacyQuizReview(id) {
@@ -1086,7 +1091,10 @@ function ensureLegacyQuizReview(id) {
     topic: 'Full module review',
     focus: guide.focus,
     sectionIndex: guide.sectionIndex,
-    reviewed: false
+    reviewed: false,
+    checkPassed: false,
+    options: [],
+    correctIndex: -1
   }];
   saveState();
 }
@@ -1115,22 +1123,34 @@ function renderQuizReviewPanel(id) {
       <div>
         <span class="eyebrow">Required remediation</span>
         <h3 id="quiz-review-heading">Review missed topics before retaking the quiz</h3>
-        <p>A perfect 10 out of 10 is required. Open each assigned section below, review the material, and then retake the complete quiz.</p>
+        <p>A perfect 10 out of 10 is required. Open each assigned section, review the material, and pass its focused knowledge check before retaking the complete quiz.</p>
       </div>
       <div class="quiz-review-score"><strong>${Number.isFinite(bestScore) ? bestScore : 0}%</strong><span>Best score</span></div>
     </div>
     <div class="quiz-review-items">
       ${items.map((item, index) => `
-        <article class="quiz-review-item${item.reviewed ? ' reviewed' : ''}">
+        <article class="quiz-review-item${item.checkPassed ? ' reviewed' : (item.reviewed ? ' review-opened' : '')}">
           <div class="quiz-review-item-heading">
             <span>Missed topic ${index + 1}</span>
-            <strong>${item.reviewed ? 'Section reviewed ✓' : 'Review required'}</strong>
+            <strong>${item.checkPassed ? 'Knowledge check passed ✓' : (item.reviewed ? 'Knowledge check required' : 'Review required')}</strong>
           </div>
           <p class="quiz-review-question">${escapeHtml(item.question)}</p>
           ${item.selectedAnswer ? `<p class="quiz-review-answer"><strong>Your answer:</strong> ${escapeHtml(item.selectedAnswer)}</p>` : ''}
           <p><strong>Return to:</strong> ${escapeHtml(item.topic)}</p>
           <p class="quiz-review-focus">${escapeHtml(item.focus)}</p>
           <button class="btn btn-outline btn-sm quiz-review-link" type="button" data-review-section="${item.sectionIndex}">${item.reviewed ? 'Review Section Again' : 'Open Review Section'}</button>
+          ${item.reviewed ? (
+            item.options.length && item.correctIndex >= 0
+              ? `<div class="quiz-review-knowledge-check">
+                  <label for="review-check-select-${id}-${index}"><strong>Focused check:</strong> ${escapeHtml(item.question)}</label>
+                  <select id="review-check-select-${id}-${index}" ${item.checkPassed ? 'disabled' : ''}>
+                    <option value="">Select an answer</option>
+                    ${item.options.map((option, optionIndex) => `<option value="${optionIndex}">${escapeHtml(option)}</option>`).join('')}
+                  </select>
+                  <button class="btn btn-sm quiz-review-check-button" type="button" data-review-check="${index}" ${item.checkPassed ? 'disabled' : ''}>${item.checkPassed ? 'Check Passed ✓' : 'Check Answer'}</button>
+                </div>`
+              : `<button class="btn btn-sm quiz-review-confirm-button" type="button" data-review-confirm="${index}" ${item.checkPassed ? 'disabled' : ''}>${item.checkPassed ? 'Review Confirmed ✓' : 'Confirm Full Module Review'}</button>`
+          ) : ''}
         </article>
       `).join('')}
     </div>
@@ -1142,6 +1162,12 @@ function renderQuizReviewPanel(id) {
   container.prepend(panel);
   panel.querySelectorAll('.quiz-review-link').forEach(button => {
     button.addEventListener('click', () => markQuizReviewSectionVisited(id, Number(button.dataset.reviewSection)));
+  });
+  panel.querySelectorAll('[data-review-check]').forEach(button => {
+    button.addEventListener('click', () => submitQuizReviewCheck(id, Number(button.dataset.reviewCheck)));
+  });
+  panel.querySelectorAll('[data-review-confirm]').forEach(button => {
+    button.addEventListener('click', () => confirmLegacyQuizReview(id, Number(button.dataset.reviewConfirm)));
   });
   panel.querySelector('#quiz-review-retake')?.addEventListener('click', showQuiz);
 }
@@ -1162,6 +1188,34 @@ function markQuizReviewSectionVisited(id, sectionIndex) {
     section.focus({ preventScroll: true });
     window.setTimeout(() => section.classList.remove('quiz-review-highlight'), 4000);
   }
+}
+
+
+function submitQuizReviewCheck(id, itemIndex) {
+  const item = getQuizReviewItems(id)[itemIndex];
+  const select = document.getElementById('review-check-select-' + id + '-' + itemIndex);
+  if (!item || !select || item.reviewed !== true) return;
+  if (select.value === '') {
+    alert('Select an answer before checking your review.');
+    return;
+  }
+  if (Number(select.value) !== Number(item.correctIndex)) {
+    alert('That answer is not correct yet. Return to the highlighted module section and review the topic again.');
+    return;
+  }
+  item.checkPassed = true;
+  saveState();
+  renderQuizReviewPanel(id);
+  updateQuizButton(id);
+}
+
+function confirmLegacyQuizReview(id, itemIndex) {
+  const item = getQuizReviewItems(id)[itemIndex];
+  if (!item || item.reviewed !== true) return;
+  item.checkPassed = true;
+  saveState();
+  renderQuizReviewPanel(id);
+  updateQuizButton(id);
 }
 
 function openModuleReview(id) {
@@ -1516,7 +1570,10 @@ function submitQuiz() {
       topic: guide.topic,
       focus: guide.focus,
       sectionIndex: guide.sectionIndex,
-      reviewed: false
+      reviewed: false,
+      checkPassed: false,
+      options: item.question.options.slice(),
+      correctIndex: item.question.answer
     };
   });
   state.scores[m.id] = Math.max(Number(state.scores[m.id]) || 0, percent);
@@ -1579,6 +1636,19 @@ function showCertificate() {
       and oversight by an MSHA-approved instructor under an approved training plan are still required.
       Attach supporting records to the official MSHA Form 5000-23 as directed by the operator and instructor.
     </p>
+    <div class="instructor-verification-checklist" style="margin-top:20px;padding:16px;border:2px solid #374151;text-align:left;">
+      <h3 style="margin-top:0;">Instructor Verification — Required Outside This App</h3>
+      <p>This classroom certificate is not a final Part 48 training certificate. The operator and MSHA-approved instructor must verify and document, as required by the approved plan:</p>
+      <ul>
+        <li>Approximately 8 hours of mine-site training, including the mine tour and observation of the mining method.</li>
+        <li>Current site-specific plans, escapeways, emergency procedures, and applicable demonstrations or hands-on activities.</li>
+        <li>MSA W65 instruction, demonstration, and any practice required by the approved plan.</li>
+        <li>New-task training, supervised practice, and demonstrated safe procedures before independent assignment, where applicable.</li>
+        <li>Completion and certification on MSHA Form 5000-23 or an MSHA-approved alternate form.</li>
+      </ul>
+      <p><strong>Instructor:</strong> ____________________ &nbsp; <strong>Approval/ID:</strong> __________</p>
+      <p><strong>Signature:</strong> ____________________ &nbsp; <strong>Date:</strong> __________</p>
+    </div>
     <p style="margin-top:24px;font-size:0.75rem;color:#777;">Generated by Part 48 Classroom Training Support Tool · Progress stored locally</p>
   `;
 }
@@ -1597,6 +1667,15 @@ function downloadTrainingRecord() {
     startedAt: state.startedAt,
     totalProgramHours: modules.reduce((sum, m) => sum + m.hours, 0),
     requiredQuizScore: QUIZ_PASSING_SCORE,
+    recordType: 'classroom-support-record',
+    complianceStatus: 'Classroom portion only — instructor verification and official Part 48 certification remain required.',
+    externalVerificationRequired: [
+      'Approximately 8 hours of mine-site training and mine tour',
+      'Current site-specific plans, escapeways, and emergency procedures',
+      'MSA W65 instruction, demonstration, and practice required by the approved plan',
+      'Applicable new-task training, supervised practice, and demonstrated safe procedures',
+      'Operator or instructor certification on MSHA Form 5000-23 or approved alternate'
+    ],
     modules: modules.map(m => ({
       id: m.id,
       title: m.title,
@@ -1647,3 +1726,4 @@ function hideAll() {
 // Init
 loadState();
 showStart();
+

@@ -560,6 +560,7 @@
     padding: 15px; border: 1px solid #e1d5b4; border-radius: 11px; background: #fff;
   }
   .quiz-review-item.reviewed { border-color: #b7d7c4; background: #f5fbf7; }
+  .quiz-review-item.review-opened { border-color: #d8b755; background: #fffcf2; }
   .quiz-review-item-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
   .quiz-review-item-heading span {
     color: #87640d; font-size: 0.66rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase;
@@ -571,6 +572,16 @@
   .quiz-review-item > p { margin-bottom: 6px; font-size: 0.83rem; }
   .quiz-review-focus { color: var(--text-muted); }
   .quiz-review-link { margin-top: 5px; }
+  .quiz-review-knowledge-check {
+    display: grid; gap: 9px; margin-top: 12px; padding: 13px;
+    border: 1px solid #d8c98f; border-radius: 9px; background: #fffdf7;
+  }
+  .quiz-review-knowledge-check label { color: var(--charcoal); font-size: 0.82rem; }
+  .quiz-review-knowledge-check select {
+    width: 100%; min-height: 42px; padding: 9px 10px;
+    border: 1px solid #aeb7bd; border-radius: 7px; background: #fff; color: var(--charcoal);
+  }
+  .quiz-review-check-button, .quiz-review-confirm-button { margin-top: 9px; }
   .quiz-review-actions {
     display: flex; justify-content: space-between; align-items: center; gap: 16px;
     margin-top: 18px; padding-top: 16px; border-top: 1px solid #e5dbc0;
@@ -668,3 +679,4 @@
     .footer-logo { margin: 0 auto; }
     .footer-inner > span { grid-column: auto; text-align: center; }
   }
+

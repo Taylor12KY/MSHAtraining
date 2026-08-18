@@ -18,9 +18,10 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Site-specific **Module 1** orientation based on selected location
 - 13 modules covering Part 48 classroom topics
 - **Anti-skip tracking** (KnowBe4-style): auto seat-time matching credited hours, progress saved, pauses when tab is hidden, scroll-to-end required before quiz
-- Quizzes (80% to pass) to unlock the next module
+- Ten-question mastery quizzes requiring 100% to unlock the next module
 - Inactivity-aware seat-time tracking with progress validation
 - Randomized quiz presentation with recent attempt history
+- Missed-topic remediation with a focused knowledge check before a full quiz retake
 - Downloadable trainee progress records
 - Printable certificate when all modules are complete
 
@@ -62,7 +63,7 @@ Other accounts can help build this:
 ## Notes
 
 - Progress is stored in the trainee's browser (`localStorage` key `msha48_32hr_v2`).
-- This app supports classroom delivery; it does not replace required hands-on training (e.g. self-rescuer donning) or company written plans.
+- This app supports the 32-hour classroom portion; it does not replace the approximately 8 hours of mine-site training, required demonstrations or hands-on activities, task training, the approved Part 48 plan, or official MSHA records.
 - Keep site-specific procedures aligned with current ground control, escape, and fire plans.
 
 ## License / use

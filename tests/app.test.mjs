@@ -30,14 +30,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=quiz-mastery-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=quiz-mastery-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=compliance-guards-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=compliance-guards-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -119,11 +119,23 @@ test('missed quiz questions create a required topic-review loop before retake', 
   assert.match(app, /function renderQuizReviewPanel/);
   assert.match(app, /function markQuizReviewSectionVisited/);
   assert.match(app, /item\.reviewed = true/);
+  assert.match(app, /item\.checkPassed = true/);
+  assert.match(app, /function submitQuizReviewCheck/);
+  assert.match(app, /Knowledge check required/);
   assert.match(app, /missed-topic review/);
   assert.match(app, /Retake Full 10-Question Quiz/);
   assert.match(app, /function openModuleReview/);
   assert.match(app, /if \(state\.quizReview\) delete state\.quizReview\[m\.id\]/);
   assert.match(html, /answer all 10 questions correctly/i);
+});
+
+
+test('classroom completion requires an explicit instructor and official-record handoff', () => {
+  assert.match(app, /Instructor Verification — Required Outside This App/);
+  assert.match(app, /Approximately 8 hours of mine-site training/);
+  assert.match(app, /MSHA Form 5000-23 or an MSHA-approved alternate form/);
+  assert.match(app, /recordType: 'classroom-support-record'/);
+  assert.match(app, /externalVerificationRequired/);
 });
 
 test('all 55 videos are uniquely assigned and all submitted batches remain intact', () => {
