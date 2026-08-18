@@ -35,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=preview-remediation-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=preview-remediation-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=remediation-status-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=remediation-status-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -201,6 +201,7 @@ test('missed quiz questions create a required topic-review loop before retake', 
   assert.match(app, /Knowledge check required/);
   assert.match(app, /missed-topic review/);
   assert.match(app, /Retake Full 10-Question Quiz/);
+  assert.match(app, /Pass every focused knowledge check to enable the full quiz retake/);
   assert.match(app, /function openModuleReview/);
   assert.match(app, /if \(state\.quizReview\) delete state\.quizReview\[m\.id\]/);
   assert.match(html, /answer all 10 questions correctly/i);

@@ -1279,6 +1279,11 @@ function renderQuizReviewPanel(id) {
   if (!items.length) return;
 
   const bestScore = Number(state.scores && state.scores[id]);
+  const reviewStatus = quizReviewReady(id)
+    ? 'All assigned sections and focused checks are complete. You may retake the full quiz.'
+    : (items.every(item => item.reviewed === true)
+        ? 'Pass every focused knowledge check to enable the full quiz retake.'
+        : 'Open every assigned review section, then pass each focused knowledge check.');
   const panel = document.createElement('aside');
   panel.id = 'quiz-review-panel';
   panel.className = 'quiz-review-panel';
@@ -1320,7 +1325,7 @@ function renderQuizReviewPanel(id) {
       `).join('')}
     </div>
     <div class="quiz-review-actions">
-      <p id="quiz-review-status">${quizReviewReady(id) ? 'All assigned sections have been opened. You may retake the full quiz.' : 'Open every assigned review section to enable the retake.'}</p>
+      <p id="quiz-review-status">${reviewStatus}</p>
       <button class="btn" id="quiz-review-retake" type="button" ${quizReviewReady(id) ? '' : 'disabled'}>Retake Full 10-Question Quiz</button>
     </div>
   `;
