@@ -35,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=account-records-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=account-records-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=invite-accounts-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=invite-accounts-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -87,6 +87,13 @@ test('instructor access has no client-side shared password and learner signup ca
   assert.match(instructorAuth, /if \(!user\.confirmedAt\)/);
   assert.doesNotMatch(instructorAuth, /signup\([^\n]*roles/);
   assert.match(instructorAuth, /authenticatedRequest\('\/api\/instructor-session'/);
+});
+
+test('learner registration follows the deployed Identity invitation policy', () => {
+  assert.match(instructorAuth, /getSettings/);
+  assert.match(instructorAuth, /settings\?\.disableSignup/);
+  assert.match(html, /class="auth-link hidden" id="learner-show-signup"/);
+  assert.match(html, /Learner accounts are invitation-only/);
 });
 
 test('instructor route and server endpoint both require the instructor role', () => {

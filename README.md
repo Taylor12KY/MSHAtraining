@@ -22,7 +22,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Inactivity-aware seat-time tracking with progress validation
 - Randomized quiz presentation with recent attempt history
 - Missed-topic remediation with a focused knowledge check before a full quiz retake
-- Authenticated learner accounts with server-side progress and local recovery backup
+- Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
 - Downloadable trainee progress records tied to the authenticated account
 - Printable certificate when all modules are complete
@@ -42,7 +42,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 
 1. Download or clone this repo.
 2. Run the Netlify development environment or deploy to Netlify; Identity and Blobs require the Netlify runtime.
-3. Sign in with a learner account, select name + work location, and begin training.
+3. Accept an instructor-issued learner invitation, sign in, select name + work location, and begin training.
 
 ## Completion records
 

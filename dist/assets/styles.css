@@ -33,6 +33,12 @@
   gap: 12px;
   flex-wrap: wrap;
 }
+.learner-registration-note {
+  margin: 0.8rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
 .learner-signed-in {
   display: flex;
   align-items: center;

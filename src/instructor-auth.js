@@ -1,5 +1,6 @@
 import {
   acceptInvite,
+  getSettings,
   getUser,
   handleAuthCallback,
   login,
@@ -82,6 +83,22 @@ function setLearnerView(view) {
   byId('learner-login-form')?.classList.toggle('hidden', view !== 'login');
   byId('learner-signup-form')?.classList.toggle('hidden', view !== 'signup');
   showLearnerStatus('');
+}
+
+async function configureLearnerRegistration() {
+  const signupButton = byId('learner-show-signup');
+  const registrationNote = byId('learner-registration-note');
+  try {
+    const settings = await getSettings();
+    const inviteOnly = Boolean(settings?.disableSignup);
+    signupButton?.classList.toggle('hidden', inviteOnly);
+    registrationNote?.classList.toggle('hidden', !inviteOnly);
+    if (inviteOnly) setLearnerView('login');
+  } catch {
+    // Fail closed when the deployed Identity registration policy cannot be verified.
+    signupButton?.classList.add('hidden');
+    registrationNote?.classList.remove('hidden');
+  }
 }
 
 function openAccountAccess(view = 'login', intent = 'instructor') {
@@ -490,6 +507,7 @@ function bindAuthUI() {
 async function initializeAuthentication() {
   bindAuthUI();
   updateLearnerAccountUI(null);
+  await configureLearnerRegistration();
   const callbackHandled = await processAuthCallback();
   if (callbackHandled) return;
   if (isInstructorRoute) return authorizeInstructorPage();
