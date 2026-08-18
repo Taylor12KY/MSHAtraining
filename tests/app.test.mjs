@@ -35,14 +35,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=fall-gas-training-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=fall-gas-training-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/app\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=fall-gas-training-2"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -355,6 +355,8 @@ test('managed video notices accurately describe verified in-player completion', 
   assert.match(app, /external playback cannot be verified and does not receive completion credit/);
   assert.match(app, /text\.includes\('YouTube cannot fully lock seeking'\)/);
   assert.match(app, /text\.includes\('If the player shows'\)/);
+  assert.match(app, /the assigned video/);
+  assert.doesNotMatch(app, /â†—/);
 });
 
 test('every site orientation requires current-plan instructor review', () => {

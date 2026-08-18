@@ -828,7 +828,7 @@ function configureRequiredVideoBox(box, iframe, video) {
   if (!box.querySelector('.video-fallback')) {
     box.insertAdjacentHTML(
       'beforeend',
-      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} â†—</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
+      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
     );
   }
   const button = box.querySelector('.video-play-toggle');
@@ -846,7 +846,7 @@ function renderRequiredVideos(moduleId) {
   section.className = 'required-video-section';
   section.innerHTML = `
     <h3>Required Module Videos</h3>
-    <p>Follow the listed sequence and complete all ${videos.length} assigned video${videos.length === 1 ? '' : 's'} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
+    <p>Follow the listed sequence and complete ${videos.length === 1 ? 'the assigned video' : `all ${videos.length} assigned videos`} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
   `;
 
   videos.forEach((video, index) => {
