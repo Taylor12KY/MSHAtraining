@@ -15,15 +15,15 @@ export const MODULE_REQUIREMENTS = {
   1: { seconds: 5400, videos: {} },
   2: { seconds: 7200, videos: { VEOVVx3rDyI: 528, 'QGkT8Ahh1-E': 2409, eEj1JOVu_eY: 850, SN4Sfuhvs2Y: 150, WrnHZK9GhlM: 540, 'F7AOWLOOT-U': 158, TM8DYUKbjsw: 541 } },
   3: { seconds: 12600, videos: { '98555798': 819, 'AU07-U96dfw': 162 } },
-  4: { seconds: 7200, videos: { NH7vatxj_t0: 960, yEwFZHVLsso: 326, mSt9lHz22xM: 71, NjHDUhWA6Lo: 682, ZrnWnmhGpQY: 1103, q_4q8lm0tCs: 374, p_vsrhxIlR8: 374, xtb61bDBc6o: 727 } },
+  4: { seconds: 7200, videos: { NH7vatxj_t0: 960, yEwFZHVLsso: 326, mSt9lHz22xM: 71, NjHDUhWA6Lo: 682, ZrnWnmhGpQY: 1103, q_4q8lm0tCs: 374, p_vsrhxIlR8: 374 } },
   5: { seconds: 12600, videos: { _s2x4dmQgjU: 825, GSPRVJsu3_A: 1183, 'qDDg-CbOTmw': 605, '9wnDBLifDB4': 420, Oaxs7EEIp4k: 178, '2cyQ5QTPOek': 622, addOUsx6760: 1498, H2J5MDUAMTk: 1231, oJ834e9wDQ4: 303, DfiBLI8lGM8: 113, Ka9UKa_xYNU: 3676 } },
   6: { seconds: 10800, videos: { e8mGpQ9W4_w: 999, j9DNL0DnKmU: 686, IGb20ZDbjkY: 2613 } },
   7: { seconds: 10800, videos: { '4rQwxVnYcLk': 1223, OxOwJC5wHyc: 821, '528dJg0lESM': 122, kjCsEVjRrlg: 1655, eFTnBiAvxxg: 295, Ok2p6cUe_sM: 320, '1u6c7YMgkB8': 357, GN3OBFAVHt4: 149, dIreslbUgwY: 881 } },
-  8: { seconds: 9000, videos: { '1OJUEmUAPmc': 677, CHTJ8i55HUk: 1596, X5r4upNwIGk: 1169 } },
+  8: { seconds: 9000, videos: { '1OJUEmUAPmc': 677, CHTJ8i55HUk: 1596, X5r4upNwIGk: 1169, Veayb1NucTA: 30 } },
   9: { seconds: 7200, videos: { iX8j7h7bJF4: 866, wal2KP1bbIY: 561, is77KiZ16_o: 712 } },
   10: { seconds: 12600, videos: { hQiYjxSC9bI: 1939 } },
   11: { seconds: 7200, videos: { b7mhJ8viccI: 129 } },
-  12: { seconds: 10800, videos: { '4MjKwOI2LrE': 357, gbaGN7JQoO4: 900, WTKCluA6lgE: 4077, zaliBZlRsaE: 209, ZHVAmbOBkrk: 379, G2Hs51QDszc: 188, v26fTGBEi9E: 1402, Km8XxRCuCho: 202, EQ1OPz1p0U4: 332 } },
+  12: { seconds: 10800, videos: { '4MjKwOI2LrE': 357, gbaGN7JQoO4: 900, WTKCluA6lgE: 4077, zaliBZlRsaE: 209, ZHVAmbOBkrk: 379, G2Hs51QDszc: 188, Km8XxRCuCho: 202, EQ1OPz1p0U4: 332 } },
   13: { seconds: 1800, videos: {} }
 };
 

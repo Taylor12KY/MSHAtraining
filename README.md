@@ -23,7 +23,10 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Randomized quiz presentation with recent attempt history
 - Missed-topic remediation with a focused knowledge check before a full quiz retake
 - Current fall-protection sequence with the 2026 OSHA personal fall-arrest webinar, NIOSH prevention guidance, MSHA incident review, and instructor equipment verification
-- MSA ALTAIR 4X mine-gas lesson with required bump-test video, current manufacturer/MSHA references, and instructor hands-on verification
+- NIOSH equipment blind-area diagrams with explicit actual-machine and positive-communication safeguards
+- Dust-safe cleanup, current DPM corrective-action guidance, 3M valved N95 and 6200/07025 fit/use instruction, and NIOSH hearing-protector fitting practice
+- MSHA/NIOSH-based safe-work-procedure and job-task-analysis exercise for assigned tasks
+- Expanded mine-gas recognition, exposure/action references, likely accumulation areas, sensory warnings, stop–warn–withdraw–report response, and a supervisor-operated MSA ALTAIR 4X orientation
 - Current MSHA silica and NIOSH mining heat-stress learning material
 - Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
