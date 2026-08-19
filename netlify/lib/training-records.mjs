@@ -14,7 +14,7 @@ export const SIGNOFF_KEYS = [
 export const MODULE_REQUIREMENTS = {
   1: { seconds: 5400, videos: {} },
   2: { seconds: 7200, videos: { VEOVVx3rDyI: 528, 'QGkT8Ahh1-E': 2409, eEj1JOVu_eY: 850, SN4Sfuhvs2Y: 150, WrnHZK9GhlM: 540, 'F7AOWLOOT-U': 158, TM8DYUKbjsw: 541 } },
-  3: { seconds: 12600, videos: { 'Z33qMr0CobM': 87 } },
+  3: { seconds: 12600, videos: { 'Z33qMr0CobM': 87, tAE5lPOPm8w: 1749 } },
   4: { seconds: 7200, videos: { NH7vatxj_t0: 960, yEwFZHVLsso: 326, mSt9lHz22xM: 71, NjHDUhWA6Lo: 682, ZrnWnmhGpQY: 1103, q_4q8lm0tCs: 374, p_vsrhxIlR8: 374 } },
   5: { seconds: 12600, videos: { _s2x4dmQgjU: 825, GSPRVJsu3_A: 1183, 'qDDg-CbOTmw': 605, '9wnDBLifDB4': 420, Oaxs7EEIp4k: 178, '2cyQ5QTPOek': 622, addOUsx6760: 1498, H2J5MDUAMTk: 1231, oJ834e9wDQ4: 303, DfiBLI8lGM8: 113, Ka9UKa_xYNU: 3676 } },
   6: { seconds: 10800, videos: { e8mGpQ9W4_w: 999, j9DNL0DnKmU: 686, IGb20ZDbjkY: 2613 } },

@@ -161,7 +161,7 @@ const MODULES_PART_1 = [
         </ul>
         <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace instructor-led donning practice with the approved MSA W65 training unit and the procedures in the current mine training plan.</div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the full W65 presentation, two supporting self-rescuer videos, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Video 1 – Full W65 Demonstration by Fred Raubach · 13:39</p>
         <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This is the complete presentation selected for the course. Vimeo's owner currently permits playback on Vimeo but blocks playback inside this training site.</p>
@@ -188,7 +188,7 @@ const MODULES_PART_1 = [
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, the official MSA visual review, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, both supporting self-rescuer videos, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>

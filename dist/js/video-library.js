@@ -24,6 +24,14 @@ const REQUIRED_VIDEOS = [
     description: "Official visual demonstration of the MSA W65; the instructor narrates the Spanish-language video in English."
   },
   {
+    id: "tAE5lPOPm8w",
+    moduleId: 3,
+    title: "SELF RESCUER",
+    author: "Frank Arrowsmith",
+    durationSeconds: 1749,
+    description: "Extended self-rescuer lesson supporting inspection, donning, limitations, and immediate escape."
+  },
+  {
     id: "NH7vatxj_t0",
     moduleId: 4,
     title: "Powered Haulage: Be Alert, Be Ready!",
@@ -491,7 +499,7 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["Z33qMr0CobM"],
+  3: ["Z33qMr0CobM", "tAE5lPOPm8w"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -510,6 +518,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "QGkT8Ahh1-E": "Next, move from the agency's role to the specific rights and responsibilities miners exercise at work.",
   "eEj1JOVu_eY": "Use this second presentation to consolidate the protected activities, reporting options, and responsibilities just introduced.",
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
+  "tAE5lPOPm8w": "Now extend the short visual review into a fuller discussion of self-rescuer readiness, correct donning, limitations, and immediate escape actions.",
   "q_4q8lm0tCs": "Build on the broad powered-haulage hazards by identifying specific prevention practices and technologies.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
   "mSt9lHz22xM": "Apply those ideas to a short underground field example involving traffic flow, clearances, and a dumping area.",
@@ -572,6 +581,10 @@ const VIDEO_TRAINING_GUIDANCE = {
   "Z33qMr0CobM": {
     focus: "After the full Fred Raubach presentation, follow this shorter visual W65 opening and donning review while the instructor narrates each step in English.",
     scope: "This official MSA Latin America video has Spanish narration and no captions. It supplements—not replaces—the full 13:39 instructor-opened presentation, current MSA instructions, mine plan, and hands-on practice with the approved W65 trainer."
+  },
+  "tAE5lPOPm8w": {
+    focus: "Identify the pre-use condition checks, correct opening and donning sequence, breathing limitations, and the need to begin immediate escape toward known fresh air.",
+    scope: "This 2014 general self-rescuer presentation provides supporting instruction. Where its terminology, device examples, or techniques differ, the current MSA W65 manufacturer instructions, mine emergency plan, instructor direction, and hands-on practice with the approved W65 trainer control."
   },
   "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
   "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },

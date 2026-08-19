@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-video-fix-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-video-add-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-video-add-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -264,7 +264,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 55 active videos are unique and retired submissions are documented', () => {
+test('all 56 active videos are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -273,8 +273,8 @@ test('all 55 active videos are unique and retired submissions are documented', (
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 55);
-  assert.equal(new Set(ids).size, 55);
+  assert.equal(context.videos.length, 56);
+  assert.equal(new Set(ids).size, 56);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 15);
@@ -432,6 +432,8 @@ test('training content is W65-specific and contains no SCSR material', () => {
   assert.match(modulesPartOne, /Full W65 Demonstration by Fred Raubach · 13:39/);
   assert.match(modulesPartOne, /https:\/\/vimeo\.com\/98555798/);
   assert.match(modulesPartOne, /Video 2 – Official MSA W65 Visual Review · 1:27/);
+  assert.match(videoLibrary, /tAE5lPOPm8w/);
+  assert.match(videoLibrary, /current MSA W65 manufacturer instructions/);
 });
 
 test('managed video notices accurately describe verified in-player completion', () => {
