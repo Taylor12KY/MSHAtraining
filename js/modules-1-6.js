@@ -163,12 +163,12 @@ const MODULES_PART_1 = [
       </div>
       <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 1 – MSA W65 Demo (Fred Raubach) · 13:39</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Watch the full demonstration. Do not skip.</p>
+        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Official MSA W65 Visual Demonstration · 1:27</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">The narration is Spanish and captions are unavailable. The instructor will narrate each inspection and donning step in English while trainees follow the visual sequence.</p>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe id="vimeo-w65" style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://player.vimeo.com/video/98555798?title=0&amp;byline=0&amp;portrait=0" title="W65 Demo Fred Raubach" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-muted);">If the player shows “content blocked,” open this HTML in Safari/Chrome from your Files app (not a chat preview), or put the file on your company website/intranet. If blocked: <a href="https://vimeo.com/98555798" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open W65 video on Vimeo ↗</a></p>
+        <div class="key-box"><strong>Instructor cue:</strong> identify the sealed case and release, removal from the container, mouthpiece placement and seal, nose clip, head harness, and immediate escape toward known fresh air. Reinforce that the W65 does not supply oxygen.</div>
       </div>
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Video 2 – Short W65 Donning Animation · ~2:42</p>
@@ -176,11 +176,10 @@ const MODULES_PART_1 = [
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;">
           <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AU07-U96dfw?rel=0&modestbranding=1&playsinline=1" title="W65 Donning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=AU07-U96dfw" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Watch both W65 videos, complete instructor-led hands-on practice, and review the site emergency plan. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Watch both W65 videos with the instructor, complete instructor-led hands-on practice using the approved trainer, and review the site emergency plan. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
