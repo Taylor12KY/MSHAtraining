@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=terminology-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=terminology-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-video-fix-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-video-fix-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -408,14 +408,17 @@ test('Sunshine Mine guidance explains its regulatory legacy', () => {
   assert.match(sunshine, /ventilation/i);
 });
 
-test('all 10 retained pre-existing embeds use the tracked YouTube/Vimeo player system', () => {
+test('all 10 retained pre-existing embeds use the tracked managed player system', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const preExisting = context.videos.filter(video => context.preExistingIds.includes(video.id));
   assert.equal(context.preExistingIds.length, 10);
   assert.equal(preExisting.length, 10);
-  assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 1);
+  assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 0);
+  assert.ok(preExisting.every(video => video.provider !== 'vimeo'));
+  assert.doesNotMatch(videoLibrary, /98555798/);
+  assert.match(videoLibrary, /Z33qMr0CobM/);
   assert.match(app, /function loadVimeoApi/);
   assert.match(app, /player\.setCurrentTime\(record\.watchedSeconds\)/);
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);

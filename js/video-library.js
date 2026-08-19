@@ -16,13 +16,12 @@ const REQUIRED_VIDEOS = [
     description: "Overview of miners' rights and responsibilities under the Mine Act."
   },
   {
-    id: "98555798",
-    provider: "vimeo",
+    id: "Z33qMr0CobM",
     moduleId: 3,
-    title: "W65 Demo by Fred Raubach",
-    author: "SURF",
-    durationSeconds: 819,
-    description: "Demonstration of the MSA W65 filter self-rescuer."
+    title: "Official MSA W65 Visual Demonstration",
+    author: "MSA Latin America",
+    durationSeconds: 87,
+    description: "Official visual demonstration of the MSA W65; the instructor narrates the Spanish-language video in English."
   },
   {
     id: "AU07-U96dfw",
@@ -492,14 +491,14 @@ const CURRENT_RESOURCE_VIDEO_IDS = new Set([
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
-  "QGkT8Ahh1-E", "98555798", "AU07-U96dfw", "NH7vatxj_t0",
+  "QGkT8Ahh1-E", "Z33qMr0CobM", "AU07-U96dfw", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
   "wal2KP1bbIY"
 ]);
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["98555798", "AU07-U96dfw"],
+  3: ["Z33qMr0CobM", "AU07-U96dfw"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -578,7 +577,10 @@ const MODULE_VIDEO_SCOPE = {
 const VIDEO_TRAINING_GUIDANCE = {
   "VEOVVx3rDyI": { focus: "Identify MSHA's enforcement, education, training, and technical-support roles and how they affect daily mine safety." },
   "QGkT8Ahh1-E": { focus: "Listen for miners' protected rights, personal responsibilities, hazard-reporting options, and protections against retaliation." },
-  "98555798": { focus: "Watch the complete W65 inspection and donning sequence, including the mouthpiece, nose clip, head harness, and immediate movement toward fresh air." },
+  "Z33qMr0CobM": {
+    focus: "Follow the visual W65 opening and donning sequence while the instructor narrates each step in English, including the mouthpiece, nose clip, head harness, and immediate movement toward fresh air.",
+    scope: "This official MSA Latin America video has Spanish narration and no captions. It is a visual aid only; the instructor's English explanation, current MSA instructions, mine plan, and hands-on practice with the approved W65 trainer control."
+  },
   "AU07-U96dfw": { focus: "Use the animation to reinforce the order of W65 donning steps before practicing them with the approved trainer." },
   "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
   "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },
