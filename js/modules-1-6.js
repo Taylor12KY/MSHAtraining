@@ -117,7 +117,7 @@ const MODULES_PART_1 = [
       </div>
     `,
     questions: [
-      { q: "Under the Mine Act, a miner generally has how many days to file a discrimination complaint under § 105(c)?", options: ["30 days", "60 days", "90 days", "1 year"], answer: 1 },
+      { q: "A miner reasonably believes a condition may violate a safety standard or create an imminent danger. Which action is consistent with the miner's rights?", options: ["Report the concern and request an MSHA inspection using the available protected channels", "Wait for an injury before saying anything", "Alter the condition without authorization", "Post the concern publicly instead of notifying anyone responsible for safety"], answer: 0 },
       { q: "Who has both the authority and the responsibility to ensure work complies with mandatory standards?", options: ["Only the mine superintendent", "Supervisors (including those who direct work)", "Only MSHA inspectors", "Only the safety manager"], answer: 1 },
       { q: "True or False: A miner can be discriminated against for making a good-faith safety complaint.", options: ["True", "False"], answer: 1 },
       { q: "What should you do if you discover a condition that could cause serious injury?", options: ["Wait until the end of shift to report it", "Assume a supervisor already knows", "Report it immediately according to company procedures", "Only report it if someone is already injured"], answer: 2 },

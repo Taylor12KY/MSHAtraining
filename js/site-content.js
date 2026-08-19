@@ -54,6 +54,11 @@ const COMMON_MINING_TERMS = [
     safety: "Know which heading and level you are in and how to reach both designated escapeways."
   },
   {
+    term: "Room", context: "Underground layout",
+    definition: "A mined opening between pillars in a room-and-pillar mine. Rooms and connecting crosscuts form the underground layout.",
+    safety: "Use the mine's location names, level markings, and map; similar-looking rooms and intersections can make orientation difficult."
+  },
+  {
     term: "Header / top heading", context: "Underground stone",
     definition: "At these operations, the upper portion of a tall opening that is mined first; lower rock may be removed later by benching.",
     safety: "“Header” can be used differently at other mines. Confirm the local mining sequence and limits with the instructor."
@@ -94,6 +99,16 @@ const COMMON_MINING_TERMS = [
     safety: "Do not stand beneath or beside it. Barricade or guard as required, withdraw, and notify the supervisor."
   },
   {
+    term: "Unsupported ground", context: "Ground control",
+    definition: "Ground that has not been supported or otherwise made safe under the mine's ground-control method and examination.",
+    safety: "Never travel or work under unsupported or unexamined ground. Obey barricades and the supervisor's limits."
+  },
+  {
+    term: "Ground control", context: "Ground stability",
+    definition: "The mine's methods for designing, examining, supporting, scaling, barricading, and otherwise controlling the back, ribs, faces, pillars, highwalls, and slopes.",
+    safety: "The current site plan and competent examination control; a glossary does not qualify a trainee to examine or correct ground."
+  },
+  {
     term: "Scaling", context: "Ground control",
     definition: "The controlled removal of loose rock from the back, ribs, face, pillar, or highwall using the approved hand tool or mechanical equipment.",
     safety: "Scaling is performed only by trained and authorized people from a protected position under the mine's procedure."
@@ -109,6 +124,16 @@ const COMMON_MINING_TERMS = [
     safety: "Trainees do not handle explosives or make blast/re-entry decisions. Follow signals, boundaries, withdrawal, and the authorized all-clear."
   },
   {
+    term: "Misfire", context: "Blasting",
+    definition: "A complete or partial failure of an explosive charge to fire as planned.",
+    safety: "Do not approach, touch, dig, drill, or move suspected misfired material. Withdraw, guard the area as directed, and notify the authorized blaster or supervisor immediately."
+  },
+  {
+    term: "Blast area / exclusion zone", context: "Blasting",
+    definition: "The area from which people and equipment must be withdrawn or protected for a blast, as established by the authorized blasting procedure.",
+    safety: "Know the site signals and boundaries. Stay out until the authorized all-clear; never assume elapsed time makes the area safe."
+  },
+  {
     term: "Highwall / toe", context: "Surface quarry",
     definition: "A highwall is the exposed rock wall of a surface excavation. The toe is the bottom where that wall meets the bench or pit floor.",
     safety: "Stay outside the required setback and never work below loose material or an unexamined wall."
@@ -122,6 +147,36 @@ const COMMON_MINING_TERMS = [
     term: "Stockpile", context: "Material handling",
     definition: "A pile of raw, crushed, screened, or finished stone stored before further processing or loading.",
     safety: "Keep off piles and away from draw points, feeders, unstable faces, undercut material, equipment blind areas, and edge drop-offs."
+  },
+  {
+    term: "Feeder / hopper / chute", context: "Material handling",
+    definition: "Equipment that receives, stores briefly, meters, or directs rock into a crusher, conveyor, truck, or another process.",
+    safety: "These areas can expose workers to engulfment, falling material, moving parts, and stored energy. Never enter or clear a blockage without authorization and the complete isolation procedure."
+  },
+  {
+    term: "Surge pile / surge bin", context: "Material handling",
+    definition: "Temporary material storage that keeps a crusher or conveyor process supplied while upstream and downstream flow changes.",
+    safety: "Material can bridge and collapse or feed through a hidden draw point. Stay off and out unless an approved, controlled procedure specifically authorizes the work."
+  },
+  {
+    term: "Grizzly", context: "Material sizing",
+    definition: "A set of heavy bars or a grid that lets smaller rock pass while holding back oversized material before crushing or handling.",
+    safety: "Treat it as an opening and a material-flow hazard. Do not walk on it or clear lodged rock without the approved access, guarding, and energy-control procedure."
+  },
+  {
+    term: "Ventilation control / stopping", context: "Mine air",
+    definition: "A wall, curtain, door, regulator, or other control used to direct and separate mine airflow. A stopping is a barrier built across an opening to control air movement.",
+    safety: "Do not damage, move, prop open, or alter a ventilation control unless authorized under the current ventilation procedure. Report changes promptly."
+  },
+  {
+    term: "Intake air / return air", context: "Mine air",
+    definition: "Intake air travels toward working areas; return air has passed through mine areas and travels back toward discharge from the mine.",
+    safety: "Air routes can change with doors, fans, stoppings, equipment, or damage. Follow the current plan and never use airflow alone to declare an atmosphere safe."
+  },
+  {
+    term: "Escapeway", context: "Emergency travel",
+    definition: "A designated route miners use to leave the underground mine during an emergency.",
+    safety: "Know the primary and alternate route from the actual work location, keep routes unobstructed, and follow current markers, maps, alarms, and instructor direction."
   },
   {
     term: "Travelway / haul road", context: "Traffic",
@@ -159,7 +214,7 @@ function miningTerminologyPanel() {
           <span class="resource-badge resource-badge-required">New-miner foundation</span>
           <h3 id="mining-terminology-heading">Mining Language: Plain-English Quick Reference</h3>
         </div>
-        <span class="document-meta">19 common terms</span>
+        <span class="document-meta">30 common terms</span>
       </div>
       <p>Mining words can describe a location, a work step, and a hazard at the same time. Learn the terms below so instructions such as “stay clear of the face,” “check the back and ribs,” or “muck the round after the all-clear” are understood correctly.</p>
       <details class="terminology-details" open>
