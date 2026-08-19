@@ -366,7 +366,7 @@ const SIGNOFF_LABELS = {
   plansProcedures: 'Current plans, escapeways, emergency procedures, and required demonstrations',
   w65Practice: 'Instructor-led MSA W65 instruction and hands-on practice',
   fallProtectionPractice: 'Harness, lanyard, and SRL inspection, fit, compatibility, tie-off, clearance, and rescue demonstration',
-  gasMonitorPractice: 'Instructor-led MSA ALTAIR 4X startup, bump-test, alarm-response, and failed-test practice',
+  gasMonitorPractice: 'Supervisor-led ALTAIR 4X orientation; trainee demonstrates alarm recognition, detector limits, and stop–warn–withdraw–report response',
   taskTraining: 'Applicable new-task training and demonstrated safe procedures',
   form5000_23: 'MSHA Form 5000-23 or approved alternate completed'
 };

@@ -98,23 +98,31 @@ const QUIZ_REVIEW_SECTIONS = {
   4: {
     sections: [
       { topic: 'Check-in and check-out systems', focus: 'Review individual check-in responsibility and how the system supports emergency accountability.' },
-      { topic: 'Transportation controls', focus: 'Review approved conveyances, designated travelways, blind spots, seat belts, safe approach, and positive communication.' },
+      { topic: 'Equipment blind areas', focus: 'Review the three NIOSH diagram heights, why generic diagrams do not map the exact site machine, equipment exclusion zones, and positive two-way communication.' },
+      { topic: 'Transportation controls', focus: 'Review approved conveyances, designated travelways, seat belts, traffic controls, safe approach, and positive communication.' },
       { topic: 'Communications and warning signals', focus: 'Review radio discipline, traffic signs, warning signals, emergency messages, and location-specific communication procedures.' }
     ],
     rules: [
       { pattern: /check.?in|check.?out|tag in|accountability|who is underground/i, sectionIndex: 0 },
-      { pattern: /radio|communication|warning signal|directional sign|emergency message/i, sectionIndex: 2 }
+      { pattern: /blind.?area|blind spot|NIOSH|992G|operator sees/i, sectionIndex: 1 },
+      { pattern: /radio|communication|warning signal|directional sign|emergency message/i, sectionIndex: 3 }
     ],
-    defaultSectionIndex: 1
+    defaultSectionIndex: 2
   },
   5: {
     sections: [
       { topic: 'Work environment overview', focus: 'Review underground and surface work areas, equipment interactions, processes, and changing mine conditions.' },
       { topic: 'Core hazard categories', focus: 'Review workplace examinations, mobile equipment, ground, conveyors, stored energy, respiratory hazards, and prompt correction.' },
-      { topic: 'Personal practices', focus: 'Review situational awareness, required PPE, suspended-load exclusion, housekeeping, authorization, and asking before acting.' }
+      { topic: 'PPE and fall-protection systems', focus: 'Review the control hierarchy, complete fall-arrest system, inspection, compatibility, clearance, anchorage, and rescue planning.' },
+      { topic: 'Mining fall case study', focus: 'Review the fatal fall, opening and access controls, anchorage, rescue planning, and instructor hands-on verification.' },
+      { topic: 'Current NIOSH practice tools', focus: 'Use the virtual stone-operation hazard challenge and current slip-prevention guidance to practice active hazard recognition.' },
+      { topic: 'Personal practices', focus: 'Review situational awareness, suspended-load exclusion, safe walking, housekeeping, authorization, and asking before acting.' }
     ],
     rules: [
-      { pattern: /ppe|hard hat|suspended|personal practice|housekeeping|ask before|authorized/i, sectionIndex: 2 },
+      { pattern: /harness|lanyard|SRL|fall.?arrest|anchorage|rescue plan|PPE/i, sectionIndex: 2 },
+      { pattern: /fatal fall|opening|21 feet|case study/i, sectionIndex: 3 },
+      { pattern: /slip|incline|grating|three points|hazard challenge/i, sectionIndex: 4 },
+      { pattern: /suspended|personal practice|housekeeping|ask before|authorized/i, sectionIndex: 5 },
       { pattern: /workplace examination|stored energy|conveyor|blind spot|silica|diesel|hazard recognition|hazard category|loader|haul truck/i, sectionIndex: 1 }
     ]
   },
@@ -139,20 +147,48 @@ const QUIZ_REVIEW_SECTIONS = {
   },
   8: {
     sections: [
-      { topic: 'Health measurements and controls', focus: 'Review dust, silica, noise, sampling, engineering and administrative controls, PPE, and long-term health effects.' },
-      { topic: 'Hazard communication', focus: 'Review labels, Safety Data Sheets, chemical hazards, protective measures, emergency information, and the written HazCom program.' }
+      { topic: 'Health measurements and controls', focus: 'Review sampling integrity, the hierarchy of controls, and why PPE does not make an uncontrolled source acceptable.' },
+      { topic: 'Hazard communication', focus: 'Review labels, Safety Data Sheets, chemical hazards, protective measures, emergency information, and the written HazCom program.' },
+      { topic: 'Dust-safe cleanup and N95 use', focus: 'Review wet and properly filtered cleanup, prohibited dust-raising practices, valved N95 limitations, fit testing, and the seal check required at each donning.' },
+      { topic: 'Elevated dust or DPM response', focus: 'Review source investigation, feasible controls, corrective verification, 6200/07025 limitations, program-selected filters, medical evaluation, fit testing, and seal checks.' },
+      { topic: 'Hearing protection that fits', focus: 'Review the five Cs, Roll–Pull–Hold, correct and consistent use, and individual hearing-protector fit testing.' },
+      { topic: 'Engineering dust controls', focus: 'Review the NIOSH conveyor-control case and how enclosure, filtration, negative pressure, and water control dust at the source.' }
     ],
-    rules: [{ pattern: /sds|safety data|hazcom|chemical|label|written hazard/i, sectionIndex: 1 }]
+    rules: [
+      { pattern: /sds|safety data|hazcom|chemical|label|written hazard/i, sectionIndex: 1 },
+      { pattern: /cleanup|sweep|vacuum|N95|Cool Flow/i, sectionIndex: 2 },
+      { pattern: /DPM|6200|07025|filter|facepiece|elevated dust/i, sectionIndex: 3 },
+      { pattern: /hearing|earplug|Roll|five Cs|attenuation/i, sectionIndex: 4 },
+      { pattern: /conveyor dust|Dustinator|93%/i, sectionIndex: 5 }
+    ]
   },
   9: { sections: [{ topic: 'Electrical hazards and energy control', focus: 'Review qualification, damaged equipment, shock and arc-flash hazards, lockout/tagout/tryout, stored energy, and verification.' }] },
   10: { sections: [{ topic: 'First aid in the mine environment', focus: 'Review scene safety, activating help, bleeding control, AEDs and supplies, limits of training, and the bridge to professional care.' }] },
-  11: { sections: [{ topic: 'Mine gases and atmospheric controls', focus: 'Review oxygen deficiency, carbon monoxide, carbon dioxide, detection, ventilation, testing, authorization, and why smell is unreliable.' }] },
+  11: {
+    sections: [
+      { topic: 'Trainee atmospheric-hazard response', focus: 'Review the supervisor monitor role and the stop, warn, withdraw, and report response. Do not investigate, create an ignition source, attempt rescue entry, or wait for an alarm.' },
+      { topic: 'Mine gases and reference values', focus: 'Review oxygen, CO, CO₂, H₂S, NO₂, SO₂, methane, and hydrogen: hazards, sources, reference values, sensory limitations, and gases the typical four-gas detector does not measure.' },
+      { topic: 'Likely gas locations and warning signs', focus: 'Review ventilation changes, post-blast fumes, combustion, low and enclosed spaces, high roof spaces, returns, symptoms, and why airflow matters more than density alone.' },
+      { topic: "Supervisor's ALTAIR 4X", focus: 'Review the four typical channels, instrument limitations, bump-test purpose, alarm recognition, and the fact that trainees do not use the detector to clear or re-enter an area.' },
+      { topic: 'Atmospheric controls and verification', focus: 'Review restriction and withdrawal, correct testing, source and ventilation controls, authorized retesting and release, and prompt medical evaluation after suspected exposure.' }
+    ],
+    rules: [
+      { pattern: /50 ppm|exposure|limit|oxygen|19\.5|carbon|CO₂|H₂S|NO₂|SO₂|methane|hydrogen|gas does not|not measured|four-gas/i, sectionIndex: 1 },
+      { pattern: /where|low|high|gather|accumulate|blast|fume|delayed|smell|odor|density|airflow|turbulence/i, sectionIndex: 2 },
+      { pattern: /ALTAIR|supervisor|monitor|bump|channel|LEL|sensor/i, sectionIndex: 3 },
+      { pattern: /ventilation|engineering|control|re-entry|retest|medical/i, sectionIndex: 4 }
+    ]
+  },
   12: {
     sections: [
       { topic: 'Accident prevention', focus: 'Review workplace examinations, human factors, procedure compliance, speaking up, near misses, and prompt hazard correction.' },
-      { topic: 'Task-specific health and safety', focus: 'Review required task training, authorization, safe procedures, standards, chemical hazards, and protective measures before new work.' }
+      { topic: 'Task-specific health and safety', focus: 'Review required task training, authorization, safe procedures, standards, chemical hazards, and protective measures before new work.' },
+      { topic: 'Safe work procedure and JTA', focus: 'Review ordered task steps, hazards, controls, stop triggers, supervised practice, and the conveyor-cleanup example.' }
     ],
-    rules: [{ pattern: /task|assigned|training|authorized|new work/i, sectionIndex: 1 }]
+    rules: [
+      { pattern: /JTA|job task|ordered task|stop trigger|cleanup near|danger zone|through a guard/i, sectionIndex: 2 },
+      { pattern: /task|assigned|training|authorized|new work/i, sectionIndex: 1 }
+    ]
   },
   13: { sections: [{ topic: 'Final comprehensive review', focus: 'Return to the final review checklist and revisit every listed program topic before attempting the comprehensive quiz again.' }] }
 };
@@ -828,7 +864,7 @@ function configureRequiredVideoBox(box, iframe, video) {
   if (!box.querySelector('.video-fallback')) {
     box.insertAdjacentHTML(
       'beforeend',
-      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} â†—</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
+      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
     );
   }
   const button = box.querySelector('.video-play-toggle');
@@ -846,7 +882,7 @@ function renderRequiredVideos(moduleId) {
   section.className = 'required-video-section';
   section.innerHTML = `
     <h3>Required Module Videos</h3>
-    <p>Follow the listed sequence and complete all ${videos.length} assigned video${videos.length === 1 ? '' : 's'} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
+    <p>Follow the listed sequence and complete ${videos.length === 1 ? 'the assigned video' : `all ${videos.length} assigned videos`} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
   `;
 
   videos.forEach((video, index) => {
@@ -1852,6 +1888,8 @@ async function showCertificate() {
         <li>${signoffMark('mineTour')} Mine tour and observation of the mining method.</li>
         <li>${signoffMark('plansProcedures')} Current site-specific plans, escapeways, emergency procedures, and applicable demonstrations.</li>
         <li>${signoffMark('w65Practice')} MSA W65 instruction, demonstration, and hands-on practice required by the approved plan.</li>
+        <li>${signoffMark('fallProtectionPractice')} Harness, lanyard, and SRL inspection, fit, compatibility, tie-off, clearance, and rescue demonstration.</li>
+        <li>${signoffMark('gasMonitorPractice')} Supervisor-led MSA ALTAIR 4X orientation; trainee verifies alarm recognition, detector limits, and stop–warn–withdraw–report response.</li>
         <li>${signoffMark('taskTraining')} Applicable new-task training, supervised practice, and demonstrated safe procedures.</li>
         <li>${signoffMark('form5000_23')} MSHA Form 5000-23 or an approved alternate form completed.</li>
       </ul>

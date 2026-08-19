@@ -1,7 +1,10 @@
 [build]
-  command = "npm run build"
+  command = "pnpm run build"
   publish = "dist"
   functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/instructor/*"

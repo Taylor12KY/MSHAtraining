@@ -23,6 +23,7 @@ const instructorRecords = read('netlify/functions/instructor-records.mjs');
 const trainingRecords = read('netlify/lib/training-records.mjs');
 const packageJson = read('package.json');
 const netlifyConfig = read('netlify.toml');
+const pnpmWorkspace = read('pnpm-workspace.yaml');
 const recordLibrary = await import(pathToFileURL(path.join(root, 'netlify/lib/training-records.mjs')).href);
 
 test('JavaScript files parse', () => {
@@ -35,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=fall-gas-training-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=fall-gas-training-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/app\.js\?v=terminology-2"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=terminology-2"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -50,6 +51,13 @@ test('HTML loads external CSS, content, and app files in order', () => {
   assert.ok(html.indexOf('js/video-library.js') < html.indexOf('js/app.js'));
   assert.doesNotMatch(html, /<style>/i);
   assert.doesNotMatch(html, /<script>\s*[^<]/i);
+});
+
+test('Netlify build uses the repository package manager and bundles modern functions', () => {
+  assert.match(netlifyConfig, /command = "pnpm run build"/);
+  assert.match(netlifyConfig, /node_bundler = "esbuild"/);
+  assert.match(pnpmWorkspace, /nodeLinker: hoisted/);
+  assert.match(pnpmWorkspace, /allowBuilds:\s*\n\s*esbuild: true/);
 });
 
 test('branded learner experience keeps regulatory context and a clear next action', () => {
@@ -60,6 +68,38 @@ test('branded learner experience keeps regulatory context and a clear next actio
   assert.match(html, /id="btn-continue-training"/);
   assert.match(app, /function continueTraining\(\)/);
   assert.match(app, /div\.addEventListener\('keydown'/);
+});
+
+test('trial-ready resources include the official miners rights handout and three site aerial views', () => {
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-miners-rights-trifold.pdf')));
+  assert.match(modulesPartOne, /\/assets\/docs\/msha-miners-rights-trifold\.pdf/);
+  assert.match(modulesPartOne, /Miners' Rights and Responsibilities Trifold/);
+  assert.match(modulesPartOne, /Powered Haulage Stand-Down/);
+  assert.match(modulesPartTwo, /Current First-Aid References/);
+  assert.match(modulesPartTwo, /MSA ALTAIR 4X user instructions/);
+  assert.equal((siteContent.match(/\$\{siteAerialPanel\(/g) || []).length, 3);
+  assert.match(siteContent, /37\.9042434,-84\.2710647/);
+  assert.match(siteContent, /37\.5014605,-84\.1663879/);
+  assert.match(siteContent, /37\.6404113,-84\.6599655/);
+  assert.match(siteContent, /Orientation aid only/);
+});
+
+test('site orientations teach common mining terminology in plain language', () => {
+  const context = {};
+  new vm.Script(`${siteContent}\nthis.commonTerms = COMMON_MINING_TERMS; this.commonQuestions = COMMON_TERMINOLOGY_QUESTIONS;`)
+    .runInNewContext(context);
+  assert.equal(context.commonTerms.length, 30);
+  assert.equal(context.commonQuestions.length, 2);
+  for (const term of ['Back (or roof)', 'Face', 'Header / top heading', 'Bench / benching', 'Scaling', 'Muck / mucking', 'Highwall / toe', 'Misfire', 'Ventilation control / stopping', 'Escapeway']) {
+    assert.ok(context.commonTerms.some(item => item.term === term), `missing terminology card for ${term}`);
+  }
+  assert.equal((siteContent.match(/\$\{miningTerminologyPanel\(\)\}/g) || []).length, 3);
+  assert.match(siteContent, /Knowing a definition does not authorize scaling, blasting, equipment operation, or another task/);
+});
+
+test('module 2 quiz emphasizes practical miner rights instead of deadline recall', () => {
+  assert.doesNotMatch(modulesPartOne, /generally has how many days to file a discrimination complaint/);
+  assert.match(modulesPartOne, /request an MSHA inspection using the available protected channels/);
 });
 
 test('program contains modules 1-13 totaling exactly 32 hours', () => {
@@ -107,6 +147,9 @@ test('instructor route and server endpoint both require the instructor role', ()
 
 test('authenticated learner progress is server-owned, validated, and durably stored', () => {
   assert.match(packageJson, /"@netlify\/blobs": "10\.7\.12"/);
+  assert.match(packageJson, /"@netlify\/identity": "1\.2\.0"/);
+  assert.match(netlifyConfig, /node_bundler = "esbuild"/);
+  assert.doesNotMatch(netlifyConfig, /external_node_modules/);
   assert.match(learnerProgress, /getUser/);
   assert.match(learnerProgress, /recordKey\(user\.id\)/);
   assert.doesNotMatch(learnerProgress, /payload\.(userId|learnerId)/);
@@ -221,7 +264,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 57 active videos are unique and retired submissions are documented', () => {
+test('all 56 active videos are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -230,18 +273,18 @@ test('all 57 active videos are unique and retired submissions are documented', (
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 57);
-  assert.equal(new Set(ids).size, 57);
+  assert.equal(context.videos.length, 56);
+  assert.equal(new Set(ids).size, 56);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 15);
   assert.equal(firstBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 10891);
   assert.equal(secondBatch.length, 16);
   assert.equal(secondBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 16276);
-  assert.equal(thirdBatch.length, 13);
-  assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 8284);
-  assert.equal(currentResources.length, 4);
-  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4221);
+  assert.equal(thirdBatch.length, 11);
+  assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 6155);
+  assert.equal(currentResources.length, 5);
+  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4251);
   assert.equal(context.thirdSubmittedIds.length, 17);
   assert.equal(ids.filter(id => id === 'X5r4upNwIGk').length, 1);
   assert.equal(ids.filter(id => id === 'yEwFZHVLsso').length, 1);
@@ -251,9 +294,44 @@ test('all 57 active videos are unique and retired submissions are documented', (
   assert.equal(context.contentDuplicates.ddermx9hJ7k, 'X5r4upNwIGk');
   assert.equal(ids.filter(id => id === 'MziZesbb32Q').length, 0);
   assert.equal(ids.filter(id => id === 'W4uQqiHnXUI').length, 0);
+  assert.equal(ids.filter(id => id === 'xtb61bDBc6o').length, 0);
+  assert.equal(ids.filter(id => id === 'v26fTGBEi9E').length, 0);
+  assert.equal(ids.filter(id => id === 'Veayb1NucTA').length, 1);
   assert.match(context.retiredIds.MziZesbb32Q, /Replaced/);
   assert.match(context.retiredIds.W4uQqiHnXUI, /Retired/);
-  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI']) assert.ok(ids.includes(id));
+  assert.match(context.retiredIds.xtb61bDBc6o, /Replaced/);
+  assert.match(context.retiredIds.v26fTGBEi9E, /Replaced/);
+  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'Veayb1NucTA']) assert.ok(ids.includes(id));
+});
+
+test('current respirator, cleanup, hearing, blind-area, and task-analysis lessons are present', () => {
+  assert.match(modulesPartOne, /NIOSH blind-area diagrams/);
+  assert.match(modulesPartOne, /not diagrams for the Allen Company Cat 980M\/988-class loaders/);
+  assert.match(modulesPartTwo, /3M N95 particulate respirator with a Cool Flow valve/);
+  assert.match(modulesPartTwo, /fit test for that exact make, model, style, and size/);
+  assert.match(modulesPartTwo, /user seal check every time/);
+  assert.match(modulesPartTwo, /3M 6200 \/ 07025 medium half facepiece/);
+  assert.match(modulesPartTwo, /facepiece without the correct filters provides no respiratory protection/);
+  assert.match(modulesPartTwo, /R- or P-series filter/);
+  assert.match(modulesPartTwo, /Avoid dry sweeping and compressed-air cleanup/);
+  assert.match(modulesPartTwo, /Roll–Pull–Hold/);
+  assert.match(modulesPartTwo, /Build the Safe Work Procedure Before the Work Starts/);
+  assert.match(modulesPartTwo, /This exercise is not task authorization/);
+});
+
+test('mine-gas training teaches trainee response, gas limits, and supervisor-only detector operation', () => {
+  assert.match(modulesPartTwo, /supervisors—not new-miner trainees—carry and operate the MSA ALTAIR 4X/);
+  assert.match(modulesPartTwo, /Stop → Warn → Withdraw → Report/);
+  assert.match(modulesPartTwo, /at least <strong>19\.5% oxygen/);
+  assert.match(modulesPartTwo, /50 ppm TWA/);
+  assert.match(modulesPartTwo, /5,000 ppm TWA/);
+  assert.match(modulesPartTwo, /10 ppm TWA/);
+  assert.match(modulesPartTwo, /MSHA ceiling reference: <strong>5 ppm/);
+  assert.match(modulesPartTwo, /methane.*5–15% by volume/is);
+  assert.match(modulesPartTwo, /typical four-gas unit does <strong>not<\/strong> detect every possible hazard/);
+  assert.match(modulesPartTwo, /do not become a second victim/);
+  assert.match(instructorAuth, /Supervisor-led ALTAIR 4X orientation/);
+  assert.match(videoLibrary, /Only designated supervisors operate and make decisions from the company detector/);
 });
 
 test('module videos use a complete instructional sequence with transitions', () => {
