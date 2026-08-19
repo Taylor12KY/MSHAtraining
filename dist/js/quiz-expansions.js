@@ -86,12 +86,12 @@ const MODULE_QUIZ_ADDITIONS = {
 const SITE_QUIZ_ADDITIONS = {
   "Boonesboro Quarry": [
     { q: "How many underground levels does Boonesboro Quarry have?", options: ["One", "Two", "Three", "Five"], answer: 2 },
-    { q: "The Boonesboro Liwell plant produces:", options: ["A clean screened product used in asphalt mix", "Coal slurry", "Electrical power", "Concrete blocks"], answer: 0 },
-    { q: "The Boonesboro mine shop is located on:", options: ["Level 1", "Level 2", "Level 3", "The KY 627 bridge"], answer: 0 }
+    COMMON_TERMINOLOGY_QUESTIONS[0],
+    { q: "What does “mucking” mean in mining?", options: ["Loading and removing broken rock after blasting or excavation", "Testing a respirator for proper fit", "Installing roof bolts before entering a heading", "Washing equipment at the end of a shift"], answer: 0 }
   ],
   "Clover Bottom Quarry": [
     { q: "The old and new Clover Bottom underground mines are each:", options: ["One-level room-and-pillar mines", "Three-level coal mines", "Surface-only pits", "Inactive offices"], answer: 0 },
-    { q: "Before entering underground at Clover Bottom, a miner must confirm:", options: ["Whether the assignment is in the old mine or new mine and use that mine's procedure", "Only the weather", "The asphalt price", "Which personal vehicle arrived first"], answer: 0 }
+    COMMON_TERMINOLOGY_QUESTIONS[1]
   ],
   "Dix River Stone": [
     { q: "How many underground levels does Dix River Stone have?", options: ["One", "Two", "Three", "Four"], answer: 1 },

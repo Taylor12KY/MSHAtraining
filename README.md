@@ -25,6 +25,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Current fall-protection sequence with the 2026 OSHA personal fall-arrest webinar, NIOSH prevention guidance, MSHA incident review, and instructor equipment verification
 - NIOSH equipment blind-area diagrams with explicit actual-machine and positive-communication safeguards
 - Satellite orientation panels for all three sites with Google Earth/full-map links and current-plan warnings
+- Plain-language Module 1 glossary covering 19 common underground, quarry, ground-control, blasting, and material-handling terms
 - Embedded official MSHA miners' rights trifold plus current DOL complaint and reporting resources
 - Recent official MSHA powered-haulage, blasting, confined-space, and equipment-fire alerts
 - Dust-safe cleanup, current DPM corrective-action guidance, 3M valved N95 and 6200/07025 fit/use instruction, and NIOSH hearing-protector fitting practice

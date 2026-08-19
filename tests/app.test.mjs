@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=trial-ready-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=trial-ready-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=terminology-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=terminology-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -82,6 +82,19 @@ test('trial-ready resources include the official miners rights handout and three
   assert.match(siteContent, /37\.5014605,-84\.1663879/);
   assert.match(siteContent, /37\.6404113,-84\.6599655/);
   assert.match(siteContent, /Orientation aid only/);
+});
+
+test('site orientations teach common mining terminology in plain language', () => {
+  const context = {};
+  new vm.Script(`${siteContent}\nthis.commonTerms = COMMON_MINING_TERMS; this.commonQuestions = COMMON_TERMINOLOGY_QUESTIONS;`)
+    .runInNewContext(context);
+  assert.equal(context.commonTerms.length, 19);
+  assert.equal(context.commonQuestions.length, 2);
+  for (const term of ['Back (or roof)', 'Face', 'Header / top heading', 'Bench / benching', 'Scaling', 'Muck / mucking', 'Highwall / toe']) {
+    assert.ok(context.commonTerms.some(item => item.term === term), `missing terminology card for ${term}`);
+  }
+  assert.equal((siteContent.match(/\$\{miningTerminologyPanel\(\)\}/g) || []).length, 3);
+  assert.match(siteContent, /Knowing a definition does not authorize scaling, blasting, equipment operation, or another task/);
 });
 
 test('program contains modules 1-13 totaling exactly 32 hours', () => {

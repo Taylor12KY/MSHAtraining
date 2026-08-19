@@ -32,6 +32,145 @@ function siteAerialPanel(siteName, address, coordinates, instructorFocus) {
   `;
 }
 
+const COMMON_MINING_TERMS = [
+  {
+    term: "Back (or roof)", context: "Underground",
+    definition: "The overhead surface of an underground opening. Hard-rock and stone miners often say “back” where others say “roof.”",
+    safety: "Look and listen for cracks, slabs, drummy rock, water, or other change; stay clear and report questionable ground."
+  },
+  {
+    term: "Rib", context: "Underground",
+    definition: "The sidewall of an underground opening or the side of a rock pillar.",
+    safety: "Rib rock can spall or fall even when the back appears sound. Keep separation and report loose material."
+  },
+  {
+    term: "Face", context: "Production",
+    definition: "The exposed working end of a heading or excavation where rock is drilled, blasted, or otherwise removed.",
+    safety: "A face can contain loose ground, misfires, fumes, and equipment hazards. Enter only after required examination and release."
+  },
+  {
+    term: "Heading (or entry)", context: "Underground",
+    definition: "An underground passage being driven through the rock. The advancing end of the heading is the face.",
+    safety: "Know which heading and level you are in and how to reach both designated escapeways."
+  },
+  {
+    term: "Header / top heading", context: "Underground stone",
+    definition: "At these operations, the upper portion of a tall opening that is mined first; lower rock may be removed later by benching.",
+    safety: "“Header” can be used differently at other mines. Confirm the local mining sequence and limits with the instructor."
+  },
+  {
+    term: "Bench / benching", context: "Surface + underground",
+    definition: "A bench is a horizontal step or working level. Underground benching removes the lower portion after a top heading; at a quarry it can mean a step cut into a highwall or pit.",
+    safety: "The word has two common local uses. Ask which bench and which elevation is being discussed before acting."
+  },
+  {
+    term: "Floor", context: "Underground",
+    definition: "The bottom surface of an underground opening. “Floor mining” means removing additional rock from that lower portion.",
+    safety: "Watch for uneven travel, water, drop-offs, edge conditions, and changing clearance after floor work."
+  },
+  {
+    term: "Pillar", context: "Ground control",
+    definition: "A block of rock intentionally left in place to support the back and maintain the room-and-pillar layout.",
+    safety: "Do not alter, scale extensively, or work around a damaged pillar except under the ground-control procedure and supervision."
+  },
+  {
+    term: "Crosscut", context: "Underground",
+    definition: "An opening driven between headings or entries to provide access, ventilation, or another travel route.",
+    safety: "Intersections change sight distance, equipment traffic, airflow, and the span of exposed ground."
+  },
+  {
+    term: "Portal", context: "Underground access",
+    definition: "An entrance from the surface into an underground mine opening.",
+    safety: "Portal areas can combine changing ground, weather, water, lighting, and two-way equipment traffic."
+  },
+  {
+    term: "Brow", context: "Ground edge",
+    definition: "The upper edge of a face, opening, or highwall. Underground, miners may use it for the back edge at an opening; surface usage often means the top edge of a wall.",
+    safety: "Because local usage varies, point to the location and confirm what “brow” means before approaching or positioning equipment."
+  },
+  {
+    term: "Loose ground / spalling", context: "Ground control",
+    definition: "Rock that is cracked, detached, or no longer securely supported. Spalling is the breaking or flaking of slabs or fragments from the back, rib, face, pillar, or highwall.",
+    safety: "Do not stand beneath or beside it. Barricade or guard as required, withdraw, and notify the supervisor."
+  },
+  {
+    term: "Scaling", context: "Ground control",
+    definition: "The controlled removal of loose rock from the back, ribs, face, pillar, or highwall using the approved hand tool or mechanical equipment.",
+    safety: "Scaling is performed only by trained and authorized people from a protected position under the mine's procedure."
+  },
+  {
+    term: "Muck / mucking", context: "Production",
+    definition: "Muck is broken rock produced by a blast or excavation. Mucking is loading and removing that material from the work area.",
+    safety: "Fresh muck can hide unstable ground, voids, hot material, explosives-related hazards, and moving-equipment exposure."
+  },
+  {
+    term: "Round / shot", context: "Blasting",
+    definition: "A round is a planned group of blastholes fired as one blast. A “shot” may mean the blast itself; shot rock is the broken material it produces.",
+    safety: "Trainees do not handle explosives or make blast/re-entry decisions. Follow signals, boundaries, withdrawal, and the authorized all-clear."
+  },
+  {
+    term: "Highwall / toe", context: "Surface quarry",
+    definition: "A highwall is the exposed rock wall of a surface excavation. The toe is the bottom where that wall meets the bench or pit floor.",
+    safety: "Stay outside the required setback and never work below loose material or an unexamined wall."
+  },
+  {
+    term: "Berm", context: "Surface + traffic",
+    definition: "A raised bank of material used to define an edge, separate traffic, or help restrain vehicles where the site plan requires it.",
+    safety: "Do not assume every pile of material is a compliant berm or a safe pedestrian barrier. Follow the traffic plan."
+  },
+  {
+    term: "Stockpile", context: "Material handling",
+    definition: "A pile of raw, crushed, screened, or finished stone stored before further processing or loading.",
+    safety: "Keep off piles and away from draw points, feeders, unstable faces, undercut material, equipment blind areas, and edge drop-offs."
+  },
+  {
+    term: "Travelway / haul road", context: "Traffic",
+    definition: "A designated route for people or vehicles. A haul road is designed and controlled for mobile equipment carrying material.",
+    safety: "Use the assigned route, obey right-of-way and speed rules, and obtain positive acknowledgment before approaching equipment."
+  }
+];
+
+const COMMON_TERMINOLOGY_QUESTIONS = [
+  {
+    q: "In an underground stone mine, the “back” is:",
+    options: ["The overhead surface or roof of the opening", "The road leading out of the mine", "The rear of a loader only", "The bottom of a stockpile"],
+    answer: 0
+  },
+  {
+    q: "What does “scaling” mean in mine ground control?",
+    options: ["Measuring production tonnage", "Controlled removal of loose rock by trained and authorized personnel using the approved procedure", "Driving on the highwall bench", "Loading finished stone into a customer truck"],
+    answer: 1
+  }
+];
+
+function miningTerminologyPanel() {
+  const termCards = COMMON_MINING_TERMS.map(item => `
+    <div class="terminology-card">
+      <dt>${item.term}<span>${item.context}</span></dt>
+      <dd>${item.definition}</dd>
+      <dd class="terminology-safety"><strong>Safety meaning:</strong> ${item.safety}</dd>
+    </div>
+  `).join("");
+
+  return `
+    <section class="content-section terminology-panel" aria-labelledby="mining-terminology-heading">
+      <div class="official-resource-heading">
+        <div>
+          <span class="resource-badge resource-badge-required">New-miner foundation</span>
+          <h3 id="mining-terminology-heading">Mining Language: Plain-English Quick Reference</h3>
+        </div>
+        <span class="document-meta">19 common terms</span>
+      </div>
+      <p>Mining words can describe a location, a work step, and a hazard at the same time. Learn the terms below so instructions such as “stay clear of the face,” “check the back and ribs,” or “muck the round after the all-clear” are understood correctly.</p>
+      <details class="terminology-details" open>
+        <summary>Review the terminology cards</summary>
+        <dl class="terminology-grid">${termCards}</dl>
+      </details>
+      <div class="key-box"><strong>Speak-up rule:</strong> terminology varies between mines and crews. If a word, location, boundary, signal, or instruction is unfamiliar, stop and ask the supervisor or instructor to point it out before you proceed. Knowing a definition does not authorize scaling, blasting, equipment operation, or another task.</div>
+    </section>
+  `;
+}
+
 const SITE_CONTENT = {
   "Boonesboro Quarry": {
     title: "Boonesboro Quarry – Site Orientation",
@@ -53,6 +192,7 @@ const SITE_CONTENT = {
         <p>Finished stone supports construction aggregate, aglime, and related products for Central Kentucky, and feeds Allen Company asphalt operations in the area.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib conditions / ground control; mobile equipment traffic underground and on surface (loaders, haul trucks); conveyor systems from Level 2 to surface; shop and Level 1 activity; Liwell plant; haul routes to BT3 under KY 627; silica dust; noise; diesel equipment; and emergency escape from multiple levels.</div>
       </div>
+      ${miningTerminologyPanel()}
       ${siteAerialPanel(
         "Boonesboro Quarry",
         "2591 Boonesboro Rd, Richmond, KY 40475",
@@ -116,6 +256,7 @@ const SITE_CONTENT = {
         <p>Stone from Clover Bottom supports construction aggregate, aglime, and Allen Company asphalt operations serving Jackson, Madison, Rockcastle, and surrounding counties.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib / ground control in both the old and new mines; knowing which mine (and Mine ID) you are working in; surface drill-and-blast; mobile equipment underground and on the shared surface; primary crusher in the pit and conveyors up the hill; secondary plant and stockpiles; Liwell plant in the old mine; silica dust; noise; diesel equipment; and emergency escape from either underground mine plus surface gathering points.</div>
       </div>
+      ${miningTerminologyPanel()}
       ${siteAerialPanel(
         "Clover Bottom Quarry",
         "12420 US 421 N, McKee, KY 40447",
@@ -175,6 +316,7 @@ const SITE_CONTENT = {
         <p><strong>Site leadership:</strong> Foreman / site supervisor is <strong>Gene Smith</strong>, who has been at the quarry since its origin in 2001. Site leadership includes <strong>licensed blasters</strong>.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib / ground control on Level 1 and Level 2; header mining faces; mobile equipment underground and on surface; primary crusher and surge silo; conveyors to secondary plant; surface and underground stockpiles; silica dust; noise; diesel equipment; and emergency escape from both levels plus surface gathering points.</div>
       </div>
+      ${miningTerminologyPanel()}
       ${siteAerialPanel(
         "Dix River Stone",
         "4963 Danville Road, Lancaster, KY 40444",

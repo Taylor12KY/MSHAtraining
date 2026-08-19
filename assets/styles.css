@@ -746,6 +746,37 @@
     padding: 11px 18px; border-top: 1px solid #ead8a9; background: #fff9e9;
     color: #70581b; font-size: 0.74rem; line-height: 1.45;
   }
+  .terminology-panel {
+    padding: clamp(18px, 3vw, 26px); border: 1px solid #d7d1c3; border-left: 5px solid #b88918;
+    border-radius: 13px; background: linear-gradient(145deg, #fffdf7, #fff); box-shadow: 0 5px 17px rgba(75, 62, 31, 0.06);
+  }
+  .terminology-panel > p { margin-bottom: 14px; }
+  .terminology-details { overflow: hidden; margin: 15px 0; border: 1px solid #d9d5ca; border-radius: 11px; background: #f8f7f3; }
+  .terminology-details summary {
+    padding: 13px 15px; color: #69520f; cursor: pointer; font-size: 0.82rem; font-weight: 850;
+  }
+  .terminology-details[open] summary { border-bottom: 1px solid #ded8ca; background: #f4efe2; }
+  .terminology-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+    margin: 0; padding: 13px; background: #f8f7f3;
+  }
+  .terminology-card {
+    min-width: 0; padding: 14px; border: 1px solid #d9d7cf; border-radius: 10px;
+    background: #fff; box-shadow: 0 2px 7px rgba(46, 48, 47, 0.035);
+  }
+  .terminology-card dt {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    margin-bottom: 7px; color: #2f3d44; font-size: 0.9rem; font-weight: 850;
+  }
+  .terminology-card dt span {
+    flex: 0 0 auto; padding: 3px 6px; border-radius: 999px; background: #e8eef0;
+    color: #48626c; font-size: 0.55rem; font-weight: 850; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .terminology-card dd { margin: 0; color: #465158; font-size: 0.78rem; line-height: 1.5; }
+  .terminology-card .terminology-safety {
+    margin-top: 9px; padding-top: 9px; border-top: 1px solid #ece8de; color: #725719; font-size: 0.74rem;
+  }
+  .terminology-safety strong { color: #604707; }
   .training-figure {
     max-width: 620px; margin: 16px auto; overflow: hidden; border: 1px solid #d7d8d3;
     border-radius: 12px; background: #fff; box-shadow: 0 6px 18px rgba(45, 50, 52, 0.07);
@@ -930,6 +961,8 @@
     .site-map-frame { height: 330px; }
     .site-map-actions { display: grid; grid-template-columns: 1fr; }
     .site-map-actions .btn { width: 100%; }
+    .terminology-grid { grid-template-columns: 1fr; padding: 9px; }
+    .terminology-card dt { flex-direction: column; gap: 5px; }
     .nav-btns .btn { flex: 1 1 180px; }
     .quiz-review-header, .quiz-review-actions { align-items: stretch; flex-direction: column; }
     .quiz-review-score { width: 100%; }
