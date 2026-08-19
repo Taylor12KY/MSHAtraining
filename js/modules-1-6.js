@@ -163,23 +163,32 @@ const MODULES_PART_1 = [
       </div>
       <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Official MSA W65 Visual Demonstration · 1:27</p>
+        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Full W65 Demonstration by Fred Raubach · 13:39</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This is the complete presentation selected for the course. Vimeo's owner currently permits playback on Vimeo but blocks playback inside this training site.</p>
+        <div class="official-resource-panel">
+          <div class="official-resource-heading">
+            <div>
+              <span class="resource-badge resource-badge-required">Required instructor presentation</span>
+              <h3>Open the full 13:39 presentation on Vimeo</h3>
+            </div>
+            <span class="document-meta">External playback</span>
+          </div>
+          <p>The instructor opens the presentation, shows it to the class in full, and verifies it as part of the W65 instruction and hands-on signoff. The course timer continues to document the full 3.5-hour module period.</p>
+          <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open full W65 demonstration ↗</a>
+        </div>
+        <div class="warning-box"><strong>Why it opens separately:</strong> this is a Vimeo-owner privacy restriction, not a browser error. External playback cannot be automatically verified by the app, so the instructor confirms it during the required W65 demonstration and hands-on verification.</div>
+      </div>
+      <div class="video-box">
+        <p style="font-weight:600;margin-bottom:8px;">Video 2 – Official MSA W65 Visual Review · 1:27</p>
         <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">The narration is Spanish and captions are unavailable. The instructor will narrate each inspection and donning step in English while trainees follow the visual sequence.</p>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual review" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
         <div class="key-box"><strong>Instructor cue:</strong> identify the sealed case and release, removal from the container, mouthpiece placement and seal, nose clip, head harness, and immediate escape toward known fresh air. Reinforce that the W65 does not supply oxygen.</div>
       </div>
       <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 2 – Short W65 Donning Animation · ~2:42</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Step-by-step donning review. Watch fully.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/AU07-U96dfw?rel=0&modestbranding=1&playsinline=1" title="W65 Donning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Watch both W65 videos with the instructor, complete instructor-led hands-on practice using the approved trainer, and review the site emergency plan. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, the official MSA visual review, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>

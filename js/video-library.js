@@ -24,14 +24,6 @@ const REQUIRED_VIDEOS = [
     description: "Official visual demonstration of the MSA W65; the instructor narrates the Spanish-language video in English."
   },
   {
-    id: "AU07-U96dfw",
-    moduleId: 3,
-    title: "Self Rescuer MSA W-65",
-    author: "David Menchaca",
-    durationSeconds: 162,
-    description: "Short step-by-step W65 donning animation."
-  },
-  {
     id: "NH7vatxj_t0",
     moduleId: 4,
     title: "Powered Haulage: Be Alert, Be Ready!",
@@ -480,6 +472,7 @@ const VIDEO_CONTENT_DUPLICATES = {
 };
 
 const RETIRED_VIDEO_IDS = {
+  "AU07-U96dfw": "Replaced by the official MSA W65 visual review; the full Fred Raubach demonstration remains an instructor-opened Vimeo presentation.",
   MziZesbb32Q: "Replaced by the newer CDC/NIOSH head-protection presentation.",
   W4uQqiHnXUI: "Retired to preserve instructional time for the current fall-protection sequence.",
   xtb61bDBc6o: "Replaced by NIOSH blind-area diagrams and an actual-equipment visibility lesson.",
@@ -491,14 +484,14 @@ const CURRENT_RESOURCE_VIDEO_IDS = new Set([
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
-  "QGkT8Ahh1-E", "Z33qMr0CobM", "AU07-U96dfw", "NH7vatxj_t0",
+  "QGkT8Ahh1-E", "Z33qMr0CobM", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
   "wal2KP1bbIY"
 ]);
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["Z33qMr0CobM", "AU07-U96dfw"],
+  3: ["Z33qMr0CobM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -517,7 +510,6 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "QGkT8Ahh1-E": "Next, move from the agency's role to the specific rights and responsibilities miners exercise at work.",
   "eEj1JOVu_eY": "Use this second presentation to consolidate the protected activities, reporting options, and responsibilities just introduced.",
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
-  "AU07-U96dfw": "After the complete W65 demonstration, use this animation to rehearse the donning sequence before hands-on practice.",
   "q_4q8lm0tCs": "Build on the broad powered-haulage hazards by identifying specific prevention practices and technologies.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
   "mSt9lHz22xM": "Apply those ideas to a short underground field example involving traffic flow, clearances, and a dumping area.",
@@ -578,10 +570,9 @@ const VIDEO_TRAINING_GUIDANCE = {
   "VEOVVx3rDyI": { focus: "Identify MSHA's enforcement, education, training, and technical-support roles and how they affect daily mine safety." },
   "QGkT8Ahh1-E": { focus: "Listen for miners' protected rights, personal responsibilities, hazard-reporting options, and protections against retaliation." },
   "Z33qMr0CobM": {
-    focus: "Follow the visual W65 opening and donning sequence while the instructor narrates each step in English, including the mouthpiece, nose clip, head harness, and immediate movement toward fresh air.",
-    scope: "This official MSA Latin America video has Spanish narration and no captions. It is a visual aid only; the instructor's English explanation, current MSA instructions, mine plan, and hands-on practice with the approved W65 trainer control."
+    focus: "After the full Fred Raubach presentation, follow this shorter visual W65 opening and donning review while the instructor narrates each step in English.",
+    scope: "This official MSA Latin America video has Spanish narration and no captions. It supplements—not replaces—the full 13:39 instructor-opened presentation, current MSA instructions, mine plan, and hands-on practice with the approved W65 trainer."
   },
-  "AU07-U96dfw": { focus: "Use the animation to reinforce the order of W65 donning steps before practicing them with the approved trainer." },
   "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
   "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },
   "mSt9lHz22xM": { focus: "Observe the underground traffic pattern, dumping area, equipment clearances, visibility limits, and interaction with the crusher area." },
