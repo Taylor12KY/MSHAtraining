@@ -1,3 +1,37 @@
+function siteAerialPanel(siteName, address, coordinates, instructorFocus) {
+  const mapQuery = encodeURIComponent(coordinates);
+  const earthQuery = encodeURIComponent(coordinates);
+
+  return `
+    <section class="site-map-card" aria-label="${siteName} aerial orientation">
+      <div class="site-map-header">
+        <div>
+          <span class="resource-badge">Instructor orientation</span>
+          <h3>Aerial Site View</h3>
+          <p>${address}</p>
+        </div>
+        <span class="site-map-source">Satellite view</span>
+      </div>
+      <iframe
+        class="site-map-frame"
+        loading="lazy"
+        title="Satellite map of ${siteName}"
+        src="https://maps.google.com/maps?q=${mapQuery}&amp;t=k&amp;z=17&amp;output=embed"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+      <div class="site-map-body">
+        <p><strong>Instructor focus:</strong> ${instructorFocus}</p>
+        <div class="site-map-actions">
+          <a class="btn btn-outline btn-sm" href="https://earth.google.com/web/search/${earthQuery}/" target="_blank" rel="noopener noreferrer">Open in Google Earth ↗</a>
+          <a class="btn btn-outline btn-sm" href="https://www.google.com/maps/@?api=1&amp;map_action=map&amp;center=${mapQuery}&amp;zoom=17&amp;basemap=satellite" target="_blank" rel="noopener noreferrer">Open full map ↗</a>
+        </div>
+      </div>
+      <div class="site-map-notice"><strong>Orientation aid only.</strong> Imagery can be old or incomplete. The instructor's current mine map, escapeway map, traffic plan, emergency plan, and on-site tour control.</div>
+    </section>
+  `;
+}
+
 const SITE_CONTENT = {
   "Boonesboro Quarry": {
     title: "Boonesboro Quarry – Site Orientation",
@@ -19,6 +53,12 @@ const SITE_CONTENT = {
         <p>Finished stone supports construction aggregate, aglime, and related products for Central Kentucky, and feeds Allen Company asphalt operations in the area.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib conditions / ground control; mobile equipment traffic underground and on surface (loaders, haul trucks); conveyor systems from Level 2 to surface; shop and Level 1 activity; Liwell plant; haul routes to BT3 under KY 627; silica dust; noise; diesel equipment; and emergency escape from multiple levels.</div>
       </div>
+      ${siteAerialPanel(
+        "Boonesboro Quarry",
+        "2591 Boonesboro Rd, Richmond, KY 40475",
+        "37.9042434,-84.2710647",
+        "Locate the mine portals, KY 627 and the BT3 route, the surface plant and stockpiles, the Kentucky River, and the designated gathering areas identified by the instructor."
+      )}
       <div class="content-section">
         <h3>Boonesboro Site-Specific Policies (Review with Instructor)</h3>
         <ul>
@@ -63,7 +103,7 @@ const SITE_CONTENT = {
     content: `
       <div class="content-section">
         <h3>Clover Bottom Quarry – Site Overview</h3>
-        <p><strong>Clover Bottom Quarry</strong> is an <strong>underground limestone operation</strong> in <strong>Jackson County, Kentucky</strong>, near <strong>McKee</strong>, along <strong>US 421</strong> (approximately 12146 / 12420 Hwy 421 N, McKee, KY 40447). The site is owned and operated by <strong>The Allen Company</strong>.</p>
+        <p><strong>Clover Bottom Quarry</strong> is an <strong>underground limestone operation</strong> in <strong>Jackson County, Kentucky</strong>, near <strong>McKee</strong>, along <strong>US 421</strong> at approximately <strong>12420 US 421 N, McKee, KY 40447</strong>. The site is owned and operated by <strong>The Allen Company</strong>.</p>
         <p>There are <strong>two separate MSHA mines</strong> that share the same surface area. They are commonly called the <strong>old mine</strong> and the <strong>new mine</strong>:</p>
         <ul>
           <li><strong>Clover Bottom Quarry #1 (old mine)</strong> — MSHA Mine ID <strong>15-00112</strong>. Operated by <strong>M.A. Walker</strong> beginning around <strong>1950</strong>; purchased by The Allen Company in <strong>2004</strong>.</li>
@@ -76,6 +116,12 @@ const SITE_CONTENT = {
         <p>Stone from Clover Bottom supports construction aggregate, aglime, and Allen Company asphalt operations serving Jackson, Madison, Rockcastle, and surrounding counties.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib / ground control in both the old and new mines; knowing which mine (and Mine ID) you are working in; surface drill-and-blast; mobile equipment underground and on the shared surface; primary crusher in the pit and conveyors up the hill; secondary plant and stockpiles; Liwell plant in the old mine; silica dust; noise; diesel equipment; and emergency escape from either underground mine plus surface gathering points.</div>
       </div>
+      ${siteAerialPanel(
+        "Clover Bottom Quarry",
+        "12420 US 421 N, McKee, KY 40447",
+        "37.5014605,-84.1663879",
+        "Distinguish the old- and new-mine portal areas, shared surface, US 421 access, pit and primary crusher, secondary plant, stockpiles, and current gathering areas."
+      )}
       <div class="content-section">
         <h3>Clover Bottom Site-Specific Policies (Review with Instructor)</h3>
         <ul>
@@ -129,6 +175,12 @@ const SITE_CONTENT = {
         <p><strong>Site leadership:</strong> Foreman / site supervisor is <strong>Gene Smith</strong>, who has been at the quarry since its origin in 2001. Site leadership includes <strong>licensed blasters</strong>.</p>
         <div class="key-box"><strong>Site focus hazards:</strong> Roof and rib / ground control on Level 1 and Level 2; header mining faces; mobile equipment underground and on surface; primary crusher and surge silo; conveyors to secondary plant; surface and underground stockpiles; silica dust; noise; diesel equipment; and emergency escape from both levels plus surface gathering points.</div>
       </div>
+      ${siteAerialPanel(
+        "Dix River Stone",
+        "4963 Danville Road, Lancaster, KY 40444",
+        "37.6404113,-84.6599655",
+        "Locate the entrance and portal areas, Danville Road access, surface primary crusher, surge silo, secondary plant, stockpiles, and the gathering areas designated by the instructor."
+      )}
       <div class="content-section">
         <h3>Dix River Stone Site-Specific Policies (Review with Instructor)</h3>
         <ul>

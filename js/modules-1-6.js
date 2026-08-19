@@ -38,6 +38,44 @@ const MODULES_PART_1 = [
         </ul>
         <div class="key-box"><strong>Remember:</strong> Section 105(c) of the Mine Act protects miners from discrimination for engaging in protected safety activities. If you believe you have been discriminated against, you generally have 60 days to file a complaint with MSHA.</div>
       </div>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge resource-badge-required">Required instructor review</span>
+            <span class="resource-badge">Official MSHA handout</span>
+            <h3>Miners' Rights and Responsibilities Trifold</h3>
+          </div>
+          <span class="document-meta">3-page PDF · MSHA 3116a</span>
+        </div>
+        <p>Use this official handout to identify how to report hazards, request MSHA action, participate in inspections, raise a good-faith safety concern, and report retaliation. Record important dates and facts; a Section 105(c) discrimination complaint generally must be filed within 60 days.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="/assets/docs/msha-miners-rights-trifold.pdf" target="_blank" rel="noopener">
+            <strong>Open the classroom copy ↗</strong>
+            <span>Reliable local copy for this course</span>
+          </a>
+          <a class="resource-card" href="https://arlweb.msha.gov/S%26HINFO/minersrights/MinersRightsTrifold.pdf" target="_blank" rel="noopener noreferrer">
+            <strong>Open the official MSHA PDF ↗</strong>
+            <span>Original agency-hosted document</span>
+          </a>
+          <a class="resource-card" href="https://www.dol.gov/general/topics/whistleblower" target="_blank" rel="noopener noreferrer">
+            <strong>DOL miner protections</strong>
+            <span>Current rights, complaint, and whistleblower resources</span>
+          </a>
+          <a class="resource-card" href="https://www.dol.gov/general/apps/msha/miner-safety-health" target="_blank" rel="noopener noreferrer">
+            <strong>MSHA Miner Safety &amp; Health app</strong>
+            <span>Rights information, alerts, and reporting resources</span>
+          </a>
+        </div>
+        <details class="document-embed">
+          <summary>Preview the trifold in this module</summary>
+          <div class="document-frame-wrap">
+            <object class="document-frame" data="/assets/docs/msha-miners-rights-trifold.pdf#view=FitH" type="application/pdf">
+              <p>Your browser cannot display the PDF here. <a href="/assets/docs/msha-miners-rights-trifold.pdf" target="_blank" rel="noopener">Open the classroom copy</a>.</p>
+            </object>
+          </div>
+        </details>
+        <div class="key-box"><strong>Completion note:</strong> opening a document does not complete the module. The instructor discussion, required attention time, and 100% quiz standard still apply. Current law, MSHA guidance, and the approved training plan control.</div>
+      </div>
       <div class="content-section">
         <h3>2. Authority & Responsibility of Supervisors</h3>
         <p>Supervisors (including leadmen and those with authority to direct work) have both the authority and the legal responsibility to:</p>
@@ -198,6 +236,7 @@ const MODULES_PART_1 = [
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/volvo-a40d.html" target="_blank" rel="noopener"><strong>NIOSH Volvo A40D</strong><span>Articulated-truck visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/manual-method.html" target="_blank" rel="noopener"><strong>Map the actual machine</strong><span>NIOSH manual blind-area method</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/stand_down/Powered-Haulage.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA Powered Haulage Stand-Down</strong><span>Official one-page July 2025 discussion handout</span></a>
         </div>
       </div>
       <div class="content-section">
@@ -299,6 +338,22 @@ const MODULES_PART_1 = [
         </div>
       </div>
 
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge">Current case anchors</span>
+            <h3>Recent MSHA Hazard Alerts</h3>
+          </div>
+          <span class="document-meta">Instructor-led discussion</span>
+        </div>
+        <p>Connect the controls in this module to recent mining events. Focus on what the trainee must recognize, where to stay clear, and when to stop and notify supervision.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast signals, exclusion areas, withdrawal, guarding, and authorized re-entry</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/Confined%20Space%20Safety%20Alert.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA confined-space alert</strong><span>Engulfment, stored energy, atmospheric hazards, isolation, and rescue planning</span></a>
+        </div>
+        <div class="warning-box"><strong>Scope:</strong> trainees are not being trained to conduct blasting or confined-space entry. They must know boundaries, warning signals, withdrawal rules, and that bins, hoppers, chutes, crushers, and tanks cannot be entered or cleared without the mine's authorization and full procedure.</div>
+      </div>
+
       <div class="content-section">
         <h3>Personal Practices</h3>
         <ul>
@@ -373,6 +428,14 @@ const MODULES_PART_1 = [
         <h3>Barricading</h3>
         <p>Where barricading is part of the mine's emergency plan, know the locations of materials and the basic principles of constructing a seal that can protect against irrespirable atmospheres for a limited time while awaiting rescue. Barricading is a last-resort option when escape is not possible.</p>
         <div class="warning-box">Never delay an escape when the emergency plan directs evacuation. Prompt action, the W65 used at this operation, and knowledge of the designated escapeways are critical.</div>
+      </div>
+      <div class="content-section official-resource-panel">
+        <span class="resource-badge">Official MSHA safety alert</span>
+        <h3>Equipment Fires and Heated Tires</h3>
+        <p>A heated tire can rupture violently during or after an equipment fire. Safely stop and shut down if possible, warn others, notify supervision, and withdraw under the site emergency plan. Do not approach or try to fight a tire fire with a handheld extinguisher.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/Tire-Explosion-During-Equipment-Fire-safetyalert.pdf" target="_blank" rel="noopener noreferrer"><strong>Tire Explosion During Equipment Fire</strong><span>Official MSHA alert based on a June 2024 fatal incident</span></a>
+        </div>
       </div>
 
       <div class="video-box">

@@ -97,6 +97,7 @@ const MODULES_PART_2 = [
         </ul>
         <div class="resource-grid">
           <a class="resource-card" href="https://www.cdc.gov/niosh/silica/work/index.html" target="_blank" rel="noopener"><strong>NIOSH safe work practices</strong><span>Wet methods, ventilation, filtration, and housekeeping controls</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/docs/2022-107/pdfs/2022-107.pdf" target="_blank" rel="noopener noreferrer"><strong>NIOSH Simple Solutions for Dusty Environments</strong><span>Practical source-control, wet-method, enclosure, and housekeeping examples</span></a>
           <a class="resource-card" href="https://multimedia.3m.com/mws/media/2620489O/3m-8511-8511mx-8211-particulate-respirator-n95-user-instructions.pdf" target="_blank" rel="noopener"><strong>3M valved N95 instructions</strong><span>Fitting and seal-check example; the instructions for the issued model control</span></a>
         </div>
         <div class="warning-box"><strong>Current rule status:</strong> compliance deadlines in MSHA's 2024 silica rule are under a judicial stay, and associated metal/nonmetal amendments were delayed indefinitely pending review. The dust controls taught here remain protective practices. Follow the current enforceable MSHA standards, the approved training plan, sampling results, and the mine's respiratory-protection program. <a href="https://www.federalregister.gov/d/2026-06584" target="_blank" rel="noopener">Review the 2026 Federal Register notice</a>.</div>
@@ -231,6 +232,23 @@ const MODULES_PART_2 = [
         </ul>
         <div class="key-box">First aid is a bridge to professional care. The goal is to preserve life and prevent further harm until EMTs, paramedics, or hospital care can take over.</div>
       </div>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge resource-badge-required">Instructor skills practice</span>
+            <h3>Current First-Aid References</h3>
+          </div>
+          <span class="document-meta">Supporting resources</span>
+        </div>
+        <p>Use these current authoritative resources with the instructor demonstration. Links support review; they do not replace hands-on practice, the mine emergency plan, or a recognized First Aid/CPR/AED course.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.redcross.org/take-a-class/aed/using-an-aed/aed-steps" target="_blank" rel="noopener noreferrer"><strong>American Red Cross AED steps</strong><span>Scene safety, activation, pad placement, analysis, and shock sequence</span></a>
+          <a class="resource-card" href="https://www.stopthebleed.org/get-trained/online-course/" target="_blank" rel="noopener noreferrer"><strong>ACS Stop the Bleed review</strong><span>Recognize life-threatening bleeding and review pressure, packing, and tourniquet concepts</span></a>
+          <a class="resource-card" href="https://www.osha.gov/medical-first-aid/" target="_blank" rel="noopener noreferrer"><strong>OSHA medical and first-aid overview</strong><span>Program planning, supplies, response, and training references</span></a>
+          <a class="resource-card" href="https://www.osha.gov/sites/default/files/publications/OSHA3317first-aid.pdf" target="_blank" rel="noopener noreferrer"><strong>OSHA Best Practices Guide</strong><span>Workplace first-aid program reference for instructor discussion</span></a>
+        </div>
+        <div class="warning-box"><strong>Emergency rule:</strong> activate the mine's emergency response and 911/EMS process early. Do not delay professional care while searching an online reference.</div>
+      </div>
       <div class="content-section">
         <h3>Heat Stress: Recognize It Early</h3>
         <p>Hot conditions can occur underground, on surface equipment, near asphalt operations, during strenuous work, and while wearing protective equipment. Risk increases with heat, humidity, workload, radiant heat, limited air movement, dehydration, illness, medication, and lack of acclimatization.</p>
@@ -343,7 +361,7 @@ const MODULES_PART_2 = [
             </tbody>
           </table>
         </div>
-        <p>Regulatory references: <a href="https://www.law.cornell.edu/cfr/text/30/57.5001" target="_blank" rel="noopener">30 CFR § 57.5001 exposure limits</a>, <a href="https://www.law.cornell.edu/cfr/text/30/57.5015" target="_blank" rel="noopener">30 CFR § 57.5015 oxygen deficiency</a>, and <a href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener">MSHA Unified Mine Rescue Training</a>. The mine's current alarm settings, action levels, approved plans, and procedures control and may be more protective.</p>
+        <p>Regulatory references: <a href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5001" target="_blank" rel="noopener noreferrer">30 CFR § 57.5001 exposure limits</a>, <a href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5015" target="_blank" rel="noopener noreferrer">30 CFR § 57.5015 oxygen deficiency</a>, and <a href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer">MSHA Unified Mine Rescue Training</a>. The mine's current alarm settings, action levels, approved plans, and procedures control and may be more protective.</p>
       </div>
       <div class="content-section">
         <h3>Where Gases Can Accumulate—and Why Density Is Only a Clue</h3>
@@ -379,7 +397,13 @@ const MODULES_PART_2 = [
           <li><strong>Verify before re-entry:</strong> authorized personnel retest all required locations and release the area. A single good reading in one spot or at one time is not enough.</li>
           <li><strong>Evaluate exposure:</strong> anyone with possible symptoms or significant exposure receives prompt medical evaluation, especially after CO or nitrogen-dioxide exposure because serious effects can be delayed.</li>
         </ol>
-        <p>Instrument reference: <a href="https://docs.msasafety.com/altair4x/en-us/ALTAIR%204X%20US%20OPM%2010105903/PDF%20Download/OPM%20Altair%204X%2010105903_r6_US.pdf" target="_blank" rel="noopener">MSA ALTAIR 4X user instructions</a>. Only personnel designated by the company operate, bump-test, calibrate, or make decisions from the instrument.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://docs.msasafety.com/altair4x/en-us/ALTAIR%204X%20US%20OPM%2010105903/PDF%20Download/OPM%20Altair%204X%2010105903_r6_US.pdf" target="_blank" rel="noopener noreferrer"><strong>MSA ALTAIR 4X user instructions</strong><span>Official operation, bump-test, alarm, calibration, and limitation reference</span></a>
+          <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5001" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5001</strong><span>Current official eCFR exposure-limit reference</span></a>
+          <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5015" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5015</strong><span>Current official oxygen-deficiency standard</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA mine-rescue gas guide</strong><span>Instructor reference for gas properties, detection, and emergency response</span></a>
+        </div>
+        <p>Only personnel designated by the company operate, bump-test, calibrate, or make decisions from the instrument.</p>
         <div class="warning-box">The ALTAIR 4X is a warning and measurement tool—not respiratory protection. A dust respirator does not protect against mine gases or oxygen deficiency. The MSA W65 does not supply oxygen and does not protect in an oxygen-deficient atmosphere.</div>
       </div>
       <div class="video-box">

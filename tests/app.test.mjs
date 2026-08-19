@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/app\.js\?v=mine-gases-1"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=mine-gases-1"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=trial-ready-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=trial-ready-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -68,6 +68,20 @@ test('branded learner experience keeps regulatory context and a clear next actio
   assert.match(html, /id="btn-continue-training"/);
   assert.match(app, /function continueTraining\(\)/);
   assert.match(app, /div\.addEventListener\('keydown'/);
+});
+
+test('trial-ready resources include the official miners rights handout and three site aerial views', () => {
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-miners-rights-trifold.pdf')));
+  assert.match(modulesPartOne, /\/assets\/docs\/msha-miners-rights-trifold\.pdf/);
+  assert.match(modulesPartOne, /Miners' Rights and Responsibilities Trifold/);
+  assert.match(modulesPartOne, /Powered Haulage Stand-Down/);
+  assert.match(modulesPartTwo, /Current First-Aid References/);
+  assert.match(modulesPartTwo, /MSA ALTAIR 4X user instructions/);
+  assert.equal((siteContent.match(/\$\{siteAerialPanel\(/g) || []).length, 3);
+  assert.match(siteContent, /37\.9042434,-84\.2710647/);
+  assert.match(siteContent, /37\.5014605,-84\.1663879/);
+  assert.match(siteContent, /37\.6404113,-84\.6599655/);
+  assert.match(siteContent, /Orientation aid only/);
 });
 
 test('program contains modules 1-13 totaling exactly 32 hours', () => {
