@@ -73,7 +73,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "9wnDBLifDB4",
-    moduleId: 5,
+    moduleId: 11,
     title: "A Look Inside an Open-Pit Blasting Process",
     author: "TEKNIQ",
     durationSeconds: 420,
@@ -185,7 +185,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "gbaGN7JQoO4",
-    moduleId: 12,
+    moduleId: 11,
     title: "Explosives Underground – Handling Explosives in Modern Mines",
     author: "PublicResourceOrg",
     durationSeconds: 900,
@@ -337,7 +337,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "zaliBZlRsaE",
-    moduleId: 12,
+    moduleId: 11,
     title: "Drill and Blast Sequence",
     author: "Kalloc Tech",
     durationSeconds: 209,
@@ -353,7 +353,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "G2Hs51QDszc",
-    moduleId: 12,
+    moduleId: 11,
     title: "Underground Drilling and Blasting Training Overview",
     author: "Australian Centre for Geomechanics",
     durationSeconds: 188,
@@ -432,6 +432,22 @@ const REQUIRED_VIDEOS = [
     description: "Detailed 2026 webinar on personal fall-arrest components, selection, inspection, compatibility, fit, anchorage, clearance, and rescue planning."
   },
   {
+    id: "UD2u9LXREWM",
+    moduleId: 11,
+    title: "Handling Explosives in Underground Mines",
+    author: "Centers for Disease Control and Prevention (CDC/NIOSH)",
+    durationSeconds: 909,
+    description: "Underground explosives storage, transport, blast-area security, fumes, misfires, and waiting for authorized re-entry."
+  },
+  {
+    id: "-wrwD7s9rUE",
+    moduleId: 11,
+    title: "The Confined Space Hazards That Kill Most Often",
+    author: "Ally Safety",
+    durationSeconds: 0,
+    description: "Atmospheric hazards in confined spaces: toxic or oxygen-deficient air, and why untrained rescue attempts kill. Principles only; not mine-rescue or confined-space qualification."
+  },
+  {
     id: "b7mhJ8viccI",
     moduleId: 11,
     title: "MSA ALTAIR 4X: How to Manually Bump Test",
@@ -493,14 +509,14 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["Z33qMr0CobM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "Veayb1NucTA"],
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI"],
-  11: ["b7mhJ8viccI"],
-  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "WTKCluA6lgE"]
+  11: ["-wrwD7s9rUE", "b7mhJ8viccI", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "UD2u9LXREWM"],
+  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "WTKCluA6lgE"]
 };
 
 const VIDEO_SEQUENCE_TRANSITIONS = {
@@ -525,7 +541,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
   "Ka9UKa_xYNU": "When a fall hazard remains and personal fall arrest is required, examine how the complete system must be selected, inspected, fitted, connected, and supported by a rescue plan.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
-  "2cyQ5QTPOek": "Continue to material-handling hazards by studying unstable slopes, voids, and safe positioning around stockpiles.",
+  "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 (Blasting, Explosives, & Mine Gases).",
   "9wnDBLifDB4": "Close the hazard-recognition sequence with a specialized restricted operation: recognizing blast areas and obeying warning controls.",
   "j9DNL0DnKmU": "After fire prevention and early response, shift to the decisions, communication, and leadership required during evacuation.",
   "IGb20ZDbjkY": "Use the Sago case to examine how self-rescue, mine rescue, accountability, and command coordination interact in a prolonged emergency.",
@@ -543,6 +559,12 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "is77KiZ16_o": "Move from basic electrical awareness to the controlled isolation of hazardous energy before service or repair.",
   "iX8j7h7bJF4": "Finish with an arc-flash fatality case that shows why qualification, isolation, verification, and safe boundaries are essential.",
   "b7mhJ8viccI": "Watch how the supervisor verifies the ALTAIR 4X before use. Your trainee responsibility is to recognize its alarms and limits, withdraw from questionable air, and report the concern.",
+  "-wrwD7s9rUE": "Start with why oxygen-deficient or toxic air kills in enclosed spaces, and why you never enter to rescue someone unless you are trained and equipped.",
+  "9wnDBLifDB4": "After the detector lesson, recognize blast areas, warning signals, and exclusion zones so you stay out until the all-clear.",
+  "zaliBZlRsaE": "See the planned drill-and-blast cycle and the ventilation and re-entry decisions between stages.",
+  "G2Hs51QDszc": "Place that sequence underground and identify fumes, misfires, and authorized re-entry.",
+  "gbaGN7JQoO4": "Build on the overview with storage, transport, loading, security, and authorized roles.",
+  "UD2u9LXREWM": "Finish with NIOSH handling of explosives underground, including blast fumes and waiting for a qualified person to clear the area.",
   "Km8XxRCuCho": "With attention and distraction in mind, consider the worker's personal role in recognizing and managing risk.",
   "EQ1OPz1p0U4": "Now clarify that personal responsibility includes looking beyond minimum compliance when a hazard remains uncontrolled.",
   "4MjKwOI2LrE": "Connect that principle to the human consequences one person's shortcut can create for coworkers and family.",
@@ -562,7 +584,7 @@ const MODULE_VIDEO_SCOPE = {
   8: "Focus on exposure recognition and controls. Follow current sampling, HazCom, respiratory-protection, hearing-conservation, and PPE requirements at the mine.",
   9: "This is hazard-awareness instruction, not electrical qualification. Only qualified and authorized persons may perform electrical work under the mine's energy-control procedures.",
   10: "This video supports first-aid awareness and refresher discussion; it is not a certification course. Work within your training and activate professional emergency response promptly.",
-  11: "Supervisors carry and operate the MSA ALTAIR 4X at these operations. Trainees use this video to understand alarm readiness and instrument limits—not to clear an area. A detector warns of hazards; it does not make an unsafe atmosphere safe.",
+  11: "Supervisors carry and operate the MSA ALTAIR 4X at these operations. Trainees use these videos to understand atmospheric hazards, blasting fumes, alarm readiness, and instrument limits—not to clear an area, handle explosives, or make a re-entry decision. A detector warns of hazards; it does not make an unsafe atmosphere safe. The Ally Safety confined-space tape is principles only, not mine-rescue qualification.",
   12: "Use the incident or task example to strengthen prevention and decision-making. It does not authorize a task or replace task-specific training and site procedures."
 };
 
@@ -681,7 +703,8 @@ const VIDEO_TRAINING_GUIDANCE = {
 function getRequiredVideos(moduleId) {
   const sequence = MODULE_VIDEO_SEQUENCE[moduleId] || [];
   const sequenceIndex = new Map(sequence.map((id, index) => [id, index]));
-  return REQUIRED_VIDEOS
-    .filter(video => video.moduleId === moduleId)
-    .sort((a, b) => (sequenceIndex.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (sequenceIndex.get(b.id) ?? Number.MAX_SAFE_INTEGER));
+  const byId = new Map(REQUIRED_VIDEOS.map(video => [video.id, video]));
+  const fromSequence = sequence.map(id => byId.get(id)).filter(Boolean);
+  const extras = REQUIRED_VIDEOS.filter(video => video.moduleId === moduleId && !sequenceIndex.has(video.id));
+  return fromSequence.concat(extras);
 }

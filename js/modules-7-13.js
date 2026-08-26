@@ -277,13 +277,14 @@ const MODULES_PART_2 = [
   },
   {
     id: 11,
-    title: "Mine Gases",
+    title: "Blasting, Explosives, & Mine Gases",
     hours: 2.0,
     objectives: [
       "Identify the major mine gases, their sources, health or explosion hazards, and likely accumulation areas",
       "Understand oxygen, ppm, time-weighted-average, ceiling, and lower-explosive-limit reference values",
       "Recognize sensory and physical warning signs without relying on smell to declare air safe",
       "Know that supervisors carry and operate the MSA ALTAIR 4X and when to request atmospheric testing",
+      "Recognize blast-area controls, post-blast CO and NOx fumes, and that re-entry is authorized only after ventilation and testing",
       "Apply the stop, warn, withdraw, and report response to any suspected atmospheric hazard"
     ],
     content: `
@@ -376,6 +377,18 @@ const MODULES_PART_2 = [
         <p>Gas density helps a qualified tester choose sampling locations, but it does not predict a working mine atmosphere by itself. Fans, pressure changes, equipment movement, temperature, obstructions, and turbulence can mix or move gases. Testing must cover the locations required by the mine procedure.</p>
         <div class="warning-box"><strong>Use your senses only to recognize a possible emergency—not to clear the air.</strong> Smoke or haze, unusual fumes, a sharp or rotten-egg odor, eye or throat irritation, headache, nausea, dizziness, confusion, unexpected fatigue, rapid breathing, or another worker acting strangely all require withdrawal and notification.</div>
       </div>
+
+      <div class="content-section">
+        <h3>Post-Blast Fumes and Re-Entry in Underground Limestone</h3>
+        <p>Production blasting is the main source of toxic gases in many underground stone mines. The gases of concern are mainly <strong>carbon monoxide (CO)</strong> and the <strong>oxides of nitrogen (NO and NO<sub>2</sub>)</strong>. CO is colorless and odorless. NO<sub>2</sub> may appear as a reddish-brown / orange cloud and is a severe lung irritant; symptoms can worsen hours later.</p>
+        <p>NIOSH measured post-blast gases in an operating underground limestone mine. <strong>CO took the longest to clear.</strong> Average re-entry based on CO was about <strong>1.3 hours</strong>, about <strong>2.7 hours</strong> at one standard deviation, and <strong>well over 3 hours</strong> on some shots. A clock on the wall is not a clearance. Stay out until ventilation has run and an authorized supervisor releases the area with the correct instrument.</p>
+        <div class="key-box"><strong>Meter limit:</strong> a typical four-gas ALTAIR 4X reads O<sub>2</sub>, LEL, CO, and H<sub>2</sub>S. It does <strong>not</strong> measure NO<sub>2</sub>. Do not treat a quiet four-gas meter as proof that blast fumes are gone.</div>
+        <ul>
+          <li>Obey blast signals, exclusion zones, and the all-clear. Do not walk onto a muck pile or heading to "see if it looks clear."</li>
+          <li>The blasting videos in this module are awareness only. They do not authorize handling explosives, stemming, or firing.</li>
+          <li>The open-pit blast-area overview and the underground explosives sequence now live in this module (moved from Modules 5 and 12) so gases and blasting fumes are taught together.</li>
+        </ul>
+      </div>
       <div class="content-section">
         <h3>What Trainees Need to Know About the Supervisor's ALTAIR 4X</h3>
         <p>Supervisors are responsible for carrying and operating the company ALTAIR 4X under the atmospheric-testing procedure. The required video shows why a supervisor inspects and bump-tests the detector before use. It does <strong>not</strong> authorize a trainee to test an area, interpret a questionable atmosphere, silence an alarm, or make a re-entry decision.</p>
@@ -401,14 +414,16 @@ const MODULES_PART_2 = [
           <a class="resource-card" href="https://docs.msasafety.com/altair4x/en-us/ALTAIR%204X%20US%20OPM%2010105903/PDF%20Download/OPM%20Altair%204X%2010105903_r6_US.pdf" target="_blank" rel="noopener noreferrer"><strong>MSA ALTAIR 4X user instructions</strong><span>Official operation, bump-test, alarm, calibration, and limitation reference</span></a>
           <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5001" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5001</strong><span>Current official eCFR exposure-limit reference</span></a>
           <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5015" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5015</strong><span>Current official oxygen-deficiency standard</span></a>
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA mine-rescue gas guide</strong><span>Instructor reference for gas properties, detection, and emergency response</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA mine-rescue gas guide (IG 115 Module 2)</strong><span>Classroom text for gas properties and detection. Skip coal-only damps as procedure.</span></a>
+          <a class="resource-card" href="https://stacks.cdc.gov/view/cdc/227865/cdc_227865_DS1.pdf" target="_blank" rel="noopener noreferrer"><strong>NIOSH limestone post-blast re-entry study</strong><span>CO, NO, and NO2 measured in an underground limestone mine; CO clears slowest</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/mining/works/coversheet1739.html" target="_blank" rel="noopener noreferrer"><strong>NIOSH: Dangers of Toxic Fumes from Blasting</strong><span>CO and NOx from explosives; stay out of confined spaces until air is tested</span></a>
         </div>
         <p>Only personnel designated by the company operate, bump-test, calibrate, or make decisions from the instrument.</p>
         <div class="warning-box">The ALTAIR 4X is a warning and measurement tool—not respiratory protection. A dust respirator does not protect against mine gases or oxygen deficiency. The MSA W65 does not supply oxygen and does not protect in an oxygen-deficient atmosphere.</div>
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the gas-recognition lesson, required ALTAIR 4X supervisor-demonstration video, and trainee alarm/response verification. Full module seat time remains 2.0 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the gas-recognition lesson, required videos (atmosphere principles, ALTAIR 4X demonstration, blasting-fume / explosives awareness), and trainee alarm/response verification. Full module seat time remains 2.0 hours.</p>
         <div class="timer-display" id="timer-11">120:00</div>
         <button class="btn btn-sm" id="btn-timer-11" onclick="startTimer(11, 120)">Start 2-hour Required Timer (120 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-11">Timer not started</p>
