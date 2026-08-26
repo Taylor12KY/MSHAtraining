@@ -541,7 +541,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
   "Ka9UKa_xYNU": "When a fall hazard remains and personal fall arrest is required, examine how the complete system must be selected, inspected, fitted, connected, and supported by a rescue plan.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
-  "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 with mine gases.",
+  "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 (Blasting, Explosives, & Mine Gases).",
   "9wnDBLifDB4": "Close the hazard-recognition sequence with a specialized restricted operation: recognizing blast areas and obeying warning controls.",
   "j9DNL0DnKmU": "After fire prevention and early response, shift to the decisions, communication, and leadership required during evacuation.",
   "IGb20ZDbjkY": "Use the Sago case to examine how self-rescue, mine rescue, accountability, and command coordination interact in a prolonged emergency.",
