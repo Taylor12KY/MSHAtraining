@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-copy-links-3"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-no-fred-4"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -472,8 +472,8 @@ test('training content is W65-specific and contains no SCSR material', () => {
   assert.doesNotMatch(source, /\bSCSR\b|self-contained self-rescuer|CSE SR-100/i);
   assert.match(source, /MSA W65/);
   assert.match(modulesPartOne, /does not protect in an oxygen-deficient atmosphere/i);
-  assert.match(modulesPartOne, /Fred Raubach/);
-  assert.match(modulesPartOne, /https:\/\/vimeo\.com\/98555798/);
+  assert.doesNotMatch(source, /Fred Raubach|98555798|13:39/);
+  assert.doesNotMatch(modulesPartOne, /Fred Raubach|98555798|optional instructor Vimeo|instructor may also show/);
   assert.match(modulesPartOne, /Cleveland Potash/);
   assert.match(modulesPartOne, /hopcalite/i);
   assert.doesNotMatch(modulesPartOne, /Video 2 – Official MSA W65 Visual Review/);

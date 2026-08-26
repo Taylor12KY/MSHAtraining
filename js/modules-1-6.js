@@ -187,21 +187,10 @@ const MODULES_PART_1 = [
           <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
       </div>
-      <div class="content-section official-resource-panel">
-        <div class="official-resource-heading">
-          <div>
-            <span class="resource-badge">Optional instructor presentation</span>
-            <h3>Fred Raubach W65 demonstration · 13:39</h3>
-          </div>
-          <span class="document-meta">Vimeo · embed blocked</span>
-        </div>
-        <p>The Vimeo owner set embed to Nowhere, so this site cannot play the 13:39 Fred Raubach demonstration in-app. The instructor may open it in class at <a href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">https://vimeo.com/98555798</a>. The app cannot verify that viewing. Required in-app credit is the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, the 3.5-hour timer, and hands-on trainer practice.</p>
-        <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open Fred Raubach on Vimeo ↗</a>
-      </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, optional instructor Vimeo presentation, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. The instructor may also show the Fred Raubach Vimeo presentation in class. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
