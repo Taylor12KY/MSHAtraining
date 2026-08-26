@@ -100,7 +100,7 @@ const MODULES_PART_1 = [
 
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">MSHA Miners Rights and Responsibilities (overview video) · ~40 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Instructional overview of miners rights and responsibilities under the Mine Act. Use with instructor discussion.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This presenter is labeled Part 46 (surface). Use it for statutory rights and 105(c) ideas only. This course is Part 48 underground limestone. Current Mine Act, Part 48 plan, and instructor control.</p>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
           <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/QGkT8Ahh1-E?rel=0&modestbranding=1&playsinline=1" title="MSHA Miners Rights and Responsibilities (overview video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -143,8 +143,9 @@ const MODULES_PART_1 = [
       </div>
       <div class="content-section">
         <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
-        <p>The first required in-app video is the NIOSH Sunshine Mine case study. On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
+        <p>The first required in-app video is the NIOSH Sunshine Mine case study. Watch this first as the historical why. Next two videos are the device you carry (Cleveland Potash W65) then hopcalite how/when (1980 NCB). On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
         <p>Video 2 is the Cleveland Potash W65 donning and how-it-works film, shot at Boulby UK potash mine on the actual MSA W65 (mouthpiece, nose clip, filter canister). Video 3 is the 1980 NCB training film on the hopcalite filter self-rescuer—old proven technology that still does the same job. Both UK films may show UK service or inspection intervals; those are not the U.S. MSHA or current MSA rules used at these Allen Company underground limestone operations.</p>
+        <p>The 1980 NCB film is a UK coal National Coal Board film. Allen Company sites are underground limestone (Boonesboro / Clover Bottom / Dix River Stone). Device class is a hopcalite filter self-rescuer, the same idea as the MSA W65. These operations do not issue oxygen-generating escape devices. Do not treat coal refuge or UK inspection intervals as local procedure.</p>
       </div>
       <div class="content-section">
         <h3>MSA W65 Inspection, Carrying & Use</h3>
@@ -182,8 +183,8 @@ const MODULES_PART_1 = [
         <p>Use the current manufacturer instructions and the MSHA HH-12 card with the instructor. These readings support—not replace—the approved W65 trainer and the mine emergency plan.</p>
         <div class="resource-grid">
           <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/HH%20Cards/HH-12%20Filter%20Self-Rescuer%20MNM.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA HH-12 Filter Self-Rescuer</strong><span>Metal/nonmetal hazard card for the filter self-rescuer</span></a>
-          <a class="resource-card" href="http://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Donning%20Instructions%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 donning instructions</strong><span>English donning sequence from the manufacturer</span></a>
-          <a class="resource-card" href="http://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Donning%20Instructions%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 donning instructions</strong><span>English donning sequence from the manufacturer</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
       </div>
       <div class="content-section official-resource-panel">
@@ -256,7 +257,7 @@ const MODULES_PART_1 = [
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/volvo-a40d.html" target="_blank" rel="noopener"><strong>NIOSH Volvo A40D</strong><span>Articulated-truck visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/manual-method.html" target="_blank" rel="noopener"><strong>Map the actual machine</strong><span>NIOSH manual blind-area method</span></a>
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/stand_down/Powered-Haulage.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA Powered Haulage Stand-Down</strong><span>Official one-page July 2025 discussion handout</span></a>
+          <a class="resource-card" href="https://www.msha.gov/safety-and-health/safety-and-health-initiatives/powered-haulage-safety" target="_blank" rel="noopener noreferrer"><strong>MSHA powered-haulage safety initiative</strong><span>Current MSHA powered-haulage initiative (not the old one-pager)</span></a>
         </div>
       </div>
       <div class="content-section">
@@ -368,7 +369,7 @@ const MODULES_PART_1 = [
         </div>
         <p>Connect the controls in this module to recent mining events. Focus on what the trainee must recognize, where to stay clear, and when to stop and notify supervision.</p>
         <div class="resource-grid">
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast signals, exclusion areas, withdrawal, guarding, and authorized re-entry</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast-area recognition only. Handling explosives is Module 11. Trainees do not blast.</span></a>
           <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/Confined%20Space%20Safety%20Alert.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA confined-space alert</strong><span>Engulfment, stored energy, atmospheric hazards, isolation, and rescue planning</span></a>
         </div>
         <div class="warning-box"><strong>Scope:</strong> trainees are not being trained to conduct blasting or confined-space entry. They must know boundaries, warning signals, withdrawal rules, and that bins, hoppers, chutes, crushers, and tanks cannot be entered or cleared without the mine's authorization and full procedure.</div>

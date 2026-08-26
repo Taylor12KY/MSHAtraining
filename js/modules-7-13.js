@@ -15,13 +15,13 @@ const MODULES_PART_2 = [
         <ul>
           <li>Look for cracks, spalling, water, or unusual sounds.</li>
           <li>Respect any temporary or permanent support installations.</li>
-          <li>Highwalls on surface also require examination and control of loose material.</li>
+          <li>Highwalls on surface also require examination and control of loose material. The highwall clips in this module are surface highwall / pit examples. Use them at Clover Bottom surface drill-and-blast and Dix River surface areas. Underground, use the stone-mine ground-control plan, not highwall rules.</li>
         </ul>
       </div>
       <div class="content-section">
         <h3>Ventilation</h3>
         <p>Ventilation supplies fresh air, dilutes and removes contaminants (diesel exhaust, dust, blasting fumes, etc.), and can be part of the escape strategy. Know the basic direction of air flow in your work area, the location of major fans and controls, and never alter ventilation without authorization.</p>
-        <div class="key-box">For metal/nonmetal underground (Part 57), the ventilation plan and ground control plan are central to daily safe operation. New miners must receive an introduction to both.</div>
+        <div class="key-box">For metal/nonmetal underground (Part 57), the ventilation plan and ground control plan are central to daily safe operation. New miners must receive an introduction to both. The Granite Mountain case is not a second Sunshine. Take ventilation reversal, fire loading, and two-way escapeways — not 1917 equipment. Sunshine is device why (Module 3). Sago is command (Module 6). This is ventilation behavior.</div>
       </div>
 
       <div class="video-box">
@@ -65,7 +65,7 @@ const MODULES_PART_2 = [
       <div class="content-section">
         <h3>Health Measurements & Controls</h3>
         <p>MSHA and the operator take dust, noise, and other samples to evaluate exposures and the effectiveness of controls. You may be asked to wear sampling equipment. Do not remove, cover, reposition, or disturb it. Results help protect long-term health from silica, diesel particulate matter (DPM), excessive noise, and other hazards.</p>
-        <p>Use the hierarchy of controls: eliminate or reduce the source where possible, apply engineering controls, use safe work and administrative practices, then use assigned PPE as the final layer. A respirator or hearing protector does not make an uncontrolled source acceptable.</p>
+        <p>Use the hierarchy of controls: eliminate or reduce the source where possible, apply engineering controls, use safe work and administrative practices, then use assigned PPE as the final layer. A respirator or hearing protector does not make an uncontrolled source acceptable. The dust-disease film in this module is generic; our exposures are limestone silica and DPM.</p>
       </div>
       <div class="content-section">
         <h3>Hazard Communication (HazCom)</h3>
@@ -90,7 +90,7 @@ const MODULES_PART_2 = [
         <h4>Company respirator for general or light-duty particulate cleanup</h4>
         <p>The assigned disposable respirator is a company-provided, NIOSH-approved <strong>3M N95 particulate respirator with a Cool Flow valve</strong>. Verify the exact model and approval markings on the issued package. The valve improves exhalation comfort; it does not increase the filtration rating.</p>
         <ul>
-          <li>An N95 protects against certain non-oil particles when properly selected and fitted. It does <strong>not</strong> protect against gases or vapors, oxygen deficiency, unknown concentrations, or an immediately dangerous atmosphere.</li>
+          <li>An N95 protects against certain non-oil particles when properly selected and fitted. An N95 is not a W65 and does <strong>not</strong> protect against mine gases, vapors, oxygen deficiency, unknown concentrations, or an immediately dangerous atmosphere.</li>
           <li>When it is required protection, the miner must complete the respiratory-program requirements and pass a fit test for that exact make, model, style, and size before use.</li>
           <li>Use both hands to mold the nose clip, keep hair and other items out of the sealing surface, and perform the manufacturer-required user seal check every time it is put on.</li>
           <li>If a seal cannot be achieved, or the respirator is damaged, soiled, or difficult to breathe through, leave the exposure and report to the supervisor. Do not alter, wash, or reuse it contrary to its instructions.</li>
@@ -187,7 +187,7 @@ const MODULES_PART_2 = [
 
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Electrical Safety Awareness for Non-electrical Workers · ~9 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Electrical awareness for non-electricians. Does not replace qualified-person requirements.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Canadian construction-association awareness tape. Principles only. Electrical work at these mines follows MSHA Part 57, the energy-control procedure, and qualified-person rules — not CSA/OSHA construction qualification.</p>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
           <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/wal2KP1bbIY?rel=0&modestbranding=1&playsinline=1" title="Electrical Safety Awareness for Non-electrical Workers" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -230,7 +230,7 @@ const MODULES_PART_2 = [
           <li>Control life-threatening bleeding with direct pressure and appropriate dressings or tourniquets if trained.</li>
           <li>Support the person until higher-level care arrives; do not attempt procedures beyond your training.</li>
         </ul>
-        <div class="key-box">First aid is a bridge to professional care. The goal is to preserve life and prevent further harm until EMTs, paramedics, or hospital care can take over.</div>
+        <div class="key-box">The mining first-aid video is scenario awareness, not Red Cross/ACS certification. Skills are instructor-led. First aid is a bridge to professional care until EMTs, paramedics, or hospital care can take over.</div>
       </div>
       <div class="content-section official-resource-panel">
         <div class="official-resource-heading">
@@ -449,6 +449,7 @@ const MODULES_PART_2 = [
     content: `
       <div class="content-section">
         <h3>Accident Prevention</h3>
+        <p>These four shorts are decision-making and speaking-up, not equipment authorization. Graded work is the conveyor-cleanup JTA table and asking for task training before a new job. Sunshine is Module 3; blasting is Module 11 — do not watch them again here.</p>
         <p>Most serious mining incidents involve a combination of hazards, human factors, and sometimes inadequate procedures or training. Prevention relies on:</p>
         <ul>
           <li>Effective workplace examinations and prompt correction of hazards.</li>

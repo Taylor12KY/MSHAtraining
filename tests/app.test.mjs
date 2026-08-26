@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-video-fix-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-copy-links-3"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-copy-links-3"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -74,7 +74,8 @@ test('trial-ready resources include the official miners rights handout and three
   assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-miners-rights-trifold.pdf')));
   assert.match(modulesPartOne, /\/assets\/docs\/msha-miners-rights-trifold\.pdf/);
   assert.match(modulesPartOne, /Miners' Rights and Responsibilities Trifold/);
-  assert.match(modulesPartOne, /Powered Haulage Stand-Down/);
+  assert.match(modulesPartOne, /powered-haulage-safety/);
+  assert.match(modulesPartOne, /powered-haulage initiative/i);
   assert.match(modulesPartTwo, /Current First-Aid References/);
   assert.match(modulesPartTwo, /MSA ALTAIR 4X user instructions/);
   assert.equal((siteContent.match(/\$\{siteAerialPanel\(/g) || []).length, 3);
@@ -284,7 +285,7 @@ test('all 58 active videos are unique and retired submissions are documented', (
   assert.equal(thirdBatch.length, 11);
   assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 6155);
   assert.equal(currentResources.length, 5);
-  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4251);
+  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4301);
   assert.equal(context.thirdSubmittedIds.length, 17);
   assert.equal(ids.filter(id => id === 'X5r4upNwIGk').length, 1);
   assert.equal(ids.filter(id => id === 'yEwFZHVLsso').length, 1);
@@ -296,7 +297,9 @@ test('all 58 active videos are unique and retired submissions are documented', (
   assert.equal(ids.filter(id => id === 'W4uQqiHnXUI').length, 0);
   assert.equal(ids.filter(id => id === 'xtb61bDBc6o').length, 0);
   assert.equal(ids.filter(id => id === 'v26fTGBEi9E').length, 0);
-  assert.equal(ids.filter(id => id === 'Veayb1NucTA').length, 1);
+  assert.equal(ids.filter(id => id === 'Veayb1NucTA').length, 0);
+  assert.ok(ids.includes('zM3R_1JceWo'));
+  assert.match(context.retiredIds.Veayb1NucTA, /unavailable|replaced|zM3R_1JceWo/i);
   assert.match(context.retiredIds.MziZesbb32Q, /Replaced/);
   assert.match(context.retiredIds.W4uQqiHnXUI, /Retired/);
   assert.match(context.retiredIds.xtb61bDBc6o, /Replaced/);
@@ -310,7 +313,7 @@ test('all 58 active videos are unique and retired submissions are documented', (
   assert.ok(ids.includes('1JfkPpr6sRM'));
   assert.equal(ids.filter(id => id === 'zfuxPqg3z38').length, 0);
   assert.equal(ids.filter(id => id === 'ZhTZKsI3-eY').length, 0);
-  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'Veayb1NucTA']) assert.ok(ids.includes(id));
+  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'zM3R_1JceWo']) assert.ok(ids.includes(id));
 });
 
 test('current respirator, cleanup, hearing, blind-area, and task-analysis lessons are present', () => {
