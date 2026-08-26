@@ -277,7 +277,7 @@ const MODULES_PART_2 = [
   },
   {
     id: 11,
-    title: "Mine Gases",
+    title: "Blasting, Explosives, & Mine Gases",
     hours: 2.0,
     objectives: [
       "Identify the major mine gases, their sources, health or explosion hazards, and likely accumulation areas",
