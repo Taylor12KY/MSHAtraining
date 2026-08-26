@@ -16,14 +16,6 @@ const REQUIRED_VIDEOS = [
     description: "Overview of miners' rights and responsibilities under the Mine Act."
   },
   {
-    id: "AU07-U96dfw",
-    moduleId: 3,
-    title: "Self Rescuer MSA W-65",
-    author: "David Menchaca",
-    durationSeconds: 162,
-    description: "English animation of the MSA W65 donning sequence used at these limestone operations."
-  },
-  {
     id: "NH7vatxj_t0",
     moduleId: 4,
     title: "Powered Haulage: Be Alert, Be Ready!",
@@ -280,6 +272,23 @@ const REQUIRED_VIDEOS = [
     description: "NIOSH historical case study of the 1972 Sunshine Mine fire, emergency response, and lessons that shaped metal/nonmetal safety."
   },
   {
+    id: "106597590",
+    moduleId: 3,
+    provider: "vimeo",
+    title: "Cleveland Potash - W65 Self Rescuer",
+    author: "Ithica / IthicaFilms",
+    durationSeconds: 332,
+    description: "Donning and how-it-works film of the actual MSA W65 (mouthpiece, nose clip, filter canister) shot at Boulby UK potash mine."
+  },
+  {
+    id: "1JfkPpr6sRM",
+    moduleId: 3,
+    title: "The Self Rescuer - A 1980 NCB Training Film. HD. rt 8 mins.",
+    author: "Coal Mining in the UK",
+    durationSeconds: 408,
+    description: "Historical hopcalite filter-self-rescuer training: how and when to use a belt-worn CO filter self-rescuer. Same class of device as the MSA W65; it does not make or carry its own oxygen."
+  },
+  {
     id: "eEj1JOVu_eY",
     moduleId: 2,
     title: "Miners' Rights and Responsibilities",
@@ -488,6 +497,7 @@ const VIDEO_CONTENT_DUPLICATES = {
 };
 
 const RETIRED_VIDEO_IDS = {
+  "AU07-U96dfw": "Removed from the Module 3 required sequence; English MSA W65 Powtoon donning animation replaced by Cleveland Potash W65 footage.",
   "Z33qMr0CobM": "Removed at instructor request; Spanish visual of the MSA W65.",
   MziZesbb32Q: "Replaced by the newer CDC/NIOSH head-protection presentation.",
   W4uQqiHnXUI: "Retired to preserve instructional time for the current fall-protection sequence.",
@@ -500,14 +510,14 @@ const CURRENT_RESOURCE_VIDEO_IDS = new Set([
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
-  "QGkT8Ahh1-E", "AU07-U96dfw", "NH7vatxj_t0",
+  "QGkT8Ahh1-E", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
   "wal2KP1bbIY"
 ]);
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["WTKCluA6lgE", "AU07-U96dfw"],
+  3: ["WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -526,7 +536,8 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "QGkT8Ahh1-E": "Next, move from the agency's role to the specific rights and responsibilities miners exercise at work.",
   "eEj1JOVu_eY": "Use this second presentation to consolidate the protected activities, reporting options, and responsibilities just introduced.",
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
-  "AU07-U96dfw": "Sunshine showed why delayed escape and missing self-rescue killed 91 metal miners. Now watch how to don the MSA W65 you carry so you can convert carbon monoxide and move to fresh air instead of waiting for smoke.",
+  "106597590": "Sunshine showed why delayed escape and missing self-rescue killed 91 metal miners. Now watch how the MSA W65 you carry actually works and how to don it—mouthpiece, nose clip, filter canister—on a real unit at Cleveland Potash.",
+  "1JfkPpr6sRM": "You have seen the W65 you carry. This 1980 NCB film is the same class of hopcalite filter self-rescuer: old proven technology that still does the same job. Learn how and when to use it, and remember UK service rules are not the inspection intervals used here.",
   "q_4q8lm0tCs": "Build on the broad powered-haulage hazards by identifying specific prevention practices and technologies.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
   "mSt9lHz22xM": "Apply those ideas to a short underground field example involving traffic flow, clearances, and a dumping area.",
@@ -591,9 +602,9 @@ const MODULE_VIDEO_SCOPE = {
 const VIDEO_TRAINING_GUIDANCE = {
   "VEOVVx3rDyI": { focus: "Identify MSHA's enforcement, education, training, and technical-support roles and how they affect daily mine safety." },
   "QGkT8Ahh1-E": { focus: "Listen for miners' protected rights, personal responsibilities, hazard-reporting options, and protections against retaliation." },
-  "AU07-U96dfw": {
-    focus: "After Sunshine, this English animation shows the MSA W65 you carry. Follow the donning sequence: inspect the seal, operate the red lever, pull the unit by the harness, insert the mouthpiece, apply the nose clip, position the harness, replace the hard hat, and escape to fresh air.",
-    scope: "The W65 converts carbon monoxide to carbon dioxide. It does not make oxygen and will not protect in an oxygen-deficient atmosphere. Don it at the first sign of fire or explosion even without visible smoke. This animation is not a substitute for current MSA instructions, mine procedures, or hands-on practice with the approved W65 trainer."
+  "106597590": {
+    focus: "This Cleveland Potash film is the W65 donning and how-it-works clip for the device you carry. Watch the actual MSA W65: mouthpiece, nose clip, and filter canister. Shot at Boulby UK potash mine by Ithica / IthicaFilms.",
+    scope: "This is the same MSA W65 class used at Allen Company underground limestone operations. It converts carbon monoxide; it does not make oxygen and will not protect in oxygen-deficient air. UK service and inspection intervals shown in the film are not the U.S. MSHA or current MSA intervals for these sites. Follow this mine's procedures, current MSA instructions, and hands-on practice with the approved W65 trainer."
   },
   "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
   "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },
@@ -650,6 +661,10 @@ const VIDEO_TRAINING_GUIDANCE = {
   "WTKCluA6lgE": {
     focus: "Study the historical WHY we carry self-rescuers. On May 2, 1972, the Sunshine Mine fire produced carbon monoxide that killed 91 metal miners after delayed evacuation, unclear overall command, smoke in the intakes, and inadequate self-rescue preparation.",
     scope: "NIOSH identifies this disaster as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. Connect the case to prompt evacuation, emergency drills, self-rescue preparation, ventilation and fire controls, stronger enforcement, and the creation of MSHA. Historical equipment shown in the film is not the MSA W65 used at these operations; current site plans and W65 instruction control here."
+  },
+  "1JfkPpr6sRM": {
+    focus: "This 1980 NCB film teaches how and when to use a hopcalite filter self-rescuer—the same job the MSA W65 still does today. Don it for carbon monoxide from a fire or blast fumes, keep it on until fresh air, and know it does not work if the air is oxygen-deficient.",
+    scope: "This is old, proven technology that still works. The chemistry is hopcalite: copper and manganese oxides that turn carbon monoxide into carbon dioxide using oxygen already in the air. That catalyst was discovered in 1918 at Johns Hopkins and the University of California during World War I (the name is Hop + Cal). Belt-worn mining filter self-rescuers of this type showed up around 1960. MSA leaflets point to a German origin; in the UK the NCB and MSA were involved. After carbon monoxide deaths at Whitehaven (1947) and Creswell (1950), the UK ran trials in 1953 and 1962, then in 1967 issued the MSA 230 so every man underground carried one. A heat exchanger was added in 1968 because the reaction gets hot. By the 1970s it was a legal carry requirement in UK mines. This 1980 film is that generation of training. The MSA W65 at these Allen Company underground limestone operations is the same class of device: a hopcalite filter self-rescuer, not a unit that makes or carries its own oxygen. UK service and inspection intervals are not the U.S. MSHA or current MSA intervals used here. Follow this mine's inspection, carrying, and replacement rules."
   },
   "eEj1JOVu_eY": { focus: "Identify protected activities, inspection participation, hazard reporting, training rights, and the responsibilities miners retain for safe work." },
   "SN4Sfuhvs2Y": { focus: "Use this short review to reinforce the statutory rights a miner can exercise without retaliation." },

@@ -264,7 +264,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 57 active videos are unique and retired submissions are documented', () => {
+test('all 58 active videos are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -273,8 +273,8 @@ test('all 57 active videos are unique and retired submissions are documented', (
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 57);
-  assert.equal(new Set(ids).size, 57);
+  assert.equal(context.videos.length, 58);
+  assert.equal(new Set(ids).size, 58);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 15);
@@ -303,8 +303,13 @@ test('all 57 active videos are unique and retired submissions are documented', (
   assert.match(context.retiredIds.v26fTGBEi9E, /Replaced/);
   assert.match(context.retiredIds.Z33qMr0CobM, /instructor request|Spanish/);
   assert.equal(ids.filter(id => id === 'Z33qMr0CobM').length, 0);
-  assert.ok(ids.includes('AU07-U96dfw'));
+  assert.equal(ids.filter(id => id === 'AU07-U96dfw').length, 0);
+  assert.match(context.retiredIds['AU07-U96dfw'], /Module 3|Powtoon|Cleveland/i);
   assert.ok(ids.includes('WTKCluA6lgE'));
+  assert.ok(ids.includes('106597590'));
+  assert.ok(ids.includes('1JfkPpr6sRM'));
+  assert.equal(ids.filter(id => id === 'zfuxPqg3z38').length, 0);
+  assert.equal(ids.filter(id => id === 'ZhTZKsI3-eY').length, 0);
   for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'Veayb1NucTA']) assert.ok(ids.includes(id));
 });
 
@@ -412,13 +417,13 @@ test('Sunshine Mine guidance explains its regulatory legacy', () => {
   assert.match(sunshine, /ventilation/i);
 });
 
-test('all 9 retained pre-existing embeds use the tracked managed player system', () => {
+test('all 8 retained pre-existing embeds use the tracked managed player system', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const preExisting = context.videos.filter(video => context.preExistingIds.includes(video.id));
-  assert.equal(context.preExistingIds.length, 9);
-  assert.equal(preExisting.length, 9);
+  assert.equal(context.preExistingIds.length, 8);
+  assert.equal(preExisting.length, 8);
   assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 0);
   assert.ok(preExisting.every(video => video.provider !== 'vimeo'));
   assert.doesNotMatch(videoLibrary, /98555798/);
@@ -428,6 +433,37 @@ test('all 9 retained pre-existing embeds use the tracked managed player system',
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
 });
 
+test('Module 3 sequence is Sunshine, Cleveland Potash W65, then 1980 NCB filter self-rescuer', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.guidance = VIDEO_TRAINING_GUIDANCE;')
+    .runInNewContext(context);
+  assert.deepEqual([...context.sequences[3]], ['WTKCluA6lgE', '106597590', '1JfkPpr6sRM']);
+  const cleveland = context.videos.find(video => video.id === '106597590');
+  assert.equal(cleveland.provider, 'vimeo');
+  assert.equal(cleveland.durationSeconds, 332);
+  assert.match(cleveland.title, /Cleveland Potash/);
+  const ncb = context.videos.find(video => video.id === '1JfkPpr6sRM');
+  assert.equal(ncb.durationSeconds, 408);
+  assert.match(ncb.title, /1980 NCB/);
+  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 3);
+  const clevelandGuide = `${context.guidance['106597590'].focus} ${context.guidance['106597590'].scope}`;
+  assert.match(clevelandGuide, /W65/);
+  assert.match(clevelandGuide, /Boulby|Cleveland Potash/i);
+  assert.match(clevelandGuide, /UK/);
+  const ncbGuide = `${context.guidance['1JfkPpr6sRM'].focus} ${context.guidance['1JfkPpr6sRM'].scope}`;
+  assert.match(ncbGuide, /hopcalite/i);
+  assert.match(ncbGuide, /1918/);
+  assert.match(ncbGuide, /Johns Hopkins/);
+  assert.match(ncbGuide, /1967/);
+  assert.match(ncbGuide, /MSA 230/);
+  assert.match(ncbGuide, /Whitehaven/);
+  assert.match(ncbGuide, /Creswell/);
+  assert.match(ncbGuide, /heat exchanger/i);
+  assert.match(ncbGuide, /oxygen-deficient/i);
+  assert.match(ncbGuide, /UK/);
+  assert.match(app, /https:\/\/player\.vimeo\.com\/video\/'\s*\+\s*videoId/);
+});
+
 test('training content is W65-specific and contains no SCSR material', () => {
   const source = html + modulesSource + siteContent + quizExpansions + videoLibrary + app;
   assert.doesNotMatch(source, /\bSCSR\b|self-contained self-rescuer|CSE SR-100/i);
@@ -435,8 +471,12 @@ test('training content is W65-specific and contains no SCSR material', () => {
   assert.match(modulesPartOne, /does not protect in an oxygen-deficient atmosphere/i);
   assert.match(modulesPartOne, /Fred Raubach/);
   assert.match(modulesPartOne, /https:\/\/vimeo\.com\/98555798/);
+  assert.match(modulesPartOne, /Cleveland Potash/);
+  assert.match(modulesPartOne, /hopcalite/i);
   assert.doesNotMatch(modulesPartOne, /Video 2 – Official MSA W65 Visual Review/);
   assert.doesNotMatch(modulesPartOne, /Z33qMr0CobM/);
+  assert.doesNotMatch(modulesPartOne, /AU07-U96dfw/);
+  assert.doesNotMatch(modulesPartOne, /zfuxPqg3z38|ZhTZKsI3-eY/);
 });
 
 test('managed video notices accurately describe verified in-player completion', () => {

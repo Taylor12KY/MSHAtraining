@@ -138,12 +138,13 @@ const MODULES_PART_1 = [
     content: `
       <div class="content-section">
         <h3>The MSA W65 Used at These Operations</h3>
-        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
+        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It is a hopcalite filter self-rescuer: copper and manganese oxides turn carbon monoxide into carbon dioxide using oxygen already in the air. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
         <div class="key-box"><strong>Critical limitation:</strong> The W65 does not protect in an oxygen-deficient atmosphere. Use it only for emergency escape, follow the mine emergency plan, and move promptly toward fresh air by the designated escapeway.</div>
       </div>
       <div class="content-section">
         <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
         <p>The first required in-app video is the NIOSH Sunshine Mine case study. On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
+        <p>Video 2 is the Cleveland Potash W65 donning and how-it-works film, shot at Boulby UK potash mine on the actual MSA W65 (mouthpiece, nose clip, filter canister). Video 3 is the 1980 NCB training film on the hopcalite filter self-rescuer—old proven technology that still does the same job. Both UK films may show UK service or inspection intervals; those are not the U.S. MSHA or current MSA rules used at these Allen Company underground limestone operations.</p>
       </div>
       <div class="content-section">
         <h3>MSA W65 Inspection, Carrying & Use</h3>
@@ -155,6 +156,11 @@ const MODULES_PART_1 = [
           <li>Breathe through the mouthpiece, keep the nose clip in place, and do not remove the device until you are confirmed to be in fresh air.</li>
           <li>The sealed W65 is a one-use escape device. After it is opened or used, follow site procedures to remove it from service.</li>
         </ul>
+      </div>
+      <div class="content-section">
+        <h3>Old Proven Technology That Still Works</h3>
+        <p>Hopcalite was discovered in 1918 at Johns Hopkins and the University of California during World War I (the name is Hop + Cal). Belt-worn mining filter self-rescuers of this type showed up around 1960. MSA leaflets point to a German origin; in the UK the NCB and MSA were involved. After carbon monoxide deaths at Whitehaven (1947) and Creswell (1950), the UK ran trials in 1953 and 1962, then in 1967 issued the MSA 230 so every man underground carried one. A heat exchanger was added in 1968 because the reaction gets hot. By the 1970s it was a legal carry requirement in UK mines. The 1980 NCB film is that generation of training.</p>
+        <p>The MSA W65 you carry is the same class of device. Don it for carbon monoxide from a fire or blast fumes, keep it on until fresh air, and know it does not work if the air is oxygen-deficient. Follow this mine's U.S. inspection, carrying, and replacement rules—not the UK intervals in the films.</p>
       </div>
       <div class="content-section">
         <h3>Hands-On W65 Practice</h3>
@@ -188,13 +194,13 @@ const MODULES_PART_1 = [
           </div>
           <span class="document-meta">Vimeo · embed blocked</span>
         </div>
-        <p>The Vimeo owner set embed to Nowhere, so this site cannot play the 13:39 Fred Raubach demonstration in-app. The instructor may open it in class at <a href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">https://vimeo.com/98555798</a>. The app cannot verify that viewing. Required in-app credit is the Sunshine case study, the English W65 donning animation, the 3.5-hour timer, and hands-on trainer practice.</p>
+        <p>The Vimeo owner set embed to Nowhere, so this site cannot play the 13:39 Fred Raubach demonstration in-app. The instructor may open it in class at <a href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">https://vimeo.com/98555798</a>. The app cannot verify that viewing. Required in-app credit is the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, the 3.5-hour timer, and hands-on trainer practice.</p>
         <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open Fred Raubach on Vimeo ↗</a>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the English W65 donning animation, optional instructor Vimeo presentation, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, optional instructor Vimeo presentation, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the English W65 donning animation, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. The instructor may also show the Fred Raubach Vimeo presentation in class. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. The instructor may also show the Fred Raubach Vimeo presentation in class. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
