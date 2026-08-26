@@ -386,7 +386,7 @@ const MODULES_PART_2 = [
         <ul>
           <li>Obey blast signals, exclusion zones, and the all-clear. Do not walk onto a muck pile or heading to "see if it looks clear."</li>
           <li>The blasting videos in this module are awareness only. They do not authorize handling explosives, stemming, or firing.</li>
-          <li>Module 5 still has the open-pit blast-area overview, and Module 12 still has the task-training explosives sequence. They were copied here so gases and blasting fumes are taught together.</li>
+          <li>The open-pit blast-area overview and the underground explosives sequence now live in this module (moved from Modules 5 and 12) so gases and blasting fumes are taught together.</li>
         </ul>
       </div>
       <div class="content-section">
