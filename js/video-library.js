@@ -16,12 +16,12 @@ const REQUIRED_VIDEOS = [
     description: "Overview of miners' rights and responsibilities under the Mine Act."
   },
   {
-    id: "Z33qMr0CobM",
+    id: "AU07-U96dfw",
     moduleId: 3,
-    title: "Official MSA W65 Visual Demonstration",
-    author: "MSA Latin America",
-    durationSeconds: 87,
-    description: "Official visual demonstration of the MSA W65; the instructor narrates the Spanish-language video in English."
+    title: "Self Rescuer MSA W-65",
+    author: "David Menchaca",
+    durationSeconds: 162,
+    description: "English animation of the MSA W65 donning sequence used at these limestone operations."
   },
   {
     id: "NH7vatxj_t0",
@@ -273,7 +273,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "WTKCluA6lgE",
-    moduleId: 12,
+    moduleId: 3,
     title: "You Are My Sunshine: The Sunshine Mine Disaster",
     author: "PublicResourceOrg",
     durationSeconds: 4077,
@@ -444,7 +444,7 @@ const REQUIRED_VIDEOS = [
     moduleId: 11,
     title: "The Confined Space Hazards That Kill Most Often",
     author: "Ally Safety",
-    durationSeconds: 0,
+    durationSeconds: 242,
     description: "Atmospheric hazards in confined spaces: toxic or oxygen-deficient air, and why untrained rescue attempts kill. Principles only; not mine-rescue or confined-space qualification."
   },
   {
@@ -488,7 +488,7 @@ const VIDEO_CONTENT_DUPLICATES = {
 };
 
 const RETIRED_VIDEO_IDS = {
-  "AU07-U96dfw": "Replaced by the official MSA W65 visual review; the full Fred Raubach demonstration remains an instructor-opened Vimeo presentation.",
+  "Z33qMr0CobM": "Removed at instructor request; Spanish visual of the MSA W65.",
   MziZesbb32Q: "Replaced by the newer CDC/NIOSH head-protection presentation.",
   W4uQqiHnXUI: "Retired to preserve instructional time for the current fall-protection sequence.",
   xtb61bDBc6o: "Replaced by NIOSH blind-area diagrams and an actual-equipment visibility lesson.",
@@ -500,14 +500,14 @@ const CURRENT_RESOURCE_VIDEO_IDS = new Set([
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
-  "QGkT8Ahh1-E", "Z33qMr0CobM", "NH7vatxj_t0",
+  "QGkT8Ahh1-E", "AU07-U96dfw", "NH7vatxj_t0",
   "yEwFZHVLsso", "GSPRVJsu3_A", "qDDg-CbOTmw", "j9DNL0DnKmU", "OxOwJC5wHyc",
   "wal2KP1bbIY"
 ]);
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["Z33qMr0CobM"],
+  3: ["WTKCluA6lgE", "AU07-U96dfw"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -516,7 +516,7 @@ const MODULE_VIDEO_SEQUENCE = {
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI"],
   11: ["-wrwD7s9rUE", "b7mhJ8viccI", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "UD2u9LXREWM"],
-  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "WTKCluA6lgE"]
+  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE"]
 };
 
 const VIDEO_SEQUENCE_TRANSITIONS = {
@@ -526,6 +526,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "QGkT8Ahh1-E": "Next, move from the agency's role to the specific rights and responsibilities miners exercise at work.",
   "eEj1JOVu_eY": "Use this second presentation to consolidate the protected activities, reporting options, and responsibilities just introduced.",
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
+  "AU07-U96dfw": "Sunshine showed why delayed escape and missing self-rescue killed 91 metal miners. Now watch how to don the MSA W65 you carry so you can convert carbon monoxide and move to fresh air instead of waiting for smoke.",
   "q_4q8lm0tCs": "Build on the broad powered-haulage hazards by identifying specific prevention practices and technologies.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
   "mSt9lHz22xM": "Apply those ideas to a short underground field example involving traffic flow, clearances, and a dumping area.",
@@ -570,13 +571,12 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "4MjKwOI2LrE": "Connect that principle to the human consequences one person's shortcut can create for coworkers and family.",
   "zaliBZlRsaE": "Apply the module's safe-work-procedure framework to the planned sequence and coordination required for drill-and-blast work.",
   "G2Hs51QDszc": "Next, place that sequence in an underground mining context and identify the hazards surrounding explosives and re-entry.",
-  "gbaGN7JQoO4": "Build on the overview with a fuller look at storage, transport, loading, security, communication, and authorized roles.",
-  "WTKCluA6lgE": "Close with the Sunshine Mine case to connect task decisions and emergency readiness to the regulatory protections that followed."
+  "gbaGN7JQoO4": "Build on the overview with a fuller look at storage, transport, loading, security, communication, and authorized roles."
 };
 
 const MODULE_VIDEO_SCOPE = {
   2: "Use the video to understand miners' rights, responsibilities, and regulatory history. Current law, the approved training plan, and instructor guidance control if an older presentation differs.",
-  3: "Use only the current MSA W65 instructions and this mine's procedures. Video viewing does not replace hands-on practice with an approved W65 training unit.",
+  3: "Use only the current MSA W65 instructions and this mine's procedures. The W65 converts carbon monoxide; it does not supply oxygen. Video viewing does not replace hands-on practice with an approved W65 training unit.",
   4: "Transfer the communication, visibility, seat-belt, guarding, and isolation principles to this operation. The video is not task authorization or equipment-specific operating instruction.",
   5: "Concentrate on recognizing and controlling hazards. Do not enter restricted areas or perform specialized work without site authorization and task training.",
   6: "Treat incident footage as a case study. In an emergency, follow the current mine emergency plan, designated escapeways, communications, and instructor direction.",
@@ -591,9 +591,9 @@ const MODULE_VIDEO_SCOPE = {
 const VIDEO_TRAINING_GUIDANCE = {
   "VEOVVx3rDyI": { focus: "Identify MSHA's enforcement, education, training, and technical-support roles and how they affect daily mine safety." },
   "QGkT8Ahh1-E": { focus: "Listen for miners' protected rights, personal responsibilities, hazard-reporting options, and protections against retaliation." },
-  "Z33qMr0CobM": {
-    focus: "After the full Fred Raubach presentation, follow this shorter visual W65 opening and donning review while the instructor narrates each step in English.",
-    scope: "This official MSA Latin America video has Spanish narration and no captions. It supplements—not replaces—the full 13:39 instructor-opened presentation, current MSA instructions, mine plan, and hands-on practice with the approved W65 trainer."
+  "AU07-U96dfw": {
+    focus: "After Sunshine, this English animation shows the MSA W65 you carry. Follow the donning sequence: inspect the seal, operate the red lever, pull the unit by the harness, insert the mouthpiece, apply the nose clip, position the harness, replace the hard hat, and escape to fresh air.",
+    scope: "The W65 converts carbon monoxide to carbon dioxide. It does not make oxygen and will not protect in an oxygen-deficient atmosphere. Don it at the first sign of fire or explosion even without visible smoke. This animation is not a substitute for current MSA instructions, mine procedures, or hands-on practice with the approved W65 trainer."
   },
   "NH7vatxj_t0": { focus: "Look for blind spots, positive communication, safe positioning, traffic controls, and choices that keep people out of the line of fire." },
   "yEwFZHVLsso": { focus: "Identify conveyor guards, safe crossings, emergency stops, stored energy, and when lockout/tagout is required." },
@@ -648,8 +648,8 @@ const VIDEO_TRAINING_GUIDANCE = {
   "2cyQ5QTPOek": { focus: "Identify unstable slopes, hidden voids, bridging, engulfment, dumping hazards, and safe loader and pedestrian positioning around stockpiles." },
   "1u6c7YMgkB8": { focus: "Understand how benching and pillar geometry can contribute to progressive or massive collapse and why exclusion zones and plan compliance matter." },
   "WTKCluA6lgE": {
-    focus: "Study the failures that made the Sunshine fire so deadly: delayed evacuation, unclear overall command, inadequate emergency and self-rescue preparation, smoke and carbon monoxide entering intake airways, and limited escape readiness.",
-    scope: "Regulatory legacy: NIOSH identifies this disaster as a catalyst for the 1977 metal/nonmetal safety reforms that underpin many current protections. Connect the case to prompt evacuation, emergency drills, self-rescue preparation, ventilation and fire controls, stronger enforcement, and the creation of MSHA. Historical equipment is context; current site plans and W65 instruction control here."
+    focus: "Study the historical WHY we carry self-rescuers. On May 2, 1972, the Sunshine Mine fire produced carbon monoxide that killed 91 metal miners after delayed evacuation, unclear overall command, smoke in the intakes, and inadequate self-rescue preparation.",
+    scope: "NIOSH identifies this disaster as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. Connect the case to prompt evacuation, emergency drills, self-rescue preparation, ventilation and fire controls, stronger enforcement, and the creation of MSHA. Historical equipment shown in the film is not the MSA W65 used at these operations; current site plans and W65 instruction control here."
   },
   "eEj1JOVu_eY": { focus: "Identify protected activities, inspection participation, hazard reporting, training rights, and the responsibilities miners retain for safe work." },
   "SN4Sfuhvs2Y": { focus: "Use this short review to reinforce the statutory rights a miner can exercise without retaliation." },
@@ -697,6 +697,14 @@ const VIDEO_TRAINING_GUIDANCE = {
   "b7mhJ8viccI": {
     focus: "Observe how the supervisor inspects the ALTAIR 4X, verifies the cylinder and regulator, applies known gas, confirms the installed sensors and alarms respond, and recognizes BUMP PASS versus BUMP ERROR.",
     scope: "Only designated supervisors operate and make decisions from the company detector. This vendor demonstration is not an MSA-produced certification course and does not authorize trainees to test or clear an area. Trainees must recognize alarms, know a typical four-gas unit does not detect every mine gas, withdraw from questionable air, and notify the supervisor."
+  },
+  "UD2u9LXREWM": {
+    focus: "Follow underground explosives storage, transport, blast-area security, fumes, misfires, and the requirement to wait for authorized re-entry after a shot.",
+    scope: "This NIOSH presentation is awareness only. Only trained and authorized persons may handle explosives. A detector reading or video does not clear an area; follow the current blast plan, signals, and qualified-person procedures."
+  },
+  "-wrwD7s9rUE": {
+    focus: "Identify why toxic or oxygen-deficient air kills in enclosed spaces and why untrained rescue attempts so often create a second victim.",
+    scope: "This Ally Safety tape is principles only. It is not mine-rescue, confined-space, or detector qualification and does not authorize entry or rescue. Withdraw, warn others, and report; do not enter questionable air."
   }
 };
 

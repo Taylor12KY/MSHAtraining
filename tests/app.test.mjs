@@ -264,7 +264,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 55 active videos are unique and retired submissions are documented', () => {
+test('all 57 active videos are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -273,8 +273,8 @@ test('all 55 active videos are unique and retired submissions are documented', (
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 55);
-  assert.equal(new Set(ids).size, 55);
+  assert.equal(context.videos.length, 57);
+  assert.equal(new Set(ids).size, 57);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 15);
@@ -301,6 +301,10 @@ test('all 55 active videos are unique and retired submissions are documented', (
   assert.match(context.retiredIds.W4uQqiHnXUI, /Retired/);
   assert.match(context.retiredIds.xtb61bDBc6o, /Replaced/);
   assert.match(context.retiredIds.v26fTGBEi9E, /Replaced/);
+  assert.match(context.retiredIds.Z33qMr0CobM, /instructor request|Spanish/);
+  assert.equal(ids.filter(id => id === 'Z33qMr0CobM').length, 0);
+  assert.ok(ids.includes('AU07-U96dfw'));
+  assert.ok(ids.includes('WTKCluA6lgE'));
   for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'Veayb1NucTA']) assert.ok(ids.includes(id));
 });
 
@@ -418,7 +422,7 @@ test('all 9 retained pre-existing embeds use the tracked managed player system',
   assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 0);
   assert.ok(preExisting.every(video => video.provider !== 'vimeo'));
   assert.doesNotMatch(videoLibrary, /98555798/);
-  assert.match(videoLibrary, /Z33qMr0CobM/);
+  assert.match(videoLibrary, /AU07-U96dfw/);
   assert.match(app, /function loadVimeoApi/);
   assert.match(app, /player\.setCurrentTime\(record\.watchedSeconds\)/);
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
@@ -429,9 +433,10 @@ test('training content is W65-specific and contains no SCSR material', () => {
   assert.doesNotMatch(source, /\bSCSR\b|self-contained self-rescuer|CSE SR-100/i);
   assert.match(source, /MSA W65/);
   assert.match(modulesPartOne, /does not protect in an oxygen-deficient atmosphere/i);
-  assert.match(modulesPartOne, /Full W65 Demonstration by Fred Raubach · 13:39/);
+  assert.match(modulesPartOne, /Fred Raubach/);
   assert.match(modulesPartOne, /https:\/\/vimeo\.com\/98555798/);
-  assert.match(modulesPartOne, /Video 2 – Official MSA W65 Visual Review · 1:27/);
+  assert.doesNotMatch(modulesPartOne, /Video 2 – Official MSA W65 Visual Review/);
+  assert.doesNotMatch(modulesPartOne, /Z33qMr0CobM/);
 });
 
 test('managed video notices accurately describe verified in-player completion', () => {

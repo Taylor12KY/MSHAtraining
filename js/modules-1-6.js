@@ -132,13 +132,18 @@ const MODULES_PART_1 = [
     objectives: [
       "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
       "Describe inspection, carrying, storage, and basic donning requirements for the W65",
-      "Understand that hands-on practice with an approved W65 training unit is still required"
+      "Understand that hands-on practice with an approved W65 training unit is still required",
+      "Connect the 1972 Sunshine Mine fire to why these operations carry a filter self-rescuer"
     ],
     content: `
       <div class="content-section">
         <h3>The MSA W65 Used at These Operations</h3>
         <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
         <div class="key-box"><strong>Critical limitation:</strong> The W65 does not protect in an oxygen-deficient atmosphere. Use it only for emergency escape, follow the mine emergency plan, and move promptly toward fresh air by the designated escapeway.</div>
+      </div>
+      <div class="content-section">
+        <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
+        <p>The first required in-app video is the NIOSH Sunshine Mine case study. On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
       </div>
       <div class="content-section">
         <h3>MSA W65 Inspection, Carrying & Use</h3>
@@ -161,34 +166,35 @@ const MODULES_PART_1 = [
         </ul>
         <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace instructor-led donning practice with the approved MSA W65 training unit and the procedures in the current mine training plan.</div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Full W65 Demonstration by Fred Raubach · 13:39</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This is the complete presentation selected for the course. Vimeo's owner currently permits playback on Vimeo but blocks playback inside this training site.</p>
-        <div class="official-resource-panel">
-          <div class="official-resource-heading">
-            <div>
-              <span class="resource-badge resource-badge-required">Required instructor presentation</span>
-              <h3>Open the full 13:39 presentation on Vimeo</h3>
-            </div>
-            <span class="document-meta">External playback</span>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge">Official references</span>
+            <h3>MSA W65 and MSHA filter self-rescuer materials</h3>
           </div>
-          <p>The instructor opens the presentation, shows it to the class in full, and verifies it as part of the W65 instruction and hands-on signoff. The course timer continues to document the full 3.5-hour module period.</p>
-          <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open full W65 demonstration ↗</a>
         </div>
-        <div class="warning-box"><strong>Why it opens separately:</strong> this is a Vimeo-owner privacy restriction, not a browser error. External playback cannot be automatically verified by the app, so the instructor confirms it during the required W65 demonstration and hands-on verification.</div>
-      </div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 2 – Official MSA W65 Visual Review · 1:27</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">The narration is Spanish and captions are unavailable. The instructor will narrate each inspection and donning step in English while trainees follow the visual sequence.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual review" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p>Use the current manufacturer instructions and the MSHA HH-12 card with the instructor. These readings support—not replace—the approved W65 trainer and the mine emergency plan.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/HH%20Cards/HH-12%20Filter%20Self-Rescuer%20MNM.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA HH-12 Filter Self-Rescuer</strong><span>Metal/nonmetal hazard card for the filter self-rescuer</span></a>
+          <a class="resource-card" href="http://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Donning%20Instructions%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 donning instructions</strong><span>English donning sequence from the manufacturer</span></a>
+          <a class="resource-card" href="http://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
-        <div class="key-box"><strong>Instructor cue:</strong> identify the sealed case and release, removal from the container, mouthpiece placement and seal, nose clip, head harness, and immediate escape toward known fresh air. Reinforce that the W65 does not supply oxygen.</div>
       </div>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge">Optional instructor presentation</span>
+            <h3>Fred Raubach W65 demonstration · 13:39</h3>
+          </div>
+          <span class="document-meta">Vimeo · embed blocked</span>
+        </div>
+        <p>The Vimeo owner set embed to Nowhere, so this site cannot play the 13:39 Fred Raubach demonstration in-app. The instructor may open it in class at <a href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">https://vimeo.com/98555798</a>. The app cannot verify that viewing. Required in-app credit is the Sunshine case study, the English W65 donning animation, the 3.5-hour timer, and hands-on trainer practice.</p>
+        <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open Fred Raubach on Vimeo ↗</a>
+      </div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the English W65 donning animation, optional instructor Vimeo presentation, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, the official MSA visual review, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the English W65 donning animation, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. The instructor may also show the Fred Raubach Vimeo presentation in class. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
