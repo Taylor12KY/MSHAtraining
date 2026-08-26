@@ -73,7 +73,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "9wnDBLifDB4",
-    moduleId: 5,
+    moduleId: 11,
     title: "A Look Inside an Open-Pit Blasting Process",
     author: "TEKNIQ",
     durationSeconds: 420,
@@ -185,7 +185,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "gbaGN7JQoO4",
-    moduleId: 12,
+    moduleId: 11,
     title: "Explosives Underground – Handling Explosives in Modern Mines",
     author: "PublicResourceOrg",
     durationSeconds: 900,
@@ -337,7 +337,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "zaliBZlRsaE",
-    moduleId: 12,
+    moduleId: 11,
     title: "Drill and Blast Sequence",
     author: "Kalloc Tech",
     durationSeconds: 209,
@@ -353,7 +353,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "G2Hs51QDszc",
-    moduleId: 12,
+    moduleId: 11,
     title: "Underground Drilling and Blasting Training Overview",
     author: "Australian Centre for Geomechanics",
     durationSeconds: 188,
@@ -509,14 +509,14 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["Z33qMr0CobM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "Ka9UKa_xYNU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "Veayb1NucTA"],
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI"],
   11: ["-wrwD7s9rUE", "b7mhJ8viccI", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "UD2u9LXREWM"],
-  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "zaliBZlRsaE", "G2Hs51QDszc", "gbaGN7JQoO4", "WTKCluA6lgE"]
+  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE", "WTKCluA6lgE"]
 };
 
 const VIDEO_SEQUENCE_TRANSITIONS = {
@@ -541,7 +541,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
   "Ka9UKa_xYNU": "When a fall hazard remains and personal fall arrest is required, examine how the complete system must be selected, inspected, fitted, connected, and supported by a rescue plan.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
-  "2cyQ5QTPOek": "Continue to material-handling hazards by studying unstable slopes, voids, and safe positioning around stockpiles.",
+  "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 with mine gases.",
   "9wnDBLifDB4": "Close the hazard-recognition sequence with a specialized restricted operation: recognizing blast areas and obeying warning controls.",
   "j9DNL0DnKmU": "After fire prevention and early response, shift to the decisions, communication, and leadership required during evacuation.",
   "IGb20ZDbjkY": "Use the Sago case to examine how self-rescue, mine rescue, accountability, and command coordination interact in a prolonged emergency.",
