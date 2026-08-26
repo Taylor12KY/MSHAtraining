@@ -100,7 +100,7 @@ const MODULES_PART_1 = [
 
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">MSHA Miners Rights and Responsibilities (overview video) · ~40 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Instructional overview of miners rights and responsibilities under the Mine Act. Use with instructor discussion.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This presenter is labeled Part 46 (surface). Use it for statutory rights and 105(c) ideas only. This course is Part 48 underground limestone. Current Mine Act, Part 48 plan, and instructor control.</p>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
           <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/QGkT8Ahh1-E?rel=0&modestbranding=1&playsinline=1" title="MSHA Miners Rights and Responsibilities (overview video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -132,13 +132,20 @@ const MODULES_PART_1 = [
     objectives: [
       "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
       "Describe inspection, carrying, storage, and basic donning requirements for the W65",
-      "Understand that hands-on practice with an approved W65 training unit is still required"
+      "Understand that hands-on practice with an approved W65 training unit is still required",
+      "Connect the 1972 Sunshine Mine fire to why these operations carry a filter self-rescuer"
     ],
     content: `
       <div class="content-section">
         <h3>The MSA W65 Used at These Operations</h3>
-        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
+        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It is a hopcalite filter self-rescuer: copper and manganese oxides turn carbon monoxide into carbon dioxide using oxygen already in the air. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
         <div class="key-box"><strong>Critical limitation:</strong> The W65 does not protect in an oxygen-deficient atmosphere. Use it only for emergency escape, follow the mine emergency plan, and move promptly toward fresh air by the designated escapeway.</div>
+      </div>
+      <div class="content-section">
+        <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
+        <p>The first required in-app video is the NIOSH Sunshine Mine case study. Watch this first as the historical why. Next two videos are the device you carry (Cleveland Potash W65) then hopcalite how/when (1980 NCB). On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
+        <p>Video 2 is the Cleveland Potash W65 donning and how-it-works film, shot at Boulby UK potash mine on the actual MSA W65 (mouthpiece, nose clip, filter canister). Video 3 is the 1980 NCB training film on the hopcalite filter self-rescuer—old proven technology that still does the same job. Both UK films may show UK service or inspection intervals; those are not the U.S. MSHA or current MSA rules used at these Allen Company underground limestone operations.</p>
+        <p>The 1980 NCB film is a UK coal National Coal Board film. Allen Company sites are underground limestone (Boonesboro / Clover Bottom / Dix River Stone). Device class is a hopcalite filter self-rescuer, the same idea as the MSA W65. These operations do not issue oxygen-generating escape devices. Do not treat coal refuge or UK inspection intervals as local procedure.</p>
       </div>
       <div class="content-section">
         <h3>MSA W65 Inspection, Carrying & Use</h3>
@@ -152,6 +159,11 @@ const MODULES_PART_1 = [
         </ul>
       </div>
       <div class="content-section">
+        <h3>Old Proven Technology That Still Works</h3>
+        <p>Hopcalite was discovered in 1918 at Johns Hopkins and the University of California during World War I (the name is Hop + Cal). Belt-worn mining filter self-rescuers of this type showed up around 1960. MSA leaflets point to a German origin; in the UK the NCB and MSA were involved. After carbon monoxide deaths at Whitehaven (1947) and Creswell (1950), the UK ran trials in 1953 and 1962, then in 1967 issued the MSA 230 so every man underground carried one. A heat exchanger was added in 1968 because the reaction gets hot. By the 1970s it was a legal carry requirement in UK mines. The 1980 NCB film is that generation of training.</p>
+        <p>The MSA W65 you carry is the same class of device. Don it for carbon monoxide from a fire or blast fumes, keep it on until fresh air, and know it does not work if the air is oxygen-deficient. Follow this mine's U.S. inspection, carrying, and replacement rules—not the UK intervals in the films.</p>
+      </div>
+      <div class="content-section">
         <h3>Hands-On W65 Practice</h3>
         <ul>
           <li>Locate the W65 before entering the underground area and verify that it is carried as the site requires.</li>
@@ -161,34 +173,24 @@ const MODULES_PART_1 = [
         </ul>
         <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace instructor-led donning practice with the approved MSA W65 training unit and the procedures in the current mine training plan.</div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Full W65 Demonstration by Fred Raubach · 13:39</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This is the complete presentation selected for the course. Vimeo's owner currently permits playback on Vimeo but blocks playback inside this training site.</p>
-        <div class="official-resource-panel">
-          <div class="official-resource-heading">
-            <div>
-              <span class="resource-badge resource-badge-required">Required instructor presentation</span>
-              <h3>Open the full 13:39 presentation on Vimeo</h3>
-            </div>
-            <span class="document-meta">External playback</span>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge">Official references</span>
+            <h3>MSA W65 and MSHA filter self-rescuer materials</h3>
           </div>
-          <p>The instructor opens the presentation, shows it to the class in full, and verifies it as part of the W65 instruction and hands-on signoff. The course timer continues to document the full 3.5-hour module period.</p>
-          <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open full W65 demonstration ↗</a>
         </div>
-        <div class="warning-box"><strong>Why it opens separately:</strong> this is a Vimeo-owner privacy restriction, not a browser error. External playback cannot be automatically verified by the app, so the instructor confirms it during the required W65 demonstration and hands-on verification.</div>
-      </div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 2 – Official MSA W65 Visual Review · 1:27</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">The narration is Spanish and captions are unavailable. The instructor will narrate each inspection and donning step in English while trainees follow the visual sequence.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual review" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p>Use the current manufacturer instructions and the MSHA HH-12 card with the instructor. These readings support—not replace—the approved W65 trainer and the mine emergency plan.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/HH%20Cards/HH-12%20Filter%20Self-Rescuer%20MNM.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA HH-12 Filter Self-Rescuer</strong><span>Metal/nonmetal hazard card for the filter self-rescuer</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Donning%20Instructions%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 donning instructions</strong><span>English donning sequence from the manufacturer</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
-        <div class="key-box"><strong>Instructor cue:</strong> identify the sealed case and release, removal from the container, mouthpiece placement and seal, nose clip, head harness, and immediate escape toward known fresh air. Reinforce that the W65 does not supply oxygen.</div>
       </div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, the official MSA visual review, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
@@ -244,7 +246,7 @@ const MODULES_PART_1 = [
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/volvo-a40d.html" target="_blank" rel="noopener"><strong>NIOSH Volvo A40D</strong><span>Articulated-truck visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/manual-method.html" target="_blank" rel="noopener"><strong>Map the actual machine</strong><span>NIOSH manual blind-area method</span></a>
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/stand_down/Powered-Haulage.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA Powered Haulage Stand-Down</strong><span>Official one-page July 2025 discussion handout</span></a>
+          <a class="resource-card" href="https://www.msha.gov/safety-and-health/safety-and-health-initiatives/powered-haulage-safety" target="_blank" rel="noopener noreferrer"><strong>MSHA powered-haulage safety initiative</strong><span>Current MSHA powered-haulage initiative (not the old one-pager)</span></a>
         </div>
       </div>
       <div class="content-section">
@@ -356,7 +358,7 @@ const MODULES_PART_1 = [
         </div>
         <p>Connect the controls in this module to recent mining events. Focus on what the trainee must recognize, where to stay clear, and when to stop and notify supervision.</p>
         <div class="resource-grid">
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast signals, exclusion areas, withdrawal, guarding, and authorized re-entry</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast-area recognition only. Handling explosives is Module 11. Trainees do not blast.</span></a>
           <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/Confined%20Space%20Safety%20Alert.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA confined-space alert</strong><span>Engulfment, stored energy, atmospheric hazards, isolation, and rescue planning</span></a>
         </div>
         <div class="warning-box"><strong>Scope:</strong> trainees are not being trained to conduct blasting or confined-space entry. They must know boundaries, warning signals, withdrawal rules, and that bins, hoppers, chutes, crushers, and tanks cannot be entered or cleared without the mine's authorization and full procedure.</div>

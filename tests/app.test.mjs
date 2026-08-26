@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-video-fix-2"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-video-fix-2"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-no-fred-4"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -74,7 +74,8 @@ test('trial-ready resources include the official miners rights handout and three
   assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-miners-rights-trifold.pdf')));
   assert.match(modulesPartOne, /\/assets\/docs\/msha-miners-rights-trifold\.pdf/);
   assert.match(modulesPartOne, /Miners' Rights and Responsibilities Trifold/);
-  assert.match(modulesPartOne, /Powered Haulage Stand-Down/);
+  assert.match(modulesPartOne, /powered-haulage-safety/);
+  assert.match(modulesPartOne, /powered-haulage initiative/i);
   assert.match(modulesPartTwo, /Current First-Aid References/);
   assert.match(modulesPartTwo, /MSA ALTAIR 4X user instructions/);
   assert.equal((siteContent.match(/\$\{siteAerialPanel\(/g) || []).length, 3);
@@ -264,7 +265,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 55 active videos are unique and retired submissions are documented', () => {
+test('all 58 active videos are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -273,8 +274,8 @@ test('all 55 active videos are unique and retired submissions are documented', (
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 55);
-  assert.equal(new Set(ids).size, 55);
+  assert.equal(context.videos.length, 58);
+  assert.equal(new Set(ids).size, 58);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 15);
@@ -284,7 +285,7 @@ test('all 55 active videos are unique and retired submissions are documented', (
   assert.equal(thirdBatch.length, 11);
   assert.equal(thirdBatch.reduce((sum, video) => sum + video.durationSeconds, 0), 6155);
   assert.equal(currentResources.length, 5);
-  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4251);
+  assert.equal(currentResources.reduce((sum, video) => sum + video.durationSeconds, 0), 4301);
   assert.equal(context.thirdSubmittedIds.length, 17);
   assert.equal(ids.filter(id => id === 'X5r4upNwIGk').length, 1);
   assert.equal(ids.filter(id => id === 'yEwFZHVLsso').length, 1);
@@ -296,12 +297,23 @@ test('all 55 active videos are unique and retired submissions are documented', (
   assert.equal(ids.filter(id => id === 'W4uQqiHnXUI').length, 0);
   assert.equal(ids.filter(id => id === 'xtb61bDBc6o').length, 0);
   assert.equal(ids.filter(id => id === 'v26fTGBEi9E').length, 0);
-  assert.equal(ids.filter(id => id === 'Veayb1NucTA').length, 1);
+  assert.equal(ids.filter(id => id === 'Veayb1NucTA').length, 0);
+  assert.ok(ids.includes('zM3R_1JceWo'));
+  assert.match(context.retiredIds.Veayb1NucTA, /unavailable|replaced|zM3R_1JceWo/i);
   assert.match(context.retiredIds.MziZesbb32Q, /Replaced/);
   assert.match(context.retiredIds.W4uQqiHnXUI, /Retired/);
   assert.match(context.retiredIds.xtb61bDBc6o, /Replaced/);
   assert.match(context.retiredIds.v26fTGBEi9E, /Replaced/);
-  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'Veayb1NucTA']) assert.ok(ids.includes(id));
+  assert.match(context.retiredIds.Z33qMr0CobM, /instructor request|Spanish/);
+  assert.equal(ids.filter(id => id === 'Z33qMr0CobM').length, 0);
+  assert.equal(ids.filter(id => id === 'AU07-U96dfw').length, 0);
+  assert.match(context.retiredIds['AU07-U96dfw'], /Module 3|Powtoon|Cleveland/i);
+  assert.ok(ids.includes('WTKCluA6lgE'));
+  assert.ok(ids.includes('106597590'));
+  assert.ok(ids.includes('1JfkPpr6sRM'));
+  assert.equal(ids.filter(id => id === 'zfuxPqg3z38').length, 0);
+  assert.equal(ids.filter(id => id === 'ZhTZKsI3-eY').length, 0);
+  for (const id of ['Ka9UKa_xYNU', 'DfiBLI8lGM8', 'oJ834e9wDQ4', 'b7mhJ8viccI', 'zM3R_1JceWo']) assert.ok(ids.includes(id));
 });
 
 test('current respirator, cleanup, hearing, blind-area, and task-analysis lessons are present', () => {
@@ -408,20 +420,51 @@ test('Sunshine Mine guidance explains its regulatory legacy', () => {
   assert.match(sunshine, /ventilation/i);
 });
 
-test('all 9 retained pre-existing embeds use the tracked managed player system', () => {
+test('all 8 retained pre-existing embeds use the tracked managed player system', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS);')
     .runInNewContext(context);
   const preExisting = context.videos.filter(video => context.preExistingIds.includes(video.id));
-  assert.equal(context.preExistingIds.length, 9);
-  assert.equal(preExisting.length, 9);
+  assert.equal(context.preExistingIds.length, 8);
+  assert.equal(preExisting.length, 8);
   assert.equal(preExisting.filter(video => video.provider === 'vimeo').length, 0);
   assert.ok(preExisting.every(video => video.provider !== 'vimeo'));
   assert.doesNotMatch(videoLibrary, /98555798/);
-  assert.match(videoLibrary, /Z33qMr0CobM/);
+  assert.match(videoLibrary, /AU07-U96dfw/);
   assert.match(app, /function loadVimeoApi/);
   assert.match(app, /player\.setCurrentTime\(record\.watchedSeconds\)/);
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
+});
+
+test('Module 3 sequence is Sunshine, Cleveland Potash W65, then 1980 NCB filter self-rescuer', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.guidance = VIDEO_TRAINING_GUIDANCE;')
+    .runInNewContext(context);
+  assert.deepEqual([...context.sequences[3]], ['WTKCluA6lgE', '106597590', '1JfkPpr6sRM']);
+  const cleveland = context.videos.find(video => video.id === '106597590');
+  assert.equal(cleveland.provider, 'vimeo');
+  assert.equal(cleveland.durationSeconds, 332);
+  assert.match(cleveland.title, /Cleveland Potash/);
+  const ncb = context.videos.find(video => video.id === '1JfkPpr6sRM');
+  assert.equal(ncb.durationSeconds, 408);
+  assert.match(ncb.title, /1980 NCB/);
+  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 3);
+  const clevelandGuide = `${context.guidance['106597590'].focus} ${context.guidance['106597590'].scope}`;
+  assert.match(clevelandGuide, /W65/);
+  assert.match(clevelandGuide, /Boulby|Cleveland Potash/i);
+  assert.match(clevelandGuide, /UK/);
+  const ncbGuide = `${context.guidance['1JfkPpr6sRM'].focus} ${context.guidance['1JfkPpr6sRM'].scope}`;
+  assert.match(ncbGuide, /hopcalite/i);
+  assert.match(ncbGuide, /1918/);
+  assert.match(ncbGuide, /Johns Hopkins/);
+  assert.match(ncbGuide, /1967/);
+  assert.match(ncbGuide, /MSA 230/);
+  assert.match(ncbGuide, /Whitehaven/);
+  assert.match(ncbGuide, /Creswell/);
+  assert.match(ncbGuide, /heat exchanger/i);
+  assert.match(ncbGuide, /oxygen-deficient/i);
+  assert.match(ncbGuide, /UK/);
+  assert.match(app, /https:\/\/player\.vimeo\.com\/video\/'\s*\+\s*videoId/);
 });
 
 test('training content is W65-specific and contains no SCSR material', () => {
@@ -429,9 +472,14 @@ test('training content is W65-specific and contains no SCSR material', () => {
   assert.doesNotMatch(source, /\bSCSR\b|self-contained self-rescuer|CSE SR-100/i);
   assert.match(source, /MSA W65/);
   assert.match(modulesPartOne, /does not protect in an oxygen-deficient atmosphere/i);
-  assert.match(modulesPartOne, /Full W65 Demonstration by Fred Raubach · 13:39/);
-  assert.match(modulesPartOne, /https:\/\/vimeo\.com\/98555798/);
-  assert.match(modulesPartOne, /Video 2 – Official MSA W65 Visual Review · 1:27/);
+  assert.doesNotMatch(source, /Fred Raubach|98555798|13:39/);
+  assert.doesNotMatch(modulesPartOne, /Fred Raubach|98555798|optional instructor Vimeo|instructor may also show/);
+  assert.match(modulesPartOne, /Cleveland Potash/);
+  assert.match(modulesPartOne, /hopcalite/i);
+  assert.doesNotMatch(modulesPartOne, /Video 2 – Official MSA W65 Visual Review/);
+  assert.doesNotMatch(modulesPartOne, /Z33qMr0CobM/);
+  assert.doesNotMatch(modulesPartOne, /AU07-U96dfw/);
+  assert.doesNotMatch(modulesPartOne, /zfuxPqg3z38|ZhTZKsI3-eY/);
 });
 
 test('managed video notices accurately describe verified in-player completion', () => {
