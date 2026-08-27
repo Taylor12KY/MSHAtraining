@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-no-fred-4"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-no-fred-4"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/app\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-vimeo-controls-5"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -465,6 +465,17 @@ test('Module 3 sequence is Sunshine, Cleveland Potash W65, then 1980 NCB filter 
   assert.match(ncbGuide, /oxygen-deficient/i);
   assert.match(ncbGuide, /UK/);
   assert.match(app, /https:\/\/player\.vimeo\.com\/video\/'\s*\+\s*videoId/);
+  const vimeoUrlFn = app.match(/function managedVimeoUrl\([\s\S]*?\n\}/)[0];
+  assert.match(vimeoUrlFn, /controls:\s*'1'/);
+  assert.match(vimeoUrlFn, /playsinline:\s*'1'/);
+  assert.match(vimeoUrlFn, /dnt:\s*'1'/);
+  assert.match(vimeoUrlFn, /title:\s*'0'/);
+  assert.match(vimeoUrlFn, /byline:\s*'0'/);
+  assert.match(vimeoUrlFn, /portrait:\s*'0'/);
+  assert.match(vimeoUrlFn, /autopause:\s*'1'/);
+  assert.doesNotMatch(vimeoUrlFn, /controls:\s*'0'/);
+  assert.match(app, /On iPad, tap the play button on the video itself/);
+  assert.match(app, /function trackVimeoRequiredVideo/);
 });
 
 test('training content is W65-specific and contains no SCSR material', () => {
