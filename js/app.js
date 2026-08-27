@@ -771,12 +771,13 @@ function videoPlayerElementId(video) {
 
 function managedVimeoUrl(videoId) {
   const params = new URLSearchParams({
-    controls: '0',
+    controls: '1',
     title: '0',
     byline: '0',
     portrait: '0',
     autopause: '1',
-    dnt: '1'
+    dnt: '1',
+    playsinline: '1'
   });
   return 'https://player.vimeo.com/video/' + videoId + '?' + params.toString();
 }
@@ -795,13 +796,16 @@ function requiredVideoControls(video) {
   const viewingNote = instructorPreviewMode
     ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved.'
     : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.';
+  const vimeoIpadNote = videoProvider(video) === 'vimeo'
+    ? ' On iPad, tap the play button on the video itself if Start/Resume does not start playback.'
+    : '';
   return `
     <div class="video-watch-controls">
       <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
       <span class="video-watch-status" id="video-status-${video.id}">Required viewing · 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
     </div>
     <div class="video-watch-track" aria-hidden="true"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
-    <p class="video-watch-note" id="video-note-${video.id}">${viewingNote}</p>
+    <p class="video-watch-note" id="video-note-${video.id}">${viewingNote}${vimeoIpadNote}</p>
   `;
 }
 
@@ -1206,7 +1210,7 @@ function toggleRequiredVideo(videoId) {
         }
         await player.play();
       };
-      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module.', true));
+      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module. On iPad, tap the play button on the video itself.', true));
     }
     return;
   }
