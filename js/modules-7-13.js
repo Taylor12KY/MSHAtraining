@@ -224,6 +224,15 @@ const MODULES_PART_2 = [
       <div class="content-section">
         <h3>First Aid in the Mine Environment</h3>
         <p>Part 48 requires instruction in first-aid methods acceptable to MSHA. Training typically covers scene safety, calling for help, bleeding control, shock, airway/breathing/circulation basics, burns, fractures, and specific mining-related injuries. Know where first-aid supplies, AEDs, and stretchers are located and how to summon emergency medical assistance at your mine.</p>
+        <h3>LIFEPAK CR2 Semi-Automatic AED</h3>
+        <p>Allen Company locations use the <strong>Physio-Control / Stryker LIFEPAK CR2 semi-automatic AED</strong>. Semi-automatic means the device analyzes the heart rhythm and, if a shock is advised, prompts you to deliver the shock by pressing the shock button after confirming nobody is touching the patient.</p>
+        <ul>
+          <li>Know the CR2 locations at your site and how to bring the unit to the patient.</li>
+          <li>Turn the unit on and follow the voice/screen prompts.</li>
+          <li>Expose the chest, apply the pads as shown on the pad diagram, and keep the area clear during analysis and shock.</li>
+          <li>Continue hands-only CPR when prompted. Do not delay CPR to search for a second rescuer if you are alone and trained to start.</li>
+          <li>This classroom video does not replace instructor hands-on practice on the site CR2 or a recognized CPR/AED course.</li>
+        </ul>
         <ul>
           <li>Ensure the scene is safe before approaching a victim.</li>
           <li>Activate the mine’s emergency medical response system early.</li>
@@ -253,7 +262,8 @@ const MODULES_PART_2 = [
         <h3>Heat Stress: Recognize It Early</h3>
         <p>Hot conditions can occur underground, on surface equipment, near asphalt operations, during strenuous work, and while wearing protective equipment. Risk increases with heat, humidity, workload, radiant heat, limited air movement, dehydration, illness, medication, and lack of acclimatization.</p>
         <ul>
-          <li>Use hydration, work/rest controls, shade or cooling, ventilation, acclimatization, and the buddy system required by the site.</li>
+          <li>Drink water regularly before you feel thirsty. Use electrolyte drinks such as <strong>Sqwincher</strong> when the site provides them for heavy sweating or longer heat exposures—they supplement water, they do not replace it as your main fluid.</li>
+          <li>Use work/rest controls, shade or cooling, ventilation, acclimatization, and the buddy system required by the site.</li>
           <li>Report headache, dizziness, unusual fatigue, cramps, nausea, confusion, loss of coordination, fainting, or other concerning changes immediately.</li>
           <li>Move the person to a cooler area, begin appropriate cooling, and activate the mine's emergency medical response. Confusion, collapse, seizure, or loss of consciousness is an emergency.</li>
           <li>Do not leave a symptomatic worker alone or tell them simply to finish the shift.</li>
