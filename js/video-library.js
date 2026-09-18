@@ -483,14 +483,6 @@ const REQUIRED_VIDEOS = [
     description: "Underground explosives storage, transport, blast-area security, fumes, misfires, and waiting for authorized re-entry."
   },
   {
-    id: "-wrwD7s9rUE",
-    moduleId: 11,
-    title: "The Confined Space Hazards That Kill Most Often",
-    author: "Ally Safety",
-    durationSeconds: 242,
-    description: "Atmospheric hazards in confined spaces: toxic or oxygen-deficient air, and why untrained rescue attempts kill. Principles only; not mine-rescue or confined-space qualification."
-  },
-  {
     id: "s6Oj2O7P0is",
     moduleId: 7,
     title: "Mine Ventilation Systems and Gas Monitoring",
@@ -529,6 +521,79 @@ const REQUIRED_VIDEOS = [
     author: "U.S. Department of Labor",
     durationSeconds: 250,
     description: "Official DOL overview of carbon monoxide sources, health effects, and why CO requires engineered controls and testing rather than sensory detection."
+  },
+
+  {
+    id: "41K6lWYTjZU",
+    moduleId: 11,
+    title: "Underground Mine Gases – Part 1",
+    author: "Mining Infotech",
+    durationSeconds: 443,
+    description: "Classroom overview of common underground mine gases, where they come from, and why they matter to miner health and safety."
+  },
+  {
+    id: "UIXqBn0Krwc",
+    moduleId: 11,
+    title: "Gas Management in Hardrock Underground Mining",
+    author: "Balai Diklat Tambang Bawah Tanah",
+    durationSeconds: 100,
+    description: "Short hardrock-underground orientation to gas management concepts used with the site ventilation plan and supervisor atmospheric testing."
+  },
+  {
+    id: "XpdQJ-DqfPY",
+    moduleId: 11,
+    title: "Preventing Mine Fires and Explosions Underground",
+    author: "Joe Flick / NIOSH best-practices series",
+    durationSeconds: 640,
+    description: "Underground-mining best practices for preventing fires and explosions and protecting miners from the atmospheric hazards that follow."
+  },
+  {
+    id: "WTBxoZmAqIc",
+    moduleId: 5,
+    title: "Eye Protection",
+    author: "Montana State Fund",
+    durationSeconds: 246,
+    description: "Why eye and face injuries happen and how to select and use appropriate safety eyewear for the task."
+  },
+  {
+    id: "Xbgfex8Dz4o",
+    moduleId: 5,
+    title: "Foot Protection – Safety Boots",
+    author: "NORCAT",
+    durationSeconds: 113,
+    description: "Foot-protection basics for industrial and mining workplaces, including why safety-toe footwear is required."
+  },
+  {
+    id: "roF1rTRFErE",
+    moduleId: 5,
+    title: "PPE: Hand Protection",
+    author: "GotSafety",
+    durationSeconds: 178,
+    description: "Hand-injury awareness and selecting gloves that match the task hazards without creating new catch or dexterity risks."
+  },
+  {
+    id: "McxLFYRP8Fk",
+    moduleId: 5,
+    title: "The Choice is Yours – Reflective Clothing",
+    author: "PublicResourceOrg / MSHA training film",
+    durationSeconds: 459,
+    description: "High-visibility and reflective clothing so mobile equipment and coworkers can see you. Apply to underground and surface traffic areas per site clothing rules."
+  },
+  {
+    id: "N8Uq1U3xHP8",
+    moduleId: 10,
+    title: "LIFEPAK CR2 Semi-Automatic AED – Hands-Only CPR Demo",
+    author: "Cardio Partners / Physio-Control",
+    durationSeconds: 284,
+    description: "How to use the LIFEPAK CR2 semi-automatic AED with hands-only CPR. Matches the semi-automatic CR2 units at Allen Company locations. Instructor-led practice still required."
+  },
+  {
+    id: "-E_0GU4fm9s",
+    moduleId: 10,
+    title: "Heat Stress Prevention",
+    author: "Oregon OSHA",
+    durationSeconds: 136,
+    description: "Recognize heat illness early and use hydration, work/rest, and cooling controls. Pair with site water/Sqwincher and NIOSH mining heat-stress guidance."
   },
   {
     id: "lOlGUa3iIwA",
@@ -581,11 +646,15 @@ const RETIRED_VIDEO_IDS = {
   "Veayb1NucTA": "Removed from the Module 8 required sequence; NIOSH YouTube ID returned oembed/thumbnail 404 and IFrame API Error 150 (Video unavailable). Replaced by the live CDC Roll, Pull, and Hold clip zM3R_1JceWo.",
   "Ka9UKa_xYNU": "Retired 61-minute OSHA PFAS webinar; replaced by MSHA Fall Protection: Your Lifeline to Safety plus a shorter Ally Safety PFAS basics demonstration.",
   "gbaGN7JQoO4": "Removed as a content duplicate of CDC/NIOSH Handling Explosives in Underground Mines (UD2u9LXREWM).",
-  "b7mhJ8viccI": "Removed bump-test demonstration per instructor direction; trainees need ALTAIR function/limits awareness only, not bump-test or calibration procedure."
+  "b7mhJ8viccI": "Removed bump-test demonstration per instructor direction; trainees need ALTAIR function/limits awareness only, not bump-test or calibration procedure.",
+  "-wrwD7s9rUE": "Removed Ally Safety confined-space atmospheric film; replaced with underground mine-gas and hardrock gas-management / fire-prevention teaching more appropriate to these limestone operations."
 };
 
 const CURRENT_RESOURCE_VIDEO_IDS = new Set([
-  "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "s6Oj2O7P0is", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "lOlGUa3iIwA", "zM3R_1JceWo"
+  "oJ834e9wDQ4", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk",
+  "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU",
+  "s6Oj2O7P0is", "41K6lWYTjZU", "UIXqBn0Krwc", "XpdQJ-DqfPY", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "lOlGUa3iIwA",
+  "N8Uq1U3xHP8", "-E_0GU4fm9s", "zM3R_1JceWo"
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
@@ -598,13 +667,13 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "zM3R_1JceWo"],
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
-  10: ["hQiYjxSC9bI"],
-  11: ["Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "-wrwD7s9rUE", "lOlGUa3iIwA", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
+  10: ["hQiYjxSC9bI", "N8Uq1U3xHP8", "-E_0GU4fm9s"],
+  11: ["41K6lWYTjZU", "UIXqBn0Krwc", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "XpdQJ-DqfPY", "lOlGUa3iIwA", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
   12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE"]
 };
 
@@ -629,6 +698,10 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "qDDg-CbOTmw": "Turn hazard recognition into action by applying the Stop, Look, Analyze, and Manage decision process.",
   "addOUsx6760": "Apply the same process to mobile equipment examinations, defect correction, and required records.",
   "oJ834e9wDQ4": "After equipment examinations, shift to personal protective equipment and choose head protection for the hazards actually present.",
+  "WTBxoZmAqIc": "Next protect the eyes—select eyewear for the flying, splash, or impact hazard.",
+  "Xbgfex8Dz4o": "Then protect the feet with required safety-toe footwear for the work area.",
+  "roF1rTRFErE": "Match gloves to the hand hazard without creating catch points or loss of needed dexterity.",
+  "McxLFYRP8Fk": "Finish basic PPE with high-visibility clothing so equipment operators and coworkers can see you underground and on the surface.",
   "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
   "kJ6xIsy7WNM": "Apply prevention-through-design ideas to mining fall hazards: elevated work, openings, and the fall-protection systems required under MSHA rules.",
   "TEf1Tsx_3MA": "When personal fall arrest or restraint is required, use the ABCD framework—anchorage, body support, connectors, and deceleration—then move into inspection and donning.",
@@ -636,6 +709,8 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "cW85eKNxR7c": "Next, study how self-retracting lifelines behave and where they fit in a fall-protection plan.",
   "XBVQongE3V0": "With SRL concepts in mind, check swing-fall and clearance so the device can actually protect the worker.",
   "RBmYGDwzfWU": "Finally, plan for after the arrest: suspension trauma awareness and trauma-strap / relief steps support prompt rescue.",
+  "N8Uq1U3xHP8": "In first aid, use the LIFEPAK CR2 semi-automatic AED sequence that matches Allen Company units—still practice with the instructor on the site unit.",
+  "-E_0GU4fm9s": "Close heat-illness prevention with hydration (water and Sqwincher when provided), work/rest, and early recognition.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
   "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 (Blasting, Explosives, & Mine Gases).",
   "j9DNL0DnKmU": "After fire prevention and early response, shift to the decisions, communication, and leadership required during evacuation.",
@@ -655,11 +730,13 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "zM3R_1JceWo": "Finish the health sequence by practicing the Roll–Pull–Hold method that helps soft foam earplugs provide their intended protection.",
   "is77KiZ16_o": "Move from basic electrical awareness to the controlled isolation of hazardous energy before service or repair.",
   "iX8j7h7bJF4": "Finish with an arc-flash fatality case that shows why qualification, isolation, verification, and safe boundaries are essential.",
-  "Vk6BgJ1H4EE": "Start mine-gas awareness with what common toxic gases do and why senses are not enough.",
-  "DXzYOtwf6Ts": "Connect toxic-gas lessons to oxygen deficiency and other atmospheres that can kill quickly.",
-  "aLDvPGSXzrU": "Focus next on carbon monoxide—the colorless, odorless gas most often linked to combustion, exhaust, and blast fumes.",
-  "-wrwD7s9rUE": "Tie atmospheric hazards together: toxic or oxygen-deficient air, and why untrained rescue attempts kill.",
-  "lOlGUa3iIwA": "Finish gas-protection awareness with how the company-style four-gas detector works—what it shows, what it cannot show, and that alarms mean withdraw and notify.",
+  "41K6lWYTjZU": "Start with what underground mine gases are, where they come from, and why they threaten miners.",
+  "UIXqBn0Krwc": "Apply those gas concepts to hardrock underground gas-management expectations.",
+  "Vk6BgJ1H4EE": "Review how common toxic gases affect the body and why odor is not a reliable warning.",
+  "DXzYOtwf6Ts": "Connect toxic-gas lessons to oxygen deficiency and atmospheres that can kill quickly.",
+  "aLDvPGSXzrU": "Focus on carbon monoxide from combustion, exhaust, fire, and blast fumes.",
+  "XpdQJ-DqfPY": "Carry atmospheric awareness into underground fire and explosion prevention—how mines protect people when air quality fails.",
+  "lOlGUa3iIwA": "Finish with how the company-style four-gas detector works—what it shows, what it cannot show, and that alarms mean withdraw and notify.",
   "9wnDBLifDB4": "Open-pit example for blast-area recognition, signals, and exclusion. Not a limestone underground round and not task authorization. Stay out until the all-clear. Underground fumes and re-entry are the later videos and the NIOSH limestone study.",
   "zaliBZlRsaE": "Apply the module's safe-work-procedure framework to the planned sequence and coordination required for drill-and-blast work.",
   "G2Hs51QDszc": "Next, place that sequence in an underground mining context and identify the hazards surrounding explosives and re-entry.",
@@ -680,7 +757,7 @@ const MODULE_VIDEO_SCOPE = {
   8: "Focus on exposure recognition and controls. Our exposures are limestone silica and DPM. An N95 is not a W65 and does not protect against mine gases or oxygen deficiency. Follow current sampling, HazCom, respiratory-protection, hearing-conservation, and PPE requirements at the mine.",
   9: "This is hazard-awareness instruction, not electrical qualification. Electrical work at these mines follows MSHA Part 57, the energy-control procedure, and qualified-person rules — not CSA/OSHA construction qualification.",
   10: "The mining first-aid video is scenario awareness, not Red Cross/ACS certification. Skills are instructor-led. Work within your training and activate professional emergency response promptly.",
-  11: "Supervisors carry and operate the MSA ALTAIR 4X at these operations. Trainees use these videos to understand atmospheric hazards, blasting fumes, alarm readiness, and instrument limits—not to clear an area, handle explosives, or make a re-entry decision. A detector warns of hazards; it does not make an unsafe atmosphere safe. The Ally Safety confined-space tape is principles only, not mine-rescue qualification.",
+  11: "Supervisors carry and operate the MSA ALTAIR 4X at these operations. Trainees use these videos to understand underground mine gases, ventilation-related atmospheric hazards, blasting fumes, alarm readiness, and instrument limits—not to clear an area, handle explosives, or make a re-entry decision. A detector warns of hazards; it does not make an unsafe atmosphere safe.",
   12: "These four shorts are decision-making and speaking-up, not equipment authorization. Graded work is the conveyor-cleanup JTA table and asking for task training before a new job. Sunshine is Module 3; blasting is Module 11 — do not watch them again here."
 };
 
@@ -866,6 +943,42 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Recognize carbon monoxide sources and effects, and that CO requires controls and instrument detection rather than sensory warning.",
     scope: "DOL construction/portable-equipment framing. Connect the same CO lessons to diesel exhaust, fire, hot work, and blasting fumes underground under the site plan."
   },
+  "41K6lWYTjZU": {
+    focus: "Identify common underground mine gases, typical sources, and why atmospheric hazards must be taken seriously even when air looks normal.",
+    scope: "Classroom overview. Site exposures, detectors, and response follow the approved plans and supervisor atmospheric testing at these limestone operations."
+  },
+  "UIXqBn0Krwc": {
+    focus: "Connect gas awareness to hardrock underground gas-management expectations and the need for controlled ventilation.",
+    scope: "Short international hardrock training clip used for concepts only. Allen Company ventilation plans and supervisor procedures control."
+  },
+  "XpdQJ-DqfPY": {
+    focus: "Apply underground best practices that prevent fires and explosions and protect miners from the toxic and oxygen-deficient atmospheres that can follow.",
+    scope: "NIOSH/Joe Flick underground best-practices series. Use with the site fire, ventilation, and emergency plans—not as a substitute for them."
+  },
+  "WTBxoZmAqIc": {
+    focus: "Select and wear eye protection matched to impact, dust, chemical, or optical hazards of the task.",
+    scope: "General industry eye-protection principles. Use only company-approved eyewear required for the area or task."
+  },
+  "Xbgfex8Dz4o": {
+    focus: "Wear required safety-toe footwear and keep boots in serviceable condition for the work area.",
+    scope: "NORCAT foot-protection briefing. Follow Allen Company footwear requirements for underground and surface areas."
+  },
+  "roF1rTRFErE": {
+    focus: "Choose gloves for the actual hand hazard (cut, abrasion, chemical, heat) without creating catch points on moving equipment.",
+    scope: "General hand-protection awareness. Task-specific glove selection is set by the job hazard and site rules."
+  },
+  "McxLFYRP8Fk": {
+    focus: "Wear required high-visibility / reflective clothing so mobile equipment and coworkers can see you.",
+    scope: "MSHA reflective-clothing training film. Underground and surface clothing rules at these operations control color, reflectivity, and when garments are required."
+  },
+  "N8Uq1U3xHP8": {
+    focus: "Operate the LIFEPAK CR2 semi-automatic AED: power on, apply pads, follow prompts, and deliver a shock only when the device advises and the area is clear.",
+    scope: "Vendor demo for the semi-automatic CR2 used at Allen Company locations. Does not replace instructor hands-on practice or a recognized CPR/AED course."
+  },
+  "-E_0GU4fm9s": {
+    focus: "Recognize heat illness early and use water, electrolyte drinks when provided (such as Sqwincher), work/rest, and cooling controls.",
+    scope: "Oregon OSHA heat-stress principles paired with NIOSH mining heat-stress guidance and site hydration rules."
+  },
   "lOlGUa3iIwA": {
     focus: "Recognize what a typical four-gas ALTAIR 4X is designed to indicate (O₂, LEL, CO, H₂S) and that alarms mean withdraw and notify — not investigate.",
     scope: "Vendor overview only. Supervisors operate the company detector. Trainees do not bump-test, calibrate, or clear an area. A four-gas unit does not detect every mine gas (including NO₂ and CO₂)."
@@ -874,10 +987,7 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Follow underground explosives storage, transport, blast-area security, fumes, misfires, and the requirement to wait for authorized re-entry after a shot.",
     scope: "This NIOSH presentation is awareness only. Only trained and authorized persons may handle explosives. A detector reading or video does not clear an area; follow the current blast plan, signals, and qualified-person procedures."
   },
-  "-wrwD7s9rUE": {
-    focus: "Identify why toxic or oxygen-deficient air kills in enclosed spaces and why untrained rescue attempts so often create a second victim.",
-    scope: "This Ally Safety tape is principles only. It is not mine-rescue, confined-space, or detector qualification and does not authorize entry or rescue. Withdraw, warn others, and report; do not enter questionable air."
-  }
+
 };
 
 function getRequiredVideos(moduleId) {
