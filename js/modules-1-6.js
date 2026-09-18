@@ -325,10 +325,11 @@ const MODULES_PART_1 = [
         <ul>
           <li><strong>Plan the work:</strong> identify edges, openings, unstable surfaces, climbing, equipment access, overhead hazards, and the rescue method before exposure begins.</li>
           <li><strong>Inspect before use:</strong> check harness webbing, stitching, labels, D-rings, buckles, and impact indicators. Check lanyards and self-retracting lifelines (SRLs) for damaged connectors, cuts, burns, chemical damage, broken strands, housing damage, correct retraction, and evidence of deployment.</li>
+          <li><strong>Don and fit correctly:</strong> put the harness on according to the manufacturer instructions, snug the straps, and confirm the dorsal D-ring and leg/chest adjustments before connecting.</li>
           <li><strong>Verify compatibility:</strong> use only approved connectors and anchorage arrangements. A hook that appears to close can still roll out or fail if connected to an incompatible object.</li>
-          <li><strong>Fit and connect correctly:</strong> follow the harness and connecting-device manufacturer instructions. Do not improvise an anchorage or mix components merely because they can be physically connected.</li>
+          <li><strong>Understand SRLs:</strong> know how a self-retracting lifeline behaves, where it is appropriate, and that swing-fall and required clearance still control whether it can protect the worker.</li>
           <li><strong>Control clearance and swing:</strong> account for free fall, deceleration, worker height, connector length, lifeline behavior, lower obstructions, and lateral swing-fall exposure.</li>
-          <li><strong>Plan prompt rescue:</strong> a suspended worker may be unable to self-rescue. The plan, trained personnel, equipment, communication, and access must be in place before work starts.</li>
+          <li><strong>Plan prompt rescue and suspension trauma:</strong> a suspended worker may be unable to self-rescue. Trauma straps / relief steps buy time only when a trained rescue response is already planned. The plan, trained personnel, equipment, communication, and access must be in place before work starts.</li>
         </ul>
         <div class="warning-box">Never tie off to a handrail, pipe, cable tray, equipment part, or other convenient object unless it has been specifically approved for that fall-protection use. The competent person, site procedure, and manufacturer instructions determine acceptable systems.</div>
       </div>
