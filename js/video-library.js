@@ -547,6 +547,23 @@ const REQUIRED_VIDEOS = [
     durationSeconds: 640,
     description: "Underground-mining best practices for preventing fires and explosions and protecting miners from the atmospheric hazards that follow."
   },
+
+  {
+    id: "-80slHn8zYg",
+    moduleId: 5,
+    title: "How To Properly Fit A Hard Hat",
+    author: "Laborers' Health & Safety Fund of North America",
+    durationSeconds: 109,
+    description: "Adjust the suspension and wear the hard hat correctly so it stays seated and protects as designed."
+  },
+  {
+    id: "U4z5RGpH0Pc",
+    moduleId: 5,
+    title: "Hard Hat Inspection",
+    author: "Texas Municipal League Intergovernmental Risk Pool",
+    durationSeconds: 104,
+    description: "Quick pre-use hard hat inspection: shell, suspension, cracks, wear, and when to remove it from service."
+  },
   {
     id: "WTBxoZmAqIc",
     moduleId: 5,
@@ -651,7 +668,7 @@ const RETIRED_VIDEO_IDS = {
 };
 
 const CURRENT_RESOURCE_VIDEO_IDS = new Set([
-  "oJ834e9wDQ4", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk",
+  "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk",
   "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU",
   "s6Oj2O7P0is", "41K6lWYTjZU", "UIXqBn0Krwc", "XpdQJ-DqfPY", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "lOlGUa3iIwA",
   "N8Uq1U3xHP8", "-E_0GU4fm9s", "zM3R_1JceWo"
@@ -667,7 +684,7 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "zM3R_1JceWo"],
@@ -698,6 +715,8 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "qDDg-CbOTmw": "Turn hazard recognition into action by applying the Stop, Look, Analyze, and Manage decision process.",
   "addOUsx6760": "Apply the same process to mobile equipment examinations, defect correction, and required records.",
   "oJ834e9wDQ4": "After equipment examinations, shift to personal protective equipment and choose head protection for the hazards actually present.",
+  "-80slHn8zYg": "With the right type of head protection in mind, fit the suspension so the hat stays seated and protective.",
+  "U4z5RGpH0Pc": "Inspect the shell and suspension before every use and remove damaged hats from service.",
   "WTBxoZmAqIc": "Next protect the eyes—select eyewear for the flying, splash, or impact hazard.",
   "Xbgfex8Dz4o": "Then protect the feet with required safety-toe footwear for the work area.",
   "roF1rTRFErE": "Match gloves to the hand hazard without creating catch points or loss of needed dexterity.",
@@ -780,6 +799,14 @@ const VIDEO_TRAINING_GUIDANCE = {
   "oJ834e9wDQ4": {
     focus: "Compare hard hats and safety helmets, then connect selection, fit, retention, inspection, and replacement to falling-object, struck-by, and fall hazards.",
     scope: "The examples come from construction research, but the head-protection principles transfer to mining. Use only company-approved PPE selected for the mine hazard, compatible with other PPE, and maintained under manufacturer and site requirements."
+  },
+  "-80slHn8zYg": {
+    focus: "Adjust and wear the hard hat so the suspension fits correctly and the shell sits level and secure.",
+    scope: "Laborers' Health & Safety Fund fit demonstration. Follow the manufacturer instructions for the hard hats issued at these operations, including any cap-lamp or accessory rules."
+  },
+  "U4z5RGpH0Pc": {
+    focus: "Inspect the hard hat shell and suspension before use and remove cracked, brittle, UV-damaged, or worn units from service.",
+    scope: "Short inspection briefing. Company replacement criteria and manufacturer guidance control when a hat must be taken out of service."
   },
   "DfiBLI8lGM8": {
     focus: "Apply the hierarchy of controls to work at height: eliminate the exposure, use engineered prevention or restraint where feasible, and use personal fall arrest only as part of a complete system.",
