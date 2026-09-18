@@ -19,15 +19,19 @@ const MODULES_PART_1 = [
   },
   {
     id: 2,
-    title: "Miners' Rights, Supervisors & Hazard Reporting",
+    title: "History of Mine Safety, MSHA & Miners' Rights",
     hours: 2.0,
     objectives: [
+      "Explain why major mine disasters led to federal mine safety law and MSHA",
+      "Trace key milestones in U.S. mine safety history into today's Mine Act protections",
       "Explain key statutory rights of miners under the Mine Act",
-      "Describe the authority and responsibilities of supervisors and miners' representatives",
-      "Identify how and when to report hazards and protections against discrimination"
+      "Describe supervisor and miner responsibilities, hazard reporting, and anti-discrimination protections"
     ],
     content: `
       <div class="content-section">
+        <h3>Why This History Matters</h3>
+        <p>Module 2 is not just a list of rights. Disasters such as <strong>Farmington (1968)</strong> and the long fight for federal mine safety law explain why MSHA exists and why miners have the right—and duty—to speak up about hazards without illegal retaliation. Watch the history first, then the rights that came out of it.</p>
+
         <h3>1. Statutory Rights of Miners (Mine Act § 2 & related)</h3>
         <p>Every miner has the right to a safe and healthful workplace. Key rights include:</p>
         <ul>
@@ -133,7 +137,7 @@ const MODULES_PART_1 = [
       "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
       "Describe inspection, carrying, storage, and basic donning requirements for the W65",
       "Understand that hands-on practice with an approved W65 training unit is still required",
-      "Connect the 1972 Sunshine Mine fire to why these operations carry a filter self-rescuer"
+      "Connect the short MSHA Sunshine sting and the full Sunshine Mine fire case study to why these operations carry a filter self-rescuer"
     ],
     content: `
       <div class="content-section">
@@ -143,7 +147,7 @@ const MODULES_PART_1 = [
       </div>
       <div class="content-section">
         <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
-        <p>The first required in-app video is the NIOSH Sunshine Mine case study. Watch this first as the historical why. Next two videos are the device you carry (Cleveland Potash W65) then hopcalite how/when (1980 NCB). On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
+        <p>Start with the short MSHA Sunshine sting (why we carry a self-rescuer), then the full NIOSH Sunshine Mine case study as the historical why. Next are the device you carry (Cleveland Potash W65) and hopcalite how/when (1980 NCB). On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
         <p>Video 2 is the Cleveland Potash W65 donning and how-it-works film, shot at Boulby UK potash mine on the actual MSA W65 (mouthpiece, nose clip, filter canister). Video 3 is the 1980 NCB training film on the hopcalite filter self-rescuer—old proven technology that still does the same job. Both UK films may show UK service or inspection intervals; those are not the U.S. MSHA or current MSA rules used at these Allen Company underground limestone operations.</p>
         <p>The 1980 NCB film is a UK coal National Coal Board film. Allen Company sites are underground limestone (Boonesboro / Clover Bottom / Dix River Stone). Device class is a hopcalite filter self-rescuer, the same idea as the MSA W65. These operations do not issue oxygen-generating escape devices. Do not treat coal refuge or UK inspection intervals as local procedure.</p>
       </div>
@@ -187,7 +191,7 @@ const MODULES_PART_1 = [
           <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the short MSHA Sunshine sting, the full Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
         <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
@@ -324,7 +328,7 @@ const MODULES_PART_1 = [
         <p>PPE does not remove the hazard. Eliminate or control the exposure first; wear assigned PPE as the final layer and keep it clean, inspected, and in serviceable condition. Company and area rules set the minimum. Task hazards may require more.</p>
         <ul>
           <li><strong>Hard hat / safety helmet:</strong> wear the company-approved head protection in designated areas. Fit the suspension so the hat sits level and secure. Inspect for cracks, UV damage, missing suspension parts, and worn or damaged components before each use, and remove bad hats from service. Do not drill holes, carry it by the brim as a scoop, or wear it over incompatible caps unless the manufacturer allows it.</li>
-          <li><strong>Eye protection:</strong> safety glasses with side protection are the baseline in most work areas. Use goggles or a face shield when the task creates flying particles, slurry, chemical splash, or intense dust. Prescription lenses must be protective eyewear, not street glasses alone.</li>
+          <li><strong>Eye protection:</strong> (see also the Tony Crow account on how one injury changes a life) safety glasses with side protection are the baseline in most work areas. Use goggles or a face shield when the task creates flying particles, slurry, chemical splash, or intense dust. Prescription lenses must be protective eyewear, not street glasses alone.</li>
           <li><strong>Steel-toe / safety-toe boots:</strong> wear required safety-toe footwear with good tread. Replace boots with crushed toes, separated soles, or worn tread that creates slip or ankle risk.</li>
           <li><strong>Gloves:</strong> match the glove to the hazard—cut, abrasion, chemical, heat, or oil. Remove gloves around rotating shafts, drills, and catch points when they create a pull-in risk, then use the hand protection the task requires.</li>
           <li><strong>Hearing protection:</strong> wear the assigned plugs or muffs for the full noisy exposure. Foam plugs only work when inserted correctly (roll, pull, hold). Module 8 covers hearing conservation in more detail.</li>

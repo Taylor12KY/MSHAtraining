@@ -10,7 +10,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "QGkT8Ahh1-E",
-    moduleId: 2,
+    moduleId: 13,
     title: "Miners' Rights and Responsibilities – MSHA",
     author: "Part46Compliance",
     durationSeconds: 2409,
@@ -66,7 +66,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "9wnDBLifDB4",
-    moduleId: 11,
+    moduleId: 5,
     title: "A Look Inside an Open-Pit Blasting Process",
     author: "TEKNIQ",
     durationSeconds: 420,
@@ -129,14 +129,6 @@ const REQUIRED_VIDEOS = [
     description: "Health effects of respirable dust and the importance of exposure controls."
   },
   {
-    id: "CHTJ8i55HUk",
-    moduleId: 8,
-    title: "MSHA Respirable Dust Sampling",
-    author: "Safety Video Library",
-    durationSeconds: 1596,
-    description: "Purpose and basic process of respirable-dust sampling in mining."
-  },
-  {
     id: "X5r4upNwIGk",
     moduleId: 8,
     title: "MSHA Hearing Conservation Requirements",
@@ -170,7 +162,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "4MjKwOI2LrE",
-    moduleId: 12,
+    moduleId: 5,
     title: "Tony Crow – Safety Is Not Just About Me",
     author: "Pick Up Your Heart",
     durationSeconds: 357,
@@ -347,7 +339,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "ZHVAmbOBkrk",
-    moduleId: 12,
+    moduleId: 13,
     title: "Three Mindfulness Steps That Help You Focus at Work",
     author: "Ally Safety",
     durationSeconds: 379,
@@ -379,7 +371,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "Km8XxRCuCho",
-    moduleId: 12,
+    moduleId: 13,
     title: "Safety 3rd",
     author: "Mike Rowe",
     durationSeconds: 202,
@@ -387,7 +379,7 @@ const REQUIRED_VIDEOS = [
   },
   {
     id: "EQ1OPz1p0U4",
-    moduleId: 12,
+    moduleId: 13,
     title: "Pledge 6",
     author: "Mike Rowe",
     durationSeconds: 332,
@@ -499,22 +491,6 @@ const REQUIRED_VIDEOS = [
     description: "Historical metal/nonmetal ventilation film covering why fresh air, fans, and airflow controls matter underground. Principles only; current site ventilation plans control."
   },
   {
-    id: "Vk6BgJ1H4EE",
-    moduleId: 11,
-    title: "Toxic Gases: Carbon Monoxide, Hydrogen Sulphide, and Related Hazards",
-    author: "WorkSafeBC",
-    durationSeconds: 171,
-    description: "What common toxic gases do to the body and why odor or comfort is not a reliable warning. Principles for mine-gas awareness; not a confined-space entry qualification."
-  },
-  {
-    id: "DXzYOtwf6Ts",
-    moduleId: 11,
-    title: "Why Hazardous Atmospheres Can Be Deadly",
-    author: "WorkSafeBC",
-    durationSeconds: 162,
-    description: "How oxygen deficiency, toxic gas, and related atmospheric hazards can kill quickly—and why withdrawal and reporting protect miners."
-  },
-  {
     id: "aLDvPGSXzrU",
     moduleId: 11,
     title: "Carbon Monoxide Hazards",
@@ -612,6 +588,176 @@ const REQUIRED_VIDEOS = [
     durationSeconds: 136,
     description: "Recognize heat illness early and use hydration, work/rest, and cooling controls. Pair with site water/Sqwincher and NIOSH mining heat-stress guidance."
   },
+
+  {
+    id: "DUXRvCeqhOU",
+    moduleId: 12,
+    title: "How to Complete a Job Safety Analysis (JSA)",
+    author: "Safelyio",
+    durationSeconds: 256,
+    description: "Step-by-step job safety analysis: break the job into steps, identify hazards, and assign controls before work starts."
+  },
+  {
+    id: "8XpNhrMrggE",
+    moduleId: 12,
+    title: "Job Hazard Analysis (JHA)",
+    author: "Your ACSA Safety",
+    durationSeconds: 284,
+    description: "Job hazard analysis principles for identifying task hazards and selecting controls before performing the work."
+  },
+  {
+    id: "U5p1GdnzEHg",
+    moduleId: 12,
+    title: "Developing an Effective Job Safety Analysis",
+    author: "MiningQld",
+    durationSeconds: 72,
+    description: "Short mining-industry message on why an effective JSA prevents injuries."
+  },
+  {
+    id: "lS7pwuNghq4",
+    moduleId: 12,
+    title: "Job Safety Analysis Case Study",
+    author: "MiningQld",
+    durationSeconds: 122,
+    description: "Mining JSA case study showing how task analysis catches hazards before work begins."
+  },
+  {
+    id: "vWssDu6TkXo",
+    moduleId: 6,
+    title: "Being Prepared for a Mine Emergency (NIOSH)",
+    author: "Joe Flick / Mike Brnich (NIOSH)",
+    durationSeconds: 114,
+    description: "NIOSH perspective on preparing for underground emergencies, including knowing escape plans before an event."
+  },
+  {
+    id: "m9yYUuMG-kE",
+    moduleId: 6,
+    title: "Preventing Emergencies Underground – Introduction",
+    author: "Joe Flick / NIOSH best-practices series",
+    durationSeconds: 426,
+    description: "Introduction to underground emergency-prevention best practices: know the plan, the map, and your role before you need them."
+  },
+  {
+    id: "LQIgql3q6Ek",
+    moduleId: 6,
+    title: "Overview of Mine Disasters and Escape Lessons",
+    author: "Joe Flick / NIOSH best-practices series",
+    durationSeconds: 512,
+    description: "Disaster overview used to reinforce why escapeways, maps, communication, and self-rescue beat last-resort barricading."
+  },
+  {
+    id: "gk-hCHk1z7o",
+    moduleId: 8,
+    title: "Obtaining a Dust Sample",
+    author: "PublicResourceOrg / MSHA training film",
+    durationSeconds: 237,
+    description: "Why MSHA or the mine may place a sampling pump on a miner and what that pump is collecting—awareness for the wearer, not sampler qualification."
+  },
+  {
+    id: "RTG77LCfQvU",
+    moduleId: 8,
+    title: "HazCom and GHS Explained",
+    author: "Ally Safety",
+    durationSeconds: 378,
+    description: "Hazard Communication and GHS labels/SDS in plain language."
+  },
+  {
+    id: "EebrjWb6QeY",
+    moduleId: 8,
+    title: "What Is Diesel Particulate Matter?",
+    author: "AIOH",
+    durationSeconds: 97,
+    description: "Short explanation of diesel particulate matter (DPM) as an occupational exposure."
+  },
+  {
+    id: "aMfhfqh8uzw",
+    moduleId: 4,
+    title: "Underground Mining Communications",
+    author: "WAVESWAY",
+    durationSeconds: 337,
+    description: "How underground mines communicate—radios and leaky feeder concepts for safe travel and emergency response."
+  },
+  {
+    id: "1JJQiwtQcWY",
+    moduleId: 4,
+    title: "Why Leaky Feeder Radio Matters Underground",
+    author: "Tunnel Radio / Crownsmen Partners",
+    durationSeconds: 201,
+    description: "Why leaky-feeder and mine radio systems exist so miners can be reached underground."
+  },
+  {
+    id: "8OK6XXgtUyc",
+    moduleId: 9,
+    title: "5 Steps to Improve Electrical Safety in Mining",
+    author: "Littelfuse",
+    durationSeconds: 138,
+    description: "Mining-focused electrical safety steps including ground-fault awareness."
+  },
+  {
+    id: "dIxfdGSXEQ0",
+    moduleId: 9,
+    title: "Mining Trailing Cable Splice Kit Overview",
+    author: "Plymouth Rubber Group",
+    durationSeconds: 329,
+    description: "Trailing-cable splice awareness—only qualified persons splice or repair; report damage."
+  },
+  {
+    id: "HiakyMAiiaE",
+    moduleId: 7,
+    title: "Ventilation Controls Underground",
+    author: "Joe Flick / NIOSH best-practices series",
+    durationSeconds: 714,
+    description: "Underground ventilation controls as emergency-prevention best practice."
+  },
+  {
+    id: "8IZCQ05vxeY",
+    moduleId: 7,
+    title: "Ground Control in Underground Limestone Mines",
+    author: "NIOSH / research training",
+    durationSeconds: 972,
+    description: "Ground control specifically for underground limestone mines."
+  },
+  {
+    id: "7LEqWoK_aS0",
+    moduleId: 10,
+    title: "How To STOP THE BLEED",
+    author: "American College of Surgeons",
+    durationSeconds: 124,
+    description: "Official ACS Stop the Bleed overview: pressure, packing, and tourniquet concepts."
+  },
+  {
+    id: "u3nrDb5XjSI",
+    moduleId: 10,
+    title: "Stop the Bleed: Tourniquet",
+    author: "Seattle Office of Emergency Management",
+    durationSeconds: 211,
+    description: "Tourniquet application demonstration supporting Stop the Bleed practice."
+  },
+
+  {
+    id: "kbHxdV_uZV8",
+    moduleId: 3,
+    title: "Sunshine Mine Fire Disaster – MSHA Short",
+    author: "markdcatlin / MSHA archival",
+    durationSeconds: 50,
+    description: "Short MSHA archival sting on the 1972 Sunshine Mine fire—why filter self-rescuers matter."
+  },
+  {
+    id: "DxB7g_y15FI",
+    moduleId: 2,
+    title: "1968 Farmington Disaster – 50th Anniversary",
+    author: "UMWA",
+    durationSeconds: 523,
+    description: "Farmington No. 9 anniversary film: how a disaster drove federal mine safety law and why miners' rights and MSHA exist."
+  },
+  {
+    id: "n1pqUaXdJ6k",
+    moduleId: 2,
+    title: "Farmington Remembered",
+    author: "WV Gazette",
+    durationSeconds: 635,
+    description: "Documentary remembrance of Farmington—human cost behind the Mine Act era and modern miner protections."
+  },
   {
     id: "lOlGUa3iIwA",
     moduleId: 11,
@@ -664,14 +810,16 @@ const RETIRED_VIDEO_IDS = {
   "Ka9UKa_xYNU": "Retired 61-minute OSHA PFAS webinar; replaced by MSHA Fall Protection: Your Lifeline to Safety plus a shorter Ally Safety PFAS basics demonstration.",
   "gbaGN7JQoO4": "Removed as a content duplicate of CDC/NIOSH Handling Explosives in Underground Mines (UD2u9LXREWM).",
   "b7mhJ8viccI": "Removed bump-test demonstration per instructor direction; trainees need ALTAIR function/limits awareness only, not bump-test or calibration procedure.",
-  "-wrwD7s9rUE": "Removed Ally Safety confined-space atmospheric film; replaced with underground mine-gas and hardrock gas-management / fire-prevention teaching more appropriate to these limestone operations."
+  "-wrwD7s9rUE": "Removed Ally Safety confined-space atmospheric film; replaced with underground mine-gas and hardrock gas-management / fire-prevention teaching more appropriate to these limestone operations.",
+  "CHTJ8i55HUk": "Removed detailed MSHA respirable-dust sampling procedure film; replaced with shorter wearer-awareness Obtaining a Dust Sample plus HazCom and DPM orientation.",
+  "Vk6BgJ1H4EE": "Removed WorkSafeBC confined-space toxic-gas clip from Module 11 sequence.",
+  "DXzYOtwf6Ts": "Removed WorkSafeBC confined-space atmosphere clip from Module 11 sequence."
 };
 
 const CURRENT_RESOURCE_VIDEO_IDS = new Set([
-  "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk",
-  "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU",
-  "s6Oj2O7P0is", "41K6lWYTjZU", "UIXqBn0Krwc", "XpdQJ-DqfPY", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "lOlGUa3iIwA",
-  "N8Uq1U3xHP8", "-E_0GU4fm9s", "zM3R_1JceWo"
+  "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk",
+  "DUXRvCeqhOU", "8XpNhrMrggE", "8IZCQ05vxeY", "HiakyMAiiaE", "gk-hCHk1z7o", "RTG77LCfQvU", "EebrjWb6QeY",
+  "aMfhfqh8uzw", "1JJQiwtQcWY", "8OK6XXgtUyc", "dIxfdGSXEQ0", "7LEqWoK_aS0", "u3nrDb5XjSI", "N8Uq1U3xHP8", "zM3R_1JceWo"
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
@@ -681,17 +829,18 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
 ]);
 
 const MODULE_VIDEO_SEQUENCE = {
-  2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
-  4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
-  6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
-  7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
-  8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "zM3R_1JceWo"],
-  9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
-  10: ["hQiYjxSC9bI", "N8Uq1U3xHP8", "-E_0GU4fm9s"],
-  11: ["41K6lWYTjZU", "UIXqBn0Krwc", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "XpdQJ-DqfPY", "lOlGUa3iIwA", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
-  12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE"]
+  2: ["F7AOWLOOT-U", "DxB7g_y15FI", "n1pqUaXdJ6k", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
+  3: ["kbHxdV_uZV8", "WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
+  4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
+  6: ["m9yYUuMG-kE", "LQIgql3q6Ek", "vWssDu6TkXo", "e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
+  7: ["8IZCQ05vxeY", "OxOwJC5wHyc", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "eFTnBiAvxxg", "Ok2p6cUe_sM", "HiakyMAiiaE", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
+  8: ["1OJUEmUAPmc", "gk-hCHk1z7o", "EebrjWb6QeY", "RTG77LCfQvU", "X5r4upNwIGk", "zM3R_1JceWo"],
+  9: ["wal2KP1bbIY", "8OK6XXgtUyc", "dIxfdGSXEQ0", "is77KiZ16_o", "iX8j7h7bJF4"],
+  10: ["hQiYjxSC9bI", "7LEqWoK_aS0", "u3nrDb5XjSI", "N8Uq1U3xHP8", "-E_0GU4fm9s"],
+  11: ["41K6lWYTjZU", "UIXqBn0Krwc", "aLDvPGSXzrU", "XpdQJ-DqfPY", "lOlGUa3iIwA", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
+  12: ["DUXRvCeqhOU", "8XpNhrMrggE", "U5p1GdnzEHg", "lS7pwuNghq4"],
+  13: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "QGkT8Ahh1-E"]
 };
 
 const VIDEO_SEQUENCE_TRANSITIONS = {
@@ -1006,6 +1155,28 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Recognize heat illness early and use water, electrolyte drinks when provided (such as Sqwincher), work/rest, and cooling controls.",
     scope: "Oregon OSHA heat-stress principles paired with NIOSH mining heat-stress guidance and site hydration rules."
   },
+  "DUXRvCeqhOU": { focus: "Break a job into steps, identify hazards, and assign controls before starting.", scope: "General JSA method. Site task training and SWPs control." },
+  "8XpNhrMrggE": { focus: "Use JHA to spot task hazards and select controls with the supervisor.", scope: "ACSA method training; local task training controls." },
+  "U5p1GdnzEHg": { focus: "Treat JSA as a shared worker/supervisor responsibility.", scope: "MiningQld principles only." },
+  "lS7pwuNghq4": { focus: "See how a mining JSA case study catches hazards before work.", scope: "Case-study principles only." },
+  "vWssDu6TkXo": { focus: "Prepare before an emergency: know escapeways and your role.", scope: "NIOSH commentary; site plans control." },
+  "m9yYUuMG-kE": { focus: "Build emergency-prevention mindset: maps, escapeways, communication.", scope: "NIOSH best-practices introduction." },
+  "LQIgql3q6Ek": { focus: "Use disaster lessons to explain why escapeways and self-rescue beat last-resort barricading.", scope: "Coal examples possible; extract universal escape lessons for limestone ops." },
+  "gk-hCHk1z7o": { focus: "Understand why a sampling pump may be placed on a miner.", scope: "Wearer awareness only; not sampler qualification." },
+  "RTG77LCfQvU": { focus: "Read GHS labels and find SDS information under HazCom.", scope: "General HazCom/GHS; site SDS access controls." },
+  "EebrjWb6QeY": { focus: "Recognize DPM as a diesel-engine health hazard.", scope: "Short definition; follow site DPM/ventilation controls." },
+  "aMfhfqh8uzw": { focus: "Know underground communications support work and emergencies.", scope: "Generic overview; site channels control." },
+  "1JJQiwtQcWY": { focus: "Understand why leaky-feeder/mine radio coverage matters.", scope: "Vendor explanation; do not alter mine communications gear." },
+  "8OK6XXgtUyc": { focus: "Apply mining electrical safety including ground-fault respect.", scope: "Only qualified persons work on mine electrical systems." },
+  "dIxfdGSXEQ0": { focus: "Recognize trailing-cable hazards; splice/repair is qualified work only.", scope: "Manufacturer demo for awareness." },
+  "HiakyMAiiaE": { focus: "Identify ventilation controls; do not alter without authorization.", scope: "NIOSH best-practices; site ventilation plan controls." },
+  "8IZCQ05vxeY": { focus: "Apply limestone underground ground-control awareness.", scope: "Limestone-specific; site ground-control plan controls." },
+  "7LEqWoK_aS0": { focus: "Apply Stop the Bleed: alert, find bleeding, pressure, packing, tourniquet.", scope: "ACS overview; instructor practice required." },
+  "u3nrDb5XjSI": { focus: "Demonstrate tourniquet use for life-threatening limb bleeding.", scope: "Demo only; practice with instructor." },
+  "kbHxdV_uZV8": { focus: "Connect the Sunshine fire to why these operations carry a filter self-rescuer.", scope: "Short archival sting before the full Sunshine case study and W65 practical films." },
+  "DxB7g_y15FI": { focus: "Explain how Farmington helped drive federal mine safety law and why MSHA and miners' rights exist.", scope: "Coal disaster history used for why-the-law-matters; Part 48 limestone operations still follow today's Mine Act rights and duties." },
+  "n1pqUaXdJ6k": { focus: "Remember the human cost behind mine safety law and hazard reporting protections.", scope: "Documentary remembrance; extract the duty to speak up and the purpose of federal protections." },
+  "QGkT8Ahh1-E": { focus: "Optional deeper miners' rights discussion (Part 46-branded presenter).", scope: "Demoted from Module 2 required sequence. Use for statutory rights ideas only; this course is Part 48. Prefer the California DIR rights summary in Module 2." },
   "lOlGUa3iIwA": {
     focus: "Recognize what a typical four-gas ALTAIR 4X is designed to indicate (O₂, LEL, CO, H₂S) and that alarms mean withdraw and notify — not investigate.",
     scope: "Vendor overview only. Supervisors operate the company detector. Trainees do not bump-test, calibrate, or clear an area. A four-gas unit does not detect every mine gas (including NO₂ and CO₂)."
