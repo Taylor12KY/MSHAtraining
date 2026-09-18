@@ -245,22 +245,31 @@ const MODULES_PART_1 = [
       </div>
       <div class="content-section">
         <h3>See the Blind Area Before You Enter It</h3>
-        <p>NIOSH blind-area diagrams show what an operator can and cannot see by direct view or mirrors at three object heights: ground level, 900 mm (3 feet), and 1500 mm (4 feet 11 inches). The shape changes with the machine, attachment, seat position, mirror adjustment, and the height of the person or object.</p>
-        <figure class="training-figure">
-          <img loading="lazy" src="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/images/blindarea/loaders/800px/cat992g-grd.jpg" alt="NIOSH ground-level blind-area diagram for a Caterpillar 992G wheel loader">
-          <figcaption>NIOSH Cat 992G ground-level example. Use the diagram legend to compare areas the operator cannot see directly with areas visible in mirrors.</figcaption>
-        </figure>
-        <div class="warning-box"><strong>Example, not an equipment-specific map:</strong> the NIOSH Cat 966G, Cat 992G, and Volvo A40D diagrams are useful teaching examples, but they are not diagrams for the Allen Company Cat 980M/988-class loaders or every haul truck. The actual machine, current operator's manual, site traffic plan, installed cameras/proximity systems, and a site evaluation control.</div>
+        <p>NIOSH blind-area diagrams are bird's-eye maps of where the operator cannot see an object of a given height—whether looking out the windows or using mirrors. Walk through the Cat <strong>966G</strong> pages with the class (they include all three heights). Note: the Cat <strong>992G</strong> set on CDC has no 900 mm diagram.</p>
+        <p>Three object heights (feet first; millimeters in parentheses):</p>
         <ul>
-          <li><strong>Before movement:</strong> the operator adjusts the seat, mirrors, and cameras; completes the examination; clears the area; and follows the site's startup, horn, and communication procedure.</li>
-          <li><strong>On foot:</strong> stay outside the equipment's operating and articulation zones. Approach only after positive two-way communication, acknowledgment, and the equipment is stopped as required by site procedure.</li>
-          <li><strong>Never assume:</strong> eye contact, a backup alarm, mirror, camera, high-visibility clothing, or proximity warning proves the operator sees you.</li>
+          <li><strong>Ground level</strong> — something lying flat or a very low object on the ground.</li>
+          <li><strong>About 3 feet (900 mm)</strong> — roughly a short barrel, or knee-to-waist height on a person.</li>
+          <li><strong>About 5 feet (1500 mm / 4′11″)</strong> — roughly a short standing adult.</li>
+        </ul>
+        <p>How to read a diagram: <strong>0°</strong> is the front / bucket end; <strong>180°</strong> is the rear. The rings are distance from the machine (<strong>2 m ≈ 6½ ft</strong>, <strong>4 m ≈ 13 ft</strong>, <strong>12 m ≈ 40 ft</strong>). <strong>Shaded</strong> = blind (no direct view and no mirror view of that height). Hatch or mirror-colored zones = mirrors only. Open / clear = direct view through windows.</p>
+        <figure class="training-figure">
+          <img loading="lazy" src="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/images/blindarea/loaders/800px/cat966g-grd.jpg" alt="NIOSH ground-level blind-area diagram for a Caterpillar 966G wheel loader">
+          <figcaption>NIOSH Cat 966G ground-level example (preferred in-module figure—this model has ground, ~3 ft, and ~5 ft diagrams). Use the legend: shaded = blind; hatch/mirror color = mirrors only; open = direct view.</figcaption>
+        </figure>
+        <div class="warning-box"><strong>Example, not an equipment-specific map:</strong> NIOSH Cat 966G, Cat 992G, and Volvo A40D diagrams are teaching examples only. They are not maps for Allen Company Cat 980M/988-class loaders or every haul truck. The actual machine, current operator's manual, site traffic plan, installed cameras/proximity systems, and a site evaluation control.</div>
+        <div class="key-box"><strong>Punchline:</strong> if you are standing in the shaded zone, you do not exist to that operator until you have positive two-way communication and the machine is stopped per site rules.</div>
+        <ul>
+          <li><strong>Before movement:</strong> operator adjusts seat, mirrors, and cameras; completes the examination; clears the area; follows startup, horn, and communication procedure.</li>
+          <li><strong>On foot:</strong> stay outside operating and articulation zones. Approach only after positive two-way communication, acknowledgment, and the equipment is stopped as required by site procedure.</li>
+          <li><strong>Never assume:</strong> eye contact, a backup alarm, mirror, camera, high-visibility clothing, or proximity warning does not prove the operator sees you.</li>
         </ul>
         <div class="resource-grid">
-          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-966g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 966G</strong><span>Ground, 900 mm, and 1500 mm diagrams</span></a>
-          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-966g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 966G</strong><span>Ground, ~3 ft (900 mm), and ~5 ft (1500 mm) diagrams</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example (no 900 mm diagram on CDC)</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/volvo-a40d.html" target="_blank" rel="noopener"><strong>NIOSH Volvo A40D</strong><span>Articulated-truck visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/manual-method.html" target="_blank" rel="noopener"><strong>Map the actual machine</strong><span>NIOSH manual blind-area method</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/pdfs/BASFinalReport.pdf" target="_blank" rel="noopener noreferrer"><strong>NIOSH Blind Area Study – Large Mining Equipment</strong><span>Full PDF report on blind areas around large mining equipment</span></a>
           <a class="resource-card" href="https://www.msha.gov/safety-and-health/safety-and-health-initiatives/powered-haulage-safety" target="_blank" rel="noopener noreferrer"><strong>MSHA powered-haulage safety initiative</strong><span>Current MSHA powered-haulage initiative (not the old one-pager)</span></a>
         </div>
       </div>

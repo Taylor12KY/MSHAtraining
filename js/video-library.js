@@ -800,6 +800,30 @@ const REQUIRED_VIDEOS = [
     description: "Boarding and ride culture around powered haulage. May lean surface; transfer principles—site traffic plan controls."
   },
   {
+    id: "OK1LRqjlzkA",
+    moduleId: 4,
+    title: "Construction Equipment Visibility Exercise",
+    author: "Delaware T2/LTAP",
+    durationSeconds: 249,
+    description: "Walkaround teaching NIOSH blind-spot thinking around construction equipment. Principles transfer; site traffic plan controls."
+  },
+  {
+    id: "fKyMEEy9yGI",
+    moduleId: 4,
+    title: "MSHA - Blind Spots Can Kill",
+    author: "Cranesville Block Co.",
+    durationSeconds: 440,
+    description: "Blind-spot awareness around mobile equipment—why people in the shaded zone are invisible until communication and a stop."
+  },
+  {
+    id: "Gtt8DpHyFxg",
+    moduleId: 4,
+    title: "Blind Spot Survey on a Rigid Dump Truck",
+    author: "Irish Concrete Federation",
+    durationSeconds: 144,
+    description: "Demo of surveying blind spots on a rigid dump truck. Principles transfer; not a site procedure—site traffic plan controls."
+  },
+  {
     id: "lOlGUa3iIwA",
     moduleId: 11,
     title: "MSA ALTAIR 4X: Overview of Functions and Features",
@@ -872,7 +896,7 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "DxB7g_y15FI", "n1pqUaXdJ6k", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["kbHxdV_uZV8", "WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
-  4: ["g9MmOSqs8yI", "sQm4pSm4ucQ", "-bQichZvk20", "toT_5FdFDms", "E8r4mtH5Iis", "NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
+  4: ["g9MmOSqs8yI", "sQm4pSm4ucQ", "-bQichZvk20", "toT_5FdFDms", "E8r4mtH5Iis", "OK1LRqjlzkA", "fKyMEEy9yGI", "Gtt8DpHyFxg", "NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["m9yYUuMG-kE", "LQIgql3q6Ek", "vWssDu6TkXo", "e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["8IZCQ05vxeY", "OxOwJC5wHyc", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "eFTnBiAvxxg", "Ok2p6cUe_sM", "HiakyMAiiaE", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
@@ -897,6 +921,9 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "-bQichZvk20": "With check-in covered, watch a short coal mantrip ride for what a conveyance can look like. This is appearance only—not Allen Company boarding procedure.",
   "toT_5FdFDms": "Move from conveyance look-and-feel into NIOSH Hazards in Motion: mobile equipment, signals, conveyances, and why horseplay around travel kills.",
   "E8r4mtH5Iis": "Next, Florida Mine Safety Get Them on Board covers boarding and ride culture. It may lean surface—take the principles; the site traffic plan controls.",
+  "OK1LRqjlzkA": "After boarding culture, walk the visibility exercise: Delaware T2/LTAP teaches NIOSH blind-spot thinking around equipment. Principles transfer; this site's traffic plan controls.",
+  "fKyMEEy9yGI": "Continue with Blind Spots Can Kill—why people in the shaded zone are invisible until positive communication and a stop.",
+  "Gtt8DpHyFxg": "Then watch a short blind-spot survey on a rigid dump truck. Frame it as how to survey blind spots, not as Allen Company procedure. Site traffic plan controls.",
   "NH7vatxj_t0": "Continue powered-haulage awareness with Be Alert, Be Ready—visibility, communication, and staying out of the line of fire.",
   "q_4q8lm0tCs": "These are surface-mine examples. Transfer visibility, seat belts, berms, guarding, and LOTO. Underground travel, dump pockets, and this site's traffic plan control underground.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
@@ -964,7 +991,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
 const MODULE_VIDEO_SCOPE = {
   2: "Use the video for statutory rights and 105(c) ideas. Some presenters are labeled Part 46 (surface). This course is Part 48 underground limestone. Current Mine Act, the Part 48 plan, and instructor control.",
   3: "Use only the current MSA W65 instructions and this mine's procedures. The W65 converts carbon monoxide; it does not supply oxygen. Video viewing does not replace hands-on practice with an approved W65 training unit.",
-  4: "Start with check-in/tag-board accountability, then travel and boarding. Some clips are coal or surface examples (mantrip look, Get Them on Board). Transfer visibility, seat belts, berms, guarding, signals, and LOTO. Underground travel, dump pockets, and this site's traffic and check-in plans control. The video is not task authorization.",
+  4: "Start with check-in/tag-board accountability, then travel and boarding, then blind-spot teaching (visibility walkaround, Blind Spots Can Kill, dump-truck survey demo). Some clips are coal, surface, construction, or overseas examples. Transfer visibility, seat belts, berms, guarding, signals, and LOTO. Underground travel, dump pockets, and this site's traffic and check-in plans control. The video is not task authorization.",
   5: "Concentrate on recognizing and controlling hazards. Do not enter restricted areas or perform specialized work without site authorization and task training.",
   6: "Treat incident footage as a case study. In an emergency, follow the current mine emergency plan, designated escapeways, communications, and instructor direction.",
   7: "Apply the warning signs and control principles through the current ground-control and ventilation plans. Historical conditions and another mine's methods are context, not local procedure.",
@@ -1242,6 +1269,18 @@ const VIDEO_TRAINING_GUIDANCE = {
   "E8r4mtH5Iis": {
     focus: "Practice safe boarding and ride culture: wait for a complete stop, use designated points, seat belts where required, and keep clear of moving equipment.",
     scope: "Florida Mine Safety powered-haulage film may lean surface. Transfer boarding and ride principles; underground travel and this site's traffic plan control."
+  },
+  "OK1LRqjlzkA": {
+    focus: "Use the walkaround to practice NIOSH blind-spot thinking: where the operator cannot see a person or object of a given height from the seat or mirrors.",
+    scope: "Delaware T2/LTAP construction-equipment visibility exercise. Principles transfer to mining mobile equipment; site traffic plan, machine manuals, and instructor direction control—not a substitute for mapping the actual machine."
+  },
+  "fKyMEEy9yGI": {
+    focus: "Connect blind-area diagrams to real consequences: if you are in the shaded zone you are invisible until positive two-way communication and the machine is stopped per site rules.",
+    scope: "Cranesville Block Co. MSHA-style blind-spot film. Transfer awareness; follow this site's traffic plan, signals, and approach rules."
+  },
+  "Gtt8DpHyFxg": {
+    focus: "Watch how a blind-spot survey is demonstrated around a rigid dump truck—method and thinking, not a checklist to copy on site without authorization.",
+    scope: "Irish Concrete Federation dump-truck survey. Frame as a demo of surveying blind spots; principles transfer. Not Allen Company procedure. Site traffic plan and machine evaluation control."
   },
   "lOlGUa3iIwA": {
     focus: "Recognize what a typical four-gas ALTAIR 4X is designed to indicate (O₂, LEL, CO, H₂S) and that alarms mean withdraw and notify — not investigate.",
