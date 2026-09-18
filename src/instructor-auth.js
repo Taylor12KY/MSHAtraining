@@ -101,6 +101,60 @@ async function configureLearnerRegistration() {
   }
 }
 
+
+let modalFocusReturn = null;
+let activeModalKeyHandler = null;
+
+function getFocusable(container) {
+  if (!container) return [];
+  return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+    .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+}
+
+function trapFocus(modal) {
+  const focusable = getFocusable(modal);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  activeModalKeyHandler = (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      if (modal.id === 'instructor-records-modal') closeInstructorRecords();
+      else closeAccountAccess();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+  modal.addEventListener('keydown', activeModalKeyHandler);
+}
+
+function releaseModalFocus(modal) {
+  if (modal && activeModalKeyHandler) modal.removeEventListener('keydown', activeModalKeyHandler);
+  activeModalKeyHandler = null;
+  const main = document.getElementById('main-content');
+  if (main) main.inert = false;
+  if (modalFocusReturn && typeof modalFocusReturn.focus === 'function') {
+    try { modalFocusReturn.focus(); } catch (e) {}
+  }
+  modalFocusReturn = null;
+}
+
+function activateModal(modal) {
+  if (!modal) return;
+  modalFocusReturn = document.activeElement;
+  const main = document.getElementById('main-content');
+  if (main) main.inert = true;
+  trapFocus(modal);
+}
+
+
 function openAccountAccess(view = 'login', intent = 'instructor') {
   authIntent = intent;
   setAuthView(view);
@@ -110,7 +164,9 @@ function openAccountAccess(view = 'login', intent = 'instructor') {
   if (intro) intro.textContent = intent === 'instructor'
     ? 'Sign in with an invited instructor account. Learner progress and certificates are disabled in preview mode.'
     : 'Use the secure email link to regain access to your learner account.';
-  byId('instructor-auth-modal')?.classList.remove('hidden');
+  const modal = byId('instructor-auth-modal');
+  modal?.classList.remove('hidden');
+  activateModal(modal);
   window.setTimeout(() => {
     const field = byId(view === 'login' ? 'instructor-email' :
       view === 'invite' ? 'instructor-invite-password' :
@@ -121,7 +177,9 @@ function openAccountAccess(view = 'login', intent = 'instructor') {
 
 function closeAccountAccess() {
   if (isInstructorRoute) return;
-  byId('instructor-auth-modal')?.classList.add('hidden');
+  const modal = byId('instructor-auth-modal');
+  modal?.classList.add('hidden');
+  releaseModalFocus(modal);
   showAuthStatus('');
 }
 
@@ -464,7 +522,9 @@ async function saveInstructorSignoffs(event) {
 }
 
 async function openInstructorRecords() {
-  byId('instructor-records-modal')?.classList.remove('hidden');
+  const modal = byId('instructor-records-modal');
+  modal?.classList.remove('hidden');
+  activateModal(modal);
   setRecordsStatus('Loading learner records…');
   try {
     const body = await authenticatedRequest('/api/instructor-records');
@@ -481,7 +541,9 @@ async function openInstructorRecords() {
 }
 
 function closeInstructorRecords() {
-  byId('instructor-records-modal')?.classList.add('hidden');
+  const modal = byId('instructor-records-modal');
+  modal?.classList.add('hidden');
+  releaseModalFocus(modal);
 }
 
 function bindAuthUI() {

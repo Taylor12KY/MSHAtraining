@@ -22,16 +22,17 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Inactivity-aware seat-time tracking with progress validation
 - Randomized quiz presentation with recent attempt history
 - Missed-topic remediation with a focused knowledge check before a full quiz retake
-- Current fall-protection sequence with the 2026 OSHA personal fall-arrest webinar, NIOSH prevention guidance, MSHA incident review, and instructor equipment verification
+- Current fall-protection sequence covering prevention-through-design, MSHA Fall Protection: Your Lifeline to Safety, Ally Safety PFAS basics, harness inspection/donning, SRLs, swing-fall/clearance, suspension trauma straps, MSHA incident review, and instructor equipment verification
 - NIOSH equipment blind-area diagrams with explicit actual-machine and positive-communication safeguards
 - Satellite orientation panels for all three sites with Google Earth/full-map links and current-plan warnings
 - Plain-language Module 1 glossary covering 19 common underground, quarry, ground-control, blasting, and material-handling terms
 - Embedded official MSHA miners' rights trifold plus current DOL complaint and reporting resources
 - Recent official MSHA powered-haulage, blasting, confined-space, and equipment-fire alerts
 - Dust-safe cleanup, current DPM corrective-action guidance, 3M valved N95 and 6200/07025 fit/use instruction, and NIOSH hearing-protector fitting practice
-- Current Red Cross, ACS Stop the Bleed, and OSHA first-aid references for instructor-led skills practice
+- Current Red Cross, ACS Stop the Bleed, and OSHA first-aid references, plus LIFEPAK CR2 semi-automatic AED orientation matching site units
+- Expanded required-PPE teaching for hard hats, eye protection, safety-toe boots, gloves, hearing protection, hi-vis/reflective clothing, and heat-stress hydration (water/Sqwincher)
 - MSHA/NIOSH-based safe-work-procedure and job-task-analysis exercise for assigned tasks
-- Expanded mine-gas recognition, exposure/action references, likely accumulation areas, sensory warnings, stop–warn–withdraw–report response, and a supervisor-operated MSA ALTAIR 4X orientation
+- Underground mine-gas and hardrock gas-management teaching (not confined-space entry), ventilation principles, exposure/action references, stop–warn–withdraw–report response, and MSA ALTAIR 4X function/limits orientation (no trainee bump-test procedure)
 - Current MSHA silica and NIOSH mining heat-stress learning material
 - Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
@@ -86,3 +87,9 @@ Other accounts can help build this:
 ## License / use
 
 Internal training material for authorized use by The Allen Company / site operators. Do not treat as a public LMS product without company approval.
+
+## Training video updates (PR)
+- Module 2: Farmington history films plus legislation/MSHA/rights sequence; long Part 46 rights talk demoted to Module 13 review.
+- Module 3: short MSHA Sunshine sting before the full Sunshine case study and W65 films.
+- Module 4: tag-board / check-in videos, coal mantrip look-only clip, NIOSH Hazards in Motion, Florida Get Them on Board, three blind-spot videos (Delaware T2 visibility exercise, Blind Spots Can Kill, Irish dump-truck survey demo), NIOSH Blind Area Study PDF plus Cat 966G/992G/Volvo/manual-method resource cards, and MSHA check-in PDF/resource links.
+- Module 12: JSA/JHA/task-training focus; mindfulness/Mike Rowe moved to Module 13.
