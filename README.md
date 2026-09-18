@@ -29,9 +29,10 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Embedded official MSHA miners' rights trifold plus current DOL complaint and reporting resources
 - Recent official MSHA powered-haulage, blasting, confined-space, and equipment-fire alerts
 - Dust-safe cleanup, current DPM corrective-action guidance, 3M valved N95 and 6200/07025 fit/use instruction, and NIOSH hearing-protector fitting practice
-- Current Red Cross, ACS Stop the Bleed, and OSHA first-aid references for instructor-led skills practice
+- Current Red Cross, ACS Stop the Bleed, and OSHA first-aid references, plus LIFEPAK CR2 semi-automatic AED orientation matching site units
+- Expanded required-PPE teaching for hard hats, eye protection, safety-toe boots, gloves, hearing protection, hi-vis/reflective clothing, and heat-stress hydration (water/Sqwincher)
 - MSHA/NIOSH-based safe-work-procedure and job-task-analysis exercise for assigned tasks
-- Expanded mine-gas recognition (what gases are and how they harm), ventilation principles, exposure/action references, likely accumulation areas, sensory warnings, stop–warn–withdraw–report response, and a supervisor-operated MSA ALTAIR 4X function/limits orientation (no trainee bump-test procedure)
+- Underground mine-gas and hardrock gas-management teaching (not confined-space entry), ventilation principles, exposure/action references, stop–warn–withdraw–report response, and MSA ALTAIR 4X function/limits orientation (no trainee bump-test procedure)
 - Current MSHA silica and NIOSH mining heat-stress learning material
 - Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
