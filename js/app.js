@@ -893,9 +893,12 @@ function externalVideoUrl(video) {
 }
 
 function requiredVideoControls(video) {
+  const isVimeo = videoProvider(video) === 'vimeo';
   const viewingNote = instructorPreviewMode
     ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
-    : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).';
+    : (isVimeo
+      ? 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume, or on iPad tap the play button on the video itself if Start/Resume does not start playback.'
+      : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).');
   return `
     <div class="video-watch-controls">
       <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
@@ -1211,7 +1214,9 @@ function ensureRequiredVideoLoaded(videoId, { autoplay = false } = {}) {
       videoId,
       instructorPreviewMode
         ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
-        : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).',
+        : (meta.provider === 'vimeo'
+          ? 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume, or on iPad tap the play button on the video itself if Start/Resume does not start playback.'
+          : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).'),
       false
     );
     if (autoplay) {
@@ -1514,7 +1519,7 @@ async function toggleRequiredVideo(videoId) {
         }
         await player.play();
       };
-      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module, then use Start / Resume. If problems continue, ask the instructor for help.', true));
+      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module. On iPad, tap the play button on the video itself if Start/Resume does not start playback. If problems continue, ask the instructor for help.', true));
     }
     return;
   }
