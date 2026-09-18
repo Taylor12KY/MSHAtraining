@@ -441,6 +441,39 @@ const REQUIRED_VIDEOS = [
     durationSeconds: 506,
     description: "Practical demonstration of anchorage, body support, connectors, and deceleration devices, plus fall restraint versus fall arrest. Principles for instructor-led equipment verification."
   },
+
+  {
+    id: "seuWV6qTl4k",
+    moduleId: 5,
+    title: "How to Inspect and Don a Full-Body Harness",
+    author: "FallTech",
+    durationSeconds: 348,
+    description: "Manufacturer demonstration of pre-use harness inspection and correct donning/fit before work at height."
+  },
+  {
+    id: "cW85eKNxR7c",
+    moduleId: 5,
+    title: "Self Retracting Lifelines (SRLs) in Construction",
+    author: "Oregon OSHA",
+    durationSeconds: 238,
+    description: "How SRLs work, common uses, and limits compared with energy-absorbing lanyards. Apply principles under MSHA and site procedures."
+  },
+  {
+    id: "XBVQongE3V0",
+    moduleId: 5,
+    title: "Self Retracting Devices, Swing Fall and Clearance",
+    author: "ABCS Safety Training Inc.",
+    durationSeconds: 293,
+    description: "3D explanation of swing-fall and clearance requirements when using self-retracting devices."
+  },
+  {
+    id: "RBmYGDwzfWU",
+    moduleId: 5,
+    title: "Suspension Trauma and Trauma Straps",
+    author: "Oregon OSHA",
+    durationSeconds: 140,
+    description: "Why suspension trauma matters after a fall arrest and how trauma straps / relief steps support rescue planning."
+  },
   {
     id: "UD2u9LXREWM",
     moduleId: 11,
@@ -458,6 +491,14 @@ const REQUIRED_VIDEOS = [
     description: "Atmospheric hazards in confined spaces: toxic or oxygen-deficient air, and why untrained rescue attempts kill. Principles only; not mine-rescue or confined-space qualification."
   },
   {
+    id: "s6Oj2O7P0is",
+    moduleId: 7,
+    title: "Mine Ventilation Systems and Gas Monitoring",
+    author: "Uplatz",
+    durationSeconds: 367,
+    description: "Overview of underground ventilation systems and why gas monitoring pairs with airflow controls. Principles for instructor discussion of the site ventilation plan."
+  },
+  {
     id: "Mvm4LtNNwxY",
     moduleId: 7,
     title: "Breathe and Live – Ventilation in Metal and Non-Metal Mines",
@@ -466,21 +507,37 @@ const REQUIRED_VIDEOS = [
     description: "Historical metal/nonmetal ventilation film covering why fresh air, fans, and airflow controls matter underground. Principles only; current site ventilation plans control."
   },
   {
+    id: "Vk6BgJ1H4EE",
+    moduleId: 11,
+    title: "Toxic Gases: Carbon Monoxide, Hydrogen Sulphide, and Related Hazards",
+    author: "WorkSafeBC",
+    durationSeconds: 171,
+    description: "What common toxic gases do to the body and why odor or comfort is not a reliable warning. Principles for mine-gas awareness; not a confined-space entry qualification."
+  },
+  {
+    id: "DXzYOtwf6Ts",
+    moduleId: 11,
+    title: "Why Hazardous Atmospheres Can Be Deadly",
+    author: "WorkSafeBC",
+    durationSeconds: 162,
+    description: "How oxygen deficiency, toxic gas, and related atmospheric hazards can kill quickly—and why withdrawal and reporting protect miners."
+  },
+  {
+    id: "aLDvPGSXzrU",
+    moduleId: 11,
+    title: "Carbon Monoxide Hazards",
+    author: "U.S. Department of Labor",
+    durationSeconds: 250,
+    description: "Official DOL overview of carbon monoxide sources, health effects, and why CO requires engineered controls and testing rather than sensory detection."
+  },
+  {
     id: "lOlGUa3iIwA",
     moduleId: 11,
     title: "MSA ALTAIR 4X: Overview of Functions and Features",
     author: "Frontline Safety UK Ltd",
     durationSeconds: 114,
-    description: "Short overview of what a four-gas ALTAIR 4X displays and how miners should interpret alarms at a principles level before the bump-test demo."
+    description: "Short overview of what a four-gas ALTAIR 4X displays, how alarms work, and what trainees need to know about its limits—without teaching bump testing or calibration."
   },
-  {
-    id: "b7mhJ8viccI",
-    moduleId: 11,
-    title: "MSA ALTAIR 4X: How to Manually Bump Test",
-    author: "Frontline Safety UK Ltd",
-    durationSeconds: 129,
-    description: "Instrument-specific demonstration of a manual bump test on the MSA ALTAIR 4X multigas detector."
-  }
 ];
 
 const FIRST_VIDEO_BATCH_IDS = new Set([
@@ -523,11 +580,12 @@ const RETIRED_VIDEO_IDS = {
   v26fTGBEi9E: "Replaced by a current MSHA/NIOSH-based safe-work-procedure and job-task-analysis exercise.",
   "Veayb1NucTA": "Removed from the Module 8 required sequence; NIOSH YouTube ID returned oembed/thumbnail 404 and IFrame API Error 150 (Video unavailable). Replaced by the live CDC Roll, Pull, and Hold clip zM3R_1JceWo.",
   "Ka9UKa_xYNU": "Retired 61-minute OSHA PFAS webinar; replaced by MSHA Fall Protection: Your Lifeline to Safety plus a shorter Ally Safety PFAS basics demonstration.",
-  "gbaGN7JQoO4": "Removed as a content duplicate of CDC/NIOSH Handling Explosives in Underground Mines (UD2u9LXREWM)."
+  "gbaGN7JQoO4": "Removed as a content duplicate of CDC/NIOSH Handling Explosives in Underground Mines (UD2u9LXREWM).",
+  "b7mhJ8viccI": "Removed bump-test demonstration per instructor direction; trainees need ALTAIR function/limits awareness only, not bump-test or calibration procedure."
 };
 
 const CURRENT_RESOURCE_VIDEO_IDS = new Set([
-  "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "lOlGUa3iIwA", "b7mhJ8viccI", "zM3R_1JceWo"
+  "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "s6Oj2O7P0is", "Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "lOlGUa3iIwA", "zM3R_1JceWo"
 ]);
 
 const PRE_EXISTING_VIDEO_IDS = new Set([
@@ -540,13 +598,13 @@ const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "QGkT8Ahh1-E", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
   4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY"],
-  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "_s2x4dmQgjU", "2cyQ5QTPOek"],
+  5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek"],
   6: ["e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
-  7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
+  7: ["OxOwJC5wHyc", "eFTnBiAvxxg", "Ok2p6cUe_sM", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "CHTJ8i55HUk", "X5r4upNwIGk", "zM3R_1JceWo"],
   9: ["wal2KP1bbIY", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI"],
-  11: ["-wrwD7s9rUE", "lOlGUa3iIwA", "b7mhJ8viccI", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
+  11: ["Vk6BgJ1H4EE", "DXzYOtwf6Ts", "aLDvPGSXzrU", "-wrwD7s9rUE", "lOlGUa3iIwA", "9wnDBLifDB4", "zaliBZlRsaE", "G2Hs51QDszc", "UD2u9LXREWM"],
   12: ["ZHVAmbOBkrk", "Km8XxRCuCho", "EQ1OPz1p0U4", "4MjKwOI2LrE"]
 };
 
@@ -573,7 +631,11 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "oJ834e9wDQ4": "After equipment examinations, shift to personal protective equipment and choose head protection for the hazards actually present.",
   "DfiBLI8lGM8": "Carry the control-selection mindset to work at height: first look for ways to eliminate the exposure or prevent the fall.",
   "kJ6xIsy7WNM": "Apply prevention-through-design ideas to mining fall hazards: elevated work, openings, and the fall-protection systems required under MSHA rules.",
-  "TEf1Tsx_3MA": "When personal fall arrest or restraint is required, use the ABCD framework—anchorage, body support, connectors, and deceleration—and verify the complete system with the instructor before work.",
+  "TEf1Tsx_3MA": "When personal fall arrest or restraint is required, use the ABCD framework—anchorage, body support, connectors, and deceleration—then move into inspection and donning.",
+  "seuWV6qTl4k": "Inspect the harness before every use, don it correctly, and confirm fit before connecting to an approved system.",
+  "cW85eKNxR7c": "Next, study how self-retracting lifelines behave and where they fit in a fall-protection plan.",
+  "XBVQongE3V0": "With SRL concepts in mind, check swing-fall and clearance so the device can actually protect the worker.",
+  "RBmYGDwzfWU": "Finally, plan for after the arrest: suspension trauma awareness and trauma-strap / relief steps support prompt rescue.",
   "_s2x4dmQgjU": "Move from personal protection to roadway engineering controls by examining effective berms.",
   "2cyQ5QTPOek": "Close hazard recognition with material-handling hazards: unstable slopes, voids, and safe positioning around stockpiles. Blast-area controls are covered in Module 11 (Blasting, Explosives, & Mine Gases).",
   "j9DNL0DnKmU": "After fire prevention and early response, shift to the decisions, communication, and leadership required during evacuation.",
@@ -585,16 +647,19 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "GN3OBFAVHt4": "Use this short limestone field clip to see one roof-bolting application after learning the control principles.",
   "528dJg0lESM": "Compare installed support with another control method: removing loose material through protected mechanical scaling.",
   "1u6c7YMgkB8": "Expand from local loose-ground hazards to the larger-scale consequences of unstable pillar systems.",
-  "Mvm4LtNNwxY": "After ground-control lessons, study why metal/nonmetal mines move air: fresh air supply, contaminant removal, fans, and controls. Then use the Granite Mountain case for what happens when ventilation fails under fire.",
+  "s6Oj2O7P0is": "After ground-control lessons, learn how underground ventilation systems and gas monitoring work together before reviewing the historical metal/nonmetal film.",
+  "Mvm4LtNNwxY": "Carry those ventilation principles into the metal/nonmetal Breathe and Live film, then use Granite Mountain for what happens when airflow fails under fire.",
   "kjCsEVjRrlg": "This is not a second Sunshine. Take ventilation reversal, fire loading, and two-way escapeways — not 1917 equipment. Sunshine is device why (Module 3). Sago is command (Module 6). This is ventilation behavior.",
   "CHTJ8i55HUk": "After seeing why dust is dangerous, learn how sampling helps identify and document respirable exposure.",
   "X5r4upNwIGk": "Then apply the same exposure-control mindset to noise, hearing protection, and conservation-program responsibilities.",
   "zM3R_1JceWo": "Finish the health sequence by practicing the Roll–Pull–Hold method that helps soft foam earplugs provide their intended protection.",
   "is77KiZ16_o": "Move from basic electrical awareness to the controlled isolation of hazardous energy before service or repair.",
   "iX8j7h7bJF4": "Finish with an arc-flash fatality case that shows why qualification, isolation, verification, and safe boundaries are essential.",
-  "lOlGUa3iIwA": "After atmospheric-hazard awareness, see what the company-style four-gas detector is built to show—and what it cannot show—before the bump-test demo.",
-  "b7mhJ8viccI": "Watch how the supervisor verifies the ALTAIR 4X before use. Your trainee responsibility is to recognize its alarms and limits, withdraw from questionable air, and report the concern.",
-  "-wrwD7s9rUE": "Start with why oxygen-deficient or toxic air kills in enclosed spaces, and why you never enter to rescue someone unless you are trained and equipped.",
+  "Vk6BgJ1H4EE": "Start mine-gas awareness with what common toxic gases do and why senses are not enough.",
+  "DXzYOtwf6Ts": "Connect toxic-gas lessons to oxygen deficiency and other atmospheres that can kill quickly.",
+  "aLDvPGSXzrU": "Focus next on carbon monoxide—the colorless, odorless gas most often linked to combustion, exhaust, and blast fumes.",
+  "-wrwD7s9rUE": "Tie atmospheric hazards together: toxic or oxygen-deficient air, and why untrained rescue attempts kill.",
+  "lOlGUa3iIwA": "Finish gas-protection awareness with how the company-style four-gas detector works—what it shows, what it cannot show, and that alarms mean withdraw and notify.",
   "9wnDBLifDB4": "Open-pit example for blast-area recognition, signals, and exclusion. Not a limestone underground round and not task authorization. Stay out until the all-clear. Underground fumes and re-entry are the later videos and the NIOSH limestone study.",
   "zaliBZlRsaE": "Apply the module's safe-work-procedure framework to the planned sequence and coordination required for drill-and-blast work.",
   "G2Hs51QDszc": "Next, place that sequence in an underground mining context and identify the hazards surrounding explosives and re-entry.",
@@ -651,6 +716,22 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Demonstrate the ABCD components of personal fall protection, distinguish restraint from arrest, and prepare for instructor-led equipment inspection and fit check.",
     scope: "Ally Safety demonstration is principles and awareness only. It does not authorize a tie-off point or equipment combination. Follow MSHA standards, the approved plan, company procedures, and the instructor's verification."
   },
+  "seuWV6qTl4k": {
+    focus: "Inspect harness webbing, stitching, labels, D-rings, buckles, and impact indicators; then don and fit the harness correctly before connecting.",
+    scope: "Manufacturer demonstration. Allen Company harness models and labels control during the instructor hands-on verification."
+  },
+  "cW85eKNxR7c": {
+    focus: "Explain how an SRL works, typical applications, and limits versus energy-absorbing lanyards.",
+    scope: "Oregon OSHA construction-framed training used for SRL principles. Mining work remains under MSHA standards, site procedures, and manufacturer instructions for the SRLs in use."
+  },
+  "XBVQongE3V0": {
+    focus: "Calculate and visualize swing-fall and clearance so an SRL or other connecting device can protect the worker.",
+    scope: "Animated principles only. Required clearance and anchorage location are set by the competent person, site procedure, and manufacturer data."
+  },
+  "RBmYGDwzfWU": {
+    focus: "Recognize suspension trauma risk after fall arrest and the role of trauma straps / relief steps while waiting for prompt rescue.",
+    scope: "Awareness for rescue planning. Site rescue procedures and instructor demonstration control; do not improvise medical treatment from the video."
+  },
   "9wnDBLifDB4": {
     focus: "Recognize blast areas, warning signals, exclusion zones, flyrock risk, and the need to obey the site's all-clear procedure.",
     scope: "This is an open-pit example for blast-area recognition, signals, and exclusion. It is not a limestone underground round and not task authorization. Stay out until the all-clear. Underground fumes and re-entry are the later videos and the NIOSH limestone study."
@@ -677,6 +758,10 @@ const VIDEO_TRAINING_GUIDANCE = {
     scope: "This is a Canadian construction-association awareness tape. Principles only. Electrical work at these mines follows MSHA Part 57, the energy-control procedure, and qualified-person rules — not CSA/OSHA construction qualification."
   },
   "4MjKwOI2LrE": { focus: "Consider how one person's shortcut affects coworkers and family, and why speaking up, PPE, and procedure compliance matter." },
+  "s6Oj2O7P0is": {
+    focus: "Describe how mine ventilation systems move air and why gas monitoring supports those controls.",
+    scope: "Engineering overview for classroom principles. The approved ventilation plan, fans, controls, and supervisor authorization at these operations control—not the generic examples in the video."
+  },
   "Mvm4LtNNwxY": {
     focus: "Explain why underground metal/nonmetal mines ventilate: supply fresh air, dilute and remove contaminants, and keep airflow under authorized control.",
     scope: "Historical training film for principles only. Do not treat depicted equipment, quantities, or procedures as current Allen Company practice. The approved ventilation plan and supervisor authorization control."
@@ -769,13 +854,21 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Look for roof and rib warning signs, examination practices, plan requirements, support functions, and the principle of staying out from under unsupported or hazardous ground.",
     scope: "This presentation centers on underground coal mining. Do not apply its support systems or retreat-mining methods as local procedure; use only the current stone-mine ground-control and ventilation plans."
   },
+  "Vk6BgJ1H4EE": {
+    focus: "Identify health effects of common toxic gases such as carbon monoxide and hydrogen sulfide, and why odor is not a reliable warning.",
+    scope: "WorkSafeBC confined-space series used for gas-hazard principles. Stone-mine exposures, detectors, and response follow MSHA rules, the site plan, and supervisor atmospheric testing—not confined-space entry qualification."
+  },
+  "DXzYOtwf6Ts": {
+    focus: "Explain how oxygen deficiency and related atmospheric hazards can become deadly quickly, and why the correct response is withdraw and report.",
+    scope: "Awareness principles from a confined-space series. Do not treat it as authorization to enter, test, or rescue in a questionable atmosphere."
+  },
+  "aLDvPGSXzrU": {
+    focus: "Recognize carbon monoxide sources and effects, and that CO requires controls and instrument detection rather than sensory warning.",
+    scope: "DOL construction/portable-equipment framing. Connect the same CO lessons to diesel exhaust, fire, hot work, and blasting fumes underground under the site plan."
+  },
   "lOlGUa3iIwA": {
     focus: "Recognize what a typical four-gas ALTAIR 4X is designed to indicate (O₂, LEL, CO, H₂S) and that alarms mean withdraw and notify — not investigate.",
-    scope: "Vendor overview only. Supervisors operate the company detector. A four-gas unit does not detect every mine gas (including NO₂ and CO₂)."
-  },
-  "b7mhJ8viccI": {
-    focus: "Observe how the supervisor inspects the ALTAIR 4X, verifies the cylinder and regulator, applies known gas, confirms the installed sensors and alarms respond, and recognizes BUMP PASS versus BUMP ERROR.",
-    scope: "Only designated supervisors operate and make decisions from the company detector. This vendor demonstration is not an MSA-produced certification course and does not authorize trainees to test or clear an area. Trainees must recognize alarms, know a typical four-gas unit does not detect every mine gas, withdraw from questionable air, and notify the supervisor."
+    scope: "Vendor overview only. Supervisors operate the company detector. Trainees do not bump-test, calibrate, or clear an area. A four-gas unit does not detect every mine gas (including NO₂ and CO₂)."
   },
   "UD2u9LXREWM": {
     focus: "Follow underground explosives storage, transport, blast-area security, fumes, misfires, and the requirement to wait for authorized re-entry after a shot.",
