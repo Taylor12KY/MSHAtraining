@@ -391,11 +391,11 @@ const MODULES_PART_2 = [
       </div>
       <div class="content-section">
         <h3>What Trainees Need to Know About the Supervisor's ALTAIR 4X</h3>
-        <p>Supervisors are responsible for carrying and operating the company ALTAIR 4X under the atmospheric-testing procedure. The required video shows why a supervisor inspects and bump-tests the detector before use. It does <strong>not</strong> authorize a trainee to test an area, interpret a questionable atmosphere, silence an alarm, or make a re-entry decision.</p>
+        <p>Supervisors are responsible for carrying and operating the company ALTAIR 4X under the atmospheric-testing procedure. The required video shows how a typical four-gas detector works—what it displays, what alarms mean, and what it cannot detect. It does <strong>not</strong> teach bump testing or calibration, and it does <strong>not</strong> authorize a trainee to test an area, interpret a questionable atmosphere, silence an alarm, or make a re-entry decision.</p>
         <ul>
           <li>The typical company configuration displays <strong>O₂, combustible gas as %LEL, CO in ppm, and H₂S in ppm</strong>. The supervisor verifies the actual installed sensors, units, calibration gas, and alarm settings.</li>
           <li>A typical four-gas unit does <strong>not</strong> detect every possible hazard, including CO₂, NO₂, and SO₂. The supervisor must select the correct detector or test method for the suspected hazard.</li>
-          <li>A bump test confirms that installed sensors respond to known gas and the alarms function. Calibration adjusts accuracy. Neither process proves that every location will remain safe.</li>
+          <li>Supervisors confirm the instrument is ready (including any required bump test or calibration) before relying on it. Those readiness checks do not prove that every location will remain safe.</li>
           <li>If you have any air-quality question, ask the supervisor before entering or continuing. If conditions already appear questionable, withdraw first and make the report from known fresh air.</li>
         </ul>
         <div class="key-box"><strong>Trainee demonstration:</strong> identify the supervisor as the monitor carrier, name the four typical channels and at least two gases they do not cover, recognize the audible/visual/vibrating alarms, and state: “Stop, warn, withdraw, report.”</div>
