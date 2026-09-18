@@ -220,7 +220,16 @@ const MODULES_PART_1 = [
     content: `
       <div class="content-section">
         <h3>Check-In / Check-Out Systems</h3>
-        <p>Most underground mines use a formal check-in/check-out (or tag-in/tag-out) system so the operator always knows who is underground. Follow the exact procedure at your mine every time you enter or leave. Never tag in for another person or leave without tagging out.</p>
+        <p>Most underground mines use a formal check-in/check-out (or tag-in/tag-out) system so the operator always knows who is underground. Classic brass tag boards and modern electronic systems serve the same purpose: accountability before work, before a blast, and during an emergency. Follow the exact procedure at your mine every time you enter or leave. Never tag in for another person or leave without tagging out.</p>
+        <ul>
+          <li>Tag yourself in before going underground and tag yourself out when you leave—every time.</li>
+          <li>Never remove, move, or hang another person's tag.</li>
+          <li>If the board or electronic status does not match who should be underground, stop and notify a supervisor before the area is cleared for a blast or treated as evacuated.</li>
+        </ul>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/check-in-check-out-system.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA check-in / check-out PDF</strong><span>Official MSHA overview of check-in/check-out systems</span></a>
+          <a class="resource-card" href="https://www.msha.gov/mnm-underground-mines-check-check-out-system" target="_blank" rel="noopener noreferrer"><strong>MSHA M/NM check-in page</strong><span>Metal/nonmetal underground check-in / check-out guidance</span></a>
+        </div>
       </div>
       <div class="content-section">
         <h3>Transportation Controls</h3>
@@ -231,6 +240,8 @@ const MODULES_PART_1 = [
           <li>Be aware of haul trucks, loaders (Cat 988 / 980M class), and other mobile equipment – they have large blind spots.</li>
           <li>On surface areas: traffic patterns, spotting, and dump-point procedures are critical.</li>
         </ul>
+        <div class="key-box"><strong>Mantrip / conveyance “looks like” only:</strong> the short coal-mine mantrip clip shows what a diesel personnel conveyance can look like. It is not Allen Company boarding procedure, route, or signal rules. Boarding, seating, stay-seated expectations, and traffic control follow this site's transportation plan.</div>
+        <div class="warning-box"><strong>Principles, then the site plan:</strong> NIOSH <em>Hazards in Motion</em> and Florida Mine Safety <em>Get Them on Board</em> teach boarding, ride culture, signals, and horseplay controls. Some footage leans coal or surface. Transfer the principles; underground travel, dump pockets, and this site's traffic plan control here. Video viewing is not task authorization.</div>
       </div>
       <div class="content-section">
         <h3>See the Blind Area Before You Enter It</h3>

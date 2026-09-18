@@ -758,6 +758,47 @@ const REQUIRED_VIDEOS = [
     durationSeconds: 635,
     description: "Documentary remembrance of Farmington—human cost behind the Mine Act era and modern miner protections."
   },
+
+  {
+    id: "g9MmOSqs8yI",
+    moduleId: 4,
+    title: "Tag Board – Tara Mines Brass Tag System",
+    author: "Dessie Rogers",
+    durationSeconds: 52,
+    description: "Classic brass/tag-board check-in: how a physical tag board shows who is underground."
+  },
+  {
+    id: "sQm4pSm4ucQ",
+    moduleId: 4,
+    title: "Reinventing the Mine Tag Board",
+    author: "NORCAT",
+    durationSeconds: 362,
+    description: "Accountability and blast-clearance principles around modern tag-board / RFID systems—principles only, not a product purchase."
+  },
+  {
+    id: "-bQichZvk20",
+    moduleId: 4,
+    title: "Riding a Diesel Mantrip Through a WV Coal Mine",
+    author: "YouTube field clip",
+    durationSeconds: 91,
+    description: "Coal-mine POV of what a diesel mantrip looks like. Awareness only—not this site's conveyance procedure."
+  },
+  {
+    id: "toT_5FdFDms",
+    moduleId: 4,
+    title: "Hazards in Motion: Mobile Equipment Safety",
+    author: "PublicResourceOrg / NIOSH",
+    durationSeconds: 1959,
+    description: "Underground mobile equipment, conveyances, signals, and horseplay hazards—principles for safe travel and boarding."
+  },
+  {
+    id: "E8r4mtH5Iis",
+    moduleId: 4,
+    title: "Powered Haulage: Get Them on Board",
+    author: "Florida Mine Safety Program",
+    durationSeconds: 1171,
+    description: "Boarding and ride culture around powered haulage. May lean surface; transfer principles—site traffic plan controls."
+  },
   {
     id: "lOlGUa3iIwA",
     moduleId: 11,
@@ -831,7 +872,7 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "DxB7g_y15FI", "n1pqUaXdJ6k", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
   3: ["kbHxdV_uZV8", "WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
-  4: ["NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
+  4: ["g9MmOSqs8yI", "sQm4pSm4ucQ", "-bQichZvk20", "toT_5FdFDms", "E8r4mtH5Iis", "NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["m9yYUuMG-kE", "LQIgql3q6Ek", "vWssDu6TkXo", "e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
   7: ["8IZCQ05vxeY", "OxOwJC5wHyc", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "eFTnBiAvxxg", "Ok2p6cUe_sM", "HiakyMAiiaE", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
@@ -852,6 +893,11 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
   "106597590": "Sunshine showed why delayed escape and missing self-rescue killed 91 metal miners. Now watch how the MSA W65 you carry actually works and how to don it—mouthpiece, nose clip, filter canister—on a real unit at Cleveland Potash.",
   "1JfkPpr6sRM": "You have seen the W65 you carry. This 1980 NCB film is the same class of hopcalite filter self-rescuer: old proven technology that still does the same job. Learn how and when to use it, and remember UK service rules are not the inspection intervals used here.",
+  "sQm4pSm4ucQ": "After the classic brass board, see how modern tag-board accountability still serves the same purpose: know who is underground before a blast or emergency.",
+  "-bQichZvk20": "With check-in covered, watch a short coal mantrip ride for what a conveyance can look like. This is appearance only—not Allen Company boarding procedure.",
+  "toT_5FdFDms": "Move from conveyance look-and-feel into NIOSH Hazards in Motion: mobile equipment, signals, conveyances, and why horseplay around travel kills.",
+  "E8r4mtH5Iis": "Next, Florida Mine Safety Get Them on Board covers boarding and ride culture. It may lean surface—take the principles; the site traffic plan controls.",
+  "NH7vatxj_t0": "Continue powered-haulage awareness with Be Alert, Be Ready—visibility, communication, and staying out of the line of fire.",
   "q_4q8lm0tCs": "These are surface-mine examples. Transfer visibility, seat belts, berms, guarding, and LOTO. Underground travel, dump pockets, and this site's traffic plan control underground.",
   "p_vsrhxIlR8": "Now narrow the discussion to the haul-truck operator's role, daily choices, and responsibilities in a mining environment.",
   "mSt9lHz22xM": "This is the underground limestone field clip. Use it for traffic flow, dump pockets, clearances, and the dumping area at operations like these. Underground travel and this site's traffic plan control here.",
@@ -918,7 +964,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
 const MODULE_VIDEO_SCOPE = {
   2: "Use the video for statutory rights and 105(c) ideas. Some presenters are labeled Part 46 (surface). This course is Part 48 underground limestone. Current Mine Act, the Part 48 plan, and instructor control.",
   3: "Use only the current MSA W65 instructions and this mine's procedures. The W65 converts carbon monoxide; it does not supply oxygen. Video viewing does not replace hands-on practice with an approved W65 training unit.",
-  4: "Some clips are surface-mine examples. Transfer visibility, seat belts, berms, guarding, and LOTO. Underground travel, dump pockets, and this site's traffic plan control underground. The video is not task authorization.",
+  4: "Start with check-in/tag-board accountability, then travel and boarding. Some clips are coal or surface examples (mantrip look, Get Them on Board). Transfer visibility, seat belts, berms, guarding, signals, and LOTO. Underground travel, dump pockets, and this site's traffic and check-in plans control. The video is not task authorization.",
   5: "Concentrate on recognizing and controlling hazards. Do not enter restricted areas or perform specialized work without site authorization and task training.",
   6: "Treat incident footage as a case study. In an emergency, follow the current mine emergency plan, designated escapeways, communications, and instructor direction.",
   7: "Apply the warning signs and control principles through the current ground-control and ventilation plans. Historical conditions and another mine's methods are context, not local procedure.",
@@ -1177,6 +1223,26 @@ const VIDEO_TRAINING_GUIDANCE = {
   "DxB7g_y15FI": { focus: "Explain how Farmington helped drive federal mine safety law and why MSHA and miners' rights exist.", scope: "Coal disaster history used for why-the-law-matters; Part 48 limestone operations still follow today's Mine Act rights and duties." },
   "n1pqUaXdJ6k": { focus: "Remember the human cost behind mine safety law and hazard reporting protections.", scope: "Documentary remembrance; extract the duty to speak up and the purpose of federal protections." },
   "QGkT8Ahh1-E": { focus: "Optional deeper miners' rights discussion (Part 46-branded presenter).", scope: "Demoted from Module 2 required sequence. Use for statutory rights ideas only; this course is Part 48. Prefer the California DIR rights summary in Module 2." },
+  "g9MmOSqs8yI": {
+    focus: "See how a classic brass/tag board accounts for every person underground and why you never tag for someone else.",
+    scope: "Tara Mines / Dessie Rogers demonstration of a traditional tag board. Follow this mine's exact check-in/check-out procedure—not another site's board layout."
+  },
+  "sQm4pSm4ucQ": {
+    focus: "Connect tag-board accountability to blast clearance and emergency accounting—know who is in and who is out.",
+    scope: "NORCAT product framing is background only. Take the accountability and clearance principles; RFID or vendor systems are not authorized by watching this film. Site check-in procedure controls."
+  },
+  "-bQichZvk20": {
+    focus: "Recognize what a diesel mantrip / personnel conveyance can look like so you can orient to boarding, seating, and stay-seated expectations.",
+    scope: "West Virginia coal POV for visual familiarity only. Not Allen Company conveyance procedure, route, signals, or boarding rules. Follow this site's transportation plan."
+  },
+  "toT_5FdFDms": {
+    focus: "Identify mobile-equipment and conveyance hazards, warning signals, safe positioning, and why horseplay around travel equipment is forbidden.",
+    scope: "NIOSH Hazards in Motion (PublicResourceOrg). Principles for underground mobile equipment and conveyances. Site traffic plan, signals, and instructor direction control."
+  },
+  "E8r4mtH5Iis": {
+    focus: "Practice safe boarding and ride culture: wait for a complete stop, use designated points, seat belts where required, and keep clear of moving equipment.",
+    scope: "Florida Mine Safety powered-haulage film may lean surface. Transfer boarding and ride principles; underground travel and this site's traffic plan control."
+  },
   "lOlGUa3iIwA": {
     focus: "Recognize what a typical four-gas ALTAIR 4X is designed to indicate (O₂, LEL, CO, H₂S) and that alarms mean withdraw and notify — not investigate.",
     scope: "Vendor overview only. Supervisors operate the company detector. Trainees do not bump-test, calibrate, or clear an area. A four-gas unit does not detect every mine gas (including NO₂ and CO₂)."

@@ -91,4 +91,5 @@ Internal training material for authorized use by The Allen Company / site operat
 ## Training video updates (PR)
 - Module 2: Farmington history films plus legislation/MSHA/rights sequence; long Part 46 rights talk demoted to Module 13 review.
 - Module 3: short MSHA Sunshine sting before the full Sunshine case study and W65 films.
+- Module 4: tag-board / check-in videos, coal mantrip look-only clip, NIOSH Hazards in Motion, Florida Get Them on Board, plus MSHA check-in PDF/resource links.
 - Module 12: JSA/JHA/task-training focus; mindfulness/Mike Rowe moved to Module 13.
