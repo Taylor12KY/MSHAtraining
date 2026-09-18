@@ -415,6 +415,11 @@
   .managed-video-frame iframe {
     position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
   }
+  .managed-video-box[data-video-provider="vimeo"] .managed-video-frame iframe,
+  .managed-video-frame iframe[src*="player.vimeo.com"],
+  .managed-video-frame iframe[data-src*="player.vimeo.com"] {
+    pointer-events: auto;
+  }
   .video-watch-controls {
     display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
     gap: 10px; margin: 10px 0 8px;
@@ -1124,6 +1129,11 @@ body.app-dialog-open { overflow: hidden; }
 }
 
 .managed-video-frame iframe { pointer-events: none; }
+.managed-video-box[data-video-provider="vimeo"] .managed-video-frame iframe,
+.managed-video-frame iframe[src*="player.vimeo.com"],
+.managed-video-frame iframe[data-src*="player.vimeo.com"] {
+  pointer-events: auto;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
