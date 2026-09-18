@@ -972,3 +972,169 @@
     .footer-logo { margin: 0 auto; }
     .footer-inner > span { grid-column: auto; text-align: center; }
   }
+
+
+/* === UX / a11y / perf audit fixes === */
+.skip-to-content {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 10000;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #1f2933;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  transform: translateY(-120%);
+  transition: transform 0.15s ease;
+}
+.skip-to-content:focus {
+  transform: translateY(0);
+  outline: 3px solid #f0c14b;
+  outline-offset: 2px;
+}
+
+.tab-pause-note {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff7e6;
+  border: 1px solid #e0b847;
+  color: #6b4e00;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.video-progress-rail {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border: 1px solid #d9d4c7;
+  border-radius: 10px;
+  background: rgba(255, 252, 245, 0.96);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(24, 29, 33, 0.08);
+}
+.instructor-preview-active .video-progress-rail { top: 64px; }
+.video-progress-rail.hidden { display: none; }
+.video-progress-rail-text { font-size: 0.9rem; font-weight: 700; color: #3d3a32; }
+
+.app-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(24, 29, 33, 0.72);
+}
+.app-dialog-overlay.hidden { display: none; }
+.app-dialog {
+  width: min(440px, 100%);
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+}
+.app-dialog h2 { margin: 0 0 10px; font-size: 1.15rem; }
+.app-dialog p { margin: 0 0 18px; color: #3d3a32; line-height: 1.45; }
+.app-dialog-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+body.app-dialog-open { overflow: hidden; }
+
+.required-video-group { margin-top: 18px; }
+.required-video-group-title {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: #665217;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.quiz-q {
+  border: 1px solid var(--border, #d9d7cf);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 0 0 14px;
+  background: #fbfbf9;
+}
+.quiz-q-legend, .quiz-q legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--charcoal, #1f2933);
+}
+
+.training-table-wrap {
+  margin: 14px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d7d9d5;
+  border-radius: 10px;
+}
+.training-table-wrap:focus {
+  outline: 3px solid #f0c14b;
+  outline-offset: 2px;
+}
+.training-table { width: 100%; min-width: 680px; border-collapse: collapse; background: #fff; font-size: 0.8rem; }
+
+@media (max-width: 640px) {
+  .training-table-wrap {
+    border: 0;
+    overflow: visible;
+  }
+  .training-table,
+  .training-table tbody,
+  .training-table tr,
+  .training-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+  .training-table thead { display: none; }
+  .training-table tr {
+    margin: 0 0 12px;
+    border: 1px solid #d7d9d5;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .training-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ecece8;
+  }
+  .training-table td:last-child { border-bottom: 0; }
+  .training-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: #665217;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+}
+
+.managed-video-frame iframe { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .progress-fill,
+  .video-watch-fill,
+  .progress-bar-inner {
+    transition: none !important;
+  }
+}

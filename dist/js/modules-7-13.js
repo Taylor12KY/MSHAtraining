@@ -15,24 +15,20 @@ const MODULES_PART_2 = [
         <ul>
           <li>Look for cracks, spalling, water, or unusual sounds.</li>
           <li>Respect any temporary or permanent support installations.</li>
-          <li>Highwalls on surface also require examination and control of loose material.</li>
+          <li>Highwalls on surface also require examination and control of loose material. The highwall clips in this module are surface highwall / pit examples. Use them at Clover Bottom surface drill-and-blast and Dix River surface areas. Underground, use the stone-mine ground-control plan, not highwall rules.</li>
         </ul>
       </div>
       <div class="content-section">
+        <h3>Ground Control (Underground Limestone First)</h3>
+        <p>Start with underground limestone ground control—examination, changing ground, pillars, ribs, and scaling mindset under the site ground-control plan. Highwall videos apply to <strong>surface/quarry and portal-area</strong> exposures, not as a substitute for underground heading control. Roof-and-rib coal films are for support principles only; stone-mine methods at these operations control.</p>
         <h3>Ventilation</h3>
+        <p>Ventilation teaching in this module includes modern controls, the metal/nonmetal <em>Breathe and Live</em> film, and the <strong>Granite Mountain</strong> shaft-fire case study (ventilation reversal and carbon monoxide migration). Granite Mountain belongs here as ventilation behavior—not as a second Sunshine self-rescuer lesson.</p>
+        <h3>Ventilation (Detail)</h3>
         <p>Ventilation supplies fresh air, dilutes and removes contaminants (diesel exhaust, dust, blasting fumes, etc.), and can be part of the escape strategy. Know the basic direction of air flow in your work area, the location of major fans and controls, and never alter ventilation without authorization.</p>
-        <div class="key-box">For metal/nonmetal underground (Part 57), the ventilation plan and ground control plan are central to daily safe operation. New miners must receive an introduction to both.</div>
+        <div class="key-box">For metal/nonmetal underground (Part 57), the ventilation plan and ground control plan are central to daily safe operation. New miners must receive an introduction to both. The Granite Mountain case is not a second Sunshine. Take ventilation reversal, fire loading, and two-way escapeways — not 1917 equipment. Sunshine is device why (Module 3). Sago is command (Module 6). This is ventilation behavior.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">What Could Happen (mine safety awareness) · 13:42</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Mine safety awareness film. Use with instructor discussion of ground control and ventilation plans.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/OxOwJC5wHyc?rel=0&modestbranding=1&playsinline=1" title="What Could Happen (mine safety awareness)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=OxOwJC5wHyc" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -55,7 +51,7 @@ const MODULES_PART_2 = [
     title: "Health, Noise, Dust & Hazard Communication",
     hours: 2.5,
     objectives: [
-      "Understand why dust, noise, and other health measurements are taken",
+      "Understand why a miner may be asked to wear a dust-sampling pump and why dust, DPM, noise, and HazCom matter",
       "Describe basic elements of the mine's HazCom program",
       "Use dust-safe cleanup methods and the assigned respirator correctly",
       "Explain the response to elevated dust or DPM sampling results",
@@ -65,7 +61,7 @@ const MODULES_PART_2 = [
       <div class="content-section">
         <h3>Health Measurements & Controls</h3>
         <p>MSHA and the operator take dust, noise, and other samples to evaluate exposures and the effectiveness of controls. You may be asked to wear sampling equipment. Do not remove, cover, reposition, or disturb it. Results help protect long-term health from silica, diesel particulate matter (DPM), excessive noise, and other hazards.</p>
-        <p>Use the hierarchy of controls: eliminate or reduce the source where possible, apply engineering controls, use safe work and administrative practices, then use assigned PPE as the final layer. A respirator or hearing protector does not make an uncontrolled source acceptable.</p>
+        <p>Use the hierarchy of controls: eliminate or reduce the source where possible, apply engineering controls, use safe work and administrative practices, then use assigned PPE as the final layer. A respirator or hearing protector does not make an uncontrolled source acceptable. The dust-disease film in this module is generic; our exposures are limestone silica and DPM.</p>
       </div>
       <div class="content-section">
         <h3>Hazard Communication (HazCom)</h3>
@@ -78,6 +74,8 @@ const MODULES_PART_2 = [
         <div class="key-box">Part of new miner training includes information about the physical and health hazards of chemicals in the work area and the contents of the mine's HazCom program.</div>
       </div>
       <div class="content-section">
+        <h3>Why You May Wear a Sampling Pump</h3>
+        <p>MSHA or the mine may place a respirable-dust sampling pump on a miner to measure exposure. If you are selected, wear it as instructed for the shift—the sample represents working exposure. It does not mean conditions are automatically safe, and it does not make you a sampler. Engineering controls, water, ventilation, and work practices still come first.</p>
         <h3>Dust-Safe Cleanup and Silica Prevention</h3>
         <p>Cutting, drilling, crushing, conveying, cleanup, and vehicle movement can create respirable dust and crystalline silica. The smallest harmful particles may be invisible, so visible dust and personal comfort are not reliable measures of exposure.</p>
         <ul>
@@ -90,7 +88,7 @@ const MODULES_PART_2 = [
         <h4>Company respirator for general or light-duty particulate cleanup</h4>
         <p>The assigned disposable respirator is a company-provided, NIOSH-approved <strong>3M N95 particulate respirator with a Cool Flow valve</strong>. Verify the exact model and approval markings on the issued package. The valve improves exhalation comfort; it does not increase the filtration rating.</p>
         <ul>
-          <li>An N95 protects against certain non-oil particles when properly selected and fitted. It does <strong>not</strong> protect against gases or vapors, oxygen deficiency, unknown concentrations, or an immediately dangerous atmosphere.</li>
+          <li>An N95 protects against certain non-oil particles when properly selected and fitted. An N95 is not a W65 and does <strong>not</strong> protect against mine gases, vapors, oxygen deficiency, unknown concentrations, or an immediately dangerous atmosphere.</li>
           <li>When it is required protection, the miner must complete the respiratory-program requirements and pass a fit test for that exact make, model, style, and size before use.</li>
           <li>Use both hands to mold the nose clip, keep hair and other items out of the sealing surface, and perform the manufacturer-required user seal check every time it is put on.</li>
           <li>If a seal cannot be achieved, or the respirator is damaged, soiled, or difficult to breathe through, leave the exposure and report to the supervisor. Do not alter, wash, or reuse it contrary to its instructions.</li>
@@ -174,6 +172,10 @@ const MODULES_PART_2 = [
     ],
     content: `
       <div class="content-section">
+        
+        <h3>Mine Electrical Hazards</h3>
+        <p>Respect trailing cables, distribution equipment, grounding/ground-fault protection, and lockout/tagout. Do not run over, pull, or repair trailing cables unless you are trained and authorized. Never work on energized mine electrical equipment unless you are qualified and authorized. Report damaged cables, open panels, and missing covers immediately.</p>
+
         <h3>Electrical Hazards in Mining</h3>
         <p>Mining environments contain trailing cables, distribution systems, mobile equipment electrical systems, welders, and fixed installations. Water, dust, damaged insulation, and improper grounding increase risk. Arc flash is a serious concern on higher-energy systems.</p>
         <ul>
@@ -185,15 +187,7 @@ const MODULES_PART_2 = [
         <div class="warning-box">Even “low voltage” can kill under the wrong conditions. Treat all electrical systems with respect.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Electrical Safety Awareness for Non-electrical Workers · ~9 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Electrical awareness for non-electricians. Does not replace qualified-person requirements.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/wal2KP1bbIY?rel=0&modestbranding=1&playsinline=1" title="Electrical Safety Awareness for Non-electrical Workers" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=wal2KP1bbIY" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -224,13 +218,26 @@ const MODULES_PART_2 = [
       <div class="content-section">
         <h3>First Aid in the Mine Environment</h3>
         <p>Part 48 requires instruction in first-aid methods acceptable to MSHA. Training typically covers scene safety, calling for help, bleeding control, shock, airway/breathing/circulation basics, burns, fractures, and specific mining-related injuries. Know where first-aid supplies, AEDs, and stretchers are located and how to summon emergency medical assistance at your mine.</p>
+        
+        <h3>Stop the Bleed / Life-Threatening Bleeding</h3>
+        <p>Know how to recognize life-threatening bleeding and apply Stop the Bleed principles: alert others, find the bleed, use direct pressure, wound packing, and a tourniquet when trained and appropriate. Practice with the instructor using site-approved materials—the required videos do not replace hands-on skill checks.</p>
+
+        <h3>LIFEPAK CR2 Semi-Automatic AED</h3>
+        <p>Allen Company locations use the <strong>Physio-Control / Stryker LIFEPAK CR2 semi-automatic AED</strong>. Semi-automatic means the device analyzes the heart rhythm and, if a shock is advised, prompts you to deliver the shock by pressing the shock button after confirming nobody is touching the patient.</p>
+        <ul>
+          <li>Know the CR2 locations at your site and how to bring the unit to the patient.</li>
+          <li>Turn the unit on and follow the voice/screen prompts.</li>
+          <li>Expose the chest, apply the pads as shown on the pad diagram, and keep the area clear during analysis and shock.</li>
+          <li>Continue hands-only CPR when prompted. Do not delay CPR to search for a second rescuer if you are alone and trained to start.</li>
+          <li>This classroom video does not replace instructor hands-on practice on the site CR2 or a recognized CPR/AED course.</li>
+        </ul>
         <ul>
           <li>Ensure the scene is safe before approaching a victim.</li>
           <li>Activate the mine’s emergency medical response system early.</li>
           <li>Control life-threatening bleeding with direct pressure and appropriate dressings or tourniquets if trained.</li>
           <li>Support the person until higher-level care arrives; do not attempt procedures beyond your training.</li>
         </ul>
-        <div class="key-box">First aid is a bridge to professional care. The goal is to preserve life and prevent further harm until EMTs, paramedics, or hospital care can take over.</div>
+        <div class="key-box">The mining first-aid video is scenario awareness, not Red Cross/ACS certification. Skills are instructor-led. First aid is a bridge to professional care until EMTs, paramedics, or hospital care can take over.</div>
       </div>
       <div class="content-section official-resource-panel">
         <div class="official-resource-heading">
@@ -253,7 +260,8 @@ const MODULES_PART_2 = [
         <h3>Heat Stress: Recognize It Early</h3>
         <p>Hot conditions can occur underground, on surface equipment, near asphalt operations, during strenuous work, and while wearing protective equipment. Risk increases with heat, humidity, workload, radiant heat, limited air movement, dehydration, illness, medication, and lack of acclimatization.</p>
         <ul>
-          <li>Use hydration, work/rest controls, shade or cooling, ventilation, acclimatization, and the buddy system required by the site.</li>
+          <li>Drink water regularly before you feel thirsty. Use electrolyte drinks such as <strong>Sqwincher</strong> when the site provides them for heavy sweating or longer heat exposures—they supplement water, they do not replace it as your main fluid.</li>
+          <li>Use work/rest controls, shade or cooling, ventilation, acclimatization, and the buddy system required by the site.</li>
           <li>Report headache, dizziness, unusual fatigue, cramps, nausea, confusion, loss of coordination, fainting, or other concerning changes immediately.</li>
           <li>Move the person to a cooler area, begin appropriate cooling, and activate the mine's emergency medical response. Confusion, collapse, seizure, or loss of consciousness is an emergency.</li>
           <li>Do not leave a symptomatic worker alone or tell them simply to finish the shift.</li>
@@ -277,17 +285,21 @@ const MODULES_PART_2 = [
   },
   {
     id: 11,
-    title: "Mine Gases",
+    title: "Blasting, Explosives, & Mine Gases",
     hours: 2.0,
     objectives: [
       "Identify the major mine gases, their sources, health or explosion hazards, and likely accumulation areas",
       "Understand oxygen, ppm, time-weighted-average, ceiling, and lower-explosive-limit reference values",
       "Recognize sensory and physical warning signs without relying on smell to declare air safe",
       "Know that supervisors carry and operate the MSA ALTAIR 4X and when to request atmospheric testing",
+      "Recognize blast-area controls, post-blast CO and NOx fumes, and that re-entry is authorized only after ventilation and testing",
       "Apply the stop, warn, withdraw, and report response to any suspected atmospheric hazard"
     ],
     content: `
       <div class="content-section">
+        <h3>How This Module Is Organized</h3>
+        <p><strong>Gases and atmospheric protection first</strong> (what mine gases are, CO, fire/explosion prevention, how the ALTAIR warns). <strong>Then blasting awareness</strong> (drill-blast sequence, underground explosives handling, fumes and re-entry). Open-pit blast overview lives in Module 5 with other workplace hazards—not here.</p>
+
         <h3>Your Role When Air Quality Is in Question</h3>
         <p><strong>At these operations, supervisors—not new-miner trainees—carry and operate the MSA ALTAIR 4X multigas detector.</strong> Trainees need to recognize conditions that may change the atmosphere, know the limits of human senses, and ask the supervisor to evaluate any air-quality question.</p>
         <div class="key-box"><strong>Remember: Stop → Warn → Withdraw → Report.</strong> Stop the task, warn people nearby, withdraw toward known fresh air by the established route, and immediately report the location and what you noticed to the supervisor. Follow an alarm, evacuation order, or emergency procedure without waiting to compare numbers.</div>
@@ -376,13 +388,25 @@ const MODULES_PART_2 = [
         <p>Gas density helps a qualified tester choose sampling locations, but it does not predict a working mine atmosphere by itself. Fans, pressure changes, equipment movement, temperature, obstructions, and turbulence can mix or move gases. Testing must cover the locations required by the mine procedure.</p>
         <div class="warning-box"><strong>Use your senses only to recognize a possible emergency—not to clear the air.</strong> Smoke or haze, unusual fumes, a sharp or rotten-egg odor, eye or throat irritation, headache, nausea, dizziness, confusion, unexpected fatigue, rapid breathing, or another worker acting strangely all require withdrawal and notification.</div>
       </div>
+
+      <div class="content-section">
+        <h3>Post-Blast Fumes and Re-Entry in Underground Limestone</h3>
+        <p>Production blasting is the main source of toxic gases in many underground stone mines. The gases of concern are mainly <strong>carbon monoxide (CO)</strong> and the <strong>oxides of nitrogen (NO and NO<sub>2</sub>)</strong>. CO is colorless and odorless. NO<sub>2</sub> may appear as a reddish-brown / orange cloud and is a severe lung irritant; symptoms can worsen hours later.</p>
+        <p>NIOSH measured post-blast gases in an operating underground limestone mine. <strong>CO took the longest to clear.</strong> Average re-entry based on CO was about <strong>1.3 hours</strong>, about <strong>2.7 hours</strong> at one standard deviation, and <strong>well over 3 hours</strong> on some shots. A clock on the wall is not a clearance. Stay out until ventilation has run and an authorized supervisor releases the area with the correct instrument.</p>
+        <div class="key-box"><strong>Meter limit:</strong> a typical four-gas ALTAIR 4X reads O<sub>2</sub>, LEL, CO, and H<sub>2</sub>S. It does <strong>not</strong> measure NO<sub>2</sub>. Do not treat a quiet four-gas meter as proof that blast fumes are gone.</div>
+        <ul>
+          <li>Obey blast signals, exclusion zones, and the all-clear. Do not walk onto a muck pile or heading to "see if it looks clear."</li>
+          <li>The blasting videos in this module are awareness only. They do not authorize handling explosives, stemming, or firing.</li>
+          <li>The open-pit blast-area overview and the underground explosives sequence now live in this module (moved from Modules 5 and 12) so gases and blasting fumes are taught together.</li>
+        </ul>
+      </div>
       <div class="content-section">
         <h3>What Trainees Need to Know About the Supervisor's ALTAIR 4X</h3>
-        <p>Supervisors are responsible for carrying and operating the company ALTAIR 4X under the atmospheric-testing procedure. The required video shows why a supervisor inspects and bump-tests the detector before use. It does <strong>not</strong> authorize a trainee to test an area, interpret a questionable atmosphere, silence an alarm, or make a re-entry decision.</p>
+        <p>Supervisors are responsible for carrying and operating the company ALTAIR 4X under the atmospheric-testing procedure. The required video shows how a typical four-gas detector works—what it displays, what alarms mean, and what it cannot detect. It does <strong>not</strong> teach bump testing or calibration, and it does <strong>not</strong> authorize a trainee to test an area, interpret a questionable atmosphere, silence an alarm, or make a re-entry decision.</p>
         <ul>
           <li>The typical company configuration displays <strong>O₂, combustible gas as %LEL, CO in ppm, and H₂S in ppm</strong>. The supervisor verifies the actual installed sensors, units, calibration gas, and alarm settings.</li>
           <li>A typical four-gas unit does <strong>not</strong> detect every possible hazard, including CO₂, NO₂, and SO₂. The supervisor must select the correct detector or test method for the suspected hazard.</li>
-          <li>A bump test confirms that installed sensors respond to known gas and the alarms function. Calibration adjusts accuracy. Neither process proves that every location will remain safe.</li>
+          <li>Supervisors confirm the instrument is ready (including any required bump test or calibration) before relying on it. Those readiness checks do not prove that every location will remain safe.</li>
           <li>If you have any air-quality question, ask the supervisor before entering or continuing. If conditions already appear questionable, withdraw first and make the report from known fresh air.</li>
         </ul>
         <div class="key-box"><strong>Trainee demonstration:</strong> identify the supervisor as the monitor carrier, name the four typical channels and at least two gases they do not cover, recognize the audible/visual/vibrating alarms, and state: “Stop, warn, withdraw, report.”</div>
@@ -401,14 +425,16 @@ const MODULES_PART_2 = [
           <a class="resource-card" href="https://docs.msasafety.com/altair4x/en-us/ALTAIR%204X%20US%20OPM%2010105903/PDF%20Download/OPM%20Altair%204X%2010105903_r6_US.pdf" target="_blank" rel="noopener noreferrer"><strong>MSA ALTAIR 4X user instructions</strong><span>Official operation, bump-test, alarm, calibration, and limitation reference</span></a>
           <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5001" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5001</strong><span>Current official eCFR exposure-limit reference</span></a>
           <a class="resource-card" href="https://www.ecfr.gov/current/title-30/chapter-I/subchapter-K/part-57/subpart-D/section-57.5015" target="_blank" rel="noopener noreferrer"><strong>30 CFR § 57.5015</strong><span>Current official oxygen-deficiency standard</span></a>
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA mine-rescue gas guide</strong><span>Instructor reference for gas properties, detection, and emergency response</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Training_Education/Final%20-%20IG%20115%20Mine%20Rescue%20Guide.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA mine-rescue gas guide (IG 115 Module 2)</strong><span>Classroom text for gas properties and detection. Skip coal-only damps as procedure.</span></a>
+          <a class="resource-card" href="https://stacks.cdc.gov/view/cdc/227865/cdc_227865_DS1.pdf" target="_blank" rel="noopener noreferrer"><strong>NIOSH limestone post-blast re-entry study</strong><span>CO, NO, and NO2 measured in an underground limestone mine; CO clears slowest</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/mining/works/coversheet1739.html" target="_blank" rel="noopener noreferrer"><strong>NIOSH: Dangers of Toxic Fumes from Blasting</strong><span>CO and NOx from explosives; stay out of confined spaces until air is tested</span></a>
         </div>
         <p>Only personnel designated by the company operate, bump-test, calibrate, or make decisions from the instrument.</p>
         <div class="warning-box">The ALTAIR 4X is a warning and measurement tool—not respiratory protection. A dust respirator does not protect against mine gases or oxygen deficiency. The MSA W65 does not supply oxygen and does not protect in an oxygen-deficient atmosphere.</div>
       </div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the gas-recognition lesson, required ALTAIR 4X supervisor-demonstration video, and trainee alarm/response verification. Full module seat time remains 2.0 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the gas-recognition lesson, required videos (atmosphere principles, ALTAIR 4X demonstration, blasting-fume / explosives awareness), and trainee alarm/response verification. Full module seat time remains 2.0 hours.</p>
         <div class="timer-display" id="timer-11">120:00</div>
         <button class="btn btn-sm" id="btn-timer-11" onclick="startTimer(11, 120)">Start 2-hour Required Timer (120 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-11">Timer not started</p>
@@ -434,6 +460,7 @@ const MODULES_PART_2 = [
     content: `
       <div class="content-section">
         <h3>Accident Prevention</h3>
+        <p>This module focuses on <strong>job safety analysis / job hazard analysis</strong> and the requirement for task training before new or changed work. Complete the JSA/JHA videos, then the graded conveyor-cleanup JTA table. Ask for task training before any new job. Culture/mindfulness shorts moved to Module 13 review. Sunshine is Module 3; blasting awareness is Module 11.</p>
         <p>Most serious mining incidents involve a combination of hazards, human factors, and sometimes inadequate procedures or training. Prevention relies on:</p>
         <ul>
           <li>Effective workplace examinations and prompt correction of hazards.</li>
@@ -494,13 +521,15 @@ const MODULES_PART_2 = [
   {
     id: 13,
     title: "Final Review, Comprehensive Quiz & Classroom Certificate",
-    hours: 0.5,
+    hours: 1.0,
     objectives: [
       "Demonstrate retention of key concepts from the 32-hour classroom topics",
       "Receive documentation of classroom portion completion"
     ],
     content: `
       <div class="content-section">
+        <h3>Review Videos</h3>
+        <p>Short decision-making and speaking-up clips (and an optional deeper miners'-rights talk demoted from Module 2) are here for review—not as a substitute for JSA/task training in Module 12 or the history/rights sequence in Module 2.</p>
         <h3>Final Review</h3>
         <p>You have now covered the major required classroom topics for Part 48 new miner training (Subpart A underground focus with surface relevance). Before the final quiz, mentally review:</p>
         <ul>

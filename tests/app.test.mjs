@@ -36,14 +36,14 @@ test('JavaScript files parse', () => {
 });
 
 test('HTML loads external CSS, content, and app files in order', () => {
-  assert.match(html, /href="\/assets\/styles\.css\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/modules-1-6\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/modules-7-13\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/site-content\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/video-library\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/app\.js\?v=w65-vimeo-controls-5"/);
-  assert.match(html, /src="\/js\/instructor-auth\.js\?v=w65-vimeo-controls-5"/);
+  assert.match(html, /href="\/assets\/styles\.css\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/modules-1-6\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/modules-7-13\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/site-content\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/quiz-expansions\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/video-library\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/app\.js\?v=ux-a11y-perf-1"/);
+  assert.match(html, /src="\/js\/instructor-auth\.js\?v=ux-a11y-perf-1"/);
   assert.ok(html.indexOf('js/modules-1-6.js') < html.indexOf('js/modules-7-13.js'));
   assert.ok(html.indexOf('js/modules-7-13.js') < html.indexOf('js/site-content.js'));
   assert.ok(html.indexOf('js/site-content.js') < html.indexOf('js/quiz-expansions.js'));
@@ -61,7 +61,9 @@ test('Netlify build uses the repository package manager and bundles modern funct
 });
 
 test('branded learner experience keeps regulatory context and a clear next action', () => {
-  assert.match(html, /data:image\/webp;base64,/);
+  assert.match(html, /\/assets\/allen-company-logo\.webp/);
+  assert.match(html, /\/assets\/msha-emblem\.png/);
+  assert.doesNotMatch(html, /data:image\/(webp|png);base64,/);
   assert.match(html, /The Allen Company — Serving Kentucky since 1939/);
   assert.match(html, /Mine Safety and Health Administration emblem/);
   assert.match(html, /does not imply MSHA endorsement or certification/);
@@ -495,7 +497,8 @@ test('training content is W65-specific and contains no SCSR material', () => {
 
 test('managed video notices accurately describe verified in-player completion', () => {
   assert.match(app, /Forward seeking is disabled/);
-  assert.match(app, /external playback cannot be verified and does not receive completion credit/);
+  assert.match(app, /does not earn completion credit/);
+  assert.match(app, /External Open on YouTube\/Vimeo is for reference only|external playback cannot be verified/);
   assert.match(app, /text\.includes\('YouTube cannot fully lock seeking'\)/);
   assert.match(app, /text\.includes\('If the player shows'\)/);
   assert.match(app, /the assigned video/);

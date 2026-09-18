@@ -102,15 +102,7 @@ const MODULES_PART_1 = [
         <div class="warning-box"><strong>Practical tip:</strong> Highwalls, rib/roof conditions, mobile equipment (loaders, haul trucks), conveyor guarding, and diesel equipment conditions are frequent sources of reportable hazards. Know how your site documents and tracks these.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">MSHA Miners Rights and Responsibilities (overview video) · ~40 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This presenter is labeled Part 46 (surface). Use it for statutory rights and 105(c) ideas only. This course is Part 48 underground limestone. Current Mine Act, Part 48 plan, and instructor control.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/QGkT8Ahh1-E?rel=0&modestbranding=1&playsinline=1" title="MSHA Miners Rights and Responsibilities (overview video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=QGkT8Ahh1-E" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Required Viewing / Instructor Presentation</p>
@@ -279,25 +271,9 @@ const MODULES_PART_1 = [
         <div class="key-box">At many limestone and aggregate operations the combination of underground haulage and surface stockpile/asphalt plant traffic creates unique interface hazards. Learn both environments if you will work at either.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Powered Haulage Be Alert Be Ready · MSHA-style</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Powered haulage and conveyor awareness for underground and surface areas.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/NH7vatxj_t0?rel=0&modestbranding=1&playsinline=1" title="Powered Haulage Be Alert Be Ready" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=NH7vatxj_t0" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Conveyor Safety in Mining · ~5+ min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Guarding, lockout/tagout, and safe practices around belt conveyors.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/yEwFZHVLsso?rel=0&modestbranding=1&playsinline=1" title="Conveyor Safety in Mining" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=yEwFZHVLsso" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -412,25 +388,9 @@ const MODULES_PART_1 = [
         </ul>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Hazard Recognition Through Workplace Examination in Mining · 19:43</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Workplace examination and hazard recognition in mining environments.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/GSPRVJsu3_A?rel=0&modestbranding=1&playsinline=1" title="Hazard Recognition Through Workplace Examination in Mining" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=GSPRVJsu3_A" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">SLAM for Life MSHA Risk Assessment · ~10 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Stop, Look, Analyze, Manage risk assessment approach used in mining.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/qDDg-CbOTmw?rel=0&modestbranding=1&playsinline=1" title="SLAM for Life MSHA Risk Assessment" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=qDDg-CbOTmw" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -486,15 +446,7 @@ const MODULES_PART_1 = [
         </div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Mine Emergency Evacuation (practical escape) · 11:26</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Practical underground emergency escape principles. Pair with your site escapeway plan.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/j9DNL0DnKmU?rel=0&modestbranding=1&playsinline=1" title="Mine Emergency Evacuation (practical escape)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=j9DNL0DnKmU" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>

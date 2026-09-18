@@ -19,15 +19,19 @@ const MODULES_PART_1 = [
   },
   {
     id: 2,
-    title: "Miners' Rights, Supervisors & Hazard Reporting",
+    title: "History of Mine Safety, MSHA & Miners' Rights",
     hours: 2.0,
     objectives: [
+      "Explain why major mine disasters led to federal mine safety law and MSHA",
+      "Trace key milestones in U.S. mine safety history into today's Mine Act protections",
       "Explain key statutory rights of miners under the Mine Act",
-      "Describe the authority and responsibilities of supervisors and miners' representatives",
-      "Identify how and when to report hazards and protections against discrimination"
+      "Describe supervisor and miner responsibilities, hazard reporting, and anti-discrimination protections"
     ],
     content: `
       <div class="content-section">
+        <h3>Why This History Matters</h3>
+        <p>Module 2 is not just a list of rights. Disasters such as <strong>Farmington (1968)</strong> and the long fight for federal mine safety law explain why MSHA exists and why miners have the right—and duty—to speak up about hazards without illegal retaliation. Watch the history first, then the rights that came out of it.</p>
+
         <h3>1. Statutory Rights of Miners (Mine Act § 2 & related)</h3>
         <p>Every miner has the right to a safe and healthful workplace. Key rights include:</p>
         <ul>
@@ -98,15 +102,7 @@ const MODULES_PART_1 = [
         <div class="warning-box"><strong>Practical tip:</strong> Highwalls, rib/roof conditions, mobile equipment (loaders, haul trucks), conveyor guarding, and diesel equipment conditions are frequent sources of reportable hazards. Know how your site documents and tracks these.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">MSHA Miners Rights and Responsibilities (overview video) · ~40 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Instructional overview of miners rights and responsibilities under the Mine Act. Use with instructor discussion.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/QGkT8Ahh1-E?rel=0&modestbranding=1&playsinline=1" title="MSHA Miners Rights and Responsibilities (overview video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=QGkT8Ahh1-E" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;margin-bottom:8px;">Required Viewing / Instructor Presentation</p>
@@ -132,13 +128,20 @@ const MODULES_PART_1 = [
     objectives: [
       "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
       "Describe inspection, carrying, storage, and basic donning requirements for the W65",
-      "Understand that hands-on practice with an approved W65 training unit is still required"
+      "Understand that hands-on practice with an approved W65 training unit is still required",
+      "Connect the short MSHA Sunshine sting and the full Sunshine Mine fire case study to why these operations carry a filter self-rescuer"
     ],
     content: `
       <div class="content-section">
         <h3>The MSA W65 Used at These Operations</h3>
-        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
+        <p>The MSA W65 is an air-purifying, one-time escape respirator intended for protection from carbon monoxide produced by an underground fire or explosion. It is a hopcalite filter self-rescuer: copper and manganese oxides turn carbon monoxide into carbon dioxide using oxygen already in the air. It filters contaminated ambient air; it does <strong>not</strong> create or supply oxygen.</p>
         <div class="key-box"><strong>Critical limitation:</strong> The W65 does not protect in an oxygen-deficient atmosphere. Use it only for emergency escape, follow the mine emergency plan, and move promptly toward fresh air by the designated escapeway.</div>
+      </div>
+      <div class="content-section">
+        <h3>Why These Operations Carry a Filter Self-Rescuer</h3>
+        <p>Start with the short MSHA Sunshine sting (why we carry a self-rescuer), then the full NIOSH Sunshine Mine case study as the historical why. Next are the device you carry (Cleveland Potash W65) and hopcalite how/when (1980 NCB). On May 2, 1972, delayed evacuation, unclear command, smoke in the intakes, and inadequate self-rescue preparation left 91 metal miners dead from carbon monoxide. NIOSH identifies that fire as a catalyst for the 1977 Mine Act and MSHA metal/nonmetal reforms. The film is historical context—not a picture of the MSA W65 you carry here.</p>
+        <p>Video 2 is the Cleveland Potash W65 donning and how-it-works film, shot at Boulby UK potash mine on the actual MSA W65 (mouthpiece, nose clip, filter canister). Video 3 is the 1980 NCB training film on the hopcalite filter self-rescuer—old proven technology that still does the same job. Both UK films may show UK service or inspection intervals; those are not the U.S. MSHA or current MSA rules used at these Allen Company underground limestone operations.</p>
+        <p>The 1980 NCB film is a UK coal National Coal Board film. Allen Company sites are underground limestone (Boonesboro / Clover Bottom / Dix River Stone). Device class is a hopcalite filter self-rescuer, the same idea as the MSA W65. These operations do not issue oxygen-generating escape devices. Do not treat coal refuge or UK inspection intervals as local procedure.</p>
       </div>
       <div class="content-section">
         <h3>MSA W65 Inspection, Carrying & Use</h3>
@@ -152,6 +155,11 @@ const MODULES_PART_1 = [
         </ul>
       </div>
       <div class="content-section">
+        <h3>Old Proven Technology That Still Works</h3>
+        <p>Hopcalite was discovered in 1918 at Johns Hopkins and the University of California during World War I (the name is Hop + Cal). Belt-worn mining filter self-rescuers of this type showed up around 1960. MSA leaflets point to a German origin; in the UK the NCB and MSA were involved. After carbon monoxide deaths at Whitehaven (1947) and Creswell (1950), the UK ran trials in 1953 and 1962, then in 1967 issued the MSA 230 so every man underground carried one. A heat exchanger was added in 1968 because the reaction gets hot. By the 1970s it was a legal carry requirement in UK mines. The 1980 NCB film is that generation of training.</p>
+        <p>The MSA W65 you carry is the same class of device. Don it for carbon monoxide from a fire or blast fumes, keep it on until fresh air, and know it does not work if the air is oxygen-deficient. Follow this mine's U.S. inspection, carrying, and replacement rules—not the UK intervals in the films.</p>
+      </div>
+      <div class="content-section">
         <h3>Hands-On W65 Practice</h3>
         <ul>
           <li>Locate the W65 before entering the underground area and verify that it is carried as the site requires.</li>
@@ -161,34 +169,24 @@ const MODULES_PART_1 = [
         </ul>
         <div class="warning-box"><strong>Hands-on is mandatory.</strong> Videos do <em>not</em> replace instructor-led donning practice with the approved MSA W65 training unit and the procedures in the current mine training plan.</div>
       </div>
-      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the W65 demonstration, donning video, instructor-led practice, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 1 – Full W65 Demonstration by Fred Raubach · 13:39</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">This is the complete presentation selected for the course. Vimeo's owner currently permits playback on Vimeo but blocks playback inside this training site.</p>
-        <div class="official-resource-panel">
-          <div class="official-resource-heading">
-            <div>
-              <span class="resource-badge resource-badge-required">Required instructor presentation</span>
-              <h3>Open the full 13:39 presentation on Vimeo</h3>
-            </div>
-            <span class="document-meta">External playback</span>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge">Official references</span>
+            <h3>MSA W65 and MSHA filter self-rescuer materials</h3>
           </div>
-          <p>The instructor opens the presentation, shows it to the class in full, and verifies it as part of the W65 instruction and hands-on signoff. The course timer continues to document the full 3.5-hour module period.</p>
-          <a class="btn btn-outline" href="https://vimeo.com/98555798" target="_blank" rel="noopener noreferrer">Open full W65 demonstration ↗</a>
         </div>
-        <div class="warning-box"><strong>Why it opens separately:</strong> this is a Vimeo-owner privacy restriction, not a browser error. External playback cannot be automatically verified by the app, so the instructor confirms it during the required W65 demonstration and hands-on verification.</div>
-      </div>
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Video 2 – Official MSA W65 Visual Review · 1:27</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">The narration is Spanish and captions are unavailable. The instructor will narrate each inspection and donning step in English while trainees follow the visual sequence.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/Z33qMr0CobM?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Official MSA W65 visual review" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p>Use the current manufacturer instructions and the MSHA HH-12 card with the instructor. These readings support—not replace—the approved W65 trainer and the mine emergency plan.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/HH%20Cards/HH-12%20Filter%20Self-Rescuer%20MNM.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA HH-12 Filter Self-Rescuer</strong><span>Metal/nonmetal hazard card for the filter self-rescuer</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Donning%20Instructions%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 donning instructions</strong><span>English donning sequence from the manufacturer</span></a>
+          <a class="resource-card" href="https://s7d9.scene7.com/is/content/minesafetyappliances/W65%20Self-Rescuer%20Instruction%20Manual%20-%20EN" target="_blank" rel="noopener noreferrer"><strong>MSA W65 instruction manual</strong><span>Inspection, limitations, and use from MSA</span></a>
         </div>
-        <div class="key-box"><strong>Instructor cue:</strong> identify the sealed case and release, removal from the container, mouthpiece placement and seal, nose clip, head harness, and immediate escape toward known fresh air. Reinforce that the W65 does not supply oxygen.</div>
       </div>
+      <div class="key-box"><strong>Required time for this module:</strong> 3.5 hours (210 minutes) — matches credited classroom hours. Includes the short MSHA Sunshine sting, the full Sunshine Mine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice with the approved trainer, emergency-plan review, and study time. Quiz unlocks only when the full timer finishes. Timer pauses if you switch tabs/apps.</div>
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the full Fred Raubach presentation, the official MSA visual review, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Complete the Sunshine case study, the Cleveland Potash W65 film, the 1980 NCB filter-self-rescuer film, instructor-led hands-on practice using the approved trainer, and the site emergency-plan review. Full module seat time is 3.5 hours.</p>
         <div class="timer-display" id="timer-3">210:00</div>
         <button class="btn btn-sm" id="btn-timer-3" onclick="startTimer(3, 210)">Start 3.5-hour Required Timer (210 min)</button>
         <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;" id="timer-status-3">Timer not started</p>
@@ -214,7 +212,16 @@ const MODULES_PART_1 = [
     content: `
       <div class="content-section">
         <h3>Check-In / Check-Out Systems</h3>
-        <p>Most underground mines use a formal check-in/check-out (or tag-in/tag-out) system so the operator always knows who is underground. Follow the exact procedure at your mine every time you enter or leave. Never tag in for another person or leave without tagging out.</p>
+        <p>Most underground mines use a formal check-in/check-out (or tag-in/tag-out) system so the operator always knows who is underground. Classic brass tag boards and modern electronic systems serve the same purpose: accountability before work, before a blast, and during an emergency. Follow the exact procedure at your mine every time you enter or leave. Never tag in for another person or leave without tagging out.</p>
+        <ul>
+          <li>Tag yourself in before going underground and tag yourself out when you leave—every time.</li>
+          <li>Never remove, move, or hang another person's tag.</li>
+          <li>If the board or electronic status does not match who should be underground, stop and notify a supervisor before the area is cleared for a blast or treated as evacuated.</li>
+        </ul>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/check-in-check-out-system.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA check-in / check-out PDF</strong><span>Official MSHA overview of check-in/check-out systems</span></a>
+          <a class="resource-card" href="https://www.msha.gov/mnm-underground-mines-check-check-out-system" target="_blank" rel="noopener noreferrer"><strong>MSHA M/NM check-in page</strong><span>Metal/nonmetal underground check-in / check-out guidance</span></a>
+        </div>
       </div>
       <div class="content-section">
         <h3>Transportation Controls</h3>
@@ -225,26 +232,37 @@ const MODULES_PART_1 = [
           <li>Be aware of haul trucks, loaders (Cat 988 / 980M class), and other mobile equipment – they have large blind spots.</li>
           <li>On surface areas: traffic patterns, spotting, and dump-point procedures are critical.</li>
         </ul>
+        <div class="key-box"><strong>Mantrip / conveyance “looks like” only:</strong> the short coal-mine mantrip clip shows what a diesel personnel conveyance can look like. It is not Allen Company boarding procedure, route, or signal rules. Boarding, seating, stay-seated expectations, and traffic control follow this site's transportation plan.</div>
+        <div class="warning-box"><strong>Principles, then the site plan:</strong> NIOSH <em>Hazards in Motion</em> and Florida Mine Safety <em>Get Them on Board</em> teach boarding, ride culture, signals, and horseplay controls. Some footage leans coal or surface. Transfer the principles; underground travel, dump pockets, and this site's traffic plan control here. Video viewing is not task authorization.</div>
       </div>
       <div class="content-section">
         <h3>See the Blind Area Before You Enter It</h3>
-        <p>NIOSH blind-area diagrams show what an operator can and cannot see by direct view or mirrors at three object heights: ground level, 900 mm (3 feet), and 1500 mm (4 feet 11 inches). The shape changes with the machine, attachment, seat position, mirror adjustment, and the height of the person or object.</p>
-        <figure class="training-figure">
-          <img loading="lazy" src="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/images/blindarea/loaders/800px/cat992g-grd.jpg" alt="NIOSH ground-level blind-area diagram for a Caterpillar 992G wheel loader">
-          <figcaption>NIOSH Cat 992G ground-level example. Use the diagram legend to compare areas the operator cannot see directly with areas visible in mirrors.</figcaption>
-        </figure>
-        <div class="warning-box"><strong>Example, not an equipment-specific map:</strong> the NIOSH Cat 966G, Cat 992G, and Volvo A40D diagrams are useful teaching examples, but they are not diagrams for the Allen Company Cat 980M/988-class loaders or every haul truck. The actual machine, current operator's manual, site traffic plan, installed cameras/proximity systems, and a site evaluation control.</div>
+        <p>NIOSH blind-area diagrams are bird's-eye maps of where the operator cannot see an object of a given height—whether looking out the windows or using mirrors. Walk through the Cat <strong>966G</strong> pages with the class (they include all three heights). Note: the Cat <strong>992G</strong> set on CDC has no 900 mm diagram.</p>
+        <p>Three object heights (feet first; millimeters in parentheses):</p>
         <ul>
-          <li><strong>Before movement:</strong> the operator adjusts the seat, mirrors, and cameras; completes the examination; clears the area; and follows the site's startup, horn, and communication procedure.</li>
-          <li><strong>On foot:</strong> stay outside the equipment's operating and articulation zones. Approach only after positive two-way communication, acknowledgment, and the equipment is stopped as required by site procedure.</li>
-          <li><strong>Never assume:</strong> eye contact, a backup alarm, mirror, camera, high-visibility clothing, or proximity warning proves the operator sees you.</li>
+          <li><strong>Ground level</strong> — something lying flat or a very low object on the ground.</li>
+          <li><strong>About 3 feet (900 mm)</strong> — roughly a short barrel, or knee-to-waist height on a person.</li>
+          <li><strong>About 5 feet (1500 mm / 4′11″)</strong> — roughly a short standing adult.</li>
+        </ul>
+        <p>How to read a diagram: <strong>0°</strong> is the front / bucket end; <strong>180°</strong> is the rear. The rings are distance from the machine (<strong>2 m ≈ 6½ ft</strong>, <strong>4 m ≈ 13 ft</strong>, <strong>12 m ≈ 40 ft</strong>). <strong>Shaded</strong> = blind (no direct view and no mirror view of that height). Hatch or mirror-colored zones = mirrors only. Open / clear = direct view through windows.</p>
+        <figure class="training-figure">
+          <img loading="lazy" src="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/images/blindarea/loaders/800px/cat966g-grd.jpg" alt="NIOSH ground-level blind-area diagram for a Caterpillar 966G wheel loader">
+          <figcaption>NIOSH Cat 966G ground-level example (preferred in-module figure—this model has ground, ~3 ft, and ~5 ft diagrams). Use the legend: shaded = blind; hatch/mirror color = mirrors only; open = direct view.</figcaption>
+        </figure>
+        <div class="warning-box"><strong>Example, not an equipment-specific map:</strong> NIOSH Cat 966G, Cat 992G, and Volvo A40D diagrams are teaching examples only. They are not maps for Allen Company Cat 980M/988-class loaders or every haul truck. The actual machine, current operator's manual, site traffic plan, installed cameras/proximity systems, and a site evaluation control.</div>
+        <div class="key-box"><strong>Punchline:</strong> if you are standing in the shaded zone, you do not exist to that operator until you have positive two-way communication and the machine is stopped per site rules.</div>
+        <ul>
+          <li><strong>Before movement:</strong> operator adjusts seat, mirrors, and cameras; completes the examination; clears the area; follows startup, horn, and communication procedure.</li>
+          <li><strong>On foot:</strong> stay outside operating and articulation zones. Approach only after positive two-way communication, acknowledgment, and the equipment is stopped as required by site procedure.</li>
+          <li><strong>Never assume:</strong> eye contact, a backup alarm, mirror, camera, high-visibility clothing, or proximity warning does not prove the operator sees you.</li>
         </ul>
         <div class="resource-grid">
-          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-966g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 966G</strong><span>Ground, 900 mm, and 1500 mm diagrams</span></a>
-          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-966g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 966G</strong><span>Ground, ~3 ft (900 mm), and ~5 ft (1500 mm) diagrams</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/cat-992g.html" target="_blank" rel="noopener"><strong>NIOSH Cat 992G</strong><span>Large-loader visibility example (no 900 mm diagram on CDC)</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/volvo-a40d.html" target="_blank" rel="noopener"><strong>NIOSH Volvo A40D</strong><span>Articulated-truck visibility example</span></a>
           <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/manual-method.html" target="_blank" rel="noopener"><strong>Map the actual machine</strong><span>NIOSH manual blind-area method</span></a>
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/stand_down/Powered-Haulage.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA Powered Haulage Stand-Down</strong><span>Official one-page July 2025 discussion handout</span></a>
+          <a class="resource-card" href="https://www.cdc.gov/niosh/motor-vehicle/constructionequipmentvisibilitydiagram/pdfs/BASFinalReport.pdf" target="_blank" rel="noopener noreferrer"><strong>NIOSH Blind Area Study – Large Mining Equipment</strong><span>Full PDF report on blind areas around large mining equipment</span></a>
+          <a class="resource-card" href="https://www.msha.gov/safety-and-health/safety-and-health-initiatives/powered-haulage-safety" target="_blank" rel="noopener noreferrer"><strong>MSHA powered-haulage safety initiative</strong><span>Current MSHA powered-haulage initiative (not the old one-pager)</span></a>
         </div>
       </div>
       <div class="content-section">
@@ -253,25 +271,9 @@ const MODULES_PART_1 = [
         <div class="key-box">At many limestone and aggregate operations the combination of underground haulage and surface stockpile/asphalt plant traffic creates unique interface hazards. Learn both environments if you will work at either.</div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Powered Haulage Be Alert Be Ready · MSHA-style</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Powered haulage and conveyor awareness for underground and surface areas.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/NH7vatxj_t0?rel=0&modestbranding=1&playsinline=1" title="Powered Haulage Be Alert Be Ready" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=NH7vatxj_t0" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Conveyor Safety in Mining · ~5+ min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Guarding, lockout/tagout, and safe practices around belt conveyors.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/yEwFZHVLsso?rel=0&modestbranding=1&playsinline=1" title="Conveyor Safety in Mining" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=yEwFZHVLsso" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -318,15 +320,29 @@ const MODULES_PART_1 = [
         <div class="key-box">Hazard recognition is not a one-time classroom topic. It is a continuous skill. Workplace examinations (required under Part 57 and related standards) are a formal part of that process.</div>
       </div>
       <div class="content-section">
-        <h3>PPE and Fall Protection: A Complete System</h3>
-        <p>PPE does not remove the hazard. Start by eliminating the exposure where possible, then use engineering controls such as guarded platforms, covers, railings, or restraint systems. When personal fall arrest is required, every component must work together and the plan must address what happens after a fall.</p>
+        <h3>Required PPE at These Operations</h3>
+        <p>PPE does not remove the hazard. Eliminate or control the exposure first; wear assigned PPE as the final layer and keep it clean, inspected, and in serviceable condition. Company and area rules set the minimum. Task hazards may require more.</p>
+        <ul>
+          <li><strong>Hard hat / safety helmet:</strong> wear the company-approved head protection in designated areas. Fit the suspension so the hat sits level and secure. Inspect for cracks, UV damage, missing suspension parts, and worn or damaged components before each use, and remove bad hats from service. Do not drill holes, carry it by the brim as a scoop, or wear it over incompatible caps unless the manufacturer allows it.</li>
+          <li><strong>Eye protection:</strong> (see also the Tony Crow account on how one injury changes a life) safety glasses with side protection are the baseline in most work areas. Use goggles or a face shield when the task creates flying particles, slurry, chemical splash, or intense dust. Prescription lenses must be protective eyewear, not street glasses alone.</li>
+          <li><strong>Steel-toe / safety-toe boots:</strong> wear required safety-toe footwear with good tread. Replace boots with crushed toes, separated soles, or worn tread that creates slip or ankle risk.</li>
+          <li><strong>Gloves:</strong> match the glove to the hazard—cut, abrasion, chemical, heat, or oil. Remove gloves around rotating shafts, drills, and catch points when they create a pull-in risk, then use the hand protection the task requires.</li>
+          <li><strong>Hearing protection:</strong> wear the assigned plugs or muffs for the full noisy exposure. Foam plugs only work when inserted correctly (roll, pull, hold). Module 8 covers hearing conservation in more detail.</li>
+          <li><strong>High-visibility clothing:</strong> underground and around mobile equipment, wear the required hi-vis / reflective garments so operators and coworkers can see you. Keep reflective material reasonably clean; mud-covered reflectivity does not count as being seen.</li>
+          <li><strong>Other PPE:</strong> respirators, fall protection, welding gear, and specialty clothing are assigned by task and training. Never borrow damaged PPE or invent a substitute.</li>
+        </ul>
+        <div class="key-box">If PPE is damaged, missing, or the wrong type for the job, stop and get the correct gear before starting. Looking the part is not the same as being protected.</div>
+
+        <h3>Fall Protection: A Complete System</h3>
+        <p>Start by eliminating the exposure where possible, then use engineering controls such as guarded platforms, covers, railings, or restraint systems. When personal fall arrest is required, every component must work together and the plan must address what happens after a fall.</p>
         <ul>
           <li><strong>Plan the work:</strong> identify edges, openings, unstable surfaces, climbing, equipment access, overhead hazards, and the rescue method before exposure begins.</li>
           <li><strong>Inspect before use:</strong> check harness webbing, stitching, labels, D-rings, buckles, and impact indicators. Check lanyards and self-retracting lifelines (SRLs) for damaged connectors, cuts, burns, chemical damage, broken strands, housing damage, correct retraction, and evidence of deployment.</li>
+          <li><strong>Don and fit correctly:</strong> put the harness on according to the manufacturer instructions, snug the straps, and confirm the dorsal D-ring and leg/chest adjustments before connecting.</li>
           <li><strong>Verify compatibility:</strong> use only approved connectors and anchorage arrangements. A hook that appears to close can still roll out or fail if connected to an incompatible object.</li>
-          <li><strong>Fit and connect correctly:</strong> follow the harness and connecting-device manufacturer instructions. Do not improvise an anchorage or mix components merely because they can be physically connected.</li>
+          <li><strong>Understand SRLs:</strong> know how a self-retracting lifeline behaves, where it is appropriate, and that swing-fall and required clearance still control whether it can protect the worker.</li>
           <li><strong>Control clearance and swing:</strong> account for free fall, deceleration, worker height, connector length, lifeline behavior, lower obstructions, and lateral swing-fall exposure.</li>
-          <li><strong>Plan prompt rescue:</strong> a suspended worker may be unable to self-rescue. The plan, trained personnel, equipment, communication, and access must be in place before work starts.</li>
+          <li><strong>Plan prompt rescue and suspension trauma:</strong> a suspended worker may be unable to self-rescue. Trauma straps / relief steps buy time only when a trained rescue response is already planned. The plan, trained personnel, equipment, communication, and access must be in place before work starts.</li>
         </ul>
         <div class="warning-box">Never tie off to a handrail, pipe, cable tray, equipment part, or other convenient object unless it has been specifically approved for that fall-protection use. The competent person, site procedure, and manufacturer instructions determine acceptable systems.</div>
       </div>
@@ -356,7 +372,7 @@ const MODULES_PART_1 = [
         </div>
         <p>Connect the controls in this module to recent mining events. Focus on what the trainee must recognize, where to stay clear, and when to stop and notify supervision.</p>
         <div class="resource-grid">
-          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast signals, exclusion areas, withdrawal, guarding, and authorized re-entry</span></a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/March%205%2C%202025%20-%20Fatality%20Alert%20-%20Calhoun%20Quarry.pdf" target="_blank" rel="noopener noreferrer"><strong>2025 Calhoun Quarry fatality alert</strong><span>Blast-area recognition only. Handling explosives is Module 11. Trainees do not blast.</span></a>
           <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts%20and%20Hazards/Confined%20Space%20Safety%20Alert.pdf" target="_blank" rel="noopener noreferrer"><strong>MSHA confined-space alert</strong><span>Engulfment, stored energy, atmospheric hazards, isolation, and rescue planning</span></a>
         </div>
         <div class="warning-box"><strong>Scope:</strong> trainees are not being trained to conduct blasting or confined-space entry. They must know boundaries, warning signals, withdrawal rules, and that bins, hoppers, chutes, crushers, and tanks cannot be entered or cleared without the mine's authorization and full procedure.</div>
@@ -372,25 +388,9 @@ const MODULES_PART_1 = [
         </ul>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Hazard Recognition Through Workplace Examination in Mining · 19:43</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Workplace examination and hazard recognition in mining environments.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/GSPRVJsu3_A?rel=0&modestbranding=1&playsinline=1" title="Hazard Recognition Through Workplace Examination in Mining" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=GSPRVJsu3_A" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">SLAM for Life MSHA Risk Assessment · ~10 min</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Stop, Look, Analyze, Manage risk assessment approach used in mining.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/qDDg-CbOTmw?rel=0&modestbranding=1&playsinline=1" title="SLAM for Life MSHA Risk Assessment" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=qDDg-CbOTmw" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -446,15 +446,7 @@ const MODULES_PART_1 = [
         </div>
       </div>
 
-      <div class="video-box">
-        <p style="font-weight:600;margin-bottom:8px;">Mine Emergency Evacuation (practical escape) · 11:26</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Practical underground emergency escape principles. Pair with your site escapeway plan.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:12px;background:#000;">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube-nocookie.com/embed/j9DNL0DnKmU?rel=0&modestbranding=1&playsinline=1" title="Mine Emergency Evacuation (practical escape)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p style="margin:8px 0;"><a href="https://www.youtube.com/watch?v=j9DNL0DnKmU" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;">Open on YouTube ↗</a> <span style="color:var(--text-muted);font-size:0.8rem;">(use if embed is blocked)</span></p>
-        <p style="font-size:0.75rem;color:var(--text-muted);">YouTube cannot fully lock seeking in embeds. Required <strong>module seat time</strong> (credited hours) still must complete before the quiz.</p>
-      </div>
+      
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>

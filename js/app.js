@@ -312,10 +312,12 @@ function saveState() {
       localStorage.setItem(learnerAccount ? accountStorageKey(learnerAccount.id) : STORAGE_KEY, JSON.stringify(state));
     } else {
       memoryStore = JSON.parse(JSON.stringify(state));
+      setSyncStatus('This browser blocked local storage · progress is kept in memory until you reconnect or free space.', 'offline');
     }
   } catch (e) {
     console.warn('Could not save training progress:', e);
     try { memoryStore = JSON.parse(JSON.stringify(state)); } catch (e2) {}
+    setSyncStatus('Could not save progress locally (storage full or blocked). Stay online so the server copy can update.', 'offline');
   }
   if (learnerAccount && learnerHydrated) scheduleServerSync();
 }
@@ -352,7 +354,11 @@ function readStoredState(key) {
 
 function writeAccountBackup() {
   if (!learnerAccount || !HAS_LOCAL_STORAGE) return;
-  try { localStorage.setItem(accountStorageKey(learnerAccount.id), JSON.stringify(state)); } catch {}
+  try {
+    localStorage.setItem(accountStorageKey(learnerAccount.id), JSON.stringify(state));
+  } catch (e) {
+    setSyncStatus('Local recovery backup could not be saved (storage full or blocked). Server sync will keep trying while you are online.', 'offline');
+  }
 }
 
 function setSyncStatus(message, stateName = '') {
@@ -375,6 +381,96 @@ function setLearnerAuthStatus(message, isError = false) {
   status.classList.toggle('hidden', !message);
   status.classList.toggle('auth-error', isError);
 }
+
+
+let appDialogResolver = null;
+let appDialogPreviousFocus = null;
+
+function getAppDialogEls() {
+  return {
+    overlay: document.getElementById('app-dialog'),
+    title: document.getElementById('app-dialog-title'),
+    message: document.getElementById('app-dialog-message'),
+    confirmBtn: document.getElementById('app-dialog-confirm'),
+    cancelBtn: document.getElementById('app-dialog-cancel')
+  };
+}
+
+function closeAppDialog(result) {
+  const { overlay, confirmBtn, cancelBtn } = getAppDialogEls();
+  if (!overlay) return;
+  overlay.classList.add('hidden');
+  document.body.classList.remove('app-dialog-open');
+  const main = document.getElementById('main-content');
+  if (main) main.inert = false;
+  confirmBtn?.removeEventListener('click', confirmBtn._appDialogHandler);
+  cancelBtn?.removeEventListener('click', cancelBtn._appDialogHandler);
+  overlay.removeEventListener('keydown', overlay._appDialogKeyHandler);
+  const resolver = appDialogResolver;
+  appDialogResolver = null;
+  if (appDialogPreviousFocus && typeof appDialogPreviousFocus.focus === 'function') {
+    try { appDialogPreviousFocus.focus(); } catch (e) {}
+  }
+  appDialogPreviousFocus = null;
+  if (resolver) resolver(result);
+}
+
+function openAppDialog({ title = 'Notice', message = '', confirmLabel = 'OK', cancelLabel = null }) {
+  const { overlay, title: titleEl, message: messageEl, confirmBtn, cancelBtn } = getAppDialogEls();
+  if (!overlay || !confirmBtn) {
+    window.alert(message);
+    return Promise.resolve(cancelLabel ? false : true);
+  }
+  appDialogPreviousFocus = document.activeElement;
+  if (titleEl) titleEl.textContent = title;
+  if (messageEl) messageEl.textContent = message;
+  confirmBtn.textContent = confirmLabel;
+  if (cancelBtn) {
+    cancelBtn.textContent = cancelLabel || 'Cancel';
+    cancelBtn.classList.toggle('hidden', !cancelLabel);
+  }
+  const main = document.getElementById('main-content');
+  if (main) main.inert = true;
+  document.body.classList.add('app-dialog-open');
+  overlay.classList.remove('hidden');
+  return new Promise(resolve => {
+    appDialogResolver = resolve;
+    confirmBtn._appDialogHandler = () => closeAppDialog(true);
+    cancelBtn._appDialogHandler = () => closeAppDialog(false);
+    confirmBtn.addEventListener('click', confirmBtn._appDialogHandler);
+    cancelBtn?.addEventListener('click', cancelBtn._appDialogHandler);
+    overlay._appDialogKeyHandler = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeAppDialog(cancelLabel ? false : true);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable = [confirmBtn, !cancelBtn?.classList.contains('hidden') ? cancelBtn : null].filter(Boolean);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    overlay.addEventListener('keydown', overlay._appDialogKeyHandler);
+    setTimeout(() => confirmBtn.focus(), 0);
+  });
+}
+
+function showAppAlert(message, title = 'Notice') {
+  return openAppDialog({ title, message, confirmLabel: 'OK' });
+}
+
+function showAppConfirm(message, title = 'Please confirm') {
+  return openAppDialog({ title, message, confirmLabel: 'Continue', cancelLabel: 'Cancel' });
+}
+
 
 function normalizedName(value) {
   return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
@@ -462,19 +558,19 @@ async function syncLearnerProgress(force = false) {
   }
 }
 
-function startTraining() {
+async function startTraining() {
   if (!learnerAccount || !learnerHydrated) {
-    alert('Please sign in and wait for your training record to load before beginning.');
+    await showAppAlert('Please sign in and wait for your training record to load before beginning.');
     return;
   }
   const name = document.getElementById('input-name').value.trim();
   const mine = document.getElementById('input-mine').value;
   if (!name) {
-    alert('Please enter your full name.');
+    await showAppAlert('Please enter your full name.');
     return;
   }
   if (!mine) {
-    alert('Please select a work location (Boonesboro Quarry, Clover Bottom Quarry, or Dix River Stone).');
+    await showAppAlert('Please select a work location (Boonesboro Quarry, Clover Bottom Quarry, or Dix River Stone).');
     return;
   }
   // If location changed from a previous session, clear module-1 completion so they get the correct site content
@@ -494,16 +590,16 @@ function startTraining() {
   showDashboard();
 }
 
-function resetAll() {
+async function resetAll() {
   if (instructorPreviewMode) {
-    alert('Reset is disabled in instructor preview because no learner progress is being recorded.');
+    await showAppAlert('Reset is disabled in instructor preview because no learner progress is being recorded.');
     return;
   }
   if (learnerAccount) {
-    alert('Authenticated training records cannot be erased from the learner screen. Contact an instructor if a record needs review or correction.');
+    await showAppAlert('Authenticated training records cannot be erased from the learner screen. Contact an instructor if a record needs review or correction.');
     return;
   }
-  if (confirm('This will erase all progress for this browser. Continue?')) {
+  if (await showAppConfirm('This will erase all progress for this browser. Continue?')) {
     try {
       if (HAS_LOCAL_STORAGE) localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
@@ -695,6 +791,10 @@ window.setInstructorPreviewMine = setInstructorPreviewMine;
 window.exitInstructorPreview = exitInstructorPreview;
 
 function stopActiveTimers() {
+  teardownRequiredVideoLazyLoad();
+  const rail = document.getElementById('video-progress-rail');
+  if (rail) rail.classList.add('hidden');
+
   Object.keys(timerIntervals).forEach(k => {
     clearInterval(timerIntervals[k]);
     delete timerIntervals[k];
@@ -794,18 +894,15 @@ function externalVideoUrl(video) {
 
 function requiredVideoControls(video) {
   const viewingNote = instructorPreviewMode
-    ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved.'
-    : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser.';
-  const vimeoIpadNote = videoProvider(video) === 'vimeo'
-    ? ' On iPad, tap the play button on the video itself if Start/Resume does not start playback.'
-    : '';
+    ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
+    : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).';
   return `
     <div class="video-watch-controls">
       <button type="button" class="btn btn-sm video-play-toggle" data-video-id="${video.id}">Start / Resume</button>
-      <span class="video-watch-status" id="video-status-${video.id}">Required viewing · 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
+      <span class="video-watch-status" id="video-status-${video.id}" aria-live="polite">Required viewing · 0:00 / ${formatVideoTime(video.durationSeconds)}</span>
     </div>
-    <div class="video-watch-track" aria-hidden="true"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
-    <p class="video-watch-note" id="video-note-${video.id}">${viewingNote}${vimeoIpadNote}</p>
+    <div class="video-watch-track" role="progressbar" aria-label="Watched progress for ${escapeHtml(video.title)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="video-track-${video.id}"><div class="video-watch-fill" id="video-fill-${video.id}"></div></div>
+    <p class="video-watch-note" id="video-note-${video.id}">${viewingNote}</p>
   `;
 }
 
@@ -840,7 +937,8 @@ function configureRequiredVideoBox(box, iframe, video) {
   box.dataset.videoId = video.id;
   box.dataset.videoProvider = videoProvider(video);
   iframe.id = videoPlayerElementId(video);
-  iframe.src = managedVideoUrl(video);
+  iframe.removeAttribute('src');
+  iframe.setAttribute('data-src', managedVideoUrl(video));
   iframe.title = video.title;
   iframe.removeAttribute('allowfullscreen');
   iframe.setAttribute('tabindex', '-1');
@@ -868,11 +966,12 @@ function configureRequiredVideoBox(box, iframe, video) {
   if (!box.querySelector('.video-fallback')) {
     box.insertAdjacentHTML(
       'beforeend',
-      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(external playback cannot be verified and does not receive completion credit)</span></p>`
+      `<p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(External Open on YouTube/Vimeo is for reference only — it does not earn completion credit. Use Start / Resume in this player.)</span></p>`
     );
   }
   const button = box.querySelector('.video-play-toggle');
   if (button) button.addEventListener('click', () => toggleRequiredVideo(video.id));
+  observeRequiredVideoLazyLoad(box, video);
 }
 
 function renderRequiredVideos(moduleId) {
@@ -882,16 +981,33 @@ function renderRequiredVideos(moduleId) {
   const marker = document.getElementById('scroll-end-marker');
   if (!container || !marker) return;
 
+  teardownRequiredVideoLazyLoad();
+
   const section = document.createElement('section');
   section.className = 'required-video-section';
   section.innerHTML = `
     <h3>Required Module Videos</h3>
-    <p>Follow the listed sequence and complete ${videos.length === 1 ? 'the assigned video' : `all ${videos.length} assigned videos`} in this player before the module quiz unlocks. The transition notes connect each topic to the next.</p>
+    <p>Follow the listed sequence and complete ${videos.length === 1 ? 'the assigned video' : `all ${videos.length} assigned videos`} in this player before the module quiz unlocks. Players load when they near the viewport or when you press Start / Resume. The transition notes connect each topic to the next.</p>
   `;
 
+  let currentGroup = null;
+  let groupContainer = section;
   videos.forEach((video, index) => {
     ensureVideoProgress(moduleId, video);
-    let iframe = container.querySelector(`iframe[src*="${video.id}"]`);
+    if (moduleId === 5) {
+      const group = module5VideoGroup(video, index);
+      if (group !== currentGroup) {
+        currentGroup = group;
+        const groupSection = document.createElement('div');
+        groupSection.className = 'required-video-group';
+        groupSection.innerHTML = `<h4 class="required-video-group-title">${escapeHtml(group)}</h4>`;
+        section.appendChild(groupSection);
+        groupContainer = groupSection;
+      }
+    } else {
+      groupContainer = section;
+    }
+    let iframe = container.querySelector(`iframe[data-src*="${video.id}"], iframe[src*="${video.id}"]`);
     let box = iframe && iframe.closest('.video-box');
     if (!iframe || !box) {
       box = document.createElement('div');
@@ -900,12 +1016,12 @@ function renderRequiredVideos(moduleId) {
         <p class="video-title">${escapeHtml(video.title)} · ${formatVideoTime(video.durationSeconds)}</p>
         <p class="video-description">${escapeHtml(video.description)} <span class="video-source">Source: ${escapeHtml(video.author)}</span></p>
         <div class="managed-video-frame">
-          <iframe id="${videoPlayerElementId(video)}" src="${managedVideoUrl(video)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
+          <iframe id="${videoPlayerElementId(video)}" data-src="${managedVideoUrl(video)}" title="${escapeHtml(video.title)}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
         </div>
         ${requiredVideoControls(video)}
-        <p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(external viewing cannot receive completion credit)</span></p>
+        <p class="video-fallback"><a href="${externalVideoUrl(video)}" target="_blank" rel="noopener">Open on ${videoProvider(video) === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗</a> <span>(External Open on YouTube/Vimeo is for reference only — it does not earn completion credit. Use Start / Resume in this player.)</span></p>
       `;
-      section.appendChild(box);
+      groupContainer.appendChild(box);
       iframe = box.querySelector('iframe');
     }
     configureRequiredVideoBox(box, iframe, video);
@@ -916,12 +1032,13 @@ function renderRequiredVideos(moduleId) {
       box.prepend(sequenceLabel);
     }
     sequenceLabel.textContent = `Video ${index + 1} of ${videos.length}`;
-    if (index > 0) section.insertAdjacentHTML('beforeend', requiredVideoTransition(video, index, videos.length));
-    section.appendChild(box);
+    if (index > 0) groupContainer.insertAdjacentHTML('beforeend', requiredVideoTransition(video, index, videos.length));
+    groupContainer.appendChild(box);
     updateRequiredVideoUI(moduleId, video.id);
   });
 
   if (section.querySelector('.video-box')) marker.before(section);
+  updateVideoProgressRail(moduleId);
 }
 
 function loadYouTubeApi() {
@@ -964,40 +1081,222 @@ function loadVimeoApi() {
   return vimeoApiPromise;
 }
 
+
+const MAX_WARM_REQUIRED_PLAYERS = 3;
+let requiredVideoLazyObserver = null;
+const requiredVideoLoadState = {}; // videoId -> 'pending'|'loading'|'ready'
+
+function module5VideoGroup(video, index) {
+  const title = String(video.title || '').toLowerCase();
+  const id = String(video.id || '');
+  const ppeIds = new Set(['oJ834e9wDQ4', '-80slHn8zYg', 'U4z5RGpH0Pc', 'WTBxoZmAqIc', '4MjKwOI2LrE', 'Xbgfex8Dz4o', 'roF1rTRFErE', 'McxLFYRP8Fk']);
+  const fallIds = new Set(['DfiBLI8lGM8', 'kJ6xIsy7WNM', 'TEf1Tsx_3MA', 'seuWV6qTl4k', 'cW85eKNxR7c', 'XBVQongE3V0', 'RBmYGDwzfWU']);
+  const siteIds = new Set(['_s2x4dmQgjU', '2cyQ5QTPOek', '9wnDBLifDB4']);
+  if (ppeIds.has(id) || /hard hat|helmet|eye|boot|hand|glove|reflective|ppe|clothing|foot/.test(title)) return 'PPE';
+  if (fallIds.has(id) || /fall|harness|srl|lifeline|suspension|anchorage/.test(title)) return 'Fall protection';
+  if (siteIds.has(id) || /berm|stockpile|blast/.test(title)) return 'Site hazards';
+  if (/heat|hydrat|heat illness|heat stress/.test(title)) return 'Heat illness';
+  return 'Workplace examination & equipment';
+}
+
+function teardownRequiredVideoLazyLoad() {
+  if (requiredVideoLazyObserver) {
+    try { requiredVideoLazyObserver.disconnect(); } catch (e) {}
+    requiredVideoLazyObserver = null;
+  }
+}
+
+function observeRequiredVideoLazyLoad(box, video) {
+  if (!('IntersectionObserver' in window)) return;
+  if (!requiredVideoLazyObserver) {
+    requiredVideoLazyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const videoId = entry.target.dataset.videoId;
+        if (videoId) ensureRequiredVideoLoaded(videoId, { autoplay: false });
+      });
+    }, { root: null, rootMargin: '240px 0px', threshold: 0.01 });
+  }
+  requiredVideoLazyObserver.observe(box);
+}
+
+function unloadRequiredVideoPlayer(videoId) {
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (videoWatchIntervals[videoId]) {
+    clearInterval(videoWatchIntervals[videoId]);
+    delete videoWatchIntervals[videoId];
+  }
+  if (player) {
+    try {
+      if (meta && meta.provider === 'vimeo') player.unload && player.unload();
+      else if (player.destroy) player.destroy();
+    } catch (e) {}
+    delete videoPlayers[videoId];
+  }
+  delete videoPlayerMeta[videoId];
+  requiredVideoLoadState[videoId] = 'pending';
+  const iframe = document.getElementById(meta && meta.video ? videoPlayerElementId(meta.video) : '') ||
+    document.querySelector(`[data-video-id="${videoId}"] iframe`);
+  if (iframe) {
+    const dataSrc = iframe.getAttribute('data-src') || iframe.src;
+    if (dataSrc) iframe.setAttribute('data-src', dataSrc);
+    iframe.removeAttribute('src');
+    iframe.src = 'about:blank';
+  }
+}
+
+function pruneWarmRequiredPlayers(keepVideoId) {
+  const warmIds = Object.keys(videoPlayers);
+  if (warmIds.length <= MAX_WARM_REQUIRED_PLAYERS) return;
+  const ordered = warmIds.filter(id => id !== keepVideoId);
+  while (ordered.length && Object.keys(videoPlayers).length > MAX_WARM_REQUIRED_PLAYERS) {
+    const dropId = ordered.shift();
+    const meta = videoPlayerMeta[dropId];
+    if (meta && meta.isPlaying) continue;
+    unloadRequiredVideoPlayer(dropId);
+  }
+}
+
+function ensureRequiredVideoLoaded(videoId, { autoplay = false } = {}) {
+  if (videoPlayers[videoId]) {
+    requiredVideoLoadState[videoId] = 'ready';
+    return Promise.resolve(videoPlayers[videoId]);
+  }
+  const box = document.querySelector(`.managed-video-box[data-video-id="${videoId}"]`);
+  if (!box) return Promise.reject(new Error('Video box missing'));
+  const iframe = box.querySelector('iframe');
+  const moduleId = currentModuleId;
+  const video = getRequiredVideos(moduleId).find(item => item.id === videoId);
+  if (!iframe || !video) return Promise.reject(new Error('Video unavailable'));
+
+  if (requiredVideoLoadState[videoId] === 'loading') {
+    return new Promise((resolve, reject) => {
+      const started = Date.now();
+      const timer = setInterval(() => {
+        if (videoPlayers[videoId]) {
+          clearInterval(timer);
+          resolve(videoPlayers[videoId]);
+        } else if (Date.now() - started > 15000) {
+          clearInterval(timer);
+          reject(new Error('Timed out loading player'));
+        }
+      }, 100);
+    });
+  }
+
+  requiredVideoLoadState[videoId] = 'loading';
+  const dataSrc = iframe.getAttribute('data-src') || managedVideoUrl(video);
+  iframe.setAttribute('data-src', dataSrc);
+  if (!iframe.src || iframe.src === 'about:blank' || iframe.src === window.location.href) {
+    iframe.src = dataSrc;
+  }
+  pruneWarmRequiredPlayers(videoId);
+  setRequiredVideoNote(videoId, 'Loading player…', false);
+
+  const provider = videoProvider(video);
+  const initPromise = provider === 'vimeo'
+    ? loadVimeoApi().then(() => {
+        if (currentModuleId !== moduleId) return null;
+        return initializeVimeoRequiredVideo(moduleId, video);
+      })
+    : loadYouTubeApi().then(() => {
+        if (currentModuleId !== moduleId) return null;
+        return initializeYouTubeRequiredVideo(moduleId, video);
+      });
+
+  return initPromise.then(() => {
+    requiredVideoLoadState[videoId] = 'ready';
+    setRequiredVideoNote(
+      videoId,
+      instructorPreviewMode
+        ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
+        : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).',
+      false
+    );
+    if (autoplay) {
+      const player = videoPlayers[videoId];
+      const meta = videoPlayerMeta[videoId];
+      if (player && meta) {
+        if (meta.provider === 'vimeo') player.play().catch(() => {});
+        else player.playVideo();
+      }
+    }
+    return videoPlayers[videoId];
+  }).catch(err => {
+    requiredVideoLoadState[videoId] = 'pending';
+    setRequiredVideoNote(videoId, 'The tracked player could not load. Check the network and try Start / Resume again.', true);
+    throw err;
+  });
+}
+
+function updateVideoProgressRail(moduleId = currentModuleId) {
+  const rail = document.getElementById('video-progress-rail');
+  const text = document.getElementById('video-progress-rail-text');
+  const jump = document.getElementById('video-progress-rail-jump');
+  if (!rail || !text) return;
+  const videos = getRequiredVideos(moduleId);
+  if (!videos.length || document.getElementById('screen-module')?.classList.contains('hidden')) {
+    rail.classList.add('hidden');
+    return;
+  }
+  const completed = videos.filter(video => {
+    const record = state.videoProgress && state.videoProgress[moduleId] && state.videoProgress[moduleId][video.id];
+    return record && record.complete;
+  }).length;
+  const next = videos.find(video => {
+    const record = state.videoProgress && state.videoProgress[moduleId] && state.videoProgress[moduleId][video.id];
+    return !(record && record.complete);
+  });
+  rail.classList.remove('hidden');
+  text.textContent = next
+    ? `${completed} / ${videos.length} complete · Next: ${next.title}`
+    : `${completed} / ${videos.length} complete · All required videos done`;
+  if (jump) {
+    jump.classList.toggle('hidden', !next);
+    jump.onclick = () => {
+      if (!next) return;
+      const box = document.querySelector(`.managed-video-box[data-video-id="${next.id}"]`);
+      if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+  }
+}
+
+
 function initializeRequiredVideos(moduleId) {
   const videos = getRequiredVideos(moduleId);
-  if (!videos.length) return;
-  const youtubeVideos = videos.filter(video => videoProvider(video) === 'youtube');
-  const vimeoVideos = videos.filter(video => videoProvider(video) === 'vimeo');
-
-  if (youtubeVideos.length) {
-  loadYouTubeApi().then(() => {
-    if (currentModuleId !== moduleId) return;
-    youtubeVideos.forEach(video => {
-      const elementId = videoPlayerElementId(video);
-      if (!document.getElementById(elementId) || videoPlayers[video.id]) return;
-      videoPlayerMeta[video.id] = { moduleId, video, provider: 'youtube', suppressSeekUntil: 0, lastSavedSecond: -1, isPlaying: false };
-      videoPlayers[video.id] = new YT.Player(elementId, {
-        events: {
-          onReady: event => onRequiredVideoReady(event, video.id),
-          onStateChange: event => onRequiredVideoStateChange(event, video.id),
-          onError: () => setRequiredVideoNote(video.id, 'This video could not load. Check the network or use the YouTube link, then ask the instructor for assistance.', true)
-        }
-      });
-    });
-  }).catch(() => {
-    youtubeVideos.forEach(video => setRequiredVideoNote(video.id, 'The tracked YouTube player could not load. Check the network and reload this module.', true));
+  if (!videos.length) {
+    updateVideoProgressRail(moduleId);
+    return;
+  }
+  // Warm only iframes that already have a real src (near viewport / user started).
+  videos.forEach(video => {
+    const iframe = document.getElementById(videoPlayerElementId(video));
+    if (iframe && iframe.getAttribute('src') && iframe.src && iframe.src !== 'about:blank' && !videoPlayers[video.id]) {
+      ensureRequiredVideoLoaded(video.id, { autoplay: false }).catch(() => {});
+    }
   });
-  }
+  updateVideoProgressRail(moduleId);
+}
 
-  if (vimeoVideos.length) {
-    loadVimeoApi().then(() => {
-      if (currentModuleId !== moduleId) return;
-      vimeoVideos.forEach(video => initializeVimeoVideo(moduleId, video));
-    }).catch(() => {
-      vimeoVideos.forEach(video => setRequiredVideoNote(video.id, 'The tracked Vimeo player could not load. Check the network and reload this module.', true));
-    });
-  }
+
+
+function initializeYouTubeRequiredVideo(moduleId, video) {
+  const elementId = videoPlayerElementId(video);
+  if (!document.getElementById(elementId) || videoPlayers[video.id]) return videoPlayers[video.id];
+  videoPlayerMeta[video.id] = { moduleId, video, provider: 'youtube', suppressSeekUntil: 0, lastSavedSecond: -1, isPlaying: false };
+  videoPlayers[video.id] = new YT.Player(elementId, {
+    events: {
+      onReady: event => onRequiredVideoReady(event, video.id),
+      onStateChange: event => onRequiredVideoStateChange(event, video.id),
+      onError: () => setRequiredVideoNote(video.id, 'This video could not load. Check the network, then use Start / Resume or ask the instructor for assistance.', true)
+    }
+  });
+  return videoPlayers[video.id];
+}
+
+function initializeVimeoRequiredVideo(moduleId, video) {
+  return initializeVimeoVideo(moduleId, video);
 }
 
 function initializeVimeoVideo(moduleId, video) {
@@ -1190,12 +1489,17 @@ function trackRequiredVideo(videoId) {
   updateRequiredVideoUI(meta.moduleId, videoId);
 }
 
-function toggleRequiredVideo(videoId) {
+async function toggleRequiredVideo(videoId) {
   lastActivityAt = Date.now();
-  const player = videoPlayers[videoId];
-  const meta = videoPlayerMeta[videoId];
+  let player = videoPlayers[videoId];
+  let meta = videoPlayerMeta[videoId];
   if (!player || !meta) {
-    setRequiredVideoNote(videoId, 'Player is still loading. Try again in a moment.', true);
+    setRequiredVideoNote(videoId, 'Loading player…', false);
+    try {
+      await ensureRequiredVideoLoaded(videoId, { autoplay: true });
+    } catch (e) {
+      setRequiredVideoNote(videoId, 'Player could not load. Check the network and try Start / Resume again.', true);
+    }
     return;
   }
   if (meta.provider === 'vimeo') {
@@ -1210,7 +1514,7 @@ function toggleRequiredVideo(videoId) {
         }
         await player.play();
       };
-      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module. On iPad, tap the play button on the video itself.', true));
+      startPlayback().catch(() => setRequiredVideoNote(videoId, 'The player could not start. Try again or reload the module, then use Start / Resume. If problems continue, ask the instructor for help.', true));
     }
     return;
   }
@@ -1252,8 +1556,12 @@ function updateRequiredVideoUI(moduleId, videoId) {
       : 'Required viewing · ' + formatVideoTime(watched) + ' / ' + formatVideoTime(duration);
     status.classList.toggle('complete', record.complete);
   }
-  if (fill) fill.style.width = (duration ? Math.min(100, (watched / duration) * 100) : 0) + '%';
+  const pct = duration ? Math.min(100, (watched / duration) * 100) : 0;
+  if (fill) fill.style.width = pct + '%';
+  const track = document.getElementById('video-track-' + videoId);
+  if (track) track.setAttribute('aria-valuenow', String(Math.round(pct)));
   updateRequiredVideoButton(videoId);
+  updateVideoProgressRail(moduleId);
 }
 
 function setRequiredVideoNote(videoId, message, isWarning) {
@@ -1264,7 +1572,12 @@ function setRequiredVideoNote(videoId, message, isWarning) {
 }
 
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) return;
+  const note = document.getElementById('tab-pause-note');
+  if (note) note.hidden = !document.hidden;
+  if (!document.hidden) {
+    if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
+    return;
+  }
   Object.keys(videoPlayers).forEach(videoId => {
     const player = videoPlayers[videoId];
     const meta = videoPlayerMeta[videoId];
@@ -1273,6 +1586,7 @@ document.addEventListener('visibilitychange', () => {
       else player.pauseVideo();
     } catch (e) {}
   });
+  if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
 });
 
 function getQuizReviewItems(id) {
@@ -1401,16 +1715,16 @@ function markQuizReviewSectionVisited(id, sectionIndex) {
 }
 
 
-function submitQuizReviewCheck(id, itemIndex) {
+async function submitQuizReviewCheck(id, itemIndex) {
   const item = getQuizReviewItems(id)[itemIndex];
   const select = document.getElementById('review-check-select-' + id + '-' + itemIndex);
   if (!item || !select || item.reviewed !== true) return;
   if (select.value === '') {
-    alert('Select an answer before checking your review.');
+    showAppAlert('Select an answer before checking your review.');
     return;
   }
   if (Number(select.value) !== Number(item.correctIndex)) {
-    alert('That answer is not correct yet. Return to the highlighted module section and review the topic again.');
+    showAppAlert('That answer is not correct yet. Return to the highlighted module section and review the topic again.');
     return;
   }
   item.checkPassed = true;
@@ -1626,6 +1940,20 @@ function openModule(id) {
     : '<p style="font-size:0.8rem;color:var(--text-muted);text-align:center;margin:12px 0;">↓ Scroll to the end of this content (required) · Required time runs automatically while this tab is open</p>';
 
   document.getElementById('mod-content').innerHTML = html;
+  document.querySelectorAll('#mod-content .training-table').forEach(table => {
+    const wrap = table.closest('.training-table-wrap') || table.parentElement;
+    if (wrap && !wrap.getAttribute('role')) {
+      wrap.setAttribute('role', 'region');
+      wrap.setAttribute('aria-label', 'Training reference table');
+      wrap.setAttribute('tabindex', '0');
+    }
+    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach(row => {
+      Array.from(row.children).forEach((cell, index) => {
+        if (!cell.getAttribute('data-label') && headers[index]) cell.setAttribute('data-label', headers[index]);
+      });
+    });
+  });
 
   renderQuizReviewPanel(id);
   renderRequiredVideos(id);
@@ -1668,7 +1996,7 @@ function startTimer(id, minutes) {
   autoStartModuleTimer(id, m ? m.hours : (minutes / 60));
 }
 
-function showQuiz() {
+async function showQuiz() {
   stopActiveTimers();
   const m = getModule(currentModuleId);
   if (!m) return;
@@ -1678,7 +2006,7 @@ function showQuiz() {
     if (!state.scrollDone[m.id] && !state.completed.includes(m.id)) missing.push('scroll through all content');
     if (!requiredVideosComplete(m.id) && !state.completed.includes(m.id)) missing.push('all required videos');
     if (!quizReviewReady(m.id) && !state.completed.includes(m.id)) missing.push('missed-topic review');
-    alert('Complete these before the quiz: ' + missing.join(' and ') + '.');
+    showAppAlert('Complete these before the quiz: ' + missing.join(' and ') + '.');
     return;
   }
   hideAll();
@@ -1697,9 +2025,12 @@ function showQuiz() {
     .sort(() => Math.random() - 0.5);
   currentQuizQuestions.forEach((item, qi) => {
     const q = item.q;
-    const div = document.createElement('div');
-    div.className = 'quiz-q';
-    div.innerHTML = '<h4>' + (qi + 1) + '. ' + q.q + '</h4>';
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'quiz-q';
+    const legend = document.createElement('legend');
+    legend.className = 'quiz-q-legend';
+    legend.textContent = (qi + 1) + '. ' + q.q;
+    fieldset.appendChild(legend);
     q.options.map((opt, originalIndex) => ({ opt, originalIndex }))
       .sort(() => Math.random() - 0.5)
       .forEach(({ opt, originalIndex }) => {
@@ -1707,16 +2038,16 @@ function showQuiz() {
       label.className = 'quiz-option';
       label.innerHTML = '<input type="radio" name="q' + qi + '" value="' + originalIndex + '"> ' + opt;
       label.onclick = function() {
-        div.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+        fieldset.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
         label.classList.add('selected');
       };
-      div.appendChild(label);
+      fieldset.appendChild(label);
     });
-    container.appendChild(div);
+    container.appendChild(fieldset);
   });
 }
 
-function submitQuiz() {
+async function submitQuiz() {
   const m = getModule(currentModuleId);
   if (!m) return;
   let correct = 0;
@@ -1733,7 +2064,7 @@ function submitQuiz() {
     }
   });
   if (answered < m.questions.length) {
-    alert('Please answer every question before submitting.');
+    showAppAlert('Please answer every question before submitting.');
     return;
   }
   const percent = Math.round((correct / m.questions.length) * 100);
@@ -1835,11 +2166,11 @@ function submitQuiz() {
 
 async function showCertificate() {
   if (instructorPreviewMode) {
-    alert('Certificates are disabled in instructor preview because no learner completion is recorded.');
+    showAppAlert('Certificates are disabled in instructor preview because no learner completion is recorded.');
     return;
   }
   if (!learnerAccount) {
-    alert('Sign in to your learner account before generating a classroom completion certificate.');
+    showAppAlert('Sign in to your learner account before generating a classroom completion certificate.');
     return;
   }
   await syncLearnerProgress(true);
@@ -1852,7 +2183,7 @@ async function showCertificate() {
     requiredVideosComplete(m.id)
   );
   if (!validCompletion) {
-    alert('Every module must have completed seat time, content review, required videos, and a perfect 100% quiz score before a certificate can be generated.');
+    showAppAlert('Every module must have completed seat time, content review, required videos, and a perfect 100% quiz score before a certificate can be generated.');
     return;
   }
   hideAll();
@@ -1905,11 +2236,11 @@ async function showCertificate() {
 
 async function downloadTrainingRecord() {
   if (instructorPreviewMode) {
-    alert('Training-record exports are disabled in instructor preview.');
+    showAppAlert('Training-record exports are disabled in instructor preview.');
     return;
   }
   if (!learnerAccount) {
-    alert('Sign in to your learner account before exporting a training record.');
+    showAppAlert('Sign in to your learner account before exporting a training record.');
     return;
   }
   await syncLearnerProgress(true);
