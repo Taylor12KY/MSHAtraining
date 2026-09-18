@@ -320,8 +320,21 @@ const MODULES_PART_1 = [
         <div class="key-box">Hazard recognition is not a one-time classroom topic. It is a continuous skill. Workplace examinations (required under Part 57 and related standards) are a formal part of that process.</div>
       </div>
       <div class="content-section">
-        <h3>PPE and Fall Protection: A Complete System</h3>
-        <p>PPE does not remove the hazard. Start by eliminating the exposure where possible, then use engineering controls such as guarded platforms, covers, railings, or restraint systems. When personal fall arrest is required, every component must work together and the plan must address what happens after a fall.</p>
+        <h3>Required PPE at These Operations</h3>
+        <p>PPE does not remove the hazard. Eliminate or control the exposure first; wear assigned PPE as the final layer and keep it clean, inspected, and in serviceable condition. Company and area rules set the minimum. Task hazards may require more.</p>
+        <ul>
+          <li><strong>Hard hat / safety helmet:</strong> wear the company-approved head protection in designated areas. Inspect for cracks, UV damage, missing suspension parts, and expired or damaged components. Do not drill holes, carry it by the brim as a scoop, or wear it over incompatible caps unless the manufacturer allows it.</li>
+          <li><strong>Eye protection:</strong> safety glasses with side protection are the baseline in most work areas. Use goggles or a face shield when the task creates flying particles, slurry, chemical splash, or intense dust. Prescription lenses must be protective eyewear, not street glasses alone.</li>
+          <li><strong>Steel-toe / safety-toe boots:</strong> wear required safety-toe footwear with good tread. Replace boots with crushed toes, separated soles, or worn tread that creates slip or ankle risk.</li>
+          <li><strong>Gloves:</strong> match the glove to the hazard—cut, abrasion, chemical, heat, or oil. Remove gloves around rotating shafts, drills, and catch points when they create a pull-in risk, then use the hand protection the task requires.</li>
+          <li><strong>Hearing protection:</strong> wear the assigned plugs or muffs for the full noisy exposure. Foam plugs only work when inserted correctly (roll, pull, hold). Module 8 covers hearing conservation in more detail.</li>
+          <li><strong>High-visibility clothing:</strong> underground and around mobile equipment, wear the required hi-vis / reflective garments so operators and coworkers can see you. Keep reflective material reasonably clean; mud-covered reflectivity does not count as being seen.</li>
+          <li><strong>Other PPE:</strong> respirators, fall protection, welding gear, and specialty clothing are assigned by task and training. Never borrow damaged PPE or invent a substitute.</li>
+        </ul>
+        <div class="key-box">If PPE is damaged, missing, or the wrong type for the job, stop and get the correct gear before starting. Looking the part is not the same as being protected.</div>
+
+        <h3>Fall Protection: A Complete System</h3>
+        <p>Start by eliminating the exposure where possible, then use engineering controls such as guarded platforms, covers, railings, or restraint systems. When personal fall arrest is required, every component must work together and the plan must address what happens after a fall.</p>
         <ul>
           <li><strong>Plan the work:</strong> identify edges, openings, unstable surfaces, climbing, equipment access, overhead hazards, and the rescue method before exposure begins.</li>
           <li><strong>Inspect before use:</strong> check harness webbing, stitching, labels, D-rings, buckles, and impact indicators. Check lanyards and self-retracting lifelines (SRLs) for damaged connectors, cuts, burns, chemical damage, broken strands, housing damage, correct retraction, and evidence of deployment.</li>
