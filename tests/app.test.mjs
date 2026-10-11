@@ -438,11 +438,11 @@ test('all 8 retained pre-existing embeds use the tracked managed player system',
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
 });
 
-test('Module 3 sequence is Sunshine, Cleveland Potash W65, then 1980 NCB filter self-rescuer', () => {
+test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 NCB filter self-rescuer, then Arrowsmith extended lesson', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.guidance = VIDEO_TRAINING_GUIDANCE;')
     .runInNewContext(context);
-  assert.deepEqual([...context.sequences[3]], ['WTKCluA6lgE', '106597590', '1JfkPpr6sRM']);
+  assert.deepEqual([...context.sequences[3]], ['kbHxdV_uZV8', 'WTKCluA6lgE', '106597590', '1JfkPpr6sRM', 'tAE5lPOPm8w']);
   const cleveland = context.videos.find(video => video.id === '106597590');
   assert.equal(cleveland.provider, 'vimeo');
   assert.equal(cleveland.durationSeconds, 332);
@@ -450,7 +450,16 @@ test('Module 3 sequence is Sunshine, Cleveland Potash W65, then 1980 NCB filter 
   const ncb = context.videos.find(video => video.id === '1JfkPpr6sRM');
   assert.equal(ncb.durationSeconds, 408);
   assert.match(ncb.title, /1980 NCB/);
-  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 3);
+  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 5);
+  const arrowsmith = context.videos.find(video => video.id === 'tAE5lPOPm8w');
+  assert.equal(arrowsmith.durationSeconds, 1749);
+  assert.match(arrowsmith.author, /Arrowsmith/);
+  assert.notEqual(arrowsmith.provider, 'vimeo');
+  const arrowsmithGuide = `${context.guidance.tAE5lPOPm8w.focus} ${context.guidance.tAE5lPOPm8w.scope}`;
+  assert.match(arrowsmithGuide, /W65/);
+  assert.match(arrowsmithGuide, /2014/);
+  assert.match(arrowsmithGuide, /fresh air/);
+  assert.doesNotMatch(videoLibrary, /Raubach|98555798/);
   const clevelandGuide = `${context.guidance['106597590'].focus} ${context.guidance['106597590'].scope}`;
   assert.match(clevelandGuide, /W65/);
   assert.match(clevelandGuide, /Boulby|Cleveland Potash/i);

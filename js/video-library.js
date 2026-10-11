@@ -274,6 +274,14 @@ const REQUIRED_VIDEOS = [
     description: "Historical hopcalite filter-self-rescuer training: how and when to use a belt-worn CO filter self-rescuer. Same class of device as the MSA W65; it does not make or carry its own oxygen."
   },
   {
+    id: "tAE5lPOPm8w",
+    moduleId: 3,
+    title: "SELF RESCUER",
+    author: "Frank Arrowsmith",
+    durationSeconds: 1749,
+    description: "Extended self-rescuer lesson supporting inspection, donning, limitations, and immediate escape."
+  },
+  {
     id: "eEj1JOVu_eY",
     moduleId: 2,
     title: "Miners' Rights and Responsibilities",
@@ -895,7 +903,7 @@ const PRE_EXISTING_VIDEO_IDS = new Set([
 
 const MODULE_VIDEO_SEQUENCE = {
   2: ["F7AOWLOOT-U", "DxB7g_y15FI", "n1pqUaXdJ6k", "TM8DYUKbjsw", "WrnHZK9GhlM", "VEOVVx3rDyI", "eEj1JOVu_eY", "SN4Sfuhvs2Y"],
-  3: ["kbHxdV_uZV8", "WTKCluA6lgE", "106597590", "1JfkPpr6sRM"],
+  3: ["kbHxdV_uZV8", "WTKCluA6lgE", "106597590", "1JfkPpr6sRM", "tAE5lPOPm8w"],
   4: ["g9MmOSqs8yI", "sQm4pSm4ucQ", "-bQichZvk20", "toT_5FdFDms", "E8r4mtH5Iis", "OK1LRqjlzkA", "fKyMEEy9yGI", "Gtt8DpHyFxg", "NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["m9yYUuMG-kE", "LQIgql3q6Ek", "vWssDu6TkXo", "e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
@@ -917,6 +925,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "SN4Sfuhvs2Y": "Finish the sequence with a brief statutory-rights review that reinforces the key protections to remember.",
   "106597590": "Sunshine showed why delayed escape and missing self-rescue killed 91 metal miners. Now watch how the MSA W65 you carry actually works and how to don it—mouthpiece, nose clip, filter canister—on a real unit at Cleveland Potash.",
   "1JfkPpr6sRM": "You have seen the W65 you carry. This 1980 NCB film is the same class of hopcalite filter self-rescuer: old proven technology that still does the same job. Learn how and when to use it, and remember UK service rules are not the inspection intervals used here.",
+  "tAE5lPOPm8w": "The NCB film showed that a hopcalite filter self-rescuer is old proven technology that still works: it turns carbon monoxide into carbon dioxide but does not make oxygen. Now extend that short visual review into a fuller discussion of self-rescuer readiness, correct donning, limitations, and immediate escape actions.",
   "sQm4pSm4ucQ": "After the classic brass board, see how modern tag-board accountability still serves the same purpose: know who is underground before a blast or emergency.",
   "-bQichZvk20": "With check-in covered, watch a short coal mantrip ride for what a conveyance can look like. This is appearance only—not Allen Company boarding procedure.",
   "toT_5FdFDms": "Move from conveyance look-and-feel into NIOSH Hazards in Motion: mobile equipment, signals, conveyances, and why horseplay around travel kills.",
@@ -1130,6 +1139,10 @@ const VIDEO_TRAINING_GUIDANCE = {
   "1JfkPpr6sRM": {
     focus: "This 1980 NCB film teaches how and when to use a hopcalite filter self-rescuer—the same job the MSA W65 still does today. Don it for carbon monoxide from a fire or blast fumes, keep it on until fresh air, and know it does not work if the air is oxygen-deficient.",
     scope: "This is old, proven technology that still works. The chemistry is hopcalite: copper and manganese oxides that turn carbon monoxide into carbon dioxide using oxygen already in the air. That catalyst was discovered in 1918 at Johns Hopkins and the University of California during World War I (the name is Hop + Cal). Belt-worn mining filter self-rescuers of this type showed up around 1960. MSA leaflets point to a German origin; in the UK the NCB and MSA were involved. After carbon monoxide deaths at Whitehaven (1947) and Creswell (1950), the UK ran trials in 1953 and 1962, then in 1967 issued the MSA 230 so every man underground carried one. A heat exchanger was added in 1968 because the reaction gets hot. By the 1970s it was a legal carry requirement in UK mines. This 1980 film is that generation of training. The MSA W65 at these Allen Company underground limestone operations is the same class of device: a hopcalite filter self-rescuer, not a unit that makes or carries its own oxygen. UK service and inspection intervals are not the U.S. MSHA or current MSA intervals used here. Follow this mine's inspection, carrying, and replacement rules. This is a 1980 UK coal National Coal Board film. Allen Company sites are underground limestone (Boonesboro / Clover Bottom / Dix River Stone). Device class is a hopcalite filter self-rescuer, the same idea as the MSA W65. These operations do not issue oxygen-generating escape devices. Do not treat coal refuge or UK inspection intervals as local procedure."
+  },
+  "tAE5lPOPm8w": {
+    focus: "Identify the pre-use condition checks, correct opening and donning sequence, breathing limitations, and the need to begin immediate escape toward known fresh air.",
+    scope: "This 2014 general self-rescuer presentation provides supporting instruction. Where its terminology, device examples, or techniques differ, the current MSA W65 manufacturer instructions, mine emergency plan, instructor direction, and hands-on practice with the approved W65 trainer control."
   },
   "eEj1JOVu_eY": {
     focus: "Identify protected activities, inspection participation, hazard reporting, training rights, and the responsibilities miners retain for safe work.",
