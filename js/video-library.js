@@ -97,10 +97,10 @@ const REQUIRED_VIDEOS = [
     description: "Practical underground emergency escape, communication, leadership, and decision-making."
   },
   {
-    id: "4rQwxVnYcLk",
+    id: "RxyBImZyFb4",
     moduleId: 7,
     title: "Rock Falls – Preventing Rock Fall Injuries",
-    author: "Underground Life",
+    author: "PublicResourceOrg",
     durationSeconds: 1223,
     description: "Recognition and control of loose-ground and rock-fall hazards."
   },
@@ -843,7 +843,7 @@ const REQUIRED_VIDEOS = [
 
 const FIRST_VIDEO_BATCH_IDS = new Set([
   "_s2x4dmQgjU", "NH7vatxj_t0", "1OJUEmUAPmc", "CHTJ8i55HUk",
-  "4rQwxVnYcLk", "MziZesbb32Q", "X5r4upNwIGk", "4MjKwOI2LrE",
+  "RxyBImZyFb4", "MziZesbb32Q", "X5r4upNwIGk", "4MjKwOI2LrE",
   "iX8j7h7bJF4", "e8mGpQ9W4_w", "VEOVVx3rDyI",
   "9wnDBLifDB4", "mSt9lHz22xM", "528dJg0lESM", "Oaxs7EEIp4k"
 ]);
@@ -907,7 +907,7 @@ const MODULE_VIDEO_SEQUENCE = {
   4: ["g9MmOSqs8yI", "sQm4pSm4ucQ", "-bQichZvk20", "toT_5FdFDms", "E8r4mtH5Iis", "OK1LRqjlzkA", "fKyMEEy9yGI", "Gtt8DpHyFxg", "NH7vatxj_t0", "q_4q8lm0tCs", "p_vsrhxIlR8", "mSt9lHz22xM", "NjHDUhWA6Lo", "yEwFZHVLsso", "ZrnWnmhGpQY", "aMfhfqh8uzw", "1JJQiwtQcWY"],
   5: ["H2J5MDUAMTk", "Oaxs7EEIp4k", "GSPRVJsu3_A", "qDDg-CbOTmw", "addOUsx6760", "oJ834e9wDQ4", "-80slHn8zYg", "U4z5RGpH0Pc", "WTBxoZmAqIc", "4MjKwOI2LrE", "Xbgfex8Dz4o", "roF1rTRFErE", "McxLFYRP8Fk", "DfiBLI8lGM8", "kJ6xIsy7WNM", "TEf1Tsx_3MA", "seuWV6qTl4k", "cW85eKNxR7c", "XBVQongE3V0", "RBmYGDwzfWU", "_s2x4dmQgjU", "2cyQ5QTPOek", "9wnDBLifDB4"],
   6: ["m9yYUuMG-kE", "LQIgql3q6Ek", "vWssDu6TkXo", "e8mGpQ9W4_w", "j9DNL0DnKmU", "IGb20ZDbjkY"],
-  7: ["8IZCQ05vxeY", "OxOwJC5wHyc", "4rQwxVnYcLk", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "eFTnBiAvxxg", "Ok2p6cUe_sM", "HiakyMAiiaE", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
+  7: ["8IZCQ05vxeY", "OxOwJC5wHyc", "RxyBImZyFb4", "dIreslbUgwY", "GN3OBFAVHt4", "528dJg0lESM", "1u6c7YMgkB8", "eFTnBiAvxxg", "Ok2p6cUe_sM", "HiakyMAiiaE", "s6Oj2O7P0is", "Mvm4LtNNwxY", "kjCsEVjRrlg"],
   8: ["1OJUEmUAPmc", "gk-hCHk1z7o", "EebrjWb6QeY", "RTG77LCfQvU", "X5r4upNwIGk", "zM3R_1JceWo"],
   9: ["wal2KP1bbIY", "8OK6XXgtUyc", "dIxfdGSXEQ0", "is77KiZ16_o", "iX8j7h7bJF4"],
   10: ["hQiYjxSC9bI", "7LEqWoK_aS0", "u3nrDb5XjSI", "N8Uq1U3xHP8", "-E_0GU4fm9s"],
@@ -967,7 +967,7 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "IGb20ZDbjkY": "Sago is a coal emergency-management case: information, families, command, and rescue. It is not W65 donning and not a reason to barricade when an escapeway is open. Device procedures at these limestone operations are Module 3. Sunshine in Module 3 is why they carry a filter self-rescuer; Sago here is command and not-barricading.",
   "eFTnBiAvxxg": "This is a surface highwall / pit clip. Use it at Clover Bottom surface drill-and-blast and Dix River surface areas. Underground, use the stone-mine ground-control plan, not highwall rules.",
   "Ok2p6cUe_sM": "Another surface highwall / pit examination. Use it at Clover Bottom surface drill-and-blast and Dix River surface areas. Underground, follow the stone-mine ground-control plan, not highwall rules.",
-  "4rQwxVnYcLk": "Carry the same warning-sign mindset underground to loose roof, ribs, and rock-fall exposure.",
+  "RxyBImZyFb4": "Carry the same warning-sign mindset underground to loose roof, ribs, and rock-fall exposure.",
   "dIreslbUgwY": "Next, connect those warning signs to the purpose of a ground-control plan and installed support systems.",
   "GN3OBFAVHt4": "Use this short limestone field clip to see one roof-bolting application after learning the control principles.",
   "528dJg0lESM": "Compare installed support with another control method: removing loose material through protected mechanical scaling.",
@@ -1074,7 +1074,7 @@ const VIDEO_TRAINING_GUIDANCE = {
   "Oaxs7EEIp4k": { focus: "Use the overview to understand room-and-pillar layout, travelways, active faces, and why ground-control discipline matters." },
   "e8mGpQ9W4_w": { focus: "Identify ignition prevention, early warning, prompt reporting, initial response limits, and the decision to evacuate." },
   "j9DNL0DnKmU": { focus: "Watch for leadership, communication, route selection, accountability, and decisions made under limited visibility and time." },
-  "4rQwxVnYcLk": { focus: "Identify loose-ground warning signs, exposure beneath unsupported ground, and controls that prevent rock-fall injuries." },
+  "RxyBImZyFb4": { focus: "Identify loose-ground warning signs, exposure beneath unsupported ground, and controls that prevent rock-fall injuries." },
   "OxOwJC5wHyc": { focus: "Use each scenario to practice asking what could happen, who is exposed, and which control should be in place before work continues." },
   "528dJg0lESM": { focus: "Observe how mechanical scaling removes loose material while the operator maintains distance and protected positioning." },
   "1OJUEmUAPmc": {

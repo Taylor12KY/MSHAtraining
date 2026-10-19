@@ -75,6 +75,10 @@ test('branded learner experience keeps regulatory context and a clear next actio
 test('trial-ready resources include the official miners rights handout and three site aerial views', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-miners-rights-trifold.pdf')));
   assert.match(modulesPartOne, /\/assets\/docs\/msha-miners-rights-trifold\.pdf/);
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-portland-cement-quicklime-health-alert.pdf')));
+  assert.ok(fs.existsSync(path.join(root, 'assets', 'docs', 'msha-young-mine-2025-fatal-roof-fall-report.pdf')));
+  assert.match(modulesPartTwo, /\/assets\/docs\/msha-portland-cement-quicklime-health-alert\.pdf/);
+  assert.match(modulesPartTwo, /\/assets\/docs\/msha-young-mine-2025-fatal-roof-fall-report\.pdf/);
   assert.match(modulesPartOne, /Miners' Rights and Responsibilities Trifold/);
   assert.match(modulesPartOne, /powered-haulage-safety/);
   assert.match(modulesPartOne, /powered-haulage initiative/i);
