@@ -27,8 +27,48 @@ const MODULES_PART_2 = [
         <p>Ventilation supplies fresh air, dilutes and removes contaminants (diesel exhaust, dust, blasting fumes, etc.), and can be part of the escape strategy. Know the basic direction of air flow in your work area, the location of major fans and controls, and never alter ventilation without authorization.</p>
         <div class="key-box">For metal/nonmetal underground (Part 57), the ventilation plan and ground control plan are central to daily safe operation. New miners must receive an introduction to both. The Granite Mountain case is not a second Sunshine. Take ventilation reversal, fire loading, and two-way escapeways — not 1917 equipment. Sunshine is device why (Module 3). Sago is command (Module 6). This is ventilation behavior.</div>
       </div>
-
-      
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge resource-badge-required">Required instructor review</span>
+            <span class="resource-badge">MSHA final report</span>
+            <h3>Underground Case Study: Young Mine Roof Fall (July 12, 2025)</h3>
+          </div>
+          <span class="document-meta">10-page PDF · MSHA Report of Investigation</span>
+        </div>
+        <p>At 4:15 a.m. on July 12, 2025, a 36-year-old LHD loader operator with three years of experience was killed at the Young Mine, an underground lead-zinc mine in New Market, Tennessee, when the roof (back) collapsed onto the cab of the loader he was operating. The mine used room-and-pillar and bulk-stope methods. Because ground in the open stope was known to be hazardous, the mine's written policy required LHDs to be run by remote from a supported operating station behind a marked <strong>cab line</strong>. The loader was found 68 feet beyond the cab line, operated from the cab, under ground where pillars had just been removed. The machine had no falling-object protective structure, and the falling rock crushed the cab.</p>
+        <p>MSHA's root cause is the core lesson of this module: <strong>the hazardous ground was not taken down or supported before work and travel occurred in the area</strong>. MSHA cited 30 CFR § 57.3200, the metal/nonmetal underground standard that requires loose or hazardous ground to be taken down or supported before work or travel is permitted, and to be posted against entry until it is corrected. Notably, the pre-shift workplace and ground examinations were judged adequate and the miner's Part 48 training was current. An examination and training do not make unsupported ground safe. Only scaling it down, supporting it, or staying out of it does.</p>
+        <ul>
+          <li><strong>Connect it to the Rock Falls film:</strong> the film teaches you to recognize loose-ground warning signs and never to put yourself beneath unsupported ground. Young Mine shows what happens when that line is crossed, even inside a cab and even when the danger zone is already known and marked.</li>
+          <li><strong>Connect it to scaling and support:</strong> the roof-bolting and mechanical-scaling clips that follow show the two ways hazardous ground is made safe. Until one of them is done and the area is examined, the ground is treated as unsupported, and no one works or travels under it.</li>
+          <li><strong>Respect the boundaries:</strong> cab lines, danger signs, barricades, and "no entry beyond this point" markings exist because the ground beyond them has not been controlled. A machine cab is not overhead protection unless it is built and rated for it.</li>
+          <li><strong>Apply it at our limestone operations:</strong> after blasting, around fresh pillar or rib work, and wherever the site ground-control plan calls for scaling or support, stay back until a qualified person has taken down or supported loose ground. If you see loose or changing ground, stop, back out to supported ground, and report it.</li>
+        </ul>
+        <p>After the accident, the operator retrained miners on line-of-sight remote loading and open-stope limits, posted signs at every stope entry, marked cab lines with reflective paint, installed cameras in open stopes, and added "dangers beyond the cab line" to its remote-work permit. Discuss with the instructor which of those controls already exist at this mine and where they would apply.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="/assets/docs/msha-young-mine-2025-fatal-roof-fall-report.pdf" target="_blank" rel="noopener">
+            <strong>Open the classroom copy ↗</strong>
+            <span>Reliable local copy of the Young Mine final report</span>
+          </a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Data_Reports/Fatals/Enforcement/2025/July%2012%2C%202025%20-%20Final%20Report.pdf" target="_blank" rel="noopener noreferrer">
+            <strong>Open the official MSHA PDF ↗</strong>
+            <span>Original agency-hosted report of investigation</span>
+          </a>
+          <a class="resource-card" href="https://www.ecfr.gov/current/title-30/section-57.3200" target="_blank" rel="noopener noreferrer">
+            <strong>30 CFR § 57.3200</strong>
+            <span>Correction of hazardous ground conditions underground</span>
+          </a>
+        </div>
+        <details class="document-embed">
+          <summary>Preview the Young Mine report in this module</summary>
+          <div class="document-frame-wrap">
+            <object class="document-frame" data="/assets/docs/msha-young-mine-2025-fatal-roof-fall-report.pdf#view=FitH" type="application/pdf">
+              <p>Your browser cannot display the PDF here. <a href="/assets/docs/msha-young-mine-2025-fatal-roof-fall-report.pdf" target="_blank" rel="noopener">Open the classroom copy</a>.</p>
+            </object>
+          </div>
+        </details>
+        <div class="key-box"><strong>Case-study note:</strong> Young Mine is a lead-zinc mine, not limestone, and bulk stoping differs from our room-and-pillar work. Take the principle, not the mining method: hazardous ground is taken down or supported before anyone works or travels beneath it. The site ground-control plan and the instructor control.</div>
+      </div>
 
       <div class="video-box">
         <p style="font-weight:600;">Required Attention Time</p>
@@ -72,6 +112,43 @@ const MODULES_PART_2 = [
           <li>The mine's written HazCom program is available for review.</li>
         </ul>
         <div class="key-box">Part of new miner training includes information about the physical and health hazards of chemicals in the work area and the contents of the mine's HazCom program.</div>
+      </div>
+      <div class="content-section official-resource-panel">
+        <div class="official-resource-heading">
+          <div>
+            <span class="resource-badge resource-badge-required">Required instructor review</span>
+            <span class="resource-badge">Official MSHA health alert</span>
+            <h3>HazCom in Practice: Portland Cement and Quicklime</h3>
+          </div>
+          <span class="document-meta">1-page PDF · MSHA Health Alert</span>
+        </div>
+        <p>This MSHA health alert puts the HazCom section to work on materials that are close to home. Limestone is the raw material for lime, and burned lime (quicklime) and portland cement are strongly alkaline. They are caustic, not just dusty. Quicklime reacts strongly with water and gives off heat, so moisture on skin, in the eyes, in sweat, or in the airway can turn the dust into a chemical burn. Cement dust can also irritate the skin, eyes, and lungs, and repeated contact can cause rashes and allergic reactions.</p>
+        <ul>
+          <li><strong>Know the hazards:</strong> skin contact can cause irritation, rashes, burns, or allergic reactions. Eye contact can cause severe chemical burns. Breathing the dust irritates the nose, throat, and airways.</li>
+          <li><strong>Wear the required PPE:</strong> alkali-resistant gloves, long sleeves and long pants, safety glasses or goggles, and the respiratory protection your program assigns. Use the respirator rules earlier in this module. An N95 or half facepiece only protects when it is the right one, fitted, and seal-checked.</li>
+          <li><strong>Control the dust first:</strong> use ventilation and dust-control systems, handle bags and bulk material carefully, and stay out of dusty zones. Wet cement and lime are still caustic, so do not kneel in or wear clothing soaked with them.</li>
+          <li><strong>Hygiene:</strong> wash hands and exposed skin promptly after handling, and remove contaminated clothing right away. Do not let dust ride home or into the cab on clothes or boots.</li>
+          <li><strong>First aid:</strong> for skin or eye contact, flush immediately with plenty of water and keep flushing. Remove contaminated clothing. Get medical care if irritation or burns develop. Know where the nearest eyewash and water supply are before the work starts. Module 10 covers first-aid response.</li>
+        </ul>
+        <p>Before handling cement, lime, shotcrete, grout, or similar products, read the container label and the product's Safety Data Sheet. The SDS for the specific product, not this alert, gives the exact PPE and first-aid steps the mine's HazCom program requires.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="/assets/docs/msha-portland-cement-quicklime-health-alert.pdf" target="_blank" rel="noopener">
+            <strong>Open the classroom copy ↗</strong>
+            <span>Reliable local copy of the MSHA health alert</span>
+          </a>
+          <a class="resource-card" href="https://www.msha.gov/sites/default/files/Alerts-Hazards/Health%20Alert%20Portland%20Cement%20and%20Quick%20Lime.pdf" target="_blank" rel="noopener noreferrer">
+            <strong>Open the official MSHA PDF ↗</strong>
+            <span>Original agency-hosted health alert</span>
+          </a>
+        </div>
+        <details class="document-embed">
+          <summary>Preview the health alert in this module</summary>
+          <div class="document-frame-wrap">
+            <object class="document-frame" data="/assets/docs/msha-portland-cement-quicklime-health-alert.pdf#view=FitH" type="application/pdf">
+              <p>Your browser cannot display the PDF here. <a href="/assets/docs/msha-portland-cement-quicklime-health-alert.pdf" target="_blank" rel="noopener">Open the classroom copy</a>.</p>
+            </object>
+          </div>
+        </details>
       </div>
       <div class="content-section">
         <h3>Why You May Wear a Sampling Pump</h3>
