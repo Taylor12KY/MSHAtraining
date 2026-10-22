@@ -1,7 +1,7 @@
 // Supabase Auth adapter exposing the small account API the training app uses
 // (login, logout, getUser, invite/recovery callbacks, password updates).
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from './supabase-config.mjs';
+import { LEARNER_SELF_SIGNUP, SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from './supabase-config.mjs';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
@@ -67,13 +67,27 @@ export async function acceptInvite(_token, password) {
   return updateUser({ password });
 }
 
-// Learner accounts are invitation-only; public sign-up is disabled in Supabase Auth.
 export async function getSettings() {
-  return { disableSignup: true };
+  return { disableSignup: !LEARNER_SELF_SIGNUP };
 }
 
-export async function signup() {
-  throw new Error('Learner accounts are invitation-only. Ask an instructor for an invitation.');
+// Self-registered accounts always start as learners (the database trigger assigns the role).
+// When Supabase requires email confirmation there is no session yet, so the caller shows a
+// "check your email" message; the confirmation link signs the person in.
+export async function signup(email, password, metadata = {}) {
+  if (!LEARNER_SELF_SIGNUP) throw new Error('Learner accounts are invitation-only. Ask an instructor for an invitation.');
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { full_name: metadata.full_name || '' }, emailRedirectTo: `${window.location.origin}/` }
+  });
+  if (error) throw authError(error, 'The learner account could not be created.');
+  // With "Confirm email" off, Supabase signs the new trainee in immediately.
+  if (data.session) {
+    const user = await toAppUser(data.session);
+    return { ...user, confirmedAt: user.confirmedAt || new Date().toISOString() };
+  }
+  return { id: data.user?.id || '', email, name: metadata.full_name || email, roles: ['learner'], confirmedAt: null };
 }
 
 // Reads the #access_token=...&type=invite|recovery fragment Supabase adds to email links.

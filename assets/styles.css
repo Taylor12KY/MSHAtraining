@@ -1246,3 +1246,13 @@ body.app-dialog-open { overflow: hidden; }
 .invite-account-form { display: grid; gap: 6px; max-width: 520px; padding: 0 16px 16px; }
 .invite-account-form input, .invite-account-form select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
 .invite-account-note { margin: 4px 0 0; color: var(--text-muted); font-size: 0.8rem; }
+
+/* One-time account links shown to instructors (no email server) */
+.share-link:empty { display: none; }
+.share-link { margin-top: 10px; padding: 12px; border: 1px solid #c9ddcf; border-radius: 10px; background: #f4f9f5; font-size: 0.85rem; }
+.share-link p { margin: 0 0 8px; }
+.share-link-row { display: flex; gap: 8px; }
+.share-link-input { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.78rem; background: #fff; }
+.record-account-access { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.record-account-access h4 { margin: 0 0 4px; }
+.record-account-access p { margin: 0 0 10px; color: var(--text-muted); font-size: 0.85rem; }

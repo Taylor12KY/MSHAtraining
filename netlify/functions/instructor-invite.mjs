@@ -7,8 +7,9 @@ const json = (body, status = 200) => Response.json(body, {
 });
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Instructors invite trainees and other instructors. Supabase emails a link where the
-// person chooses their own password; public sign-up stays disabled.
+// Instructors invite trainees and other instructors. Instead of emailing (the project has
+// no SMTP), this returns a one-time link the instructor shares; the person opens it and
+// chooses their own password.
 export default async request => {
   const user = await authenticatedUser(request);
   if (!user) return json({ error: 'Authentication required.' }, 401);
@@ -28,9 +29,10 @@ export default async request => {
   if (!fullName) return json({ error: 'Enter the person\'s full name.' }, 400);
 
   const admin = supabaseAdmin();
-  const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
-    data: { full_name: fullName },
-    redirectTo: `${origin}/`
+  const { data, error } = await admin.auth.admin.generateLink({
+    type: 'invite',
+    email,
+    options: { data: { full_name: fullName }, redirectTo: `${origin}/` }
   });
   if (error) {
     const alreadyExists = /already been registered|already exists/i.test(error.message);
@@ -50,7 +52,10 @@ export default async request => {
     instructorId: user.id,
     instructorEmail: user.email
   });
-  return json({ message: `Invitation sent to ${email} as ${role === 'instructor' ? 'an instructor' : 'a trainee'}.` });
+  return json({
+    message: `Account created for ${email} as ${role === 'instructor' ? 'an instructor' : 'a trainee'}. Send them this one-time link to choose a password:`,
+    link: data.properties.action_link
+  });
 };
 
 export const config = { path: '/api/instructor-invite' };

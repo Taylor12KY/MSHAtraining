@@ -6,6 +6,7 @@ import learnerProgress from '../netlify/functions/learner-progress.mjs';
 import instructorRecords from '../netlify/functions/instructor-records.mjs';
 import instructorInvite from '../netlify/functions/instructor-invite.mjs';
 import instructorSession from '../netlify/functions/instructor-session.mjs';
+import instructorPasswordLink from '../netlify/functions/instructor-password-link.mjs';
 
 const BASE = 'https://training.example';
 const request = (path, { token, method = 'GET', body } = {}) => new Request(`${BASE}${path}`, {
@@ -109,12 +110,16 @@ test('instructor signoffs are stamped with the instructor and audited', async ()
   assert.ok(fake.tables.audit_events.some(row => row.event.type === 'instructor-signoff' && row.event.changedKeys.includes('w65Practice')));
 });
 
-test('instructors invite trainees or instructors, and the role is set server-side', async () => {
+test('instructors invite trainees or instructors with a one-time link, and the role is set server-side', async () => {
   const { fake } = setup();
   const trainee = await instructorInvite(request('/api/instructor-invite', { token: 'instructor-token', method: 'POST', body: { email: 'New.Miner@theallen.com', fullName: 'New Miner' } }));
   assert.equal(trainee.status, 200);
-  assert.equal(fake.client.invites[0].email, 'new.miner@theallen.com');
-  assert.equal(fake.client.invites[0].options.redirectTo, `${BASE}/`);
+  const traineeBody = await trainee.json();
+  assert.equal(fake.client.links[0].type, 'invite');
+  assert.equal(fake.client.links[0].email, 'new.miner@theallen.com');
+  assert.equal(fake.client.links[0].options.redirectTo, `${BASE}/`);
+  assert.equal(traineeBody.link, fake.client.links[0].link, 'the instructor receives the link to share (no email server)');
+  assert.equal(fake.client.invites.length, 0, 'no invitation email is attempted');
   assert.equal(fake.tables.profiles.find(row => row.email === 'new.miner@theallen.com').role, 'learner');
 
   await instructorInvite(request('/api/instructor-invite', { token: 'instructor-token', method: 'POST', body: { email: 'lead@theallen.com', fullName: 'Lead Hand', role: 'instructor' } }));
@@ -125,4 +130,17 @@ test('instructors invite trainees or instructors, and the role is set server-sid
   const invalid = await instructorInvite(request('/api/instructor-invite', { token: 'instructor-token', method: 'POST', body: { email: 'not-an-email', fullName: 'X' } }));
   assert.equal(invalid.status, 400);
   assert.ok(fake.tables.audit_events.some(row => row.event.type === 'account-invited' && row.event.role === 'instructor'));
+});
+
+test('instructors create audited one-time password links for existing accounts', async () => {
+  const { fake, learner } = setup();
+  assert.equal((await instructorPasswordLink(request('/api/instructor-password-link', { token: 'learner-token', method: 'POST', body: { accountId: learner.id } }))).status, 403);
+  assert.equal((await instructorPasswordLink(request('/api/instructor-password-link', { token: 'instructor-token', method: 'POST', body: { accountId: 'missing' } }))).status, 404);
+  const response = await instructorPasswordLink(request('/api/instructor-password-link', { token: 'instructor-token', method: 'POST', body: { accountId: learner.id } }));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(fake.client.links.at(-1).type, 'recovery');
+  assert.equal(fake.client.links.at(-1).email, 'pat@theallen.com');
+  assert.equal(body.link, fake.client.links.at(-1).link);
+  assert.ok(fake.tables.audit_events.some(row => row.event.type === 'password-link-created' && row.event.learnerId === learner.id));
 });
