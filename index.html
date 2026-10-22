@@ -218,6 +218,15 @@
       <div class="video-progress-rail-text" id="video-progress-rail-text">Required videos · 0 / 0 complete</div>
       <button type="button" class="btn btn-outline btn-sm hidden" id="video-progress-rail-jump">Jump to next incomplete</button>
     </div>
+    <nav class="module-outline hidden" id="module-outline" aria-label="On this page">
+      <details id="module-outline-details">
+        <summary><span class="module-outline-title">On this page</span><span class="module-outline-count" id="module-outline-count"></span></summary>
+        <ol class="module-outline-list" id="module-outline-list"></ol>
+      </details>
+    </nav>
+    <button type="button" class="module-outline-return hidden" id="module-outline-return" aria-controls="module-outline">
+      <span aria-hidden="true">☰</span> Sections
+    </button>
     <div id="mod-content"></div>
     <div class="nav-btns">
       <button class="btn btn-outline" onclick="showDashboard()">← Dashboard</button>

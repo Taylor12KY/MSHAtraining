@@ -581,3 +581,20 @@ test('every site orientation requires current-plan instructor review', () => {
     assert.match(siteContent, new RegExp(`${site}[\\s\\S]*?current written plans`, 'i'));
   }
 });
+
+test('long modules get an on-this-page menu that does not bypass completion gates', () => {
+  assert.match(html, /<nav class="module-outline hidden" id="module-outline" aria-label="On this page">/);
+  assert.match(html, /id="module-outline-return"/);
+  assert.match(app, /const MODULE_OUTLINE_MIN_SECTIONS = 4;/);
+  assert.match(app, /renderRequiredVideos\(id\);\n\s*renderModuleOutline\(id\);/);
+  assert.match(app, /teardownModuleOutline\(\);/);
+  assert.match(app, /aria-current', 'location'/);
+  assert.doesNotMatch(app, /scroll-end-marker[^\n]*module-outline|module-outline[^\n]*scroll-end-marker/);
+});
+
+test('loaded required-video players set their note without referencing an undefined variable', () => {
+  const loader = app.slice(app.indexOf('function ensureRequiredVideoLoaded'), app.indexOf('function updateVideoProgressRail'));
+  assert.ok(loader.length > 0);
+  assert.doesNotMatch(loader, /: \(meta\.provider === 'vimeo'/);
+  assert.match(loader, /: \(provider === 'vimeo'/);
+});

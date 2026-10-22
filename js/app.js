@@ -59,6 +59,8 @@ let videoWatchIntervals = {};
 let youtubeApiPromise = null;
 let vimeoApiPromise = null;
 let scrollObserver = null;
+let moduleOutlineModuleId = null;
+let moduleOutlineScrollFrame = 0;
 let currentQuizQuestions = [];
 let lastActivityAt = Date.now();
 const ACTIVITY_TIMEOUT_MS = 15 * 60 * 1000;
@@ -793,6 +795,7 @@ window.exitInstructorPreview = exitInstructorPreview;
 
 function stopActiveTimers() {
   teardownRequiredVideoLazyLoad();
+  teardownModuleOutline();
   const rail = document.getElementById('video-progress-rail');
   if (rail) rail.classList.add('hidden');
 
@@ -1215,7 +1218,7 @@ function ensureRequiredVideoLoaded(videoId, { autoplay = false } = {}) {
       videoId,
       instructorPreviewMode
         ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
-        : (meta.provider === 'vimeo'
+        : (provider === 'vimeo'
           ? 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume, or on iPad tap the play button on the video itself if Start/Resume does not start playback.'
           : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).'),
       false
@@ -1255,6 +1258,8 @@ function updateVideoProgressRail(moduleId = currentModuleId) {
     return !(record && record.complete);
   });
   rail.classList.remove('hidden');
+  const outlineVideoMeta = document.getElementById('module-outline-video-meta');
+  if (outlineVideoMeta) outlineVideoMeta.textContent = `${completed}/${videos.length} done`;
   text.textContent = next
     ? `${completed} / ${videos.length} complete · Next: ${next.title}`
     : `${completed} / ${videos.length} complete · All required videos done`;
@@ -1268,6 +1273,119 @@ function updateVideoProgressRail(moduleId = currentModuleId) {
   }
 }
 
+
+// "On this page" menu for long modules. Jumping between sections is navigation only:
+// seat time, required videos, and the end-of-content check still gate the quiz.
+const MODULE_OUTLINE_MIN_SECTIONS = 4;
+
+function moduleOutlineHeadings() {
+  const content = document.getElementById('mod-content');
+  if (!content) return [];
+  return Array.from(content.querySelectorAll('h3, h4.required-video-group-title'))
+    .filter(heading => heading.textContent.trim() && !heading.closest('.video-box, details:not([open])'));
+}
+
+function moduleStickyOffset() {
+  let bottom = 0;
+  document.querySelectorAll('.site-header, #instructor-preview-banner, #progress-panel, #video-progress-rail').forEach(el => {
+    if (el.classList.contains('hidden') || !el.offsetHeight) return;
+    const style = window.getComputedStyle(el);
+    if (style.position !== 'sticky' && style.position !== 'fixed') return;
+    bottom = Math.max(bottom, (parseFloat(style.top) || 0) + el.offsetHeight);
+  });
+  return bottom + 12;
+}
+
+function scrollToModuleSection(target) {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const top = target.getBoundingClientRect().top + window.scrollY - moduleStickyOffset();
+  window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+}
+
+function teardownModuleOutline() {
+  moduleOutlineModuleId = null;
+  document.getElementById('module-outline')?.classList.add('hidden');
+  document.getElementById('module-outline-return')?.classList.add('hidden');
+}
+
+function renderModuleOutline(moduleId) {
+  const nav = document.getElementById('module-outline');
+  const list = document.getElementById('module-outline-list');
+  const details = document.getElementById('module-outline-details');
+  if (!nav || !list || !details) return;
+  const wasOpen = moduleOutlineModuleId === moduleId ? details.open : null;
+  teardownModuleOutline();
+  const headings = moduleOutlineHeadings();
+  if (headings.length < MODULE_OUTLINE_MIN_SECTIONS) return;
+
+  list.innerHTML = '';
+  headings.forEach((heading, index) => {
+    if (!heading.id) heading.id = `module-${moduleId}-section-${index + 1}`;
+    const item = document.createElement('li');
+    if (heading.tagName === 'H4') item.className = 'module-outline-sub';
+    const link = document.createElement('a');
+    link.href = '#' + heading.id;
+    link.dataset.target = heading.id;
+    link.textContent = heading.textContent.trim();
+    if (heading.closest('.required-video-section') && heading.tagName === 'H3') {
+      const meta = document.createElement('span');
+      meta.className = 'module-outline-meta';
+      meta.id = 'module-outline-video-meta';
+      link.append(' ', meta);
+    }
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      if (window.matchMedia && window.matchMedia('(max-width: 780px)').matches) details.open = false;
+      scrollToModuleSection(heading);
+    });
+    item.appendChild(link);
+    list.appendChild(item);
+  });
+
+  document.getElementById('module-outline-count').textContent = `${headings.length} sections`;
+  details.open = wasOpen ?? !(window.matchMedia && window.matchMedia('(max-width: 780px)').matches);
+  nav.classList.remove('hidden');
+  moduleOutlineModuleId = moduleId;
+  updateVideoProgressRail(moduleId);
+  updateModuleOutlinePosition();
+}
+
+function updateModuleOutlinePosition() {
+  moduleOutlineScrollFrame = 0;
+  const nav = document.getElementById('module-outline');
+  const returnButton = document.getElementById('module-outline-return');
+  if (!nav || moduleOutlineModuleId === null || nav.classList.contains('hidden')) return;
+  const offset = moduleStickyOffset() + 8;
+  let activeId = '';
+  moduleOutlineHeadings().forEach(heading => {
+    if (heading.getBoundingClientRect().top <= offset) activeId = heading.id;
+  });
+  nav.querySelectorAll('a[data-target]').forEach(link => {
+    const active = link.dataset.target === activeId;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  if (returnButton) returnButton.classList.toggle('hidden', nav.getBoundingClientRect().bottom > 0);
+}
+
+window.addEventListener('scroll', () => {
+  if (moduleOutlineModuleId === null || moduleOutlineScrollFrame) return;
+  moduleOutlineScrollFrame = window.requestAnimationFrame(updateModuleOutlinePosition);
+}, { passive: true });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('module-outline-return')?.addEventListener('click', () => {
+    const nav = document.getElementById('module-outline');
+    const details = document.getElementById('module-outline-details');
+    if (!nav || !details) return;
+    details.open = true;
+    scrollToModuleSection(nav);
+    nav.querySelector('summary')?.focus({ preventScroll: true });
+  });
+});
 
 function initializeRequiredVideos(moduleId) {
   const videos = getRequiredVideos(moduleId);
@@ -1636,7 +1754,10 @@ function renderQuizReviewPanel(id) {
     section.setAttribute('tabindex', '-1');
   });
   const items = getQuizReviewItems(id);
-  if (!items.length) return;
+  if (!items.length) {
+    if (moduleOutlineModuleId === id) renderModuleOutline(id);
+    return;
+  }
 
   const bestScore = Number(state.scores && state.scores[id]);
   const reviewStatus = quizReviewReady(id)
@@ -1700,6 +1821,7 @@ function renderQuizReviewPanel(id) {
     button.addEventListener('click', () => confirmLegacyQuizReview(id, Number(button.dataset.reviewConfirm)));
   });
   panel.querySelector('#quiz-review-retake')?.addEventListener('click', showQuiz);
+  if (moduleOutlineModuleId === id) renderModuleOutline(id);
 }
 
 function markQuizReviewSectionVisited(id, sectionIndex) {
@@ -1963,6 +2085,7 @@ function openModule(id) {
 
   renderQuizReviewPanel(id);
   renderRequiredVideos(id);
+  renderModuleOutline(id);
 
   // Hide legacy manual timer UI inside module content (time is auto now)
   document.querySelectorAll('#mod-content .video-box .timer-display, #mod-content .video-box [id^="btn-timer-"], #mod-content .video-box [id^="timer-status-"]').forEach(el => {
