@@ -330,6 +330,22 @@
       <p>Review server-recorded classroom progress and document required instructor verification. Saved changes include your account identity and server time.</p>
       <button class="btn btn-outline btn-sm records-download" type="button" id="instructor-records-download">Download spreadsheet (.csv)</button>
     </div>
+    <details class="invite-account">
+      <summary>Invite a trainee or instructor</summary>
+      <form id="instructor-invite-account-form" class="invite-account-form">
+        <label for="instructor-invite-name">Full legal name</label>
+        <input id="instructor-invite-name" type="text" maxlength="120" autocomplete="off" required>
+        <label for="instructor-invite-email">Email</label>
+        <input id="instructor-invite-email" type="email" autocomplete="off" required>
+        <label for="instructor-invite-role">Account type</label>
+        <select id="instructor-invite-role">
+          <option value="learner">Trainee (learner)</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        <div class="record-save-row"><button class="btn btn-sm" type="submit">Send Invitation</button><span id="instructor-invite-status" role="status"></span></div>
+        <p class="invite-account-note">The person gets an email link to choose their own password. Instructor accounts can see every trainee record and sign off verification items.</p>
+      </form>
+    </details>
     <p class="auth-status hidden" id="instructor-records-status" role="status"></p>
     <div class="records-layout">
       <aside class="record-list" id="instructor-record-list" aria-label="Trainee records"></aside>

@@ -1,4 +1,3 @@
-import { getStore } from '@netlify/blobs';
 import { MODULE_REQUIREMENTS } from './module-requirements.mjs';
 
 export { MODULE_REQUIREMENTS };
@@ -18,18 +17,6 @@ const VALID_MINES = new Set(['Boonesboro Quarry', 'Clover Bottom Quarry', 'Dix R
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
 const safeText = (value, maximum = 500) => typeof value === 'string' ? value.trim().slice(0, maximum) : '';
 const validDate = value => typeof value === 'string' && Number.isFinite(Date.parse(value)) ? value : '';
-
-export function recordsStore() {
-  return getStore({ name: 'msha-training-records', consistency: 'strong' });
-}
-
-export function auditStore() {
-  return getStore({ name: 'msha-training-audit', consistency: 'strong' });
-}
-
-export function recordKey(userId) {
-  return `trainees/${encodeURIComponent(String(userId))}.json`;
-}
 
 export function rolesFor(user) {
   if (Array.isArray(user?.roles)) return user.roles;
@@ -220,10 +207,4 @@ export function significantChanges(previousRecord, nextRecord) {
     if (afterAttempts > beforeAttempts) changes.push(`quiz-attempt:${id}`);
   }
   return changes;
-}
-
-export async function appendAuditEvent(event) {
-  const timestamp = new Date().toISOString();
-  const key = `events/${encodeURIComponent(String(event.learnerId || 'unknown'))}/${timestamp}-${crypto.randomUUID()}.json`;
-  await auditStore().setJSON(key, { ...event, recordedAt: timestamp });
 }

@@ -8,7 +8,7 @@ import {
   requestPasswordRecovery,
   signup,
   updateUser
-} from '@netlify/identity';
+} from './auth-client.mjs';
 import { buildRecordsCsv, recordsExportFilename } from './records-export.mjs';
 
 const isInstructorRoute = document.body.dataset.instructorPreview === 'true';
@@ -562,6 +562,30 @@ function downloadInstructorRecords() {
   setRecordsStatus(`Downloaded ${instructorRecords.length} trainee record${instructorRecords.length === 1 ? '' : 's'}.`);
 }
 
+async function inviteAccount(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  const status = byId('instructor-invite-status');
+  const email = byId('instructor-invite-email').value.trim();
+  const fullName = byId('instructor-invite-name').value.trim();
+  const role = byId('instructor-invite-role').value === 'instructor' ? 'instructor' : 'learner';
+  button.disabled = true;
+  if (status) status.textContent = 'Sending invitation…';
+  try {
+    const body = await authenticatedRequest('/api/instructor-invite', {
+      method: 'POST',
+      body: JSON.stringify({ email, fullName, role })
+    });
+    form.reset();
+    if (status) status.textContent = body.message || `Invitation sent to ${email}.`;
+  } catch (error) {
+    if (status) status.textContent = errorMessage(error, 'The invitation could not be sent.');
+  } finally {
+    button.disabled = false;
+  }
+}
+
 function closeInstructorRecords() {
   const modal = byId('instructor-records-modal');
   modal?.classList.add('hidden');
@@ -589,6 +613,7 @@ function bindAuthUI() {
   byId('instructor-open-records')?.addEventListener('click', openInstructorRecords);
   byId('instructor-records-close')?.addEventListener('click', closeInstructorRecords);
   byId('instructor-records-download')?.addEventListener('click', downloadInstructorRecords);
+  byId('instructor-invite-account-form')?.addEventListener('submit', inviteAccount);
 }
 
 async function initializeAuthentication() {

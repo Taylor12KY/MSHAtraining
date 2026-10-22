@@ -1,11 +1,8 @@
-import { getUser } from '@netlify/identity';
+import { appendAuditEvent, loadRecord, saveRecord } from '../lib/record-store.mjs';
+import { authenticatedUser } from '../lib/supabase-server.mjs';
 import {
-  appendAuditEvent,
   emptySignoffs,
-  learnerName,
   mergeTrainingStates,
-  recordKey,
-  recordsStore,
   sanitizeTrainingState,
   significantChanges,
   trainingSummary
@@ -22,15 +19,12 @@ function sameOrigin(request) {
 }
 
 export default async request => {
-  const user = await getUser();
+  const user = await authenticatedUser(request);
   if (!user) return json({ error: 'Authentication required.' }, 401);
   if (!sameOrigin(request)) return json({ error: 'Cross-origin request denied.' }, 403);
 
-  const store = recordsStore();
-  const key = recordKey(user.id);
   if (request.method === 'GET') {
-    const record = await store.get(key, { type: 'json' });
-    return json({ record: record || null });
+    return json({ record: await loadRecord(user.id) });
   }
   if (request.method !== 'PUT') return json({ error: 'Method not allowed.' }, 405);
 
@@ -41,41 +35,36 @@ export default async request => {
   let payload;
   try { payload = JSON.parse(raw || '{}'); } catch { return json({ error: 'Invalid JSON.' }, 400); }
 
-  const previous = await store.get(key, { type: 'json' });
-  const state = previous
-    ? mergeTrainingStates(previous.state, payload.state)
-    : sanitizeTrainingState(payload.state);
-  const now = new Date().toISOString();
-  const signoffs = previous?.signoffs || emptySignoffs();
-  const record = {
-    format: 'msha48-server-training-record-v1',
-    version: Number(previous?.version || 0) + 1,
-    learner: {
-      id: user.id,
-      email: user.email || '',
-      name: state.name || learnerName(user)
-    },
-    state,
-    signoffs,
-    signoffDetails: previous?.signoffDetails || {},
-    instructorNotes: previous?.instructorNotes || '',
-    summary: trainingSummary(state, signoffs),
-    createdAt: previous?.createdAt || now,
-    updatedAt: now
-  };
-  const changes = significantChanges(previous, record);
-  await store.setJSON(key, record);
-  if (changes.length) {
-    await appendAuditEvent({
-      type: 'learner-progress',
-      learnerId: user.id,
-      learnerEmail: user.email || '',
-      recordVersion: record.version,
-      changes,
-      summary: record.summary
-    });
+  // Retry if another save (another tab, or an instructor signoff) landed first.
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const previous = await loadRecord(user.id);
+    const state = previous
+      ? mergeTrainingStates(previous.state, payload.state)
+      : sanitizeTrainingState(payload.state);
+    if (!state.name) state.name = user.name;
+    const signoffs = previous?.signoffs || emptySignoffs();
+    const saved = await saveRecord(user.id, {
+      state,
+      signoffs,
+      signoffDetails: previous?.signoffDetails || {},
+      instructorNotes: previous?.instructorNotes || '',
+      summary: trainingSummary(state, signoffs)
+    }, previous?.version || 0);
+    if (!saved) continue;
+    const changes = significantChanges(previous, saved);
+    if (changes.length) {
+      await appendAuditEvent({
+        type: 'learner-progress',
+        learnerId: user.id,
+        learnerEmail: user.email,
+        recordVersion: saved.version,
+        changes,
+        summary: saved.summary
+      });
+    }
+    return json({ record: saved });
   }
-  return json({ record });
+  return json({ error: 'Your progress changed in another window. Please try again.' }, 409);
 };
 
 export const config = { path: '/api/learner-progress' };
