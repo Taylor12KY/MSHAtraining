@@ -57,7 +57,8 @@ test('Netlify build uses the repository package manager and bundles modern funct
 });
 
 test('branded learner experience keeps regulatory context and a clear next action', () => {
-  assert.match(html, /\/assets\/allen-company-logo\.svg/);
+  assert.match(html, /src="\/assets\/allen-company-logo\.svg\?v=[\w-]+"/, 'logo URL is versioned so a new logo is never served from cache');
+  assert.match(read('scripts/build.mjs'), /css\|js\|svg\|png/);
   const logo = read('assets/allen-company-logo.svg');
   assert.match(logo, /<path fill="#215732"/, 'ALLEN wordmark uses Allen Company green');
   assert.deepEqual([...new Set(logo.match(/fill="#[0-9a-fA-F]{6}"/g))], ['fill="#215732"'], 'the whole logo is Allen green');
