@@ -17,7 +17,11 @@ const videoLibrary = read('js/video-library.js');
 const app = read('js/app.js');
 const instructorAuth = read('src/instructor-auth.js');
 const instructorSession = read('netlify/functions/instructor-session.mjs');
-const identitySignup = read('netlify/functions/identity-signup.mjs');
+const authClient = read('src/auth-client.mjs');
+const supabaseServer = read('netlify/lib/supabase-server.mjs');
+const recordStore = read('netlify/lib/record-store.mjs');
+const instructorInvite = read('netlify/functions/instructor-invite.mjs');
+const migration = read('netlify/functions/migrate-from-netlify.mjs');
 const learnerProgress = read('netlify/functions/learner-progress.mjs');
 const instructorRecords = read('netlify/functions/instructor-records.mjs');
 const trainingRecords = read('netlify/lib/training-records.mjs');
@@ -145,26 +149,30 @@ test('learner registration follows the deployed Identity invitation policy', () 
   assert.match(html, /Learner accounts are invitation-only/);
 });
 
-test('instructor route and server endpoint both require the instructor role', () => {
-  assert.match(netlifyConfig, /from = "\/instructor\/\*"[\s\S]*?conditions = \{ Role = \["instructor"\] \}/);
-  assert.match(netlifyConfig, /to = "\/\?instructor=unauthorized"/);
-  assert.match(instructorSession, /getUser/);
-  assert.match(instructorSession, /roles\.includes\('instructor'\)/);
-  assert.match(identitySignup, /currentRoles\.includes\('instructor'\) \? \['instructor'\] : \['trainee'\]/);
-  assert.doesNotMatch(identitySignup, /roles:\s*\['instructor'\]/);
+test('instructor page and every instructor endpoint check the Supabase role server-side', () => {
+  assert.doesNotMatch(netlifyConfig, /Role = \[/, 'Netlify Identity role redirects no longer apply');
+  assert.match(instructorAuth, /window\.location\.replace\('\/\?instructor=unauthorized'\)/);
+  for (const source of [instructorSession, instructorRecords, instructorInvite]) {
+    assert.match(source, /authenticatedUser\(request\)/);
+    assert.match(source, /role !== 'instructor'/);
+  }
+  assert.match(supabaseServer, /auth\.getUser\(token\)/);
+  assert.match(supabaseServer, /from\('profiles'\)\.select\('email, full_name, role'\)/);
+  assert.doesNotMatch(authClient, /SECRET|service_role/i, 'the browser never sees the secret key');
+  assert.match(supabaseServer, /process\.env\.SUPABASE_SECRET_KEY/);
 });
 
 test('authenticated learner progress is server-owned, validated, and durably stored', () => {
-  assert.match(packageJson, /"@netlify\/blobs": "10\.7\.12"/);
-  assert.match(packageJson, /"@netlify\/identity": "1\.2\.0"/);
+  assert.match(packageJson, /"@supabase\/supabase-js": "2\.117\.2"/);
+  assert.doesNotMatch(packageJson, /@netlify\/identity/);
   assert.match(netlifyConfig, /node_bundler = "esbuild"/);
   assert.doesNotMatch(netlifyConfig, /external_node_modules/);
-  assert.match(learnerProgress, /getUser/);
-  assert.match(learnerProgress, /recordKey\(user\.id\)/);
+  assert.match(learnerProgress, /authenticatedUser\(request\)/);
+  assert.match(learnerProgress, /loadRecord\(user\.id\)/);
   assert.doesNotMatch(learnerProgress, /payload\.(userId|learnerId)/);
   assert.match(learnerProgress, /mergeTrainingStates/);
   assert.match(learnerProgress, /appendAuditEvent/);
-  assert.match(trainingRecords, /getStore\(\{ name: 'msha-training-records', consistency: 'strong' \}\)/);
+  assert.match(recordStore, /\.eq\('version', expectedVersion\)/, 'saves use optimistic concurrency');
   assert.match(trainingRecords, /MODULE_REQUIREMENTS/);
   assert.match(trainingRecords, /clean\.scores\[id\] === 100/);
   assert.match(trainingRecords, /videosComplete/);
@@ -205,7 +213,7 @@ test('server validator rejects fabricated completion and requires known video du
 });
 
 test('instructor records and signoffs require the instructor role and preserve audit identity', () => {
-  assert.match(instructorRecords, /rolesFor\(user\)\.includes\('instructor'\)/);
+  assert.match(instructorRecords, /user\.role !== 'instructor'/);
   assert.match(instructorRecords, /authorization\.user\.id/);
   assert.match(instructorRecords, /authorization\.user\.email/);
   assert.match(instructorRecords, /appendAuditEvent/);
@@ -650,6 +658,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.match(html, /id="instructor-records-download"/);
   assert.match(instructorAuth, /import \{ buildRecordsCsv, recordsExportFilename \} from '\.\/records-export\.mjs';/);
   assert.match(instructorRecords, /modules: moduleProgress\(record\.state\)/);
+  assert.match(html, /id="instructor-invite-account-form"/);
 });
 
 test('site orientations include MSHA public-record lessons and an instructor-completed emergency card', () => {
@@ -670,4 +679,15 @@ test('site orientations include MSHA public-record lessons and an instructor-com
   }
   assert.match(context.sites['Clover Bottom Quarry'].content, /Which mine I am in today: old mine \(#1, 15-00112\) or new mine \(#2, 15-19898\)/);
   assert.match(context.sites['Dix River Stone'].content, /Level 1 or Level 2/);
+});
+
+test('Netlify accounts and records migrate to Supabase safely', () => {
+  assert.match(migration, /tokenMatches\(provided, process\.env\.MIGRATION_TOKEN\)/);
+  assert.match(migration, /timingSafeEqual/);
+  assert.match(migration, /const apply = event\.queryStringParameters\?\.apply === '1';/, 'dry run unless ?apply=1');
+  assert.match(migration, /context\.clientContext\?\.identity/);
+  assert.match(migration, /roles\.includes\('instructor'\) \? 'instructor' : 'learner'/);
+  assert.match(migration, /legacy_netlify_id: netlifyUser\.id/);
+  assert.match(migration, /alreadyCopied\.has\(netlifyUser\.id\)/, 're-running skips copied records');
+  assert.match(migration, /migratedFrom: 'netlify-blobs'/);
 });

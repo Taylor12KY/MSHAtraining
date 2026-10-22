@@ -1239,3 +1239,10 @@ body.app-dialog-open { overflow: hidden; }
 .emergency-card td.emergency-card-blank { min-width: 260px; height: 38px; border-bottom: 1px dashed #a9c9b3; background: #fafdfb; }
 .emergency-card td:first-child { width: 48%; }
 @media print { .emergency-card td.emergency-card-blank { height: 46px; } }
+
+/* Instructor invitation form in the Trainee Records window */
+.invite-account { margin: 0 0 18px; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+.invite-account summary { padding: 12px 16px; font-weight: 700; cursor: pointer; color: var(--accent); }
+.invite-account-form { display: grid; gap: 6px; max-width: 520px; padding: 0 16px 16px; }
+.invite-account-form input, .invite-account-form select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.invite-account-note { margin: 4px 0 0; color: var(--text-muted); font-size: 0.8rem; }

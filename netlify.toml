@@ -6,18 +6,12 @@
 [functions]
   node_bundler = "esbuild"
 
+# The instructor page is a static shell; it verifies the Supabase session with
+# /api/instructor-session, and every instructor API checks the role server-side.
 [[redirects]]
   from = "/instructor/*"
   to = "/instructor/index.html"
   status = 200
-  force = true
-  conditions = { Role = ["instructor"] }
-
-[[redirects]]
-  from = "/instructor/*"
-  to = "/?instructor=unauthorized"
-  status = 302
-  force = true
 
 [[headers]]
   for = "/*"

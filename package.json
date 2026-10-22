@@ -4,11 +4,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "requirements": "node scripts/generate-requirements.mjs",
-    "test": "node scripts/generate-requirements.mjs --check && node tests/app.test.mjs"
+    "test": "node scripts/generate-requirements.mjs --check && node --test tests/app.test.mjs tests/supabase.test.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "10.7.12",
-    "@netlify/identity": "1.2.0"
+    "@supabase/supabase-js": "2.117.2"
   },
   "devDependencies": {
     "esbuild": "0.28.2"
