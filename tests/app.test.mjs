@@ -370,15 +370,11 @@ test('required video time fits within each assigned module', () => {
   const context = {};
   new vm.Script(`${modulesSource}\n${videoLibrary}\nthis.modules = MODULES; this.videos = REQUIRED_VIDEOS;`)
     .runInNewContext(context);
-  // Overruns under-credit the learner (never over-credit), but changing credited hours
-  // needs training-plan sign-off, so each one must be listed here deliberately.
-  const knownOverrunSeconds = { 4: 1800 };
   for (const module of context.modules) {
     const videoSeconds = context.videos
       .filter(video => video.moduleId === module.id)
       .reduce((sum, video) => sum + video.durationSeconds, 0);
-    const allowance = knownOverrunSeconds[module.id] || 0;
-    assert.ok(videoSeconds <= module.hours * 3600 + allowance, `Module ${module.id} has more video time than credited time`);
+    assert.ok(videoSeconds <= module.hours * 3600, `Module ${module.id} has more video time than credited time`);
   }
 });
 
@@ -404,6 +400,37 @@ test('server seat-time requirements are generated from client module hours', asy
   assert.equal(read('netlify/lib/module-requirements.mjs'), generator.renderRequirements(await generator.buildRequirements()),
     'netlify/lib/module-requirements.mjs is stale; run pnpm run requirements');
   assert.match(read('scripts/build.mjs'), /renderRequirements\(await buildRequirements\(\)\)/);
+});
+
+test('recorded completions survive later changes to module hours or required videos', () => {
+  const { MODULE_REQUIREMENTS, mergeTrainingStates, sanitizeTrainingState, trainingSummary } = recordLibrary;
+  // Stored record from before Module 4 grew and Module 13's server cap was fixed: seat time
+  // was credited against the old, shorter requirements and the server marked both complete.
+  const storedState = {
+    name: 'Test Miner',
+    mine: 'Boonesboro Quarry',
+    completed: [4, 13],
+    scores: { 4: 100, 13: 100 },
+    timersDone: { 4: true, 13: true },
+    timerElapsed: { 4: 7200, 13: 1800 },
+    scrollDone: { 4: true, 13: true }
+  };
+  assert.ok(MODULE_REQUIREMENTS[4].seconds > 7200 && MODULE_REQUIREMENTS[13].seconds > 1800);
+  const merged = mergeTrainingStates(storedState, { name: 'Test Miner', mine: 'Boonesboro Quarry' });
+  assert.deepEqual(merged.completed, [4, 13]);
+  assert.equal(merged.timerElapsed[4], 7200, 'actual seat time is still reported honestly');
+  assert.deepEqual(mergeTrainingStates(merged, {}).completed, [4, 13], 'completion stays locked across later syncs');
+  assert.equal(trainingSummary(merged).completedModules, 2);
+
+  // A browser cannot claim completion on its own: untrusted payloads are always rechecked.
+  assert.deepEqual(sanitizeTrainingState({ ...storedState, completed: [4, 13] }).completed, []);
+  assert.deepEqual(mergeTrainingStates({}, storedState).completed, []);
+
+  // Changing work location still resets the site-specific Module 1.
+  const siteDone = { mine: 'Boonesboro Quarry', completed: [1], scores: { 1: 100 } };
+  assert.deepEqual(mergeTrainingStates(siteDone, { mine: 'Dix River Stone' }).completed, []);
+
+  assert.match(app, /candidate\.completed\.includes\(id\) &&\s*clean\.scores\[id\] === QUIZ_PASSING_SCORE/);
 });
 
 test('server keeps progress for every client-required video across a sync round-trip', () => {

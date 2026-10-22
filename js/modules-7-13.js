@@ -89,7 +89,7 @@ const MODULES_PART_2 = [
   {
     id: 8,
     title: "Health, Noise, Dust & Hazard Communication",
-    hours: 2.5,
+    hours: 2.0,
     objectives: [
       "Understand why a miner may be asked to wear a dust-sampling pump and why dust, DPM, noise, and HazCom matter",
       "Describe basic elements of the mine's HazCom program",
@@ -285,7 +285,7 @@ const MODULES_PART_2 = [
   {
     id: 10,
     title: "First Aid",
-    hours: 3.5,
+    hours: 3.0,
     objectives: [
       "Recall basic first-aid principles acceptable to MSHA",
       "Know the location of first-aid equipment and how to activate emergency medical response",
@@ -528,7 +528,7 @@ const MODULES_PART_2 = [
   {
     id: 12,
     title: "Accident Prevention & Health/Safety Aspects of Assigned Tasks",
-    hours: 2.5,
+    hours: 3.0,
     objectives: [
       "Apply general accident-prevention principles to daily work",
       "Understand that task training is required before performing new tasks",

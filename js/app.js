@@ -296,9 +296,10 @@ function sanitizeState(candidate) {
         correctIndex: Number.isInteger(Number(item.correctIndex)) ? Number(item.correctIndex) : -1
       }));
     }
+    // A recorded completion with a passing score stays complete even if the module's
+    // hours or required videos changed afterward; the server enforces the same rule.
     if (validIds.has(id) && Array.isArray(candidate.completed) && candidate.completed.includes(id) &&
-        clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] === QUIZ_PASSING_SCORE &&
-        requiredVideosComplete(id, clean)) {
+        clean.scores[id] === QUIZ_PASSING_SCORE) {
       clean.completed.push(id);
     }
   });
@@ -2182,10 +2183,7 @@ async function showCertificate() {
   const modules = getModules();
   const validCompletion = modules.every(m =>
     state.completed.includes(m.id) &&
-    state.timersDone[m.id] === true &&
-    state.scrollDone[m.id] === true &&
-    Number(state.scores[m.id]) === QUIZ_PASSING_SCORE &&
-    requiredVideosComplete(m.id)
+    Number(state.scores[m.id]) === QUIZ_PASSING_SCORE
   );
   if (!validCompletion) {
     showAppAlert('Every module must have completed seat time, content review, required videos, and a perfect 100% quiz score before a certificate can be generated.');

@@ -69,7 +69,11 @@ function sanitizeReview(review) {
   }));
 }
 
-export function sanitizeTrainingState(candidate = {}) {
+// Completion is permanent once the server has recorded it, so later changes to module
+// hours or required videos apply only to modules a learner has not finished yet.
+// Only server-written state may be trusted this way; client payloads are always rechecked.
+export function sanitizeTrainingState(candidate = {}, { trustCompleted = false } = {}) {
+  const lockedCompletions = new Set(trustCompleted && Array.isArray(candidate.completed) ? candidate.completed.map(Number) : []);
   const clean = {
     name: safeText(candidate.name, 120),
     mine: VALID_MINES.has(candidate.mine) ? candidate.mine : '',
@@ -109,7 +113,8 @@ export function sanitizeTrainingState(candidate = {}) {
     }
 
     const videosComplete = requiredVideoEntries.every(([videoId]) => clean.videoProgress[id]?.[videoId]?.complete === true);
-    if (clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] === 100 && videosComplete) clean.completed.push(id);
+    const earnedNow = clean.timersDone[id] && clean.scrollDone[id] && clean.scores[id] === 100 && videosComplete;
+    if (earnedNow || lockedCompletions.has(id)) clean.completed.push(id);
   }
   return clean;
 }
@@ -124,13 +129,13 @@ function mergeAttempts(previous = [], incoming = []) {
 }
 
 export function mergeTrainingStates(previousCandidate = {}, incomingCandidate = {}) {
-  const previous = sanitizeTrainingState(previousCandidate);
+  const previous = sanitizeTrainingState(previousCandidate, { trustCompleted: true });
   const incoming = sanitizeTrainingState(incomingCandidate);
   const mineChanged = Boolean(previous.mine && incoming.mine && previous.mine !== incoming.mine);
   const merged = {
     name: incoming.name || previous.name,
     mine: incoming.mine || previous.mine,
-    completed: [],
+    completed: previous.completed.filter(id => !(id === 1 && mineChanged)),
     scores: {}, timersDone: {}, timerElapsed: {}, scrollDone: {}, videoProgress: {}, quizAttempts: {}, quizReview: {},
     startedAt: [previous.startedAt, incoming.startedAt].filter(Boolean).sort()[0] || null
   };
@@ -160,7 +165,7 @@ export function mergeTrainingStates(previousCandidate = {}, incomingCandidate = 
       };
     }
   }
-  return sanitizeTrainingState(merged);
+  return sanitizeTrainingState(merged, { trustCompleted: true });
 }
 
 export function sanitizeSignoffs(candidate = {}) {
@@ -168,7 +173,7 @@ export function sanitizeSignoffs(candidate = {}) {
 }
 
 export function trainingSummary(stateCandidate = {}, signoffsCandidate = {}) {
-  const state = sanitizeTrainingState(stateCandidate);
+  const state = sanitizeTrainingState(stateCandidate, { trustCompleted: true });
   const signoffs = sanitizeSignoffs(signoffsCandidate);
   const completedModules = state.completed.length;
   const totalModules = Object.keys(MODULE_REQUIREMENTS).length;
