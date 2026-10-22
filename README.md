@@ -77,6 +77,8 @@ Sign-in and training records live in the dedicated Supabase project **msha-train
 | `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys → **Secret key** (`sb_secret_…`) | **Yes** |
 | `MIGRATION_TOKEN` | Random token for the one-time migration; delete after migrating | Yes |
 
+Netlify stores secret values per deploy context (production, deploy previews, branch deploys); the "same value for all contexts" option is not available for secrets. Set each secret for every context that runs these functions, then trigger a new deploy so functions pick it up.
+
 ### Supabase Auth settings (dashboard)
 
 1. **Authentication → Sign In / Providers:** turn off **Allow new users to sign up** (invitations still work). Set minimum password length to 8 or more.
