@@ -147,6 +147,13 @@ test('learner registration follows the deployed Identity invitation policy', () 
   assert.match(instructorAuth, /settings\?\.disableSignup/);
   assert.match(html, /class="auth-link hidden" id="learner-show-signup"/);
   assert.match(html, /Learner accounts are invitation-only/);
+  assert.match(html, /id="learner-signup-note"/);
+  const config = read('src/supabase-config.mjs');
+  assert.match(config, /export const LEARNER_SELF_SIGNUP = (true|false);/);
+  assert.match(authClient, /return \{ disableSignup: !LEARNER_SELF_SIGNUP \};/);
+  assert.match(authClient, /supabase\.auth\.signUp\(/);
+  assert.match(authClient, /emailRedirectTo/);
+  assert.doesNotMatch(authClient, /signUp\([\s\S]{0,200}role/, 'self sign-up never sends a role');
 });
 
 test('instructor page and every instructor endpoint check the Supabase role server-side', () => {

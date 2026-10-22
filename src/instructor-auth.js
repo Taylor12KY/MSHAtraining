@@ -94,6 +94,7 @@ async function configureLearnerRegistration() {
     const inviteOnly = Boolean(settings?.disableSignup);
     signupButton?.classList.toggle('hidden', inviteOnly);
     registrationNote?.classList.toggle('hidden', !inviteOnly);
+    byId('learner-signup-note')?.classList.toggle('hidden', inviteOnly);
     if (inviteOnly) setLearnerView('login');
   } catch {
     // Fail closed when the deployed Identity registration policy cannot be verified.

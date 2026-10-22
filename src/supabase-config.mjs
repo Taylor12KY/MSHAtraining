@@ -2,3 +2,7 @@
 // be shipped to clients; row-level security and the server functions protect data.
 export const SUPABASE_URL = 'https://igxvqobqcdykfzhsjnyd.supabase.co';
 export const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_cyWyKIrQDFRsek-oEjs01A_Fj6E9B8s';
+
+// Trainees may create their own learner account. Set to false for invitation-only (and turn
+// off "Allow new users to sign up" in Supabase Auth). Instructor access is always by invitation.
+export const LEARNER_SELF_SIGNUP = true;
