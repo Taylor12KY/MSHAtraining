@@ -60,6 +60,7 @@ test('branded learner experience keeps regulatory context and a clear next actio
   assert.match(html, /\/assets\/allen-company-logo\.svg/);
   const logo = read('assets/allen-company-logo.svg');
   assert.match(logo, /<path fill="#215732"/, 'ALLEN wordmark uses Allen Company green');
+  assert.deepEqual([...new Set(logo.match(/fill="#[0-9a-fA-F]{6}"/g))], ['fill="#215732"'], 'the whole logo is Allen green');
   assert.doesNotMatch(logo, /<text|font-family/, 'logo lettering is outlined so it renders the same everywhere');
   assert.match(read('assets/styles.css'), /--accent: #215732;/);
   assert.match(html, /\/assets\/msha-emblem\.png/);
