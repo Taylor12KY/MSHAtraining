@@ -1,4 +1,7 @@
 import { getStore } from '@netlify/blobs';
+import { MODULE_REQUIREMENTS } from './module-requirements.mjs';
+
+export { MODULE_REQUIREMENTS };
 
 export const SIGNOFF_KEYS = [
   'siteTraining',
@@ -10,22 +13,6 @@ export const SIGNOFF_KEYS = [
   'taskTraining',
   'form5000_23'
 ];
-
-export const MODULE_REQUIREMENTS = {
-  1: { seconds: 5400, videos: {} },
-  2: { seconds: 7200, videos: { VEOVVx3rDyI: 528, 'QGkT8Ahh1-E': 2409, eEj1JOVu_eY: 850, SN4Sfuhvs2Y: 150, WrnHZK9GhlM: 540, 'F7AOWLOOT-U': 158, TM8DYUKbjsw: 541 } },
-  3: { seconds: 12600, videos: { WTKCluA6lgE: 4077, '106597590': 332, '1JfkPpr6sRM': 408 } },
-  4: { seconds: 7200, videos: { NH7vatxj_t0: 960, yEwFZHVLsso: 326, mSt9lHz22xM: 71, NjHDUhWA6Lo: 682, ZrnWnmhGpQY: 1103, q_4q8lm0tCs: 374, p_vsrhxIlR8: 374 } },
-  5: { seconds: 12600, videos: { _s2x4dmQgjU: 825, GSPRVJsu3_A: 1183, 'qDDg-CbOTmw': 605, Oaxs7EEIp4k: 178, '2cyQ5QTPOek': 622, addOUsx6760: 1498, H2J5MDUAMTk: 1231, oJ834e9wDQ4: 303, DfiBLI8lGM8: 113, Ka9UKa_xYNU: 3676 } },
-  6: { seconds: 10800, videos: { e8mGpQ9W4_w: 999, j9DNL0DnKmU: 686, IGb20ZDbjkY: 2613 } },
-  7: { seconds: 10800, videos: { 'RxyBImZyFb4': 1223, OxOwJC5wHyc: 821, '528dJg0lESM': 122, kjCsEVjRrlg: 1655, eFTnBiAvxxg: 295, Ok2p6cUe_sM: 320, '1u6c7YMgkB8': 357, GN3OBFAVHt4: 149, dIreslbUgwY: 881 } },
-  8: { seconds: 9000, videos: { '1OJUEmUAPmc': 677, CHTJ8i55HUk: 1596, X5r4upNwIGk: 1169, zM3R_1JceWo: 80 } },
-  9: { seconds: 7200, videos: { iX8j7h7bJF4: 866, wal2KP1bbIY: 561, is77KiZ16_o: 712 } },
-  10: { seconds: 12600, videos: { hQiYjxSC9bI: 1939 } },
-  11: { seconds: 7200, videos: { '9wnDBLifDB4': 420, gbaGN7JQoO4: 900, zaliBZlRsaE: 209, G2Hs51QDszc: 188, UD2u9LXREWM: 909, '-wrwD7s9rUE': 242, b7mhJ8viccI: 129 } },
-  12: { seconds: 10800, videos: { '4MjKwOI2LrE': 357, ZHVAmbOBkrk: 379, Km8XxRCuCho: 202, EQ1OPz1p0U4: 332 } },
-  13: { seconds: 1800, videos: {} }
-};
 
 const VALID_MINES = new Set(['Boonesboro Quarry', 'Clover Bottom Quarry', 'Dix River Stone']);
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
@@ -184,15 +171,16 @@ export function trainingSummary(stateCandidate = {}, signoffsCandidate = {}) {
   const state = sanitizeTrainingState(stateCandidate);
   const signoffs = sanitizeSignoffs(signoffsCandidate);
   const completedModules = state.completed.length;
+  const totalModules = Object.keys(MODULE_REQUIREMENTS).length;
   const classroomHours = state.completed.reduce((sum, id) => sum + MODULE_REQUIREMENTS[id].seconds / 3600, 0);
   const signoffsComplete = SIGNOFF_KEYS.every(key => signoffs[key]);
   return {
     completedModules,
-    totalModules: 13,
+    totalModules,
     classroomHours,
-    classroomComplete: completedModules === 13,
+    classroomComplete: completedModules === totalModules,
     signoffsComplete,
-    readyForOperatorReview: completedModules === 13 && signoffsComplete
+    readyForOperatorReview: completedModules === totalModules && signoffsComplete
   };
 }
 

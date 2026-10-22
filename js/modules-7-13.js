@@ -528,7 +528,7 @@ const MODULES_PART_2 = [
   {
     id: 12,
     title: "Accident Prevention & Health/Safety Aspects of Assigned Tasks",
-    hours: 3.0,
+    hours: 2.5,
     objectives: [
       "Apply general accident-prevention principles to daily work",
       "Understand that task training is required before performing new tasks",

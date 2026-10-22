@@ -975,15 +975,12 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "s6Oj2O7P0is": "After ground-control lessons, learn how underground ventilation systems and gas monitoring work together before reviewing the historical metal/nonmetal film.",
   "Mvm4LtNNwxY": "Carry those ventilation principles into the metal/nonmetal Breathe and Live film, then use Granite Mountain for what happens when airflow fails under fire.",
   "kjCsEVjRrlg": "This is not a second Sunshine. Take ventilation reversal, fire loading, and two-way escapeways — not 1917 equipment. Sunshine is device why (Module 3). Sago is command (Module 6). This is ventilation behavior.",
-  "CHTJ8i55HUk": "After seeing why dust is dangerous, learn how sampling helps identify and document respirable exposure.",
   "X5r4upNwIGk": "Then apply the same exposure-control mindset to noise, hearing protection, and conservation-program responsibilities.",
   "zM3R_1JceWo": "Finish the health sequence by practicing the Roll–Pull–Hold method that helps soft foam earplugs provide their intended protection.",
   "is77KiZ16_o": "Move from basic electrical awareness to the controlled isolation of hazardous energy before service or repair.",
   "iX8j7h7bJF4": "Finish with an arc-flash fatality case that shows why qualification, isolation, verification, and safe boundaries are essential.",
   "41K6lWYTjZU": "Start with what underground mine gases are, where they come from, and why they threaten miners.",
   "UIXqBn0Krwc": "Apply those gas concepts to hardrock underground gas-management expectations.",
-  "Vk6BgJ1H4EE": "Review how common toxic gases affect the body and why odor is not a reliable warning.",
-  "DXzYOtwf6Ts": "Connect toxic-gas lessons to oxygen deficiency and atmospheres that can kill quickly.",
   "aLDvPGSXzrU": "Focus on carbon monoxide from combustion, exhaust, fire, and blast fumes.",
   "XpdQJ-DqfPY": "Carry atmospheric awareness into underground fire and explosion prevention—how mines protect people when air quality fails.",
   "lOlGUa3iIwA": "Finish with how the company-style four-gas detector works—what it shows, what it cannot show, and that alarms mean withdraw and notify.",
@@ -993,8 +990,27 @@ const VIDEO_SEQUENCE_TRANSITIONS = {
   "UD2u9LXREWM": "Finish with NIOSH handling of explosives underground, including blast fumes and waiting for a qualified person to clear the area.",
   "Km8XxRCuCho": "With attention and distraction in mind, consider the worker's personal role in recognizing and managing risk.",
   "EQ1OPz1p0U4": "Now clarify that personal responsibility includes looking beyond minimum compliance when a hazard remains uncontrolled.",
-  "4MjKwOI2LrE": "Connect that principle to the human consequences one person's shortcut can create for coworkers and family."
-
+  "4MjKwOI2LrE": "Connect that principle to the human consequences one person's shortcut can create for coworkers and family.",
+  "DxB7g_y15FI": "From company-town conditions, move to the 1968 Farmington No. 9 explosion and see how one disaster pushed Congress toward modern federal mine-safety law.",
+  "n1pqUaXdJ6k": "Stay with Farmington, now through the families and survivors. Keep the human cost in mind as the reason hazard reporting and miners' rights are protected today.",
+  "WTKCluA6lgE": "The short clip set the scene. Now study the full Sunshine case: delayed evacuation, smoke in the intakes, unclear command, and inadequate self-rescue preparation.",
+  "aMfhfqh8uzw": "With travel, haulage, and conveyor hazards covered, turn to how people underground stay in contact during normal work and in an emergency.",
+  "1JJQiwtQcWY": "Narrow communications to leaky-feeder and mine radio coverage: why it exists and why you report dead spots or damaged equipment.",
+  "LQIgql3q6Ek": "After the introduction to preventing emergencies, review past mine disasters for what kept people alive: known escapeways, maps, communication, and self-rescue.",
+  "vWssDu6TkXo": "Turn those disaster lessons into personal readiness: know your escapeways, your role, and the emergency plan before anything goes wrong.",
+  "e8mGpQ9W4_w": "Fire is one of the most likely underground emergencies. Learn ignition prevention, early warning, prompt reporting, the limits of initial response, and when to evacuate.",
+  "OxOwJC5wHyc": "With limestone ground-control basics in mind, practice the question behind every examination: what could happen, who is exposed, and what control belongs in place.",
+  "HiakyMAiiaE": "Leave the highwall and return underground: identify ventilation controls such as stoppings, doors, and curtains, and never alter one without authorization.",
+  "gk-hCHk1z7o": "After seeing why dust is dangerous, learn why a sampling pump may be placed on you and what it is collecting. Wearer awareness only, not sampler qualification.",
+  "EebrjWb6QeY": "Dust is one airborne exposure underground; diesel exhaust is another. Recognize diesel particulate matter (DPM) and the controls that limit it.",
+  "RTG77LCfQvU": "From airborne exposures, move to chemical products on site: read GHS labels and find safety data sheets under Hazard Communication.",
+  "8OK6XXgtUyc": "Build on basic electrical awareness with mining-specific steps, including respecting ground-fault protection and reporting damaged equipment.",
+  "dIxfdGSXEQ0": "Apply those steps to trailing cables: recognize damage and report it. Splicing and repair are qualified-person work only.",
+  "7LEqWoK_aS0": "After the mining first-aid overview, focus on life-threatening bleeding with the official Stop the Bleed steps: alert, find the bleeding, pressure, packing, tourniquet.",
+  "u3nrDb5XjSI": "Watch a tourniquet applied step by step. Hands-on practice with the instructor is still required.",
+  "8XpNhrMrggE": "With the JSA form in mind, look at the same idea as a job hazard analysis: break the task into steps, spot hazards, and choose controls with the supervisor.",
+  "U5p1GdnzEHg": "Hear why an effective JSA is a shared worker and supervisor responsibility, not paperwork.",
+  "lS7pwuNghq4": "Finish with a mining JSA case study that shows task analysis catching hazards before the work begins."
 };
 
 const MODULE_VIDEO_SCOPE = {
@@ -1081,7 +1097,6 @@ const VIDEO_TRAINING_GUIDANCE = {
     focus: "Connect invisible respirable dust exposure to long-term disease and the importance of engineering controls and correct PPE.",
     scope: "This is a generic dust-disease film. Our exposures are limestone silica and DPM. An N95 is not a W65 and does not protect against mine gases or oxygen deficiency."
   },
-  "CHTJ8i55HUk": { focus: "Understand why respirable-dust sampling is performed, how samples represent exposure, and why equipment must not be disturbed." },
   "X5r4upNwIGk": { focus: "Look for noise-exposure limits, hearing-protection selection and use, audiometric monitoring, and conservation-program responsibilities." },
   "zM3R_1JceWo": {
     focus: "Watch the complete Roll–Pull–Hold sequence and notice that clean hands, pulling the ear up and back, correct insertion depth, and holding during expansion all affect the seal.",
@@ -1192,14 +1207,6 @@ const VIDEO_TRAINING_GUIDANCE = {
   "dIreslbUgwY": {
     focus: "Look for roof and rib warning signs, examination practices, plan requirements, support functions, and the principle of staying out from under unsupported or hazardous ground.",
     scope: "This presentation centers on underground coal mining. Do not apply its support systems or retreat-mining methods as local procedure; use only the current stone-mine ground-control and ventilation plans."
-  },
-  "Vk6BgJ1H4EE": {
-    focus: "Identify health effects of common toxic gases such as carbon monoxide and hydrogen sulfide, and why odor is not a reliable warning.",
-    scope: "WorkSafeBC confined-space series used for gas-hazard principles. Stone-mine exposures, detectors, and response follow MSHA rules, the site plan, and supervisor atmospheric testing—not confined-space entry qualification."
-  },
-  "DXzYOtwf6Ts": {
-    focus: "Explain how oxygen deficiency and related atmospheric hazards can become deadly quickly, and why the correct response is withdraw and report.",
-    scope: "Awareness principles from a confined-space series. Do not treat it as authorization to enter, test, or rescue in a questionable atmosphere."
   },
   "aLDvPGSXzrU": {
     focus: "Recognize carbon monoxide sources and effects, and that CO requires controls and instrument detection rather than sensory warning.",

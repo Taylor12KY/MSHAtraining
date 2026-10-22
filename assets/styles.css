@@ -983,7 +983,7 @@
 .skip-to-content {
   position: absolute;
   left: 12px;
-  top: 12px;
+  top: 0;
   z-index: 10000;
   padding: 10px 14px;
   border-radius: 8px;
@@ -991,11 +991,11 @@
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  transform: translateY(-120%);
+  transform: translateY(-150%);
   transition: transform 0.15s ease;
 }
 .skip-to-content:focus {
-  transform: translateY(0);
+  transform: translateY(12px);
   outline: 3px solid #f0c14b;
   outline-offset: 2px;
 }
