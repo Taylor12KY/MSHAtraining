@@ -1234,3 +1234,8 @@ body.app-dialog-open { overflow: hidden; }
   .module-outline-list { columns: 1; }
   .module-outline-return { right: 12px; bottom: 12px; }
 }
+
+/* Site emergency card: blanks filled in with the instructor */
+.emergency-card td.emergency-card-blank { min-width: 260px; height: 38px; border-bottom: 1px dashed #a9c9b3; background: #fafdfb; }
+.emergency-card td:first-child { width: 48%; }
+@media print { .emergency-card td.emergency-card-blank { height: 46px; } }

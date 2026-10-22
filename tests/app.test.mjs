@@ -651,3 +651,23 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.match(instructorAuth, /import \{ buildRecordsCsv, recordsExportFilename \} from '\.\/records-export\.mjs';/);
   assert.match(instructorRecords, /modules: moduleProgress\(record\.state\)/);
 });
+
+test('site orientations include MSHA public-record lessons and an instructor-completed emergency card', () => {
+  const context = {};
+  new vm.Script(`${siteContent}\nthis.sites = SITE_CONTENT; this.records = SITE_SAFETY_RECORDS;`).runInNewContext(context);
+  const expectedIds = { 'Boonesboro Quarry': ['15-00006'], 'Clover Bottom Quarry': ['15-00112', '15-19898'], 'Dix River Stone': ['15-18389'] };
+  for (const [site, ids] of Object.entries(expectedIds)) {
+    const record = context.records[site];
+    assert.deepEqual([...record.mines].map(mine => mine.id), ids, `${site} mine IDs`);
+    assert.ok(record.cases.length >= 3 && record.citations.length >= 4, `${site} needs injury cases and citations`);
+    for (const [standard] of record.citations) assert.match(standard, /^5[67]\.\d+/, `${site} citation ${standard} must name a 30 CFR Part 56/57 standard`);
+    const content = context.sites[site].content;
+    assert.match(content, new RegExp(`${site} in MSHA's Public Records`));
+    assert.match(content, /Emergency Card/);
+    assert.match(content, /Fill in every line with your instructor using the current escape and evacuation plan/);
+    assert.match(content, /emergency-card-blank/);
+    assert.match(content, /mine-data-retrieval-system/);
+  }
+  assert.match(context.sites['Clover Bottom Quarry'].content, /Which mine I am in today: old mine \(#1, 15-00112\) or new mine \(#2, 15-19898\)/);
+  assert.match(context.sites['Dix River Stone'].content, /Level 1 or Level 2/);
+});
