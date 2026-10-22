@@ -168,6 +168,25 @@ export function mergeTrainingStates(previousCandidate = {}, incomingCandidate = 
   return sanitizeTrainingState(merged, { trustCompleted: true });
 }
 
+// Per-module detail for instructor views and exports, from server-written state.
+export function moduleProgress(stateCandidate = {}) {
+  const state = sanitizeTrainingState(stateCandidate, { trustCompleted: true });
+  return Object.entries(MODULE_REQUIREMENTS).map(([rawId, requirement]) => {
+    const id = Number(rawId);
+    const videos = Object.values(state.videoProgress[id] || {});
+    return {
+      id,
+      completed: state.completed.includes(id),
+      seatSeconds: state.timerElapsed[id] || 0,
+      requiredSeconds: requirement.seconds,
+      videosComplete: videos.filter(video => video.complete).length,
+      videosRequired: videos.length,
+      bestScore: Number.isFinite(state.scores[id]) ? state.scores[id] : null,
+      quizAttempts: state.quizAttempts[id].length
+    };
+  });
+}
+
 export function sanitizeSignoffs(candidate = {}) {
   return Object.fromEntries(SIGNOFF_KEYS.map(key => [key, candidate[key] === true]));
 }
