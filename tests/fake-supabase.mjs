@@ -60,6 +60,15 @@ export function createFakeSupabase() {
         return id ? { data: { user: users.get(id) }, error: null } : { data: { user: null }, error: new Error('invalid token') };
       },
       admin: {
+        async generateLink({ type, email, options = {} }) {
+          const existing = [...users.values()].find(user => user.email === email);
+          if (type === 'invite' && existing) return { data: null, error: new Error('A user with this email address has already been registered') };
+          if (type === 'recovery' && !existing) return { data: null, error: new Error('User not found') };
+          const user = existing || addUser(email, { fullName: options.data?.full_name || '' });
+          const link = `https://project.supabase.co/auth/v1/verify?type=${type}&token=t${client.links.length}&redirect_to=${encodeURIComponent(options.redirectTo || '')}`;
+          client.links.push({ type, email, options, link });
+          return { data: { user, properties: { action_link: link } }, error: null };
+        },
         async inviteUserByEmail(email, options = {}) {
           if ([...users.values()].some(user => user.email === email)) return { data: null, error: new Error('A user with this email address has already been registered') };
           const user = addUser(email, { fullName: options.data?.full_name || '' });
@@ -68,7 +77,8 @@ export function createFakeSupabase() {
         }
       }
     },
-    invites: []
+    invites: [],
+    links: []
   };
   return { client, tables, addUser };
 }

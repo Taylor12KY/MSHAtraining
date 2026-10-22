@@ -488,7 +488,14 @@ function selectInstructorRecord(recordId) {
       <label for="instructor-record-notes">Instructor notes</label>
       <textarea id="instructor-record-notes" maxlength="4000" rows="4" placeholder="Document dates, locations, demonstrations, or follow-up needed.">${escapeHtml(record.instructorNotes || '')}</textarea>
       <div class="record-save-row"><button class="btn" type="submit">Save Verified Signoffs</button><span id="record-save-status" role="status"></span></div>
-    </form>`;
+    </form>
+    <div class="record-account-access">
+      <h4>Account access</h4>
+      <p>If this person cannot sign in (forgot their password, or their account was moved from the old system), create a one-time link for them to choose a new password.</p>
+      <button class="btn btn-outline btn-sm" type="button" id="record-create-password-link">Create password link</button>
+      <div class="share-link" id="record-password-link" role="status"></div>
+    </div>`;
+  detail.querySelector('#record-create-password-link')?.addEventListener('click', () => createPasswordLink(record.learner.id));
   detail.querySelector('#instructor-signoff-form')?.addEventListener('submit', saveInstructorSignoffs);
 }
 
@@ -563,23 +570,57 @@ function downloadInstructorRecords() {
   setRecordsStatus(`Downloaded ${instructorRecords.length} trainee record${instructorRecords.length === 1 ? '' : 's'}.`);
 }
 
+// Shows a one-time account link with a copy button. Links are created instead of emails
+// because the project has no email server; the instructor sends the link directly.
+function showShareLink(container, message, link) {
+  if (!container) return;
+  container.innerHTML = `<p>${escapeHtml(message)}</p>
+    <div class="share-link-row">
+      <input class="share-link-input" type="text" readonly value="${escapeHtml(link)}" aria-label="One-time account link">
+      <button class="btn btn-sm" type="button">Copy link</button>
+    </div>`;
+  const input = container.querySelector('input');
+  container.querySelector('button').addEventListener('click', async () => {
+    input.select();
+    try { await navigator.clipboard.writeText(link); } catch { document.execCommand('copy'); }
+    container.querySelector('button').textContent = 'Copied';
+  });
+}
+
+async function createPasswordLink(accountId) {
+  const output = byId('record-password-link');
+  if (output) output.textContent = 'Creating link…';
+  try {
+    const body = await authenticatedRequest('/api/instructor-password-link', {
+      method: 'POST',
+      body: JSON.stringify({ accountId })
+    });
+    showShareLink(output, body.message, body.link);
+  } catch (error) {
+    if (output) output.textContent = errorMessage(error, 'The link could not be created.');
+  }
+}
+
 async function inviteAccount(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
   const status = byId('instructor-invite-status');
+  const linkOutput = byId('instructor-invite-link');
+  if (linkOutput) linkOutput.innerHTML = '';
   const email = byId('instructor-invite-email').value.trim();
   const fullName = byId('instructor-invite-name').value.trim();
   const role = byId('instructor-invite-role').value === 'instructor' ? 'instructor' : 'learner';
   button.disabled = true;
-  if (status) status.textContent = 'Sending invitation…';
+  if (status) status.textContent = 'Creating account…';
   try {
     const body = await authenticatedRequest('/api/instructor-invite', {
       method: 'POST',
       body: JSON.stringify({ email, fullName, role })
     });
     form.reset();
-    if (status) status.textContent = body.message || `Invitation sent to ${email}.`;
+    if (status) status.textContent = '';
+    showShareLink(linkOutput, body.message, body.link);
   } catch (error) {
     if (status) status.textContent = errorMessage(error, 'The invitation could not be sent.');
   } finally {

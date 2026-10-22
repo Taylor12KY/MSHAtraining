@@ -65,7 +65,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 
 Sign-in and training records live in the dedicated Supabase project **msha-training** (`igxvqobqcdykfzhsjnyd`, us-east-2), used only by this site.
 
-- **Accounts:** Supabase Auth. Trainees can create their own learner account from the start page (**Create learner account**), confirmed by email; set `LEARNER_SELF_SIGNUP` in `src/supabase-config.mjs` to `false` (and turn off **Allow new users to sign up** in Supabase) to go invitation-only. Instructors invite trainees or other instructors from **Trainee Records → Invite a trainee or instructor**; the person chooses a password from the email link. Instructor access is only ever by invitation.
+- **Accounts:** Supabase Auth. Trainees can create their own learner account from the start page (**Create learner account**) and are signed in immediately (email confirmation is off because the project has no email server); set `LEARNER_SELF_SIGNUP` in `src/supabase-config.mjs` to `false` (and turn off **Allow new users to sign up** in Supabase) to go invitation-only. Instructors create accounts from **Trainee Records → Invite a trainee or instructor** and get a **one-time link** to send the person (text or email); the person opens it and chooses a password. For anyone who can't sign in (forgotten password, or migrated from Netlify), the instructor opens their record and uses **Create password link**. Every link is audit-logged. Instructor access is only ever by invitation.
 - **Roles:** `public.profiles.role` is `learner` or `instructor`. New accounts are always learners; only the server (invite endpoint) or SQL can promote someone. Users cannot change their own role.
 - **Records:** `public.training_records` (progress, signoffs, notes; versioned to prevent lost updates) and `public.audit_events` (append-only, even for the server). Row-level security lets a signed-in user read only their own profile and record; all writes go through the Netlify functions, which validate and merge progress.
 
@@ -81,9 +81,9 @@ Netlify stores secret values per deploy context (production, deploy previews, br
 
 ### Supabase Auth settings (dashboard)
 
-1. **Authentication → Sign In / Providers:** keep **Allow new users to sign up** on while `LEARNER_SELF_SIGNUP` is `true` (turn it off for invitation-only), keep **Confirm email** on, and set minimum password length to 8 or more.
+1. **Authentication → Sign In / Providers:** keep **Allow new users to sign up** on while `LEARNER_SELF_SIGNUP` is `true` (turn it off for invitation-only), turn **Confirm email** off (no email server), and set minimum password length to 8 or more.
 2. **Authentication → URL Configuration:** set **Site URL** to the production URL and add `https://*--mshatrain.netlify.app/**` (deploy previews) to **Redirect URLs**.
-3. **Authentication → Emails → SMTP Settings:** connect a real email sender (for example the company mail server or SendGrid). Supabase's built-in sender only delivers to project team members and a few emails per hour, so invites and password resets will not reach trainees without it.
+3. **Email (optional):** the site works without an email server: account and password links are created for instructors to share. **Forgot password?** on the start page sends email, so it only works for Supabase team members until SMTP is connected under **Authentication → Emails → SMTP Settings**; until then, trainees ask an instructor for a password link.
 
 ### Migrating from Netlify Identity
 
@@ -96,7 +96,7 @@ curl -X POST -H "Authorization: Bearer $MIGRATION_TOKEN" https://<site>/.netlify
 curl -X POST -H "Authorization: Bearer $MIGRATION_TOKEN" "https://<site>/.netlify/functions/migrate-from-netlify?apply=1"
 ```
 
-Accounts are matched by email (re-running is safe), instructor roles carry over, and progress, signoffs, notes, and audit history are copied. Passwords cannot be copied: each person uses **Forgot password?** once. Afterward, delete `MIGRATION_TOKEN` and disable Netlify Identity.
+Accounts are matched by email (re-running is safe), instructor roles carry over, and progress, signoffs, notes, and audit history are copied. Passwords cannot be copied: an instructor creates a **password link** for each migrated person from their record. Afterward, delete `MIGRATION_TOKEN` and disable Netlify Identity.
 
 ## Changing modules or videos
 

@@ -82,7 +82,11 @@ export async function signup(email, password, metadata = {}) {
     options: { data: { full_name: metadata.full_name || '' }, emailRedirectTo: `${window.location.origin}/` }
   });
   if (error) throw authError(error, 'The learner account could not be created.');
-  if (data.session) return toAppUser(data.session);
+  // With "Confirm email" off, Supabase signs the new trainee in immediately.
+  if (data.session) {
+    const user = await toAppUser(data.session);
+    return { ...user, confirmedAt: user.confirmedAt || new Date().toISOString() };
+  }
   return { id: data.user?.id || '', email, name: metadata.full_name || email, roles: ['learner'], confirmedAt: null };
 }
 
