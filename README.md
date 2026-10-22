@@ -48,13 +48,28 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 | `src/instructor-auth.js` | Netlify Identity learner/instructor account client |
 | `netlify/functions/` | Authenticated progress and instructor record APIs |
 | `netlify/lib/training-records.mjs` | Server validation, monotonic merging, and audit storage |
+| `netlify/lib/module-requirements.mjs` | **Generated** per-module seat time and required videos used by the server |
+| `scripts/generate-requirements.mjs` | Builds `module-requirements.mjs` from `js/modules-*.js` and `js/video-library.js` |
+| `scripts/build.mjs` | Builds `dist/`, stamps content-hash cache busters, regenerates server requirements |
+| `.github/workflows/ci.yml` | Runs tests and the build on every pull request |
 | `README.md` | This file |
+
+## Changing modules or videos
+
+The server re-checks every learner's progress against the same module hours and required-video list the browser uses. Those requirements are **generated**, so they cannot drift:
+
+1. Edit module hours in `js/modules-*.js` or videos in `js/video-library.js` (add a `VIDEO_SEQUENCE_TRANSITIONS` line and a `VIDEO_TRAINING_GUIDANCE` entry for each new video).
+2. Run `pnpm run requirements` and commit the updated `netlify/lib/module-requirements.mjs`.
+3. Run `pnpm test`. CI fails if the generated file is stale, if module hours do not total 32, or if any video lacks guidance or a transition.
+
+Script and stylesheet `?v=` values in `index.html` are placeholders; the build replaces them with content hashes, so there is no version string to bump by hand.
 
 ## How to run locally
 
 1. Download or clone this repo.
-2. Run the Netlify development environment or deploy to Netlify; Identity and Blobs require the Netlify runtime.
-3. Accept an instructor-issued learner invitation, sign in, select name + work location, and begin training.
+2. Run `pnpm install`, then `pnpm test` and `pnpm run build`.
+3. Run the Netlify development environment or deploy to Netlify; Identity and Blobs require the Netlify runtime.
+4. Accept an instructor-issued learner invitation, sign in, select name + work location, and begin training.
 
 ## Completion records
 
@@ -67,8 +82,8 @@ Other accounts can help build this:
 1. Fork or request collaborator access on this repo.
 2. Create a branch for your change (e.g. `site-content-clover-bottom`).
 3. Edit `index.html` (site orientation lives in the `SITE_CONTENT` object).
-4. Open a pull request with a short description of what changed.
-5. After merge, redeploy `index.html` to Netlify (or connected host).
+4. Run `pnpm test` and open a pull request with a short description of what changed.
+5. After merge, Netlify rebuilds from `main` (`dist/` is a build output and is not committed).
 
 ### Suggested next work
 

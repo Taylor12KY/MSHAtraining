@@ -203,7 +203,7 @@ const MODULES_PART_1 = [
   {
     id: 4,
     title: "Entering/Leaving the Mine, Transportation & Communications",
-    hours: 2.0,
+    hours: 2.5,
     objectives: [
       "Describe check-in / check-out and mantrip / conveyance rules",
       "Identify communication systems and warning signals used at the mine",
