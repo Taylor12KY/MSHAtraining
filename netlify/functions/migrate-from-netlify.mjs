@@ -51,8 +51,10 @@ export const handler = async (event, context) => {
 
   const apply = event.queryStringParameters?.apply === '1';
   connectLambda(event);
-  const records = getStore({ name: 'msha-training-records', consistency: 'strong' });
-  const audit = getStore({ name: 'msha-training-audit', consistency: 'strong' });
+  // Classic functions cannot use strong consistency; the old stores no longer receive
+  // writes once the site runs on Supabase, so the default (eventual) reads are complete.
+  const records = getStore({ name: 'msha-training-records' });
+  const audit = getStore({ name: 'msha-training-audit' });
   const admin = supabaseAdmin();
 
   const netlifyUsers = await netlifyIdentityUsers(identity);

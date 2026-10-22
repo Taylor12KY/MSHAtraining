@@ -690,4 +690,5 @@ test('Netlify accounts and records migrate to Supabase safely', () => {
   assert.match(migration, /legacy_netlify_id: netlifyUser\.id/);
   assert.match(migration, /alreadyCopied\.has\(netlifyUser\.id\)/, 're-running skips copied records');
   assert.match(migration, /migratedFrom: 'netlify-blobs'/);
+  assert.doesNotMatch(migration, /consistency: 'strong'/, 'classic functions cannot use strong Blobs consistency');
 });
