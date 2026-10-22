@@ -57,7 +57,11 @@ test('Netlify build uses the repository package manager and bundles modern funct
 });
 
 test('branded learner experience keeps regulatory context and a clear next action', () => {
-  assert.match(html, /\/assets\/allen-company-logo\.webp/);
+  assert.match(html, /\/assets\/allen-company-logo\.svg/);
+  const logo = read('assets/allen-company-logo.svg');
+  assert.match(logo, /<path fill="#215732"/, 'ALLEN wordmark uses Allen Company green');
+  assert.doesNotMatch(logo, /<text|font-family/, 'logo lettering is outlined so it renders the same everywhere');
+  assert.match(read('assets/styles.css'), /--accent: #215732;/);
   assert.match(html, /\/assets\/msha-emblem\.png/);
   assert.doesNotMatch(html, /data:image\/(webp|png);base64,/);
   assert.match(html, /The Allen Company — Serving Kentucky since 1939/);
