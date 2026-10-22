@@ -29,10 +29,10 @@ await build({
   legalComments: 'none'
 });
 
-// Stamp every local CSS/JS reference with a hash of the built file so browsers
+// Stamp every local CSS/JS/image reference with a hash of the built file so browsers
 // pick up a deploy immediately instead of mixing cached and fresh scripts.
 async function stampAssetVersions(html) {
-  const pattern = /(href|src)="\/((?:assets|js)\/[^"?]+\.(?:css|js))\?v=[^"]*"/g;
+  const pattern = /(href|src)="\/((?:assets|js)\/[^"?]+\.(?:css|js|svg|png|webp|jpe?g))\?v=[^"]*"/g;
   const versions = new Map();
   for (const [, , file] of html.matchAll(pattern)) {
     if (!versions.has(file)) {
