@@ -60,6 +60,7 @@ test('branded learner experience keeps regulatory context and a clear next actio
   assert.match(html, /\/assets\/allen-company-logo\.svg/);
   const logo = read('assets/allen-company-logo.svg');
   assert.match(logo, /<path fill="#215732"/, 'ALLEN wordmark uses Allen Company green');
+  assert.deepEqual([...new Set(logo.match(/fill="#[0-9a-fA-F]{6}"/g))], ['fill="#215732"'], 'the whole logo is Allen green');
   assert.doesNotMatch(logo, /<text|font-family/, 'logo lettering is outlined so it renders the same everywhere');
   assert.match(read('assets/styles.css'), /--accent: #215732;/);
   assert.match(html, /\/assets\/msha-emblem\.png/);
@@ -601,4 +602,51 @@ test('loaded required-video players set their note without referencing an undefi
   assert.ok(loader.length > 0);
   assert.doesNotMatch(loader, /: \(meta\.provider === 'vimeo'/);
   assert.match(loader, /: \(provider === 'vimeo'/);
+});
+
+test('instructors can download every trainee record as a spreadsheet', async () => {
+  const exporter = await import(pathToFileURL(path.join(root, 'src/records-export.mjs')).href);
+  const storedState = {
+    name: 'Pat Miner',
+    mine: 'Dix River Stone',
+    completed: [1],
+    scores: { 1: 100, 2: 80 },
+    timersDone: { 1: true },
+    timerElapsed: { 1: 5400, 2: 600 },
+    scrollDone: { 1: true },
+    quizAttempts: { 1: [{ at: '2026-10-01T12:00:00.000Z', score: 100 }], 2: [{ at: '2026-10-02T12:00:00.000Z', score: 80 }] }
+  };
+  const modules = recordLibrary.moduleProgress(storedState);
+  assert.equal(modules.length, 13);
+  assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 0, bestScore: 100, quizAttempts: 1 });
+  assert.equal(modules[1].videosRequired, 8);
+
+  const csv = exporter.buildRecordsCsv([{
+    learner: { id: 'u1', name: '=HYPERLINK("http://evil")', email: 'pat@example.com' },
+    mine: 'Dix River Stone',
+    startedAt: '2026-10-01T12:00:00.000Z',
+    updatedAt: '2026-10-02T12:00:00.000Z',
+    summary: recordLibrary.trainingSummary(storedState, { w65Practice: true }),
+    signoffs: { w65Practice: true },
+    signoffDetails: { w65Practice: { value: true, at: '2026-10-02T15:00:00.000Z', instructorName: 'Jane Instructor' } },
+    instructorNotes: 'Line one, with comma\nLine two "quoted"',
+    modules
+  }], { 1: 'Site Orientation' });
+
+  assert.ok(csv.startsWith('﻿'), 'UTF-8 BOM so Excel reads accents');
+  const [header, row] = csv.slice(1).split('\r\n');
+  assert.match(header, /^Trainee,Email,Work location,/);
+  assert.match(header, /M1 Site Orientation – status/);
+  assert.match(header, /Module 13 – seat time \(min\)/);
+  assert.match(row, /^"'=HYPERLINK\(""http:\/\/evil""\)",/, 'formula-looking names are neutralized');
+  assert.match(row, /,1 of 13,1\.5,No,No,No,/);
+  assert.match(row, /,Yes,Jane Instructor,2026-10-02 \d\d:00,/);
+  assert.match(row, /"Line one, with comma\nLine two ""quoted"""/);
+  assert.match(row, /,Complete,100,1,90 of 90,,In progress,80,1,10 of 120,0 of 8,Not started,/);
+  assert.doesNotMatch(row, /\b\d+\/\d+\b/, 'no slash counts that Excel would turn into dates');
+  assert.match(exporter.recordsExportFilename(new Date(2026, 9, 22)), /^msha-part48-trainee-records-2026-10-22\.csv$/);
+
+  assert.match(html, /id="instructor-records-download"/);
+  assert.match(instructorAuth, /import \{ buildRecordsCsv, recordsExportFilename \} from '\.\/records-export\.mjs';/);
+  assert.match(instructorRecords, /modules: moduleProgress\(record\.state\)/);
 });

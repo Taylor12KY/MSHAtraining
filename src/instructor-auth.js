@@ -9,6 +9,7 @@ import {
   signup,
   updateUser
 } from '@netlify/identity';
+import { buildRecordsCsv, recordsExportFilename } from './records-export.mjs';
 
 const isInstructorRoute = document.body.dataset.instructorPreview === 'true';
 let inviteToken = '';
@@ -540,6 +541,27 @@ async function openInstructorRecords() {
   }
 }
 
+function downloadInstructorRecords() {
+  if (!instructorRecords.length) {
+    setRecordsStatus('There are no trainee records to export yet.', true);
+    return;
+  }
+  // MODULES comes from the course content scripts loaded ahead of this bundle.
+  const moduleTitles = typeof MODULES !== 'undefined'
+    ? Object.fromEntries(MODULES.map(module => [module.id, module.title]))
+    : {};
+  const csv = buildRecordsCsv(instructorRecords, moduleTitles);
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = recordsExportFilename();
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  setRecordsStatus(`Downloaded ${instructorRecords.length} trainee record${instructorRecords.length === 1 ? '' : 's'}.`);
+}
+
 function closeInstructorRecords() {
   const modal = byId('instructor-records-modal');
   modal?.classList.add('hidden');
@@ -566,6 +588,7 @@ function bindAuthUI() {
   byId('learner-sign-out')?.addEventListener('click', signOutAccount);
   byId('instructor-open-records')?.addEventListener('click', openInstructorRecords);
   byId('instructor-records-close')?.addEventListener('click', closeInstructorRecords);
+  byId('instructor-records-download')?.addEventListener('click', downloadInstructorRecords);
 }
 
 async function initializeAuthentication() {

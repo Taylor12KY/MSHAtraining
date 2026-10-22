@@ -2,6 +2,7 @@ import { getUser } from '@netlify/identity';
 import {
   appendAuditEvent,
   learnerName,
+  moduleProgress,
   recordKey,
   recordsStore,
   rolesFor,
@@ -30,6 +31,7 @@ function publicRecord(record) {
     startedAt: record.state?.startedAt || null,
     scores: record.state?.scores || {},
     summary: record.summary || trainingSummary(record.state, record.signoffs),
+    modules: moduleProgress(record.state),
     signoffs: record.signoffs || {},
     signoffDetails: record.signoffDetails || {},
     instructorNotes: record.instructorNotes || '',

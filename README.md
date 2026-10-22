@@ -36,6 +36,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 - Current MSHA silica and NIOSH mining heat-stress learning material
 - Invitation-only learner accounts with server-side progress and local recovery backup
 - Instructor-only trainee records, verification signoffs, and server-time audit events
+- Instructor spreadsheet export (CSV for Excel): one row per trainee with progress, hours, readiness, every signoff with verifier and date, notes, and per-module status, best quiz score, attempts, seat time, and videos
 - Downloadable trainee progress records tied to the authenticated account
 - Printable certificate when all modules are complete
 
@@ -46,6 +47,7 @@ The production copy is often hosted on **Netlify** as `index.html`. After edits 
 | `index.html` | App shell and learner/instructor interfaces |
 | `js/` | Training content, videos, quizzes, and progress gates |
 | `src/instructor-auth.js` | Netlify Identity learner/instructor account client |
+| `src/records-export.mjs` | Builds the instructor trainee-records spreadsheet (CSV) |
 | `netlify/functions/` | Authenticated progress and instructor record APIs |
 | `netlify/lib/training-records.mjs` | Server validation, monotonic merging, and audit storage |
 | `netlify/lib/module-requirements.mjs` | **Generated** per-module seat time and required videos used by the server |
