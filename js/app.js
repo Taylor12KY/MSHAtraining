@@ -2293,7 +2293,7 @@ function updateProgressUI(id, totalSec) {
       fillEl.style.width = '100%';
       fillEl.parentElement.setAttribute('aria-valuenow', '100');
     }
-    if (metaEl) metaEl.innerHTML = '<span class="ok">✓ Seat time and content gates bypassed for demonstration</span> &nbsp;·&nbsp; <span class="wait">Video controls remain non-seekable</span>';
+    if (metaEl) metaEl.innerHTML = '<span class="ok">✓ Seat time and content gates bypassed for demonstration</span> &nbsp;·&nbsp; <span class="preview-note">Video controls remain non-seekable</span>';
     updateQuizButton(id);
     return;
   }
@@ -2427,7 +2427,7 @@ function openModule(id) {
   if (!state.scrollDone) state.scrollDone = {};
   if (!state.timersDone) state.timersDone = {};
 
-  let html = '<div class="card"><strong>Learning Objectives</strong><ul style="margin-top:8px;">';
+  let html = '<div class="card objectives-card"><strong>Learning Objectives</strong><ul>';
   m.objectives.forEach(o => { html += '<li>' + o + '</li>'; });
   html += '</ul></div>';
   if (m.instructorLed) {
