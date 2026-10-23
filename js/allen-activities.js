@@ -89,53 +89,107 @@ const ALLEN_ACTIVITIES = {
     "id": "M1-g",
     "type": "find_the_hazard",
     "minutes": 5,
-    "prompt": "Name these five landmarks at your own site. Real site photos are shown for Dix River Stone and Clover Bottom where we have them; the rest are still illustrated stand-ins.",
+    "prompt": "Name these five landmarks at your own site. Real photos from your site are shown where we have them; anything not pictured is still an illustrated stand-in.",
     "count": 5,
     "photoPending": true,
     "answer": [
      "Tag board",
      "Scale house",
-     "Breakroom (SDS binder)",
+     "Breakroom (SDS binder or SDS station)",
      "Eyewash station",
      "Your gathering point"
     ],
-    "photoCoverage": "Photos so far: Dix River Stone tag board (breakroom), explosive magazines, ANFO trailer and fuel tank; Clover Bottom tag board. Still pending: Boonesboro, scale houses, eyewash stations and the other gathering points.",
+    "photoCoverage": "Photos cover: the tag board at all three sites; Boonesboro breakroom (PPE sign, contractor tag board, first aid cabinet and SDS station) and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
     "photos": [
      {
-      "src": "/media/photos/allen-drs-tag-board.jpg",
-      "site": "Dix River Stone",
-      "alt": "Tag board with OUT, IN, OUT columns and brass tags beside a time clock on a tiled breakroom wall",
-      "answer": "Tag board in the breakroom (also the Dix River gathering point)"
+      "src": "/media/photos/allen-bbq-tag-board-ppe-sign.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Breakroom tag board labeled IN and OUT with brass tags, under a red sign: before you leave this room make sure you have safety glasses, hard hat, hi-vis, self-rescuer, brass tag, any other required PPE",
+      "answer": "Tag board in the breakroom. The sign over it: before you leave, have your safety glasses, hard hat, hi-vis, self-rescuer, brass tag and any other required PPE."
      },
      {
-      "src": "/media/photos/allen-drs-magazine-1.jpg",
-      "site": "Dix River Stone",
-      "alt": "White steel box on the quarry floor by the highwall with a red fire extinguisher stand beside it",
-      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)"
+      "src": "/media/photos/allen-bbq-contractor-tag-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Second breakroom tag board labeled IN, CONTRACTORS and OUT with numbered pegs and brass tags, clipboard below",
+      "answer": "Contractor tag board in the breakroom (IN / CONTRACTORS / OUT)."
      },
      {
-      "src": "/media/photos/allen-drs-magazine-2.jpg",
-      "site": "Dix River Stone",
-      "alt": "Second white steel box with a hinged, latched door in front of the highwall, red extinguisher stand at left",
-      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)"
+      "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "First aid cabinet above a yellow SDS station holder on the breakroom wall",
+      "answer": "Breakroom first aid cabinet and SDS station."
      },
      {
-      "src": "/media/photos/allen-drs-anfo-trailer.jpg",
-      "site": "Dix River Stone",
-      "alt": "White trailer with an orange placard parked at an underground heading, two orange cones in front",
-      "answer": "ANFO trailer (cones mean keep clear; no smoking or flames within 50 ft)"
+      "src": "/media/photos/allen-bbq-l2-fuel-tank.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Long white diesel tank underground on Level 2 with yellow bollards and red fire extinguisher stands at each end",
+      "answer": "Level 2 diesel fuel tank (no smoking or open flames; extinguishers on the stands)."
      },
      {
-      "src": "/media/photos/allen-drs-fuel-tank.jpg",
-      "site": "Dix River Stone",
-      "alt": "Horizontal white tank marked NO OPEN FLAMES with a hazard diamond, hose and a fire extinguisher on a stand",
-      "answer": "Fuel tank (no open flames; extinguisher on the stand)"
+      "src": "/media/photos/allen-bbq-l2-fuel-tank-end.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "End of the Level 2 diesel tank with a fuel meter, NO SMOKING NO OPEN FLAMES danger sign, hazard placard and a red oily-waste can",
+      "answer": "Level 2 diesel fuel tank: NO SMOKING / NO OPEN FLAMES sign; oily rags go in the red can."
+     },
+     {
+      "src": "/media/photos/allen-cbq-tag-board-assembly-area.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "White trailer with an EMERGENCY ASSEMBLY AREA 1 sign next to the MINE #1, OUT, MINE #2 tag board and a bulletin board",
+      "answer": "Tag-board trailer: the tag board and Emergency Assembly Area 1, a gathering point."
      },
      {
       "src": "/media/photos/allen-cbq-tag-board.jpg",
       "site": "Clover Bottom Quarry",
       "alt": "Tag board with three panels labeled IN MINE #1, OUT and IN MINE #2, numbered black tags",
-      "answer": "Tag board: IN MINE #1 | OUT | IN MINE #2 (also a Clover Bottom gathering point)"
+      "answer": "Tag board: IN MINE #1 | OUT | IN MINE #2."
+     },
+     {
+      "src": "/media/photos/allen-cbq-screen-plant.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Screen plant with an overhead conveyor, control booth stairs, jersey barriers and an ALL TRAFFIC sign",
+      "answer": "Screen plant (a loud area: hearing protection)."
+     },
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Primary crusher with a haul truck at the dump point, highwall and mine portal behind",
+      "answer": "Primary crusher and dump point, with the pit and mine portal behind."
+     },
+     {
+      "src": "/media/photos/allen-drs-tag-board.jpg",
+      "site": "Dix River Stone",
+      "alt": "Tag board with OUT, IN, OUT columns and brass tags beside a time clock on a tiled breakroom wall",
+      "answer": "Tag board in the breakroom (also the Dix River gathering point)."
+     },
+     {
+      "src": "/media/photos/allen-drs-escape-map-plant-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "Escape map in a covered box on the side of the plant trailer on the flat",
+      "answer": "Escape map posted at the plant trailer on the flat."
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-1.jpg",
+      "site": "Dix River Stone",
+      "alt": "White steel box on the quarry floor by the highwall with a red fire extinguisher stand beside it",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-2.jpg",
+      "site": "Dix River Stone",
+      "alt": "Second white steel box with a hinged, latched door in front of the highwall, red extinguisher stand at left",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-anfo-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "White trailer with an orange placard parked at an underground heading, two orange cones in front",
+      "answer": "ANFO trailer (cones mean keep clear; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-fuel-tank.jpg",
+      "site": "Dix River Stone",
+      "alt": "Horizontal white tank marked NO OPEN FLAMES with a hazard diamond, hose and a fire extinguisher on a stand",
+      "answer": "Fuel tank (no open flames; extinguisher on the stand)."
      }
     ]
    },
@@ -482,6 +536,15 @@ const ALLEN_ACTIVITIES = {
    {
     "id": "M6-i",
     "type": "map_trace",
+    "photos": [
+     {
+      "src": "/media/photos/allen-drs-escape-map-plant-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "Escape map posted in a covered box on the side of the plant trailer on the flat, highwall behind",
+      "answer": "Where the Dix River escape map is posted: the plant trailer (also in the breakroom). The map itself is still pending for this activity.",
+      "label": "Where is the map?"
+     }
+    ],
     "minutes": 5,
     "prompt": "Dix River: on the posted escapeway map, trace the primary and secondary escapeway from a marked work area to your gathering point.",
     "photoPending": true,
@@ -572,6 +635,15 @@ const ALLEN_ACTIVITIES = {
    {
     "id": "M8-c",
     "type": "sds_lookup",
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Boonesboro breakroom wall: first aid cabinet above a yellow SDS station holder",
+      "answer": "Boonesboro breakroom: the SDS station (Safety Data Sheets) is under the first aid cabinet.",
+      "label": "Where are the SDSs?"
+     }
+    ],
     "minutes": 6,
     "prompt": "Open the SDS for the hydraulic oil used at your site (the paper SDS binder in your breakroom). Find: (1) the product name in section 1, and check it matches the label; (2) the signal word, if there is one; (3) first aid for eye contact (section 4); (4) the gloves to wear (section 8); (5) the extinguisher to use (section 5).",
     "answer": "From the SDS for the product; reference copy until Allen's supplier SDS is added"
@@ -1372,6 +1444,22 @@ const ALLEN_ACTIVITIES = {
      "Walkway handrail missing or damaged",
      "Electrical panel door left open",
      "Someone working on equipment without a lock on the disconnect"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-screen-plant.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom screen plant: overhead conveyor on a steel frame, stairs to a control booth, jersey barriers and an ALL TRAFFIC sign along the haul road",
+      "answer": "Clover Bottom screen plant. Walk it like an examiner: guards, spillage under belts, walkways and handrails, stop cords or railings, traffic routes.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     },
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom primary crusher with a haul truck at the dump point, feeder and conveyors below, highwall and mine portal behind",
+      "answer": "Clover Bottom primary crusher and dump point. Check the dump berm or stop, the walkways and guards, and spillage under the conveyors.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
     ]
    },
    {
@@ -1387,6 +1475,15 @@ const ALLEN_ACTIVITIES = {
      "Loose ground not posted or barricaded",
      "Haul road edge with no berm",
      "Water pooled near the travelway edge with no warning"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom pit: highwall with the mine portal above the primary crusher, haul truck at the dump point",
+      "answer": "Clover Bottom pit, highwall and portal. Check the highwall and portal brow for loose rock, the dump-point berm or stop, and traffic.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
     ]
    },
    {
