@@ -256,8 +256,8 @@
     color: var(--text-muted); font-size: 0.85rem;
   }
   .instructor-preview-banner {
-    position: sticky; top: 77px; z-index: 90; background: #713f12;
-    border-bottom: 1px solid #f59e0b; color: #fef3c7;
+    position: sticky; top: 77px; z-index: 90; background: #215732;
+    border-bottom: 1px solid #8fb89c; color: #e6f0e9;
   }
   .instructor-preview-inner {
     max-width: 1100px; margin: 0 auto; padding: 10px 16px;
@@ -270,11 +270,11 @@
     display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600;
   }
   .instructor-preview-inner select {
-    min-width: 190px; padding: 7px 9px; border-radius: 7px; border: 1px solid #d97706;
-    background: #422006; color: #fff;
+    min-width: 190px; padding: 7px 9px; border-radius: 7px; border: 1px solid #8fb89c;
+    background: #fff; color: var(--charcoal);
   }
   .instructor-preview-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .instructor-preview-actions .btn { border-color: #d97706; }
+  .instructor-preview-actions .btn { border-color: #8fb89c; }
   .auth-overlay {
     position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
     padding: 18px; background: rgba(2, 6, 23, 0.82); backdrop-filter: blur(4px);
@@ -313,7 +313,7 @@
   body.instructor-preview-active .module-item.preview-module {
     border-color: #a16207; background: #422006;
   }
-  body.instructor-preview-active .module-item.preview-module .mod-num { background: #d97706; }
+  body.instructor-preview-active .module-item.preview-module .mod-num { background: #215732; }
   .progress-bar-outer {
     height: 10px; background: #1e293b; border-radius: 5px; overflow: hidden; margin: 10px 0;
   }
@@ -891,10 +891,10 @@
   .auth-link { color: #215732; }
   .auth-status { background: #eef5f8; color: #355966; }
   .auth-status.auth-error { background: #fff0ee; color: #9d2118; }
-  .instructor-preview-banner { top: 90px; background: #59450f; border-color: #d6ab37; }
+  .instructor-preview-banner { top: 90px; background: #215732; border-color: #8fb89c; }
   .instructor-preview-inner select { background: #fff; color: var(--charcoal); border-color: #8fb89c; }
   body.instructor-preview-active .module-item.preview-module { border-color: #8fb89c; background: #f4f9f5; }
-  body.instructor-preview-active .module-item.preview-module .mod-num { background: #bd8d18; color: #fff; }
+  body.instructor-preview-active .module-item.preview-module .mod-num { background: #215732; color: #fff; }
   body.instructor-preview-active .progress-panel { top: 151px; }
 
   .site-footer { margin-top: 32px; padding: 26px 24px; border-top: 1px solid var(--border); background: rgba(255,255,255,0.7); }
