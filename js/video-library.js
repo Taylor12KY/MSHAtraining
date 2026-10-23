@@ -1368,6 +1368,54 @@ const SELF_HOSTED_VIDEOS = [
     "poster": "/media/posters/allen-m1-5.jpg"
   },
   {
+    "id": "allen-m1-6",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Boonesboro Quarry: detailed tour",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 577,
+    "description": "An illustrated tour of Boonesboro: the levels, the shop, the Liwell plant, BT3, check-in, traffic, PPE and the site's safety record. Illustration only; your in-person tour controls.",
+    "src": "/media/videos/allen-m1-6.mp4",
+    "captions": "/media/captions/allen-m1-6.vtt",
+    "poster": "/media/posters/allen-m1-6.jpg"
+  },
+  {
+    "id": "allen-m1-7",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Clover Bottom Quarry #1 and #2: detailed tour",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 518,
+    "description": "An illustrated tour of Clover Bottom: two mines on one surface, surface drilling and blasting, the plant, check-in at the right mine and the ground-fall pattern. Illustration only; your in-person tour controls.",
+    "src": "/media/videos/allen-m1-7.mp4",
+    "captions": "/media/captions/allen-m1-7.vtt",
+    "poster": "/media/posters/allen-m1-7.jpg"
+  },
+  {
+    "id": "allen-m1-8",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Dix River Stone: detailed tour",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 481,
+    "description": "An illustrated tour of Dix River: header mining on two levels, the surface, pre-shift checks, electrical conditions and stepping down safely. Illustration only; your in-person tour controls.",
+    "src": "/media/videos/allen-m1-8.mp4",
+    "captions": "/media/captions/allen-m1-8.vtt",
+    "poster": "/media/posters/allen-m1-8.jpg"
+  },
+  {
+    "id": "allen-m1-9",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Your first day: check-in to check-out",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 327,
+    "description": "The same at every Allen site: tag in, meet your lead, check your PPE, task training before any new task, report hazards and tag out.",
+    "src": "/media/videos/allen-m1-9.mp4",
+    "captions": "/media/captions/allen-m1-9.vtt",
+    "poster": "/media/posters/allen-m1-9.jpg"
+  },
+  {
     "id": "allen-m2-1",
     "moduleId": 2,
     "provider": "self",
@@ -1428,6 +1476,66 @@ const SELF_HOSTED_VIDEOS = [
     "poster": "/media/posters/allen-m6-3.jpg"
   },
   {
+    "id": "allen-m6-4",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Escapeway walkthrough: Boonesboro Quarry",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 380,
+    "description": "An illustrated pass over Boonesboro's levels, primary and secondary escapeways, tagging in and accounting for everyone. Illustration only; the posted escapeway map controls.",
+    "src": "/media/videos/allen-m6-4.mp4",
+    "captions": "/media/captions/allen-m6-4.vtt",
+    "poster": "/media/posters/allen-m6-4.jpg"
+  },
+  {
+    "id": "allen-m6-5",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Escapeway walkthrough: Clover Bottom #1 and #2",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 378,
+    "description": "Two mines on one surface: tagging in at the right mine (#1, 15-00112, or #2, 15-19898), each mine's escapeways and getting counted. Illustration only; the posted escapeway maps control.",
+    "src": "/media/videos/allen-m6-5.mp4",
+    "captions": "/media/captions/allen-m6-5.vtt",
+    "poster": "/media/posters/allen-m6-5.jpg"
+  },
+  {
+    "id": "allen-m6-6",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Escapeway walkthrough: Dix River Stone",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 370,
+    "description": "Header mining on two levels: tagging in, knowing your level, primary and secondary escapeways and how routes change as mining advances. Illustration only; the posted escapeway map controls.",
+    "src": "/media/videos/allen-m6-6.mp4",
+    "captions": "/media/captions/allen-m6-6.vtt",
+    "poster": "/media/posters/allen-m6-6.jpg"
+  },
+  {
+    "id": "allen-m6-7",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Smoke in the drift: escape decisions",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 324,
+    "description": "A five-decision escape story with the MSA W65: stench gas, hot air from the W65, heavy smoke, blocked escapeways and a missing partner.",
+    "src": "/media/videos/allen-m6-7.mp4",
+    "captions": "/media/captions/allen-m6-7.vtt",
+    "poster": "/media/posters/allen-m6-7.jpg"
+  },
+  {
+    "id": "allen-m6-8",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Accounting for everyone",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 283,
+    "description": "Why tagging in and out matters in an evacuation, how the headcount works and why you never go back in alone, tied to Clover Bottom's check-in citations.",
+    "src": "/media/videos/allen-m6-8.mp4",
+    "captions": "/media/captions/allen-m6-8.vtt",
+    "poster": "/media/posters/allen-m6-8.jpg"
+  },
+  {
     "id": "allen-m8-1",
     "moduleId": 8,
     "provider": "self",
@@ -1440,6 +1548,54 @@ const SELF_HOSTED_VIDEOS = [
     "poster": "/media/posters/allen-m8-1.jpg"
   },
   {
+    "id": "allen-m8-2",
+    "moduleId": 8,
+    "provider": "self",
+    "title": "Silica and dust at our operations",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 385,
+    "description": "Where dust comes from at our sites, why respirable crystalline silica matters, dust controls and your part, and the current status of MSHA's silica rule.",
+    "src": "/media/videos/allen-m8-2.mp4",
+    "captions": "/media/captions/allen-m8-2.vtt",
+    "poster": "/media/posters/allen-m8-2.jpg"
+  },
+  {
+    "id": "allen-m8-3",
+    "moduleId": 8,
+    "provider": "self",
+    "title": "Noise at our sites",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 340,
+    "description": "Loud places at our sites, MSHA's noise standard (Part 62), hearing tests and how to fit hearing protection.",
+    "src": "/media/videos/allen-m8-3.mp4",
+    "captions": "/media/captions/allen-m8-3.vtt",
+    "poster": "/media/posters/allen-m8-3.jpg"
+  },
+  {
+    "id": "allen-m8-4",
+    "moduleId": 8,
+    "provider": "self",
+    "title": "Diesel exhaust underground",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 309,
+    "description": "What diesel particulate matter is, the underground limit, fuel and maintenance rules, tagging smoky equipment and what you can do.",
+    "src": "/media/videos/allen-m8-4.mp4",
+    "captions": "/media/captions/allen-m8-4.vtt",
+    "poster": "/media/posters/allen-m8-4.jpg"
+  },
+  {
+    "id": "allen-m8-5",
+    "moduleId": 8,
+    "provider": "self",
+    "title": "Reading a safety data sheet",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 380,
+    "description": "How to find and read an SDS, using a generic hydraulic oil sheet: identity, hazards, first aid and protection first. The binder is in the breakroom at every site.",
+    "src": "/media/videos/allen-m8-5.mp4",
+    "captions": "/media/captions/allen-m8-5.vtt",
+    "poster": "/media/posters/allen-m8-5.jpg"
+  },
+  {
     "id": "allen-m9-1",
     "moduleId": 9,
     "provider": "self",
@@ -1450,6 +1606,54 @@ const SELF_HOSTED_VIDEOS = [
     "src": "/media/videos/allen-m9-1.mp4",
     "captions": "/media/captions/allen-m9-1.vtt",
     "poster": "/media/posters/allen-m9-1.jpg"
+  },
+  {
+    "id": "allen-m9-2",
+    "moduleId": 9,
+    "provider": "self",
+    "title": "Lockout on a crusher conveyor",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 535,
+    "description": "Step by step on a plant conveyor: tell people, stop, open the disconnect, your own lock and tag, release or block stored energy, try-start, and restart safely.",
+    "src": "/media/videos/allen-m9-2.mp4",
+    "captions": "/media/captions/allen-m9-2.vtt",
+    "poster": "/media/posters/allen-m9-2.jpg"
+  },
+  {
+    "id": "allen-m9-3",
+    "moduleId": 9,
+    "provider": "self",
+    "title": "Overhead power lines",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 316,
+    "description": "Raised beds, booms, masts and stockpiles near overhead lines, what to do if equipment contacts a line, and downed lines.",
+    "src": "/media/videos/allen-m9-3.mp4",
+    "captions": "/media/captions/allen-m9-3.vtt",
+    "poster": "/media/posters/allen-m9-3.jpg"
+  },
+  {
+    "id": "allen-m9-4",
+    "moduleId": 9,
+    "provider": "self",
+    "title": "Trailing cables and portable equipment",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 345,
+    "description": "Inspecting trailing cables, permanent splices, protecting and handling cables, and why protection that trips should never be defeated.",
+    "src": "/media/videos/allen-m9-4.mp4",
+    "captions": "/media/captions/allen-m9-4.vtt",
+    "poster": "/media/posters/allen-m9-4.jpg"
+  },
+  {
+    "id": "allen-m9-5",
+    "moduleId": 9,
+    "provider": "self",
+    "title": "You're not the electrician",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 282,
+    "description": "What only a qualified person does, and what you do instead, through six \"just reset it\" situations.",
+    "src": "/media/videos/allen-m9-5.mp4",
+    "captions": "/media/captions/allen-m9-5.vtt",
+    "poster": "/media/posters/allen-m9-5.jpg"
   },
   {
     "id": "allen-m10-1",
@@ -1541,7 +1745,7 @@ const SELF_HOSTED_VIDEOS = [
     "provider": "self",
     "title": "Task training: crusher and plant",
     "author": "Allen Company training (draft v1)",
-    "durationSeconds": 284,
+    "durationSeconds": 288,
     "description": "How the plant works, guarding, lockout, clearing jams and dust and noise.",
     "src": "/media/videos/allen-m12-3.mp4",
     "captions": "/media/captions/allen-m12-3.vtt",
@@ -1582,11 +1786,71 @@ const SELF_HOSTED_VIDEOS = [
     "src": "/media/videos/allen-m12-6.mp4",
     "captions": "/media/captions/allen-m12-6.vtt",
     "poster": "/media/posters/allen-m12-6.jpg"
+  },
+  {
+    "id": "allen-m12-7",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Workplace exams: what the examiner looks for",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 571,
+    "description": "Who examines each working place, when, what they look for, how hazards are fixed or posted, and how the record is kept (30 CFR 56/57.18002).",
+    "src": "/media/videos/allen-m12-7.mp4",
+    "captions": "/media/captions/allen-m12-7.vtt",
+    "poster": "/media/posters/allen-m12-7.jpg"
+  },
+  {
+    "id": "allen-m12-8",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Case study: ground fall during scaling",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 446,
+    "description": "Based on the MSHA Report of Investigation \"Fatal Fall of Rib Accident, April 11, 2014\" (underground limestone mine, Missouri). Scaling from a safe location, posting loose ground, and the ground-fall pattern in our own record.",
+    "src": "/media/videos/allen-m12-8.mp4",
+    "captions": "/media/captions/allen-m12-8.vtt",
+    "poster": "/media/posters/allen-m12-8.jpg"
+  },
+  {
+    "id": "allen-m12-9",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Case study: powered haulage at the dump",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 422,
+    "description": "Based on the MSHA Report of Investigation \"Powered Haulage Accident, September 12, 2023\" (surface limestone operation, Indiana). Dump-site berms, roadway berms, backing and the workplace exam.",
+    "src": "/media/videos/allen-m12-9.mp4",
+    "captions": "/media/captions/allen-m12-9.vtt",
+    "poster": "/media/posters/allen-m12-9.jpg"
+  },
+  {
+    "id": "allen-m12-10",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Case study: maintenance without lockout or blocking",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 432,
+    "description": "Based on the MSHA Report of Investigation \"Fatal Slip or Fall of Person Accident, June 8, 2023\" (surface stone plant, Massachusetts). Lockout, blocking against motion, automatic starts and safe access.",
+    "src": "/media/videos/allen-m12-10.mp4",
+    "captions": "/media/captions/allen-m12-10.vtt",
+    "poster": "/media/posters/allen-m12-10.jpg"
+  },
+  {
+    "id": "allen-m12-11",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Stop work: when and how to say no",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 335,
+    "description": "Using your Mine Act rights on the job: when to stop a task, the steps to stop it safely, what happens next, and your protection from retaliation.",
+    "src": "/media/videos/allen-m12-11.mp4",
+    "captions": "/media/captions/allen-m12-11.vtt",
+    "poster": "/media/posters/allen-m12-11.jpg"
   }
 ];
 REQUIRED_VIDEOS.push(...SELF_HOSTED_VIDEOS);
 const SELF_HOSTED_VIDEO_IDS = new Set(SELF_HOSTED_VIDEOS.map(video => video.id));
-Object.entries({"1": ["allen-m1-1", "allen-m1-2", "allen-m1-4", "allen-m1-5"], "2": ["allen-m2-1"], "3": ["allen-m3-1"], "6": ["allen-m6-1", "allen-m6-2", "allen-m6-3"], "8": ["allen-m8-1"], "9": ["allen-m9-1"], "10": ["allen-m10-1", "allen-m10-2", "allen-m10-3", "allen-m10-4"], "11": ["allen-m11-1"], "12": ["allen-m12-1", "allen-m12-2", "allen-m12-3", "allen-m12-4", "allen-m12-5", "allen-m12-6"]}).forEach(([moduleId, ids]) => {
+Object.entries({"1": ["allen-m1-1", "allen-m1-2", "allen-m1-4", "allen-m1-5", "allen-m1-6", "allen-m1-7", "allen-m1-8", "allen-m1-9"], "2": ["allen-m2-1"], "3": ["allen-m3-1"], "6": ["allen-m6-1", "allen-m6-2", "allen-m6-3", "allen-m6-4", "allen-m6-5", "allen-m6-6", "allen-m6-7", "allen-m6-8"], "8": ["allen-m8-1", "allen-m8-2", "allen-m8-3", "allen-m8-4", "allen-m8-5"], "9": ["allen-m9-1", "allen-m9-2", "allen-m9-3", "allen-m9-4", "allen-m9-5"], "10": ["allen-m10-1", "allen-m10-2", "allen-m10-3", "allen-m10-4"], "11": ["allen-m11-1"], "12": ["allen-m12-1", "allen-m12-2", "allen-m12-3", "allen-m12-4", "allen-m12-5", "allen-m12-6", "allen-m12-7", "allen-m12-8", "allen-m12-9", "allen-m12-10", "allen-m12-11"]}).forEach(([moduleId, ids]) => {
   MODULE_VIDEO_SEQUENCE[moduleId] = (MODULE_VIDEO_SEQUENCE[moduleId] || []).concat(ids);
 });
 Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
@@ -1594,13 +1858,30 @@ Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
   "allen-m1-2": "If you work at Dix River Stone, this is your site's walkthrough.",
   "allen-m1-4": "If you work at Clover Bottom, this is your site's walkthrough.",
   "allen-m1-5": "Now that you know your site, learn exactly who to call when something goes wrong.",
+  "allen-m1-6": "Now take a closer look at each site, starting with Boonesboro.",
+  "allen-m1-7": "Next, a closer look at Clover Bottom's two mines.",
+  "allen-m1-8": "Then a closer look at Dix River Stone.",
+  "allen-m1-9": "Whichever site you're at, your first day follows the same steps.",
   "allen-m2-1": "Now see how this applies at Allen Company sites. With emergencies covered, here's the law that protects you and how to speak up about hazards.",
   "allen-m3-1": "Now see how this applies at Allen Company sites. Underground, your W65 is your escape lifeline, so here's how to keep it ready.",
   "allen-m6-1": "Now see how this applies at Allen Company sites. Your W65 gets you out of bad air; now learn how you'll know it's time to go.",
   "allen-m6-2": "Once the alarm is raised, a small fire may be one you can put out, if you know how.",
   "allen-m6-3": "If escape by either escapeway is cut off, here's the last resort.",
+  "allen-m6-4": "Now walk the escape routes at your own site, starting with Boonesboro.",
+  "allen-m6-5": "If you work at Clover Bottom, here are the escape routes for both mines.",
+  "allen-m6-6": "If you work at Dix River, here are your escape routes.",
+  "allen-m6-7": "Knowing the routes is one thing; now make the escape decisions as the smoke rolls in.",
+  "allen-m6-8": "Once you're out, the next question is whether everyone else is.",
   "allen-m8-1": "Now see how this applies at Allen Company sites. From emergencies to everyday health: the signs and rules that protect you over a career.",
+  "allen-m8-2": "Now the health hazards you'll meet every day, starting with dust.",
+  "allen-m8-3": "Next, the hazard you can't see or feel until it's too late: noise.",
+  "allen-m8-4": "Underground, the machines add one more health hazard: diesel exhaust.",
+  "allen-m8-5": "Last, the chemicals themselves: how to read the sheet that tells you what they can do.",
   "allen-m9-1": "Now see how this applies at Allen Company sites. Some of the most serious hazards at a quarry are electrical; work through five real situations.",
+  "allen-m9-2": "Now take the most common electrical job at a plant step by step: locking out a conveyor.",
+  "allen-m9-3": "Not every electrical hazard is in the plant; look up.",
+  "allen-m9-4": "Underground, power travels to the machine through its trailing cable; here's how to keep that cable safe.",
+  "allen-m9-5": "Last in this module: where your electrical job stops and a qualified person's begins.",
   "allen-m10-1": "Now see how this applies at Allen Company sites. When someone does get hurt, first aid starts here: broken bones and splinting.",
   "allen-m10-2": "Next, burns, from the shop to the fuel island.",
   "allen-m10-3": "Chemical burns often involve the eyes; here's what to do in the first seconds.",
@@ -1611,7 +1892,12 @@ Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
   "allen-m12-3": "The rock ends up at the plant; learn its hazards before you work there.",
   "allen-m12-4": "Before rock reaches the loader, it's drilled and blasted; here's the helper's role.",
   "allen-m12-5": "Every machine you've seen comes through the shop; here's how to work on it safely.",
-  "allen-m12-6": "Last, the chemicals you'll handle across all of these jobs."
+  "allen-m12-6": "Last, the chemicals you'll handle across all of these jobs.",
+  "allen-m12-7": "Every one of those tasks starts in a working place that has been examined; here's what the examiner looks for.",
+  "allen-m12-8": "When an exam misses loose ground, the result can be fatal; this real MSHA report shows how.",
+  "allen-m12-9": "From the face to the dump: a second MSHA report, this time about a berm that couldn't stop a truck.",
+  "allen-m12-10": "The third report moves to the plant, where a conveyor started while a miner was working on it.",
+  "allen-m12-11": "In each of these cases, someone could have stopped the job; here's how you do it."
 });
 Object.assign(VIDEO_TRAINING_GUIDANCE, {
   "allen-m1-1": {
@@ -1629,6 +1915,22 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
   "allen-m1-5": {
     "focus": "What to say and who to call in an emergency.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m1-6": {
+    "focus": "How Boonesboro is laid out and what to watch for.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Illustration only, not a site map. Your site's plans always override this video."
+  },
+  "allen-m1-7": {
+    "focus": "Two mines, one surface: know which one you're in.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Illustration only, not a site map. Your site's plans always override this video."
+  },
+  "allen-m1-8": {
+    "focus": "How Dix River is laid out and what to watch for.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Illustration only, not a site map. Your site's plans always override this video."
+  },
+  "allen-m1-9": {
+    "focus": "Tag in, ask, get trained before every new task, tag out.",
+    "scope": "Awareness only; your site's procedures and your lead's directions control. Your site's plans always override this video."
   },
   "allen-m2-1": {
     "focus": "Your rights and how to report a hazard.",
@@ -1650,13 +1952,65 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
     "focus": "Stay out of abandoned areas; barricade only as a last resort.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
   },
+  "allen-m6-4": {
+    "focus": "Know your level and both escapeways at Boonesboro.",
+    "scope": "Illustration only, not a site map; the posted escapeway map and your in-person tour control. Your site's plans always override this video."
+  },
+  "allen-m6-5": {
+    "focus": "Know which mine you're in and its escapeways.",
+    "scope": "Illustration only, not a site map; the posted escapeway maps and your in-person tour control. Your site's plans always override this video."
+  },
+  "allen-m6-6": {
+    "focus": "Know your level and both escapeways at Dix River.",
+    "scope": "Illustration only, not a site map; the posted escapeway map and your in-person tour control. Your site's plans always override this video."
+  },
+  "allen-m6-7": {
+    "focus": "W65 on at the first sign; get to the best air; escape is the plan.",
+    "scope": "Awareness; the hands-on W65 practical is done in person. The MSA W65 protects against carbon monoxide only and does not make oxygen. Your site's plans always override this video."
+  },
+  "allen-m6-8": {
+    "focus": "Tag in, tag out, get counted, never go back alone.",
+    "scope": "Awareness only; your site's check-in and evacuation procedures control. Your site's plans always override this video."
+  },
   "allen-m8-1": {
     "focus": "Read the signs and protect your health over a working lifetime.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
   },
+  "allen-m8-2": {
+    "focus": "Keep dust at the source; report broken controls.",
+    "scope": "Awareness only; your site's dust controls and respirator directions control. Your site's plans always override this video."
+  },
+  "allen-m8-3": {
+    "focus": "Hearing protection on around the running plant and mine fans, fitted right.",
+    "scope": "Awareness only; your site's hearing conservation program controls. Your site's plans always override this video."
+  },
+  "allen-m8-4": {
+    "focus": "Don't idle, tag smoky machines, protect the ventilation.",
+    "scope": "Awareness only; your site's ventilation and equipment procedures control. Your site's plans always override this video."
+  },
+  "allen-m8-5": {
+    "focus": "Read the label; read SDS sections 1, 2, 4 and 8 first.",
+    "scope": "Awareness only; the example is generic, so always read the sheet for the actual product. Your site's plans always override this video."
+  },
   "allen-m9-1": {
     "focus": "Stay clear, report, and let qualified people fix electrical hazards.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m9-2": {
+    "focus": "Tell, stop, disconnect, lock, release, block, try.",
+    "scope": "Task-training support; you lock out only equipment you've been trained on, under the site's procedure. Your site's plans always override this video."
+  },
+  "allen-m9-3": {
+    "focus": "Keep equipment clear of overhead lines; if contact happens, stay in the cab.",
+    "scope": "Awareness only; your site's clearance rules and the utility's direction control. Your site's plans always override this video."
+  },
+  "allen-m9-4": {
+    "focus": "Inspect, protect and never defeat cable protection.",
+    "scope": "Awareness only; cable repairs and splices are done by qualified persons. Your site's plans always override this video."
+  },
+  "allen-m9-5": {
+    "focus": "Report it; let a qualified person fix it.",
+    "scope": "Awareness only; electrical work is done by qualified persons. Your site's plans always override this video."
   },
   "allen-m10-1": {
     "focus": "Make it safe, call for help, splint as found.",
@@ -1701,6 +2055,26 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
   "allen-m12-6": {
     "focus": "Read the label, know where the SDS is.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-7": {
+    "focus": "The every-shift workplace exam, and your part in it.",
+    "scope": "Task-training support; awareness only; your site's exam procedure and forms control. Your site's plans always override this video."
+  },
+  "allen-m12-8": {
+    "focus": "Scale from a place where falling rock can't reach you.",
+    "scope": "Case study from a public MSHA report, used for training only; no blame beyond the report's findings. Your site's plans always override this video."
+  },
+  "allen-m12-9": {
+    "focus": "Berms that actually stop a truck, and exams that check them.",
+    "scope": "Case study from a public MSHA report, used for training only; no blame beyond the report's findings. Your site's plans always override this video."
+  },
+  "allen-m12-10": {
+    "focus": "Stopped is not locked: lock, tag, block, try.",
+    "scope": "Case study from a public MSHA report, used for training only; no blame beyond the report's findings. Your site's plans always override this video."
+  },
+  "allen-m12-11": {
+    "focus": "When and how to stop unsafe work.",
+    "scope": "Awareness of miners' rights; your site's reporting procedure controls. Your site's plans always override this video."
   }
 });
 
