@@ -209,7 +209,7 @@ test('server validator rejects fabricated completion and requires known video du
   assert.deepEqual(moduleOneWithoutVideos.completed, []);
 
   const moduleOneVideos = recordLibrary.MODULE_REQUIREMENTS[1].videos;
-  assert.deepEqual(Object.keys(moduleOneVideos), ['allen-m1-1', 'allen-m1-2', 'allen-m1-4', 'allen-m1-5']);
+  assert.deepEqual(Object.keys(moduleOneVideos), ['allen-m1-1', 'allen-m1-2', 'allen-m1-4', 'allen-m1-5', 'allen-m1-6', 'allen-m1-7', 'allen-m1-8', 'allen-m1-9']);
   const moduleOne = recordLibrary.sanitizeTrainingState({
     mine: 'Boonesboro Quarry',
     timerElapsed: { 1: 5400 },
@@ -300,7 +300,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 126 active videos (104 embedded + 22 self-hosted) are unique and retired submissions are documented', () => {
+test('all 148 active videos (104 embedded + 44 self-hosted) are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -309,9 +309,9 @@ test('all 126 active videos (104 embedded + 22 self-hosted) are unique and retir
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 126);
-  assert.equal(new Set(ids).size, 126);
-  assert.equal(context.videos.filter(video => video.provider === 'self').length, 22);
+  assert.equal(context.videos.length, 148);
+  assert.equal(new Set(ids).size, 148);
+  assert.equal(context.videos.filter(video => video.provider === 'self').length, 44);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 13);
@@ -649,7 +649,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   };
   const modules = recordLibrary.moduleProgress(storedState);
   assert.equal(modules.length, 13);
-  assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 4, bestScore: 100, quizAttempts: 1 });
+  assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 8, bestScore: 100, quizAttempts: 1 });
   // A module already recorded complete stays complete after new required videos are added.
   assert.equal(modules[1].videosRequired, 9);
 
@@ -674,7 +674,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.match(row, /,1 of 13,1\.5,No,No,No,/);
   assert.match(row, /,Yes,Jane Instructor,2026-10-02 \d\d:00,/);
   assert.match(row, /"Line one, with comma\nLine two ""quoted"""/);
-  assert.match(row, /,Complete,100,1,90 of 90,0 of 4,In progress,80,1,10 of 120,0 of 9,Not started,/);
+  assert.match(row, /,Complete,100,1,90 of 90,0 of 8,In progress,80,1,10 of 120,0 of 9,Not started,/);
   assert.doesNotMatch(row, /\b\d+\/\d+\b/, 'no slash counts that Excel would turn into dates');
   assert.match(exporter.recordsExportFilename(new Date(2026, 9, 22)), /^msha-part48-trainee-records-2026-10-22\.csv$/);
 
@@ -720,7 +720,7 @@ test('self-hosted Allen Company videos ship with media, captions, posters and th
   const { statSync, existsSync } = await import('node:fs');
   const context = {};
   new vm.Script(videoLibrary + '\nthis.selfVideos = SELF_HOSTED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE;').runInNewContext(context);
-  assert.equal(context.selfVideos.length, 22);
+  assert.equal(context.selfVideos.length, 44);
   const perModule = {};
   for (const video of context.selfVideos) {
     assert.equal(video.provider, 'self');
@@ -733,7 +733,7 @@ test('self-hosted Allen Company videos ship with media, captions, posters and th
     assert.ok(context.sequences[video.moduleId].includes(video.id), `${video.id} is not in the Module ${video.moduleId} sequence`);
     perModule[video.moduleId] = (perModule[video.moduleId] || 0) + 1;
   }
-  assert.deepEqual(perModule, { 1: 4, 2: 1, 3: 1, 6: 3, 8: 1, 9: 1, 10: 4, 11: 1, 12: 6 });
+  assert.deepEqual(perModule, { 1: 8, 2: 1, 3: 1, 6: 8, 8: 5, 9: 5, 10: 4, 11: 1, 12: 11 });
   assert.ok(!/\blex\b|lexington quarry/i.test(JSON.stringify(context.selfVideos)));
   assert.match(app, /function initializeSelfHostedVideo/);
   assert.match(app, /addEventListener\('seeking'/);

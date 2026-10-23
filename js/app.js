@@ -1290,6 +1290,13 @@ function renderAllenActivityItem(item) {
   const id = 'act-' + item.id;
   const prompt = `<p class="allen-activity-prompt"><strong>${escapeHtml(item.id)}.</strong> ${escapeHtml(item.prompt || '')} <span class="allen-activity-minutes">~${escapeHtml(String(item.minutes || ''))} min</span></p>`;
   const feedback = `<div class="allen-activity-feedback" id="${id}-feedback" aria-live="polite"></div>`;
+  // Real site photos are shown only to trainees at the site they were taken at.
+  const sitePhotos = (item.photos || []).filter(photo => photo && photo.site && photo.site === state.mine);
+  const photoGrid = sitePhotos.length
+      ? `<div class="allen-activity-photos">${sitePhotos.map((photo, index) =>
+        `<figure class="allen-activity-photo"><img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || '')}" loading="lazy" decoding="async">` +
+        `<figcaption>${escapeHtml(photo.site)} · photo ${index + 1}<details><summary>${escapeHtml(photo.label || 'What is it?')}</summary>${escapeHtml(photo.answer || '')}</details></figcaption></figure>`).join('')}</div>`
+      : '';
   let body = '';
   if (item.type === 'multiple_choice') {
     body = (item.options || []).map((option, index) =>
@@ -1318,11 +1325,13 @@ function renderAllenActivityItem(item) {
       `</tbody></table></div><button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the answer key</button>`;
   } else {
     const photoNote = item.photoPending || item.type === 'find_the_hazard' || item.type === 'map_trace' || item.type === 'site_map_marking'
-      ? '<p class="allen-activity-hint">Site photo/map pending. Work from the video and your site tour, or complete this with your instructor.</p>' : '';
+      ? `<p class="allen-activity-hint">${sitePhotos.length
+        ? 'The photos above are real photos from your site. Anything not pictured is still pending: work from the video and your site tour, or complete this with your instructor.'
+        : 'Site photo/map pending. Work from the video and your site tour, or complete this with your instructor.'}</p>` : '';
     body = photoNote + `<textarea rows="3" class="allen-activity-text" data-free-text aria-label="Your answer"></textarea>` +
       `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the model answer</button>`;
   }
-  return `<div class="allen-activity" id="${id}" data-activity-id="${escapeHtml(item.id)}">${prompt}${body}${feedback}</div>`;
+  return `<div class="allen-activity" id="${id}" data-activity-id="${escapeHtml(item.id)}">${prompt}${photoGrid}${body}${feedback}</div>`;
 }
 
 function checkAllenActivity(item, container) {

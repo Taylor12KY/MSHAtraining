@@ -2,8 +2,8 @@
 // Practice only: they do not change module completion, seat time, quizzes or sign-offs.
 const ALLEN_ACTIVITIES = {
  "1": {
-  "title": "Module 1 · Site walkthroughs and emergency card",
-  "minutes": 12.0,
+  "title": "Module 1 · Site walkthroughs, site tours, your first day and emergency card",
+  "minutes": 31.0,
   "items": [
    {
     "id": "M1-a",
@@ -72,6 +72,227 @@ const ALLEN_ACTIVITIES = {
     "prompt": "On your site's map, tap your gathering point and the nearest phone or radio to your work area.",
     "photoPending": true,
     "answer": "Site-specific"
+   },
+   {
+    "id": "M1-f",
+    "type": "site_lookup",
+    "minutes": 5,
+    "prompt": "On your own site's page, find: (1) your escape route or gathering point, (2) the first mine-command number, (3) your site leader's role.",
+    "items": [
+     "Escape route or gathering point found",
+     "First mine-command number found",
+     "Site leader found"
+    ],
+    "answer": "Site-specific – answers come from the trainee's site page"
+   },
+   {
+    "id": "M1-g",
+    "type": "find_the_hazard",
+    "minutes": 5,
+    "prompt": "Name these five landmarks at your own site. Real photos from your site are shown where we have them; anything not pictured is still an illustrated stand-in.",
+    "count": 5,
+    "photoPending": true,
+    "answer": [
+     "Tag board",
+     "Scale house",
+     "Breakroom (SDS binder or SDS station)",
+     "Eyewash station",
+     "Your gathering point"
+    ],
+    "photoCoverage": "Photos cover: the tag boards at all three sites; Boonesboro miners' outdoor tag board, breakroom contractor/visitor boards with the PPE sign, first aid cabinet and SDS station, and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-outdoor-tag-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Outdoor covered tag board on a block wall: IN and OUT pegboard panels with tags and a CHOOSE TO BE SAFE poster in a glass case between them",
+      "answer": "The miners' tag board: the covered IN / OUT board outside. Tag in and out here every shift."
+     },
+     {
+      "src": "/media/photos/allen-bbq-contractor-visitor-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Breakroom contractor and visitor check-in board labeled IN and OUT with brass tags, under a red sign: before you leave this room make sure you have safety glasses, hard hat, hi-vis, self-rescuer, brass tag, any other required PPE",
+      "answer": "Contractor and visitor check-in board in the breakroom. The sign over it: before you leave this room, have your safety glasses, hard hat, hi-vis, self-rescuer, brass tag and any other required PPE."
+     },
+     {
+      "src": "/media/photos/allen-bbq-contractor-tag-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Breakroom contractor board labeled IN, CONTRACTORS and OUT with numbered pegs and brass tags, clipboard below",
+      "answer": "Contractor check-in board in the breakroom (IN / CONTRACTORS / OUT)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "First aid cabinet above a yellow SDS station holder on the breakroom wall",
+      "answer": "Breakroom first aid cabinet and SDS station."
+     },
+     {
+      "src": "/media/photos/allen-bbq-l2-fuel-tank.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Long white diesel tank underground on Level 2 with yellow bollards and red fire extinguisher stands at each end",
+      "answer": "Level 2 diesel fuel tank (no smoking or open flames; extinguishers on the stands)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-l2-fuel-tank-end.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "End of the Level 2 diesel tank with a fuel meter, NO SMOKING NO OPEN FLAMES danger sign, hazard placard and a red oily-waste can",
+      "answer": "Level 2 diesel fuel tank: NO SMOKING / NO OPEN FLAMES sign; oily rags go in the red can."
+     },
+     {
+      "src": "/media/photos/allen-cbq-tag-board-assembly-area.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "White trailer with an EMERGENCY ASSEMBLY AREA 1 sign next to the MINE #1, OUT, MINE #2 tag board and a bulletin board",
+      "answer": "Tag-board trailer: the tag board and Emergency Assembly Area 1, a gathering point."
+     },
+     {
+      "src": "/media/photos/allen-cbq-tag-board.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Tag board with three panels labeled IN MINE #1, OUT and IN MINE #2, numbered black tags",
+      "answer": "Tag board: IN MINE #1 | OUT | IN MINE #2."
+     },
+     {
+      "src": "/media/photos/allen-cbq-screen-plant.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Screen plant with an overhead conveyor, control booth stairs, jersey barriers and an ALL TRAFFIC sign",
+      "answer": "Screen plant (a loud area: hearing protection)."
+     },
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Primary crusher with a haul truck at the dump point, highwall and mine portal behind",
+      "answer": "Primary crusher and dump point, with the pit and mine portal behind."
+     },
+     {
+      "src": "/media/photos/allen-drs-tag-board.jpg",
+      "site": "Dix River Stone",
+      "alt": "Tag board with OUT, IN, OUT columns and brass tags beside a time clock on a tiled breakroom wall",
+      "answer": "Tag board in the breakroom (also the Dix River gathering point)."
+     },
+     {
+      "src": "/media/photos/allen-drs-escape-map-plant-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "Escape map in a covered box on the side of the plant trailer on the flat",
+      "answer": "Escape map posted at the plant trailer on the flat."
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-1.jpg",
+      "site": "Dix River Stone",
+      "alt": "White steel box on the quarry floor by the highwall with a red fire extinguisher stand beside it",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-2.jpg",
+      "site": "Dix River Stone",
+      "alt": "Second white steel box with a hinged, latched door in front of the highwall, red extinguisher stand at left",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-anfo-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "White trailer with an orange placard parked at an underground heading, two orange cones in front",
+      "answer": "ANFO trailer (cones mean keep clear; no smoking or flames within 50 ft)."
+     },
+     {
+      "src": "/media/photos/allen-drs-fuel-tank.jpg",
+      "site": "Dix River Stone",
+      "alt": "Horizontal white tank marked NO OPEN FLAMES with a hazard diamond, hose and a fire extinguisher on a stand",
+      "answer": "Fuel tank (no open flames; extinguisher on the stand)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-portals.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Two mine entrance portals cut into the limestone face, with a red and white DANGER sign on the rock between them",
+      "answer": "Mine entrance portals (DANGER sign: hard hat area)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-2west-caution-light.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Wide underground haulage road between pillars, with an amber light in the distance at an intersection",
+      "answer": "Caution light at the 5 North intersection on 2 West: slow down and watch for cross traffic."
+     },
+     {
+      "src": "/media/photos/allen-bbq-2west-blocked-area.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Dark underground heading with a blocked-off travel area marked by a sign and posts",
+      "answer": "Blocked-off area on 2 West (toward the Liwell Plant and Roll Crusher): do not enter unless you are assigned and authorized."
+     },
+     {
+      "src": "/media/photos/allen-bbq-underground-shop.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Lit underground shop area with overhead lights, ventilation duct and equipment parked inside",
+      "answer": "Underground mine shop."
+     },
+     {
+      "src": "/media/photos/allen-cbq-magazines.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Two steel magazine boxes on the floor of an underground opening, a smaller box between them",
+      "answer": "Explosive magazines (keep away unless assigned; no smoking or flames within 50 ft)."
+     }
+    ]
+   },
+   {
+    "id": "M1-h",
+    "type": "ordering",
+    "minutes": 3,
+    "prompt": "Put your first day in order.",
+    "items": [
+     "Tag in on the tag board",
+     "Report to your supervisor or lead",
+     "Check your PPE",
+     "Get task-trained before any new task",
+     "Report hazards as you find them",
+     "Tag out at the end of the shift"
+    ],
+    "answer": [
+     "Tag in on the tag board",
+     "Report to your supervisor or lead",
+     "Check your PPE",
+     "Get task-trained before any new task",
+     "Report hazards as you find them",
+     "Tag out at the end of the shift"
+    ],
+    "explanation": ""
+   },
+   {
+    "id": "M1-i",
+    "type": "scenario_short_answer",
+    "minutes": 3,
+    "prompt": "You're new and you get turned around underground. What do you do?",
+    "model_answer": "Stop in a safe place out of the way of traffic. Call your lead by radio and say where you are and the last landmark you passed. Wait for directions. Don't wander into areas you don't know.",
+    "must_include": [
+     "stop",
+     "out of traffic",
+     "radio your lead",
+     "last landmark",
+     "don't wander"
+    ]
+   },
+   {
+    "id": "M1-j",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Who can move your tag on the tag board?",
+    "options": [
+     "Anyone on your crew",
+     "Only you",
+     "Your supervisor, at the start of the shift",
+     "The scale house"
+    ],
+    "answer": 1,
+    "explanation": "Move your own tag and only your own, so the count is right in an emergency."
+   },
+   {
+    "id": "M1-k",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Your lead asks you to run a machine you've never been trained on. What do you do?",
+    "options": [
+     "Figure it out as you go",
+     "Watch someone for a minute, then run it",
+     "Say you haven't been task-trained on it yet and ask for training first",
+     "Refuse to work for the rest of the day"
+    ],
+    "answer": 2,
+    "explanation": "30 CFR 48.7: task training comes before you do a new task."
    }
   ]
  },
@@ -219,8 +440,8 @@ const ALLEN_ACTIVITIES = {
   ]
  },
  "6": {
-  "title": "Module 6 · Fire warning, escape, extinguishers and barricading",
-  "minutes": 17.0,
+  "title": "Module 6 · Fire warning, escapeways, smoke decisions, accounting and barricading",
+  "minutes": 41.5,
   "items": [
    {
     "id": "M6-a",
@@ -331,12 +552,140 @@ const ALLEN_ACTIVITIES = {
      "last resort",
      "signal"
     ]
+   },
+   {
+    "id": "M6-g",
+    "type": "map_trace",
+    "minutes": 5,
+    "prompt": "Boonesboro: on the posted escapeway map, trace the primary and secondary escapeway from a marked work area to your gathering point.",
+    "photoPending": true,
+    "answer": "Site-specific – from Boonesboro's posted escapeway map",
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-l1-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 1 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-bbq-l2-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 2 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 2 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-bbq-l3-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 3 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 3 (trace)"
+     }
+    ]
+   },
+   {
+    "id": "M6-h",
+    "type": "map_trace",
+    "minutes": 5,
+    "prompt": "Clover Bottom #1 & #2: on the posted escapeway map for the mine you work in, trace the primary and secondary escapeway from a marked work area to your gathering point.",
+    "photoPending": true,
+    "answer": "Site-specific – from Clover Bottom's posted escapeway maps",
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-1-escapeway-trace.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Simplified trace of the Clover Bottom Mine #1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Mine #1 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-cbq-2-escapeway-trace.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Simplified trace of the Clover Bottom Mine #2 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Mine #2 (trace)"
+     }
+    ]
+   },
+   {
+    "id": "M6-i",
+    "type": "map_trace",
+    "photos": [
+     {
+      "src": "/media/photos/allen-drs-escape-map-plant-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "Escape map posted in a covered box on the side of the plant trailer on the flat, highwall behind",
+      "answer": "Where the Dix River escape map is posted: the plant trailer (also in the breakroom).",
+      "label": "Where is the map?"
+     },
+     {
+      "src": "/media/photos/allen-drs-l1-escapeway-trace.jpg",
+      "site": "Dix River Stone",
+      "alt": "Simplified trace of the Dix River Level 1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 1 (trace)"
+     }
+    ],
+    "minutes": 5,
+    "prompt": "Dix River: on the posted escapeway map, trace the primary and secondary escapeway from a marked work area to your gathering point.",
+    "photoPending": true,
+    "answer": "Site-specific – from Dix River's posted escapeway map"
+   },
+   {
+    "id": "M6-j",
+    "type": "scenario_short_answer",
+    "minutes": 6,
+    "prompt": "You're working underground and smell stench gas. You put on your W65 and head out by the primary escapeway. Partway out, the smoke gets heavy and you feel lightheaded. What do you do at each point, and why?",
+    "model_answer": "Stench gas means evacuate: put on the W65 right away, warn others, and leave by the primary escapeway. Hot, dry air from the W65 is normal, so keep it on. The W65 makes no oxygen, so heavy smoke and feeling lightheaded mean you need to get out of the smoke: turn back and take the secondary escapeway to fresh air. Barricade only if every way out is cut off.",
+    "must_include": [
+     "W65 on right away",
+     "warn others",
+     "hot air is normal",
+     "no oxygen",
+     "secondary escapeway"
+    ]
+   },
+   {
+    "id": "M6-k",
+    "type": "ordering",
+    "minutes": 2,
+    "prompt": "Stench gas reaches your work area. Put your first actions in order.",
+    "items": [
+     "Put on your W65 right away",
+     "Warn the people near you",
+     "Head out by the primary escapeway",
+     "If it's blocked, take the secondary escapeway",
+     "Report to the gathering point and get counted"
+    ],
+    "answer": [
+     "Put on your W65 right away",
+     "Warn the people near you",
+     "Head out by the primary escapeway",
+     "If it's blocked, take the secondary escapeway",
+     "Report to the gathering point and get counted"
+    ],
+    "explanation": "Adapted for Allen's MSA W65 filter self-rescuer: it is put on at the first sign of fire, smoke or stench gas."
+   },
+   {
+    "id": "M6-l",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "In general MSHA training, when is barricading considered?",
+    "options": [
+     "As soon as you smell smoke",
+     "Only when every escape route is cut off",
+     "When your W65 feels hot",
+     "When you can't find your partner"
+    ],
+    "answer": 1,
+    "explanation": "At Allen, escape is the plan: our mines keep no refuge or barricading materials, and your site's emergency plan governs. In general MSHA training, barricading is only a last resort when every escape route is cut off."
    }
   ]
  },
  "8": {
-  "title": "Module 8 · Health provisions and warning labels",
-  "minutes": 4.5,
+  "title": "Module 8 · Health: dust, noise, diesel exhaust, warning labels and SDSs",
+  "minutes": 24.5,
   "items": [
    {
     "id": "M8-a",
@@ -364,12 +713,134 @@ const ALLEN_ACTIVITIES = {
     ],
     "answer": 1,
     "explanation": "Low silica doesn't mean no hazard; follow dust controls and required PPE."
+   },
+   {
+    "id": "M8-c",
+    "type": "sds_lookup",
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Boonesboro breakroom wall: first aid cabinet above a yellow SDS station holder",
+      "answer": "Boonesboro breakroom: the SDS station (Safety Data Sheets) is under the first aid cabinet.",
+      "label": "Where are the SDSs?"
+     }
+    ],
+    "minutes": 6,
+    "prompt": "Open the SDS for the hydraulic oil used at your site (the paper SDS binder in your breakroom). Find: (1) the product name in section 1, and check it matches the label; (2) the signal word, if there is one; (3) first aid for eye contact (section 4); (4) the gloves to wear (section 8); (5) the extinguisher to use (section 5).",
+    "answer": "From the SDS for the product; reference copy until Allen's supplier SDS is added"
+   },
+   {
+    "id": "M8-d",
+    "type": "matching",
+    "minutes": 3,
+    "prompt": "Match each GHS pictogram to what it warns about.",
+    "left": [
+     "Flame",
+     "Corrosion",
+     "Exclamation mark",
+     "Health hazard",
+     "Gas cylinder"
+    ],
+    "right": [
+     "Flammable",
+     "Burns skin and eyes, corrodes metal",
+     "Irritant, or harmful in smaller amounts",
+     "Serious long-term health effects, like cancer",
+     "Gas under pressure"
+    ],
+    "pairs": [
+     [
+      "Flame",
+      "Flammable"
+     ],
+     [
+      "Corrosion",
+      "Burns skin and eyes, corrodes metal"
+     ],
+     [
+      "Exclamation mark",
+      "Irritant, or harmful in smaller amounts"
+     ],
+     [
+      "Health hazard",
+      "Serious long-term health effects, like cancer"
+     ],
+     [
+      "Gas cylinder",
+      "Gas under pressure"
+     ]
+    ],
+    "answer": [
+     [
+      "Flame",
+      "Flammable"
+     ],
+     [
+      "Corrosion",
+      "Burns skin and eyes, corrodes metal"
+     ],
+     [
+      "Exclamation mark",
+      "Irritant, or harmful in smaller amounts"
+     ],
+     [
+      "Health hazard",
+      "Serious long-term health effects, like cancer"
+     ],
+     [
+      "Gas cylinder",
+      "Gas under pressure"
+     ]
+    ]
+   },
+   {
+    "id": "M8-e",
+    "type": "self_check",
+    "minutes": 3,
+    "prompt": "Foam earplug fit – tick each step as you do it with your own plugs.",
+    "items": [
+     "Rolled the plug into a thin cylinder",
+     "Reached over my head and pulled my ear up and back",
+     "Slid the plug in",
+     "Held it while it expanded",
+     "My own voice sounds muffled and the plug isn't sticking out"
+    ],
+    "answer": "Completion only"
+   },
+   {
+    "id": "M8-f",
+    "type": "find_the_hazard",
+    "minutes": 4,
+    "prompt": "Find the missing dust controls at this plant (illustrated stand-in until site photos arrive).",
+    "count": 4,
+    "photoPending": true,
+    "answer": [
+     "Plugged or missing spray nozzle",
+     "Torn conveyor skirt",
+     "Missing cover at a transfer point",
+     "Dust piled up instead of cleaned with water or a vacuum"
+    ]
+   },
+   {
+    "id": "M8-g",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "Your cab's door seal is torn on a dry, dusty day. What do you do?",
+    "model_answer": "Report it to your supervisor and on your pre-trip inspection list or app so it gets repaired. Keep the doors and windows shut. If dust is getting in, ask your supervisor whether you need respiratory protection until it's fixed.",
+    "must_include": [
+     "report it",
+     "pre-trip",
+     "keep doors shut",
+     "repair",
+     "respiratory protection"
+    ]
    }
   ]
  },
  "9": {
-  "title": "Module 9 · Electrical hazards",
-  "minutes": 11.0,
+  "title": "Module 9 · Electrical hazards: lockout, power lines, cables and qualified work",
+  "minutes": 35.0,
   "items": [
    {
     "id": "M9-a",
@@ -444,6 +915,174 @@ const ALLEN_ACTIVITIES = {
      "Pump cable lying in water",
      "Cut cable jacket",
      "Plug missing ground pin"
+    ]
+   },
+   {
+    "id": "M9-f",
+    "type": "ordering",
+    "minutes": 4,
+    "prompt": "Put the conveyor lockout steps in order.",
+    "items": [
+     "Tell the plant operator and the crew",
+     "Stop the conveyor and the feed",
+     "Open the right disconnect",
+     "Put on your own lock and tag",
+     "Release or block stored energy",
+     "Try to start it with everyone clear"
+    ],
+    "answer": [
+     "Tell the plant operator and the crew",
+     "Stop the conveyor and the feed",
+     "Open the right disconnect",
+     "Put on your own lock and tag",
+     "Release or block stored energy",
+     "Try to start it with everyone clear"
+    ],
+    "explanation": ""
+   },
+   {
+    "id": "M9-g",
+    "type": "find_the_hazard",
+    "minutes": 4,
+    "prompt": "Find the problems with this trailing cable (illustrated stand-in until site photos arrive).",
+    "count": 4,
+    "photoPending": true,
+    "answer": [
+     "Cut outer jacket",
+     "Crushed or flattened section",
+     "Exposed conductor",
+     "Tape patch instead of a permanent splice"
+    ]
+   },
+   {
+    "id": "M9-h",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "You're driving a truck and the raised bed touches an overhead power line. What do you do?",
+    "model_answer": "Stay in the cab. Warn everyone to stay away from the truck, and call for help by radio so the power can be shut off. Only leave if fire forces you out: jump clear with your feet together, never touch the truck and the ground at the same time, and shuffle away.",
+    "must_include": [
+     "stay in the cab",
+     "warn others away",
+     "call for help",
+     "jump clear",
+     "shuffle"
+    ]
+   },
+   {
+    "id": "M9-i",
+    "type": "matching",
+    "minutes": 3,
+    "prompt": "Who does it? Match each task to the right person.",
+    "left": [
+     "Resetting a breaker that keeps tripping",
+     "Repairing a damaged trailing cable",
+     "Opening an electrical panel to troubleshoot",
+     "Reporting a damaged cord",
+     "Staying clear of an open panel and reporting it"
+    ],
+    "right": [
+     "Qualified person only",
+     "Any trained miner"
+    ],
+    "pairs": [
+     [
+      "Resetting a breaker that keeps tripping",
+      "Qualified person only"
+     ],
+     [
+      "Repairing a damaged trailing cable",
+      "Qualified person only"
+     ],
+     [
+      "Opening an electrical panel to troubleshoot",
+      "Qualified person only"
+     ],
+     [
+      "Reporting a damaged cord",
+      "Any trained miner"
+     ],
+     [
+      "Staying clear of an open panel and reporting it",
+      "Any trained miner"
+     ]
+    ],
+    "answer": [
+     [
+      "Resetting a breaker that keeps tripping",
+      "Qualified person only"
+     ],
+     [
+      "Repairing a damaged trailing cable",
+      "Qualified person only"
+     ],
+     [
+      "Opening an electrical panel to troubleshoot",
+      "Qualified person only"
+     ],
+     [
+      "Reporting a damaged cord",
+      "Any trained miner"
+     ],
+     [
+      "Staying clear of an open panel and reporting it",
+      "Any trained miner"
+     ]
+    ]
+   },
+   {
+    "id": "M9-j",
+    "type": "self_check",
+    "minutes": 3,
+    "prompt": "Lock, tag and try – tick each item before you work on equipment you've been trained to lock out.",
+    "items": [
+     "The operator and crew know I'm working on it",
+     "Equipment stopped at the controls",
+     "The right disconnect is open",
+     "My own lock and signed tag are on",
+     "Stored energy released or blocked",
+     "Try-start with everyone clear: nothing moved"
+    ],
+    "answer": "Completion only"
+   },
+   {
+    "id": "M9-k",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Your coworker's lock is on a disconnect and he's gone for lunch. Who can take it off?",
+    "options": [
+     "You, if the job looks done",
+     "The plant operator",
+     "Only the person who put it on, or authorized personnel under the procedure",
+     "Anyone with bolt cutters"
+    ],
+    "answer": 2,
+    "explanation": "30 CFR 56/57.12016: locks and tags are removed only by the person who installed them or by authorized personnel."
+   },
+   {
+    "id": "M9-l",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "What does ground-fault protection do?",
+    "options": [
+     "Makes a cable safe to handle while energized",
+     "Detects current leaking out of the circuit and trips the power",
+     "Stops cables from wearing out",
+     "Replaces lockout"
+    ],
+    "answer": 1,
+    "explanation": "When current leaks to the frame or the ground, the protection trips. A trip means a fault, so report it and let a qualified person find out why."
+   },
+   {
+    "id": "M9-m",
+    "type": "scenario_short_answer",
+    "minutes": 3,
+    "prompt": "The crusher operator asks you to reset a breaker that just tripped. What do you say?",
+    "model_answer": "No. A trip means a fault. I'm not qualified to reset it. Report it so a qualified person can find out why it tripped before the power goes back on.",
+    "must_include": [
+     "not qualified",
+     "a trip means a fault",
+     "report it",
+     "qualified person"
     ]
    }
   ]
@@ -629,8 +1268,8 @@ const ALLEN_ACTIVITIES = {
   ]
  },
  "12": {
-  "title": "Module 12 · Task training: haulage, loader, plant, drill & blast, shop, HazCom",
-  "minutes": 48.0,
+  "title": "Module 12 · Task training, workplace exams, case studies and stopping unsafe work",
+  "minutes": 89.0,
   "items": [
    {
     "id": "M12-a",
@@ -873,6 +1512,206 @@ const ALLEN_ACTIVITIES = {
     "minutes": 6,
     "prompt": "Find the diesel SDS. Signal word? First aid for skin contact? Required gloves?",
     "answer": "From the SDS library"
+   },
+   {
+    "id": "M12-n1",
+    "type": "find_the_hazard",
+    "minutes": 5,
+    "prompt": "Workplace exam practice: the plant. Find the hazards in this working place (illustrated stand-in until site photos arrive).",
+    "count": 5,
+    "photoPending": true,
+    "answer": [
+     "Missing guard at a conveyor tail pulley",
+     "Spillage piled under a running conveyor",
+     "Walkway handrail missing or damaged",
+     "Electrical panel door left open",
+     "Someone working on equipment without a lock on the disconnect"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-screen-plant.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom screen plant: overhead conveyor on a steel frame, stairs to a control booth, jersey barriers and an ALL TRAFFIC sign along the haul road",
+      "answer": "Clover Bottom screen plant. Walk it like an examiner: guards, spillage under belts, walkways and handrails, stop cords or railings, traffic routes.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     },
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom primary crusher with a haul truck at the dump point, feeder and conveyors below, highwall and mine portal behind",
+      "answer": "Clover Bottom primary crusher and dump point. Check the dump berm or stop, the walkways and guards, and spillage under the conveyors.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
+    ]
+   },
+   {
+    "id": "M12-n2",
+    "type": "find_the_hazard",
+    "minutes": 5,
+    "prompt": "Workplace exam practice: the pit or the face. Find the hazards in this working place (illustrated stand-in until site photos arrive).",
+    "count": 5,
+    "photoPending": true,
+    "answer": [
+     "Dump-site berm too low or broken",
+     "Loose rock on the face, back or rib that hasn't been scaled",
+     "Loose ground not posted or barricaded",
+     "Haul road edge with no berm",
+     "Water pooled near the travelway edge with no warning"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-primary-crusher-pit.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Clover Bottom pit: highwall with the mine portal above the primary crusher, haul truck at the dump point",
+      "answer": "Clover Bottom pit, highwall and portal. Check the highwall and portal brow for loose rock, the dump-point berm or stop, and traffic.",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
+    ]
+   },
+   {
+    "id": "M12-n3",
+    "type": "find_the_hazard",
+    "minutes": 5,
+    "prompt": "Workplace exam practice: the shop. Find the hazards in this working place (illustrated stand-in until site photos arrive).",
+    "count": 5,
+    "photoPending": true,
+    "answer": [
+     "Raised truck bed or bucket not blocked",
+     "Grinder missing its guard",
+     "Oil spill on the floor",
+     "Unlabeled container",
+     "Hot work with no fire extinguisher nearby"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-underground-shop.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Lit underground shop area with overhead lights, ventilation duct and equipment parked inside",
+      "answer": "Orientation photo only (not a hazard answer key).",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
+    ]
+   },
+   {
+    "id": "M12-o",
+    "type": "jsa_worksheet",
+    "minutes": 8,
+    "prompt": "Fill out a workplace-exam record for the plant working place in M12-n1. For each area you examined, write the condition you found and the fix or posting.",
+    "columns": [
+     "Area examined",
+     "Condition found",
+     "Fix, posting, or date corrected"
+    ],
+    "answer_key": [
+     [
+      "Conveyor tail pulley",
+      "Guard missing",
+      "Lock out, reinstall the guard before restart; record the date corrected"
+     ],
+     [
+      "Under the conveyor",
+      "Spillage piled up",
+      "Lock out before cleanup; schedule cleanup; record the date corrected"
+     ],
+     [
+      "Walkway",
+      "Handrail damaged",
+      "Barricade or post the walkway until repaired; tell miners who use it"
+     ],
+     [
+      "Electrical panel",
+      "Door open",
+      "Keep people clear; qualified person closes and checks it; record it"
+     ]
+    ]
+   },
+   {
+    "id": "M12-p",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "Case study: \"Fatal Fall of Rib Accident, April 11, 2014\" (MSHA report). What was the first missed control, and what would you have done?",
+    "model_answer": "Per the report, scaling was done from a position exposed to falling material (a man basket about 38 feet up beside the rib). Scale from a location that is not exposed to falling material; post and barricade loose ground until it's corrected; stop and ask if you can't do it from a safe place.",
+    "must_include": [
+     "safe location",
+     "not exposed to falling material",
+     "barricade loose ground",
+     "stop and ask"
+    ]
+   },
+   {
+    "id": "M12-q",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "Case study: \"Powered Haulage Accident, September 12, 2023\" (MSHA report). What was the first missed control, and what would you have done?",
+    "model_answer": "Per the report, the dump-site berm was too small to stop the truck from going over the edge, and the workplace exam didn't catch it. Don't dump at an edge with an inadequate berm: dump short, report the berm, and don't use that spot until it's fixed. Wear your seat belt.",
+    "must_include": [
+     "berm",
+     "workplace exam",
+     "dump short",
+     "report"
+    ]
+   },
+   {
+    "id": "M12-r",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "Case study: \"Fatal Slip or Fall of Person Accident, June 8, 2023\" (MSHA report). What was the first missed control, and what would you have done?",
+    "model_answer": "Per the report, the magnet belt conveyor was not de-energized, locked out and blocked against motion, and it started on its own timer, and there was no safe means of access. Lock out and block every piece of equipment you'll work on, including anything that can start automatically; try-start; use a safe means of access, not the conveyors.",
+    "must_include": [
+     "lock out",
+     "block against motion",
+     "automatic start",
+     "safe access"
+    ]
+   },
+   {
+    "id": "M12-s",
+    "type": "ordering",
+    "minutes": 3,
+    "prompt": "Put the steps for stopping unsafe work in order.",
+    "items": [
+     "Stop in a safe way",
+     "Warn anyone else who could be exposed",
+     "Tell your lead or supervisor right away",
+     "Say exactly what you saw and why it's unsafe",
+     "Agree on the fix before work restarts"
+    ],
+    "answer": [
+     "Stop in a safe way",
+     "Warn anyone else who could be exposed",
+     "Tell your lead or supervisor right away",
+     "Say exactly what you saw and why it's unsafe",
+     "Agree on the fix before work restarts"
+    ],
+    "explanation": ""
+   },
+   {
+    "id": "M12-t1",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "When does the workplace exam have to be done?",
+    "options": [
+     "Once a week",
+     "At least once each shift, before miners begin work in that place",
+     "Only after an accident",
+     "Whenever MSHA visits"
+    ],
+    "answer": 1,
+    "explanation": "30 CFR 56/57.18002(a): a competent person examines each working place at least once each shift before miners begin work there."
+   },
+   {
+    "id": "M12-t2",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "What happens to the workplace-exam record?",
+    "options": [
+     "Nothing; exams aren't written down",
+     "It's made before the end of the shift and kept for at least one year",
+     "It's only kept if a hazard is found",
+     "It's thrown away at the end of the week"
+    ],
+    "answer": 1,
+    "explanation": "30 CFR 56/57.18002(b)-(d): record before the end of the shift, including conditions found and the date corrected; keep it at least one year."
    }
   ]
  }
