@@ -23,6 +23,8 @@ New material only counts if it's **required**. Every video has to go in `MODULE_
 
 ## Ground rules (read first)
 
+0. **Self-rescuer.** All three sites use the **MSA W65 filter self-rescuer**. Never call it an SCSR, and never describe oxygen supply, swapping units, or caches of extra units unless `js/site-content.js` says so.
+
 1. **Facts.**
    - Site facts come only from `js/site-content.js`. That covers:
      - names and addresses
@@ -68,7 +70,7 @@ New material only counts if it's **required**. Every video has to go in `MODULE_
 ## Fix first: Module 6, `allen-m6-1` (Fire warning and stench gas)
 
 At **01:08.7–01:12.7** the line is "If you smell smoke or feel heat in your self-rescuer, put it on." That's wrong and could hurt someone:
-- A working SCSR gets hot. Heat is normal and is no reason to wait for it.
+- These sites use the **MSA W65 filter self-rescuer**, not an oxygen-supplying SCSR. The W65 gets hot when it is converting carbon monoxide. Heat is normal: keep it on until you reach fresh air. It is no reason to wait to put it on, or to take it off.
 - The trigger to put it on is the first sign of fire or smoke, or a CO alarm or stench gas.
 
 **Replace the line with:** "At the first sign of smoke, a CO alarm, or stench gas, put on your self-rescuer right away. Don't wait to see how bad it gets." Then:
@@ -119,13 +121,13 @@ At **01:08.7–01:12.7** the line is "If you smell smoke or feel heat in your se
 | `allen-m6-4` | Escapeway map walkthrough: Boonesboro Quarry | 6 min | An animated pass over the Boonesboro map: Level 1 and the shop, primary and secondary escapeways, how escapeways are marked, gathering point, where the maps are posted. Use only the layout in `SITE_CONTENT`; flag any route detail as `[VERIFY: Nathan]`. |
 | `allen-m6-5` | Escapeway map walkthrough: Clover Bottom #1 and #2 | 6 min | Both mines and the shared surface, escapeways for each, tag-out at the right mine (#1 / 15-00112 vs #2 / 15-19898), gathering point. |
 | `allen-m6-6` | Escapeway map walkthrough: Dix River Stone | 6 min | Header mining on two levels underground plus the surface areas, escapeways, gathering point. |
-| `allen-m6-7` | Smoke in the drift: escape decisions | 6 min | A branching story: the CO alarm goes off, the trainee puts on the SCSR at once (use the corrected rule above), follows lifelines and escapeway markers, decides when to switch to a second unit, and decides when to barricade rather than walk on. |
+| `allen-m6-7` | Smoke in the drift: escape decisions | 6 min | A branching story: the CO alarm goes off, the trainee puts on the W65 at once (use the corrected rule above) and keeps it on even though it gets hot. They follow escapeway markers toward fresh air and decide when to barricade rather than walk on. State the W65 limit plainly: it filters CO but supplies no oxygen, so it's an escape device, not a reason to stay in smoke. |
 | `allen-m6-8` | Accounting for everyone | 5 min | Why tag-in and tag-out matter in an evacuation, how the gathering-point headcount works, and never going back in for a missing person on your own. Tie it to the Clover Bottom check-in findings in `SITE_SAFETY_RECORDS`. |
 
 **Activities (+25 min):**
 - **M6-g–i `map_trace`, 5 min ×3:** one per site. Trace the primary and secondary escapeway from a marked work area to the gathering point.
 - **M6-j `scenario_short_answer`, 6 min:** the branching smoke scenario, with free-text reasoning at two decision points.
-- **M6-k `ordering`, 2 min:** the steps for putting on an SCSR in smoke.
+- **M6-k `ordering`, 2 min:** the W65 donning steps in smoke (follow MSA's W65 instructions and the batch 1 video `allen-m3-1`).
 - **M6-l `multiple_choice`, 1.5 min:** when to barricade.
 
 ---
