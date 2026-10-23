@@ -529,7 +529,30 @@ const ALLEN_ACTIVITIES = {
     "minutes": 5,
     "prompt": "Boonesboro: on the posted escapeway map, trace the primary and secondary escapeway from a marked work area to your gathering point.",
     "photoPending": true,
-    "answer": "Site-specific – from Boonesboro's posted escapeway map"
+    "answer": "Site-specific – from Boonesboro's posted escapeway map",
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-l1-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 1 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-bbq-l2-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 2 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 2 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-bbq-l3-escapeway-trace.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Simplified trace of the Boonesboro Level 3 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 3 (trace)"
+     }
+    ]
    },
    {
     "id": "M6-h",
@@ -537,7 +560,23 @@ const ALLEN_ACTIVITIES = {
     "minutes": 5,
     "prompt": "Clover Bottom #1 & #2: on the posted escapeway map for the mine you work in, trace the primary and secondary escapeway from a marked work area to your gathering point.",
     "photoPending": true,
-    "answer": "Site-specific – from Clover Bottom's posted escapeway maps"
+    "answer": "Site-specific – from Clover Bottom's posted escapeway maps",
+    "photos": [
+     {
+      "src": "/media/photos/allen-cbq-1-escapeway-trace.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Simplified trace of the Clover Bottom Mine #1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Mine #1 (trace)"
+     },
+     {
+      "src": "/media/photos/allen-cbq-2-escapeway-trace.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Simplified trace of the Clover Bottom Mine #2 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Mine #2 (trace)"
+     }
+    ]
    },
    {
     "id": "M6-i",
@@ -547,8 +586,15 @@ const ALLEN_ACTIVITIES = {
       "src": "/media/photos/allen-drs-escape-map-plant-trailer.jpg",
       "site": "Dix River Stone",
       "alt": "Escape map posted in a covered box on the side of the plant trailer on the flat, highwall behind",
-      "answer": "Where the Dix River escape map is posted: the plant trailer (also in the breakroom). The map itself is still pending for this activity.",
+      "answer": "Where the Dix River escape map is posted: the plant trailer (also in the breakroom).",
       "label": "Where is the map?"
+     },
+     {
+      "src": "/media/photos/allen-drs-l1-escapeway-trace.jpg",
+      "site": "Dix River Stone",
+      "alt": "Simplified trace of the Dix River Level 1 escapeway map: pillars, green escapeway arrows, white and blue reflector dots",
+      "answer": "Green arrows mark both escapeways: white reflector dots = primary, blue = secondary. This is a simplified trace of the 2026 map; the map posted at the mine always governs.",
+      "label": "Level 1 (trace)"
      }
     ],
     "minutes": 5,
