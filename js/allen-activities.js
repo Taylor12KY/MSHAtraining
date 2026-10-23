@@ -196,6 +196,36 @@ const ALLEN_ACTIVITIES = {
       "site": "Dix River Stone",
       "alt": "Horizontal white tank marked NO OPEN FLAMES with a hazard diamond, hose and a fire extinguisher on a stand",
       "answer": "Fuel tank (no open flames; extinguisher on the stand)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-portals.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Two mine entrance portals cut into the limestone face, with a red and white DANGER sign on the rock between them",
+      "answer": "Mine entrance portals (DANGER sign: hard hat area)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-2west-caution-light.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Wide underground haulage road between pillars, with an amber light in the distance at an intersection",
+      "answer": "Caution light at the 5 North intersection on 2 West: slow down and watch for cross traffic."
+     },
+     {
+      "src": "/media/photos/allen-bbq-2west-blocked-area.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Dark underground heading with a blocked-off travel area marked by a sign and posts",
+      "answer": "Blocked-off area on 2 West (toward the Liwell Plant and Roll Crusher): do not enter unless you are assigned and authorized."
+     },
+     {
+      "src": "/media/photos/allen-bbq-underground-shop.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Lit underground shop area with overhead lights, ventilation duct and equipment parked inside",
+      "answer": "Underground mine shop."
+     },
+     {
+      "src": "/media/photos/allen-cbq-magazines.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Two steel magazine boxes on the floor of an underground opening, a smaller box between them",
+      "answer": "Explosive magazines (keep away unless assigned; no smoking or flames within 50 ft)."
      }
     ]
    },
@@ -1551,6 +1581,15 @@ const ALLEN_ACTIVITIES = {
      "Oil spill on the floor",
      "Unlabeled container",
      "Hot work with no fire extinguisher nearby"
+    ],
+    "photos": [
+     {
+      "src": "/media/photos/allen-bbq-underground-shop.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Lit underground shop area with overhead lights, ventilation duct and equipment parked inside",
+      "answer": "Orientation photo only (not a hazard answer key).",
+      "label": "Orientation photo only (not a hazard answer key)"
+     }
     ]
    },
    {
