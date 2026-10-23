@@ -99,7 +99,7 @@ const ALLEN_ACTIVITIES = {
      "Eyewash station",
      "Your gathering point"
     ],
-    "photoCoverage": "Photos cover: the tag board at all three sites; Boonesboro breakroom (PPE sign, contractor tag board, first aid cabinet and SDS station) and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
+    "photoCoverage": "Photos cover: the tag boards at all three sites; Boonesboro breakroom (PPE sign, contractor tag board, first aid cabinet and SDS station), outdoor tag board and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
     "photos": [
      {
       "src": "/media/photos/allen-bbq-tag-board-ppe-sign.jpg",
@@ -112,6 +112,12 @@ const ALLEN_ACTIVITIES = {
       "site": "Boonesboro Quarry",
       "alt": "Second breakroom tag board labeled IN, CONTRACTORS and OUT with numbered pegs and brass tags, clipboard below",
       "answer": "Contractor tag board in the breakroom (IN / CONTRACTORS / OUT)."
+     },
+     {
+      "src": "/media/photos/allen-bbq-outdoor-tag-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Outdoor covered tag board on a block wall: IN and OUT pegboard panels with tags and a CHOOSE TO BE SAFE poster in a glass case between them",
+      "answer": "Outdoor tag board (covered, IN and OUT) outside the building."
      },
      {
       "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
