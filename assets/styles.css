@@ -1270,3 +1270,28 @@ body.app-dialog-open { overflow: hidden; }
 .record-account-access { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
 .record-account-access h4 { margin: 0 0 4px; }
 .record-account-access p { margin: 0 0 10px; color: var(--text-muted); font-size: 0.85rem; }
+
+/* Self-hosted Allen Company Part 48 videos (HTML5 path) */
+.self-hosted-video-frame video {
+  position: absolute; inset: 0; width: 100%; height: 100%; background: #000; object-fit: contain;
+}
+.self-hosted-video::-webkit-media-controls-playback-rate-button { display: none !important; }
+.self-hosted-video-note { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Practice activities for the Allen Company videos */
+.allen-activities h3 { margin-bottom: 6px; }
+.allen-activity-intro { color: var(--text-muted); font-size: 0.9rem; }
+.allen-activity {
+  border: 1px solid rgba(127, 127, 127, 0.25); border-radius: 8px; padding: 12px 14px; margin: 12px 0;
+}
+.allen-activity-prompt { margin: 0 0 8px; }
+.allen-activity-minutes { color: var(--text-muted); font-size: 0.8rem; white-space: nowrap; }
+.allen-activity-option, .allen-activity-row { display: block; margin: 6px 0; line-height: 1.4; }
+.allen-activity-row select { margin-right: 8px; max-width: 100%; }
+.allen-activity-hint { font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 8px; }
+.allen-activity textarea { width: 100%; box-sizing: border-box; margin: 6px 0; font: inherit; }
+.allen-activity .btn { margin-top: 8px; }
+.allen-activity-feedback { margin-top: 8px; font-size: 0.9rem; }
+.allen-activity-feedback.ok { color: var(--success); }
+.allen-activity-feedback.retry { color: var(--warning); }
+.allen-activity-feedback ul { margin: 6px 0 0 18px; }

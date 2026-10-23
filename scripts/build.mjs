@@ -16,6 +16,8 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, 'instructor'), { recursive: true });
 await cp(path.join(root, 'assets'), path.join(dist, 'assets'), { recursive: true });
 await cp(path.join(root, 'js'), path.join(dist, 'js'), { recursive: true });
+// Self-hosted Allen Company Part 48 videos, captions and posters (each video <= 10 MB).
+await cp(path.join(root, 'media'), path.join(dist, 'media'), { recursive: true });
 
 await build({
   entryPoints: [path.join(root, 'src', 'instructor-auth.js')],

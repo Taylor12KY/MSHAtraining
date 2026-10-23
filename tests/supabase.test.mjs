@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createFakeSupabase } from './fake-supabase.mjs';
+import { MODULE_REQUIREMENTS } from '../netlify/lib/module-requirements.mjs';
 import { setSupabaseAdminForTests } from '../netlify/lib/supabase-server.mjs';
 import learnerProgress from '../netlify/functions/learner-progress.mjs';
 import instructorRecords from '../netlify/functions/instructor-records.mjs';
@@ -30,6 +31,8 @@ const moduleOneDone = {
   timersDone: { 1: true },
   scrollDone: { 1: true },
   scores: { 1: 100 },
+  // Module 1 now requires the four Allen Company site/orientation videos.
+  videoProgress: { 1: Object.fromEntries(Object.entries(MODULE_REQUIREMENTS[1].videos).map(([id, seconds]) => [id, { watchedSeconds: seconds, complete: true }])) },
   completed: [1]
 };
 

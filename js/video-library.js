@@ -1313,6 +1313,397 @@ const VIDEO_TRAINING_GUIDANCE = {
 
 };
 
+// ---------------------------------------------------------------------------
+// Allen Company Part 48 videos (draft v1), self-hosted from /media and played in the
+// tracked HTML5 player (provider "self"). Same no-skip, 1x-speed, visible-playback,
+// resume and completion records as the YouTube/Vimeo path. Captions are burned in
+// and also provided as .vtt.
+const SELF_HOSTED_VIDEOS = [
+  {
+    "id": "allen-m1-1",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Site walkthrough: Boonesboro Quarry",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 194,
+    "description": "A guided preview of Boonesboro Quarry: check-in, traffic, communication, work areas and emergencies.",
+    "src": "/media/videos/allen-m1-1.mp4",
+    "captions": "/media/captions/allen-m1-1.vtt",
+    "poster": "/media/posters/allen-m1-1.jpg"
+  },
+  {
+    "id": "allen-m1-2",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Site walkthrough: Dix River Stone",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 189,
+    "description": "A guided preview of Dix River Stone: check-in, traffic, communication, work areas and emergencies.",
+    "src": "/media/videos/allen-m1-2.mp4",
+    "captions": "/media/captions/allen-m1-2.vtt",
+    "poster": "/media/posters/allen-m1-2.jpg"
+  },
+  {
+    "id": "allen-m1-4",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Site walkthrough: Clover Bottom Quarry #1 & #2",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 201,
+    "description": "A guided preview of Clover Bottom: check-in, traffic, communication, work areas and emergencies.",
+    "src": "/media/videos/allen-m1-4.mp4",
+    "captions": "/media/captions/allen-m1-4.vtt",
+    "poster": "/media/posters/allen-m1-4.jpg"
+  },
+  {
+    "id": "allen-m1-5",
+    "moduleId": 1,
+    "provider": "self",
+    "title": "Your emergency card",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 115,
+    "description": "How to use your site's emergency contacts card and site page: 911 first, then mine command.",
+    "src": "/media/videos/allen-m1-5.mp4",
+    "captions": "/media/captions/allen-m1-5.vtt",
+    "poster": "/media/posters/allen-m1-5.jpg"
+  },
+  {
+    "id": "allen-m2-1",
+    "moduleId": 2,
+    "provider": "self",
+    "title": "The Mine Act, miners' representatives and your rights",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 176,
+    "description": "Why the Mine Act exists, your rights as a miner, miners' representatives, and how to report hazards at Allen.",
+    "src": "/media/videos/allen-m2-1.mp4",
+    "captions": "/media/captions/allen-m2-1.vtt",
+    "poster": "/media/posters/allen-m2-1.jpg"
+  },
+  {
+    "id": "allen-m3-1",
+    "moduleId": 3,
+    "provider": "self",
+    "title": "MSA W65 self-rescuer: care and inspection",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 132,
+    "description": "How to inspect and care for your W65, what it does (and doesn't do), and when it comes out of service.",
+    "src": "/media/videos/allen-m3-1.mp4",
+    "captions": "/media/captions/allen-m3-1.vtt",
+    "poster": "/media/posters/allen-m3-1.jpg"
+  },
+  {
+    "id": "allen-m6-1",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Fire warning and stench gas",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 158,
+    "description": "How fires are signaled underground and on the surface, what stench gas smells like, and what to do.",
+    "src": "/media/videos/allen-m6-1.mp4",
+    "captions": "/media/captions/allen-m6-1.vtt",
+    "poster": "/media/posters/allen-m6-1.jpg"
+  },
+  {
+    "id": "allen-m6-2",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Fighting small fires: extinguishers",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 164,
+    "description": "Fire classes, when to fight or flee, and how to use an extinguisher with P.A.S.S.",
+    "src": "/media/videos/allen-m6-2.mp4",
+    "captions": "/media/captions/allen-m6-2.vtt",
+    "poster": "/media/posters/allen-m6-2.jpg"
+  },
+  {
+    "id": "allen-m6-3",
+    "moduleId": 6,
+    "provider": "self",
+    "title": "Abandoned areas and barricading",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 127,
+    "description": "Why abandoned areas are off-limits, and barricading as a last resort when escape is cut off.",
+    "src": "/media/videos/allen-m6-3.mp4",
+    "captions": "/media/captions/allen-m6-3.vtt",
+    "poster": "/media/posters/allen-m6-3.jpg"
+  },
+  {
+    "id": "allen-m8-1",
+    "moduleId": 8,
+    "provider": "self",
+    "title": "Health provisions and warning labels",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 158,
+    "description": "How the Mine Act protects miners' health, and how to read the warning signs and labels at the quarry.",
+    "src": "/media/videos/allen-m8-1.mp4",
+    "captions": "/media/captions/allen-m8-1.vtt",
+    "poster": "/media/posters/allen-m8-1.jpg"
+  },
+  {
+    "id": "allen-m9-1",
+    "moduleId": 9,
+    "provider": "self",
+    "title": "Electrical hazards: scenarios",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 184,
+    "description": "Five real quarry situations, from open panels to a pump cable in water, and what to do in each.",
+    "src": "/media/videos/allen-m9-1.mp4",
+    "captions": "/media/captions/allen-m9-1.vtt",
+    "poster": "/media/posters/allen-m9-1.jpg"
+  },
+  {
+    "id": "allen-m10-1",
+    "moduleId": 10,
+    "provider": "self",
+    "title": "First aid: fractures, dislocations and splinting",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 185,
+    "description": "Scene safety, recognizing fractures, splinting basics and shock.",
+    "src": "/media/videos/allen-m10-1.mp4",
+    "captions": "/media/captions/allen-m10-1.vtt",
+    "poster": "/media/posters/allen-m10-1.jpg"
+  },
+  {
+    "id": "allen-m10-2",
+    "moduleId": 10,
+    "provider": "self",
+    "title": "First aid: burns",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 167,
+    "description": "Thermal, chemical and electrical burns: stop, cool, cover, and when to get help.",
+    "src": "/media/videos/allen-m10-2.mp4",
+    "captions": "/media/captions/allen-m10-2.vtt",
+    "poster": "/media/posters/allen-m10-2.jpg"
+  },
+  {
+    "id": "allen-m10-3",
+    "moduleId": 10,
+    "provider": "self",
+    "title": "First aid: eye and chemical injuries",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 171,
+    "description": "Eye injuries and chemical splashes: flushing, eyewash use and the SDS.",
+    "src": "/media/videos/allen-m10-3.mp4",
+    "captions": "/media/captions/allen-m10-3.vtt",
+    "poster": "/media/posters/allen-m10-3.jpg"
+  },
+  {
+    "id": "allen-m10-4",
+    "moduleId": 10,
+    "provider": "self",
+    "title": "First aid: heat illness",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 137,
+    "description": "Recognizing heat exhaustion and heat stroke, cooling fast, and prevention.",
+    "src": "/media/videos/allen-m10-4.mp4",
+    "captions": "/media/captions/allen-m10-4.vtt",
+    "poster": "/media/posters/allen-m10-4.jpg"
+  },
+  {
+    "id": "allen-m11-1",
+    "moduleId": 11,
+    "provider": "self",
+    "title": "Surface operations hazards",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 151,
+    "description": "Pits, ramps and dump points, spoil banks and stockpiles, water hazards, and illumination in low light.",
+    "src": "/media/videos/allen-m11-1.mp4",
+    "captions": "/media/captions/allen-m11-1.vtt",
+    "poster": "/media/posters/allen-m11-1.jpg"
+  },
+  {
+    "id": "allen-m12-1",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: haul truck and tri-axle in the pit",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 382,
+    "description": "Pre-shift exams, blind spots and making contact, haul roads, berms and dumping.",
+    "src": "/media/videos/allen-m12-1.mp4",
+    "captions": "/media/captions/allen-m12-1.vtt",
+    "poster": "/media/posters/allen-m12-1.jpg"
+  },
+  {
+    "id": "allen-m12-2",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: wheel loader",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 237,
+    "description": "Loader walkaround, stockpile and face work, loading trucks and feeding the plant.",
+    "src": "/media/videos/allen-m12-2.mp4",
+    "captions": "/media/captions/allen-m12-2.vtt",
+    "poster": "/media/posters/allen-m12-2.jpg"
+  },
+  {
+    "id": "allen-m12-3",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: crusher and plant",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 284,
+    "description": "How the plant works, guarding, lockout, clearing jams and dust and noise.",
+    "src": "/media/videos/allen-m12-3.mp4",
+    "captions": "/media/captions/allen-m12-3.vtt",
+    "poster": "/media/posters/allen-m12-3.jpg"
+  },
+  {
+    "id": "allen-m12-4",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: driller and blaster's helper",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 231,
+    "description": "Bench and underground drilling safety, explosives handling, guarding the blast and misfires.",
+    "src": "/media/videos/allen-m12-4.mp4",
+    "captions": "/media/captions/allen-m12-4.vtt",
+    "poster": "/media/posters/allen-m12-4.jpg"
+  },
+  {
+    "id": "allen-m12-5",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: shop and maintenance",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 176,
+    "description": "Lockout and blocking, tires, lifting, hot work and housekeeping on mine equipment.",
+    "src": "/media/videos/allen-m12-5.mp4",
+    "captions": "/media/captions/allen-m12-5.vtt",
+    "poster": "/media/posters/allen-m12-5.jpg"
+  },
+  {
+    "id": "allen-m12-6",
+    "moduleId": 12,
+    "provider": "self",
+    "title": "Task training: HazCom",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 229,
+    "description": "Labels, pictograms, safety data sheets and the chemicals at our quarries.",
+    "src": "/media/videos/allen-m12-6.mp4",
+    "captions": "/media/captions/allen-m12-6.vtt",
+    "poster": "/media/posters/allen-m12-6.jpg"
+  }
+];
+REQUIRED_VIDEOS.push(...SELF_HOSTED_VIDEOS);
+const SELF_HOSTED_VIDEO_IDS = new Set(SELF_HOSTED_VIDEOS.map(video => video.id));
+Object.entries({"1": ["allen-m1-1", "allen-m1-2", "allen-m1-4", "allen-m1-5"], "2": ["allen-m2-1"], "3": ["allen-m3-1"], "6": ["allen-m6-1", "allen-m6-2", "allen-m6-3"], "8": ["allen-m8-1"], "9": ["allen-m9-1"], "10": ["allen-m10-1", "allen-m10-2", "allen-m10-3", "allen-m10-4"], "11": ["allen-m11-1"], "12": ["allen-m12-1", "allen-m12-2", "allen-m12-3", "allen-m12-4", "allen-m12-5", "allen-m12-6"]}).forEach(([moduleId, ids]) => {
+  MODULE_VIDEO_SEQUENCE[moduleId] = (MODULE_VIDEO_SEQUENCE[moduleId] || []).concat(ids);
+});
+Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
+  "allen-m1-1": "Start here: before your in-person tour, see how Boonesboro is laid out.",
+  "allen-m1-2": "If you work at Dix River Stone, this is your site's walkthrough.",
+  "allen-m1-4": "If you work at Clover Bottom, this is your site's walkthrough.",
+  "allen-m1-5": "Now that you know your site, learn exactly who to call when something goes wrong.",
+  "allen-m2-1": "Now see how this applies at Allen Company sites. With emergencies covered, here's the law that protects you and how to speak up about hazards.",
+  "allen-m3-1": "Now see how this applies at Allen Company sites. Underground, your W65 is your escape lifeline, so here's how to keep it ready.",
+  "allen-m6-1": "Now see how this applies at Allen Company sites. Your W65 gets you out of bad air; now learn how you'll know it's time to go.",
+  "allen-m6-2": "Once the alarm is raised, a small fire may be one you can put out, if you know how.",
+  "allen-m6-3": "If escape by either escapeway is cut off, here's the last resort.",
+  "allen-m8-1": "Now see how this applies at Allen Company sites. From emergencies to everyday health: the signs and rules that protect you over a career.",
+  "allen-m9-1": "Now see how this applies at Allen Company sites. Some of the most serious hazards at a quarry are electrical; work through five real situations.",
+  "allen-m10-1": "Now see how this applies at Allen Company sites. When someone does get hurt, first aid starts here: broken bones and splinting.",
+  "allen-m10-2": "Next, burns, from the shop to the fuel island.",
+  "allen-m10-3": "Chemical burns often involve the eyes; here's what to do in the first seconds.",
+  "allen-m10-4": "Summer in the pit brings one more first-aid risk: heat.",
+  "allen-m11-1": "Now see how this applies at Allen Company sites. Back to the surface: the pit, water, stockpiles and lighting hazards around our sites.",
+  "allen-m12-1": "Now see how this applies at Allen Company sites. Now task training, starting with the trucks that move rock from the face to the plant.",
+  "allen-m12-2": "The loader feeds those trucks; here's how to run it safely.",
+  "allen-m12-3": "The rock ends up at the plant; learn its hazards before you work there.",
+  "allen-m12-4": "Before rock reaches the loader, it's drilled and blasted; here's the helper's role.",
+  "allen-m12-5": "Every machine you've seen comes through the shop; here's how to work on it safely.",
+  "allen-m12-6": "Last, the chemicals you'll handle across all of these jobs."
+});
+Object.assign(VIDEO_TRAINING_GUIDANCE, {
+  "allen-m1-1": {
+    "focus": "Where things are and how we work at Boonesboro.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m1-2": {
+    "focus": "Where things are and how we work at Dix River Stone.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m1-4": {
+    "focus": "Where things are and how we work at Clover Bottom.",
+    "scope": "Classroom instruction for Module 1; the in-person mine tour is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m1-5": {
+    "focus": "What to say and who to call in an emergency.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m2-1": {
+    "focus": "Your rights and how to report a hazard.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m3-1": {
+    "focus": "Keep your W65 ready: check it every shift, keep it within 25 feet.",
+    "scope": "Awareness; the hands-on W65 practical is done in person. Awareness only; your site's plans and procedures control. Your site's plans always override this video. The MSA W65 protects against carbon monoxide only and does not make oxygen."
+  },
+  "allen-m6-1": {
+    "focus": "Recognize the fire warning and get out.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m6-2": {
+    "focus": "Fight only small fires, with your escape route behind you.",
+    "scope": "Awareness; any hands-on extinguisher practice is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m6-3": {
+    "focus": "Stay out of abandoned areas; barricade only as a last resort.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m8-1": {
+    "focus": "Read the signs and protect your health over a working lifetime.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m9-1": {
+    "focus": "Stay clear, report, and let qualified people fix electrical hazards.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m10-1": {
+    "focus": "Make it safe, call for help, splint as found.",
+    "scope": "First-aid awareness using MSHA-acceptable methods based on AHA first-aid guidelines; supports hands-on training. Awareness only; your site's plans and procedures control. Your site's plans always override this video. First aid here is awareness training based on the American Heart Association guidelines Allen uses; it supports, but doesn't replace, the hands-on first-aid training delivered in person."
+  },
+  "allen-m10-2": {
+    "focus": "Stop the burning, cool it, cover it.",
+    "scope": "First-aid awareness using MSHA-acceptable methods based on AHA first-aid guidelines; supports hands-on training. Awareness only; your site's plans and procedures control. Your site's plans always override this video. First aid here is awareness training based on the American Heart Association guidelines Allen uses; it supports, but doesn't replace, the hands-on first-aid training delivered in person."
+  },
+  "allen-m10-3": {
+    "focus": "Get to the eyewash and rinse for at least 15 minutes.",
+    "scope": "First-aid awareness using MSHA-acceptable methods based on AHA first-aid guidelines; supports hands-on training. Awareness only; your site's plans and procedures control. Your site's plans always override this video. First aid here is awareness training based on the American Heart Association guidelines Allen uses; it supports, but doesn't replace, the hands-on first-aid training delivered in person."
+  },
+  "allen-m10-4": {
+    "focus": "Spot heat illness early and cool fast.",
+    "scope": "First-aid awareness using MSHA-acceptable methods based on AHA first-aid guidelines; supports hands-on training. Awareness only; your site's plans and procedures control. Your site's plans always override this video. First aid here is awareness training based on the American Heart Association guidelines Allen uses; it supports, but doesn't replace, the hands-on first-aid training delivered in person."
+  },
+  "allen-m11-1": {
+    "focus": "The hazards that come with working in the pit, near water and in poor light.",
+    "scope": "Highwalls are covered in Module 7. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-1": {
+    "focus": "Inspect it, make contact, and follow your site's haul-road rules.",
+    "scope": "Task-training support; on-the-job training with a qualified person is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-2": {
+    "focus": "Keep control, keep clear zones, load safely.",
+    "scope": "Task-training support; on-the-job training with a qualified person is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-3": {
+    "focus": "Guards on, lock out before you reach in.",
+    "scope": "Task-training support; on-the-job training with a qualified person is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-4": {
+    "focus": "Stay back from the crest, guard your post, report misfires.",
+    "scope": "Task-training support; work under the blaster's direction. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-5": {
+    "focus": "Block it, lock it, and control hot work.",
+    "scope": "Task-training support; on-the-job training with a qualified person is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  },
+  "allen-m12-6": {
+    "focus": "Read the label, know where the SDS is.",
+    "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
+  }
+});
+
 function getRequiredVideos(moduleId) {
   const sequence = MODULE_VIDEO_SEQUENCE[moduleId] || [];
   const sequenceIndex = new Map(sequence.map((id, index) => [id, index]));

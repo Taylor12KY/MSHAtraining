@@ -808,7 +808,13 @@ function stopActiveTimers() {
     delete videoWatchIntervals[k];
   });
   Object.keys(videoPlayers).forEach(k => {
-    try { videoPlayers[k].destroy(); } catch (e) {}
+    if (videoPlayerMeta[k] && videoPlayerMeta[k].provider === 'self') {
+      delete videoPlayerMeta[k];
+      saveState();
+      stopSelfHostedPlayer(videoPlayers[k]);
+    } else {
+      try { videoPlayers[k].destroy(); } catch (e) {}
+    }
     delete videoPlayers[k];
     delete videoPlayerMeta[k];
   });
@@ -866,7 +872,12 @@ function managedYouTubeUrl(videoId) {
 }
 
 function videoProvider(video) {
+  if (video.provider === 'self') return 'self';
   return video.provider === 'vimeo' ? 'vimeo' : 'youtube';
+}
+
+function isSelfHostedVideo(video) {
+  return Boolean(video) && videoProvider(video) === 'self';
 }
 
 function videoPlayerElementId(video) {
@@ -896,11 +907,13 @@ function externalVideoUrl(video) {
     : 'https://www.youtube.com/watch?v=' + video.id;
 }
 
+const SELF_HOSTED_VIDEO_NOTE = 'Forward seeking is disabled and speed is fixed at 1x. Rewinding is allowed; only playback while this tab is visible counts. Completion is saved with your training record.';
+
 function requiredVideoControls(video) {
   const isVimeo = videoProvider(video) === 'vimeo';
   const viewingNote = instructorPreviewMode
     ? 'Forward seeking is disabled. Preview viewing is temporary and is not saved. Use Start / Resume to control playback.'
-    : (isVimeo
+    : isSelfHostedVideo(video) ? SELF_HOSTED_VIDEO_NOTE : (isVimeo
       ? 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume, or on iPad tap the play button on the video itself if Start/Resume does not start playback.'
       : 'Forward seeking is disabled. Rewinding is allowed; completion is saved in this browser. Use Start / Resume to control playback (the video surface does not accept taps).');
   return `
@@ -1014,6 +1027,18 @@ function renderRequiredVideos(moduleId) {
     } else {
       groupContainer = section;
     }
+    if (isSelfHostedVideo(video)) {
+      const selfBox = buildSelfHostedVideoBox(video);
+      const selfLabel = document.createElement('div');
+      selfLabel.className = 'video-sequence-label';
+      selfLabel.textContent = `Video ${index + 1} of ${videos.length}`;
+      selfBox.prepend(selfLabel);
+      if (index > 0) groupContainer.insertAdjacentHTML('beforeend', requiredVideoTransition(video, index, videos.length));
+      groupContainer.appendChild(selfBox);
+      observeRequiredVideoLazyLoad(selfBox, video);
+      updateRequiredVideoUI(moduleId, video.id);
+      return;
+    }
     let iframe = container.querySelector(`iframe[data-src*="${video.id}"], iframe[src*="${video.id}"]`);
     let box = iframe && iframe.closest('.video-box');
     if (!iframe || !box) {
@@ -1046,6 +1071,314 @@ function renderRequiredVideos(moduleId) {
 
   if (section.querySelector('.video-box')) marker.before(section);
   updateVideoProgressRail(moduleId);
+}
+
+// ---------------------------------------------------------------------------
+// Self-hosted HTML5 player path (provider "self") for the Allen Company Part 48 videos.
+// Same rules and the same state.videoProgress records as the YouTube/Vimeo path:
+// watchedSeconds is the furthest point reached by real playback (1x speed, visible tab,
+// no jumps over 2 s); forward seeks snap back; playback resumes at watchedSeconds; and a
+// video is complete only when the ended event fires with at least 95% watched. Completion
+// then feeds requiredVideosComplete(), the module quiz gate, server sync and records.
+function buildSelfHostedVideoBox(video) {
+  const box = document.createElement('div');
+  box.className = 'video-box managed-video-box self-hosted-video-box';
+  box.dataset.videoId = video.id;
+  box.dataset.videoProvider = 'self';
+  box.innerHTML = `
+    <p class="video-title">${escapeHtml(video.title)} · ${formatVideoTime(video.durationSeconds)}</p>
+    <p class="video-description">${escapeHtml(video.description)} <span class="video-source">Source: ${escapeHtml(video.author)}</span></p>
+    ${requiredVideoTrainingMemo(video)}
+    <div class="managed-video-frame self-hosted-video-frame">
+      <video id="${videoPlayerElementId(video)}" class="self-hosted-video" controls playsinline preload="none"
+        controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback
+        poster="${escapeHtml(video.poster || '')}" title="${escapeHtml(video.title)}">
+        <source src="${escapeHtml(video.src)}" type="video/mp4">
+        ${video.captions ? `<track kind="captions" srclang="en" label="English" src="${escapeHtml(video.captions)}" default>` : ''}
+      </video>
+    </div>
+    ${requiredVideoControls(video)}
+    <p class="video-fallback self-hosted-video-note">Captions are built into the picture and are also available with the CC button. Your site's plans always override this video.</p>
+  `;
+  const element = box.querySelector('video');
+  if (element) element.addEventListener('contextmenu', event => event.preventDefault());
+  const button = box.querySelector('.video-play-toggle');
+  if (button) button.addEventListener('click', () => toggleRequiredVideo(video.id));
+  return box;
+}
+
+function selfHostedDuration(element, video) {
+  const reported = Number(element && element.duration);
+  return Number.isFinite(reported) && reported > 0 ? reported : video.durationSeconds;
+}
+
+function persistSelfHostedProgress(meta, force = false) {
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const wholeSecond = Math.floor(record.watchedSeconds);
+  if (force || (wholeSecond % 5 === 0 && wholeSecond !== meta.lastSavedSecond)) {
+    meta.lastSavedSecond = wholeSecond;
+    saveState();
+  }
+}
+
+function initializeSelfHostedVideo(moduleId, video) {
+  const element = document.getElementById(videoPlayerElementId(video));
+  if (!element || videoPlayers[video.id]) return videoPlayers[video.id];
+  const meta = { moduleId, video, provider: 'self', suppressSeekUntil: 0, lastSavedSecond: -1, isPlaying: false, lastTime: null, countedSeconds: 0 };
+  videoPlayerMeta[video.id] = meta;
+  videoPlayers[video.id] = element;
+  const record = () => ensureVideoProgress(meta.moduleId, meta.video);
+  const active = () => videoPlayerMeta[video.id] === meta && currentModuleId === meta.moduleId;
+  element.defaultPlaybackRate = 1;
+  element.playbackRate = 1;
+  if (element.preload === 'none') element.preload = 'metadata';
+
+  const showCaptions = () => {
+    Array.from(element.textTracks || []).forEach(track => {
+      if (track.kind === 'captions' || track.kind === 'subtitles') track.mode = 'showing';
+    });
+  };
+  const onMetadata = () => {
+    if (!active()) return;
+    const rec = record();
+    rec.durationSeconds = Math.round(selfHostedDuration(element, video));
+    showCaptions();
+    if (!rec.complete && rec.watchedSeconds > 2 && Math.abs(element.currentTime - rec.watchedSeconds) > 1) {
+      element.currentTime = Math.min(rec.watchedSeconds, Math.max(0, selfHostedDuration(element, video) - 0.5));
+    }
+    meta.lastTime = element.currentTime;
+    updateRequiredVideoUI(meta.moduleId, video.id);
+  };
+  if (element.readyState >= 1) onMetadata();
+  else element.addEventListener('loadedmetadata', onMetadata, { once: true });
+
+  element.addEventListener('ratechange', () => {
+    if (element.playbackRate !== 1 || element.defaultPlaybackRate !== 1) {
+      element.defaultPlaybackRate = 1;
+      element.playbackRate = 1;
+      setRequiredVideoNote(video.id, 'Playback speed is fixed at 1x for required videos.', true);
+    }
+  });
+  element.addEventListener('seeking', () => {
+    meta.lastTime = null;
+    if (!active()) return;
+    const rec = record();
+    if (element.currentTime > rec.watchedSeconds + 1) {
+      element.currentTime = rec.watchedSeconds;
+      setRequiredVideoNote(video.id, 'Forward seeking is disabled. Playback returned to your last verified position.', true);
+    }
+  });
+  element.addEventListener('seeked', () => { meta.lastTime = element.currentTime; });
+  element.addEventListener('play', () => {
+    if (!active() || document.hidden) { element.pause(); return; }
+    if (element.playbackRate !== 1) element.playbackRate = 1;
+    meta.isPlaying = true;
+    meta.lastTime = element.currentTime;
+    lastActivityAt = Date.now();
+    pauseOtherRequiredVideos(video.id);
+    updateRequiredVideoButton(video.id);
+  });
+  element.addEventListener('pause', () => {
+    meta.isPlaying = false;
+    meta.lastTime = null;
+    if (active()) persistSelfHostedProgress(meta, true);
+    updateRequiredVideoButton(video.id);
+  });
+  element.addEventListener('timeupdate', () => trackSelfHostedVideo(video.id));
+  element.addEventListener('ended', () => completeSelfHostedVideo(video.id));
+  element.addEventListener('error', () => setRequiredVideoNote(video.id, 'This video could not load. Check the network, then use Start / Resume or ask the instructor for assistance.', true));
+  if (element.textTracks && element.textTracks.addEventListener) element.textTracks.addEventListener('addtrack', showCaptions);
+  showCaptions();
+  return element;
+}
+
+function trackSelfHostedVideo(videoId) {
+  const element = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!element || !meta || meta.provider !== 'self' || currentModuleId !== meta.moduleId) return;
+  if (document.hidden) {
+    element.pause();
+    meta.lastTime = null;
+    return;
+  }
+  const current = Number(element.currentTime) || 0;
+  if (element.paused || element.seeking || element.playbackRate !== 1 || meta.lastTime === null) {
+    meta.lastTime = current;
+    return;
+  }
+  const delta = current - meta.lastTime;
+  meta.lastTime = current;
+  if (delta <= 0 || delta > 2) return;
+  meta.countedSeconds += delta;
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const duration = selfHostedDuration(element, meta.video);
+  if (current <= record.watchedSeconds + 2) {
+    record.watchedSeconds = Math.min(duration, Math.max(record.watchedSeconds, current));
+    record.durationSeconds = Math.round(duration);
+    record.updatedAt = new Date().toISOString();
+    lastActivityAt = Date.now();
+    persistSelfHostedProgress(meta);
+  }
+  updateRequiredVideoUI(meta.moduleId, videoId);
+}
+
+function completeSelfHostedVideo(videoId) {
+  const element = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!element || !meta || meta.provider !== 'self') return;
+  meta.isPlaying = false;
+  const record = ensureVideoProgress(meta.moduleId, meta.video);
+  const duration = selfHostedDuration(element, meta.video);
+  if (!record.complete && record.watchedSeconds >= duration * 0.95) {
+    record.watchedSeconds = duration;
+    record.durationSeconds = Math.round(duration);
+    record.complete = true;
+    record.updatedAt = new Date().toISOString();
+    saveState();
+    setRequiredVideoNote(videoId, 'Video complete ✓', false);
+    updateRequiredVideoUI(meta.moduleId, videoId);
+    updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+  } else if (!record.complete) {
+    element.currentTime = record.watchedSeconds;
+    setRequiredVideoNote(videoId, 'Forward jump blocked. Resume from your last verified position.', true);
+  }
+  updateRequiredVideoButton(videoId);
+}
+
+function stopSelfHostedPlayer(element) {
+  try {
+    element.pause();
+    element.querySelectorAll('source').forEach(source => source.removeAttribute('src'));
+    element.removeAttribute('src');
+    element.load();
+  } catch (e) {}
+}
+
+function pauseRequiredPlayer(videoId) {
+  const player = videoPlayers[videoId];
+  const meta = videoPlayerMeta[videoId];
+  if (!player) return;
+  try {
+    if (meta && (meta.provider === 'self' || meta.provider === 'vimeo')) player.pause();
+    else player.pauseVideo();
+  } catch (e) {}
+}
+
+// Practice activities for the Allen Company videos. Practice only: they never change
+// module completion, seat time, quiz gating or sign-offs (time on this page still counts
+// toward the module timer like the rest of the module content).
+function allenActivityDisplayOrder(items) {
+  const sorted = [...items].sort((a, b) => a.localeCompare(b));
+  if (sorted.every((item, index) => item === items[index])) sorted.push(sorted.shift());
+  return sorted;
+}
+
+function renderAllenActivityItem(item) {
+  const id = 'act-' + item.id;
+  const prompt = `<p class="allen-activity-prompt"><strong>${escapeHtml(item.id)}.</strong> ${escapeHtml(item.prompt || '')} <span class="allen-activity-minutes">~${escapeHtml(String(item.minutes || ''))} min</span></p>`;
+  const feedback = `<div class="allen-activity-feedback" id="${id}-feedback" aria-live="polite"></div>`;
+  let body = '';
+  if (item.type === 'multiple_choice') {
+    body = (item.options || []).map((option, index) =>
+      `<label class="allen-activity-option"><input type="radio" name="${id}" value="${index}"> ${escapeHtml(option)}</label>`).join('') +
+      `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Check answer</button>`;
+  } else if (item.type === 'ordering') {
+    const display = allenActivityDisplayOrder(item.items || item.answer || []);
+    const numbers = display.map((_, index) => `<option value="${index + 1}">${index + 1}</option>`).join('');
+    body = '<p class="allen-activity-hint">Number the steps in order.</p>' + display.map(step =>
+      `<label class="allen-activity-row"><select data-order-step="${escapeHtml(step)}" aria-label="Order for ${escapeHtml(step)}"><option value="">#</option>${numbers}</select> ${escapeHtml(step)}</label>`).join('') +
+      `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Check order</button>`;
+  } else if (item.type === 'matching') {
+    const right = [...(item.right || [])];
+    body = (item.left || []).map(left =>
+      `<label class="allen-activity-row">${escapeHtml(left)} → <select data-match-left="${escapeHtml(left)}"><option value="">Choose…</option>${right.map(option => `<option>${escapeHtml(option)}</option>`).join('')}</select></label>`).join('') +
+      `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Check matches</button>`;
+  } else if (item.type === 'site_lookup' || item.type === 'self_check') {
+    body = (item.items || []).map(entry =>
+      `<label class="allen-activity-option"><input type="checkbox" data-check-item> ${escapeHtml(entry)}</label>`).join('') +
+      `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Mark done</button>`;
+  } else if (item.type === 'jsa_worksheet') {
+    const columns = item.columns || ['Step', 'Hazards', 'Controls'];
+    const rows = Math.max(3, (item.answer_key || []).length);
+    body = `<div class="training-table-wrap"><table class="training-table allen-jsa"><thead><tr>${columns.map(column => `<th>${escapeHtml(column)}</th>`).join('')}</tr></thead><tbody>` +
+      Array.from({ length: rows }, () => `<tr>${columns.map(column => `<td><textarea rows="2" aria-label="${escapeHtml(column)}" data-free-text></textarea></td>`).join('')}</tr>`).join('') +
+      `</tbody></table></div><button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the answer key</button>`;
+  } else {
+    const photoNote = item.photoPending || item.type === 'find_the_hazard' || item.type === 'map_trace' || item.type === 'site_map_marking'
+      ? '<p class="allen-activity-hint">Site photo/map pending. Work from the video and your site tour, or complete this with your instructor.</p>' : '';
+    body = photoNote + `<textarea rows="3" class="allen-activity-text" data-free-text aria-label="Your answer"></textarea>` +
+      `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the model answer</button>`;
+  }
+  return `<div class="allen-activity" id="${id}" data-activity-id="${escapeHtml(item.id)}">${prompt}${body}${feedback}</div>`;
+}
+
+function checkAllenActivity(item, container) {
+  const feedback = container.querySelector('.allen-activity-feedback');
+  const show = (ok, html) => {
+    feedback.className = 'allen-activity-feedback ' + (ok === true ? 'ok' : ok === false ? 'retry' : 'info');
+    feedback.innerHTML = html;
+  };
+  const explanation = item.explanation ? ' ' + escapeHtml(item.explanation) : '';
+  if (item.type === 'multiple_choice') {
+    const picked = container.querySelector('input[type="radio"]:checked');
+    if (!picked) return show(null, 'Choose an answer first.');
+    const ok = Number(picked.value) === Number(item.answer);
+    return show(ok, ok ? '✓ Correct.' + explanation : 'Not quite. Review the video and try again.');
+  }
+  if (item.type === 'ordering') {
+    const selects = Array.from(container.querySelectorAll('select[data-order-step]'));
+    if (selects.some(select => !select.value)) return show(null, 'Number every step first.');
+    const ok = selects.every(select => (item.answer || []).indexOf(select.dataset.orderStep) + 1 === Number(select.value));
+    return show(ok, ok ? '✓ Correct order.' + explanation : 'Not quite. Think about what has to happen first, then try again.');
+  }
+  if (item.type === 'matching') {
+    const selects = Array.from(container.querySelectorAll('select[data-match-left]'));
+    if (selects.some(select => !select.value)) return show(null, 'Make every match first.');
+    const answer = new Map((item.answer || []).map(([left, right]) => [left, right]));
+    const ok = selects.every(select => answer.get(select.dataset.matchLeft) === select.value);
+    return show(ok, ok ? '✓ All matches correct.' : 'Some matches are off. Try again.');
+  }
+  if (item.type === 'site_lookup' || item.type === 'self_check') {
+    const boxes = Array.from(container.querySelectorAll('input[data-check-item]'));
+    const ok = boxes.every(box => box.checked);
+    return show(ok ? true : null, ok ? '✓ Done.' + (item.type === 'site_lookup' ? ' Confirm the details on your site tour.' : '') : 'Tick each item as you find or check it.');
+  }
+  const typed = Array.from(container.querySelectorAll('[data-free-text]')).map(field => field.value.trim()).join(' ');
+  if (typed.length < 3) return show(null, 'Write your answer first, then compare.');
+  if (item.type === 'jsa_worksheet') {
+    const rows = (item.answer_key || []).map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`).join('');
+    return show(true, `Compare your JSA with this example:<div class="training-table-wrap"><table class="training-table"><thead><tr>${(item.columns || []).map(column => `<th>${escapeHtml(column)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`);
+  }
+  if (item.type === 'scenario_short_answer') {
+    const keyPoints = (item.must_include || []).length ? `<br><strong>Key points:</strong> ${item.must_include.map(escapeHtml).join(' · ')}` : '';
+    return show(true, `<strong>Model answer:</strong> ${escapeHtml(item.model_answer || '')}${keyPoints}`);
+  }
+  if (Array.isArray(item.answer)) {
+    return show(true, `<strong>What to look for:</strong><ul>${item.answer.map(entry => `<li>${escapeHtml(entry)}</li>`).join('')}</ul>`);
+  }
+  return show(true, `<strong>Check:</strong> ${escapeHtml(item.answer || 'Confirm with your instructor or site materials.')}`);
+}
+
+function renderAllenActivities(moduleId) {
+  if (typeof ALLEN_ACTIVITIES === 'undefined') return;
+  const activity = ALLEN_ACTIVITIES[moduleId];
+  const marker = document.getElementById('scroll-end-marker');
+  if (!activity || !activity.items || !activity.items.length || !marker) return;
+  const section = document.createElement('section');
+  section.className = 'allen-activities content-section';
+  section.innerHTML = `
+    <h3>Practice Activities</h3>
+    <p class="allen-activity-intro">${escapeHtml(activity.title)} · about ${escapeHtml(String(Math.round(activity.minutes || 0)))} minutes. Practice with the Allen Company videos above. These do not replace the module quiz; time here counts toward this module's seat time like the rest of the page. Hands-on items are completed in person with the safety manager. Your site's plans always override this material.</p>
+    ${activity.items.map(renderAllenActivityItem).join('')}
+  `;
+  section.querySelectorAll('[data-act-check]').forEach(button => {
+    const item = activity.items.find(entry => entry.id === button.dataset.actCheck);
+    button.addEventListener('click', () => {
+      lastActivityAt = Date.now();
+      checkAllenActivity(item, button.closest('.allen-activity'));
+    });
+  });
+  marker.before(section);
 }
 
 function loadYouTubeApi() {
@@ -1154,10 +1487,12 @@ function unloadRequiredVideoPlayer(videoId) {
 }
 
 function pruneWarmRequiredPlayers(keepVideoId) {
-  const warmIds = Object.keys(videoPlayers);
+  // Self-hosted <video> players only hold metadata, so they never count toward the warm-iframe cap.
+  const embeddedIds = () => Object.keys(videoPlayers).filter(id => !(videoPlayerMeta[id] && videoPlayerMeta[id].provider === 'self'));
+  const warmIds = embeddedIds();
   if (warmIds.length <= MAX_WARM_REQUIRED_PLAYERS) return;
   const ordered = warmIds.filter(id => id !== keepVideoId);
-  while (ordered.length && Object.keys(videoPlayers).length > MAX_WARM_REQUIRED_PLAYERS) {
+  while (ordered.length && embeddedIds().length > MAX_WARM_REQUIRED_PLAYERS) {
     const dropId = ordered.shift();
     const meta = videoPlayerMeta[dropId];
     if (meta && meta.isPlaying) continue;
@@ -1172,9 +1507,19 @@ function ensureRequiredVideoLoaded(videoId, { autoplay = false } = {}) {
   }
   const box = document.querySelector(`.managed-video-box[data-video-id="${videoId}"]`);
   if (!box) return Promise.reject(new Error('Video box missing'));
-  const iframe = box.querySelector('iframe');
   const moduleId = currentModuleId;
   const video = getRequiredVideos(moduleId).find(item => item.id === videoId);
+  if (isSelfHostedVideo(video)) {
+    const element = initializeSelfHostedVideo(moduleId, video);
+    if (!element) return Promise.reject(new Error('Video unavailable'));
+    requiredVideoLoadState[videoId] = 'ready';
+    if (autoplay) {
+      const played = element.play();
+      if (played && played.catch) played.catch(() => setRequiredVideoNote(videoId, 'The player could not start. Press play on the video or try Start / Resume again.', true));
+    }
+    return Promise.resolve(element);
+  }
+  const iframe = box.querySelector('iframe');
   if (!iframe || !video) return Promise.reject(new Error('Video unavailable'));
 
   if (requiredVideoLoadState[videoId] === 'loading') {
@@ -1473,12 +1818,7 @@ function onRequiredVideoReady(event, videoId) {
 function pauseOtherRequiredVideos(activeVideoId) {
   Object.keys(videoPlayers).forEach(otherId => {
     if (otherId === activeVideoId) return;
-    const otherPlayer = videoPlayers[otherId];
-    const otherMeta = videoPlayerMeta[otherId];
-    try {
-      if (otherMeta && otherMeta.provider === 'vimeo') otherPlayer.pause();
-      else otherPlayer.pauseVideo();
-    } catch (e) {}
+    pauseRequiredPlayer(otherId);
   });
 }
 
@@ -1626,6 +1966,19 @@ async function toggleRequiredVideo(videoId) {
     }
     return;
   }
+  if (meta.provider === 'self') {
+    const record = ensureVideoProgress(meta.moduleId, meta.video);
+    if (!player.paused) {
+      player.pause();
+    } else {
+      if (record.complete && (player.ended || player.currentTime >= selfHostedDuration(player, meta.video) - 1)) {
+        player.currentTime = 0;
+      }
+      const played = player.play();
+      if (played && played.catch) played.catch(() => setRequiredVideoNote(videoId, 'The player could not start. Press play on the video or reload the module.', true));
+    }
+    return;
+  }
   if (meta.provider === 'vimeo') {
     const record = ensureVideoProgress(meta.moduleId, meta.video);
     if (meta.isPlaying) {
@@ -1702,14 +2055,7 @@ document.addEventListener('visibilitychange', () => {
     if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
     return;
   }
-  Object.keys(videoPlayers).forEach(videoId => {
-    const player = videoPlayers[videoId];
-    const meta = videoPlayerMeta[videoId];
-    try {
-      if (meta && meta.provider === 'vimeo') player.pause();
-      else player.pauseVideo();
-    } catch (e) {}
-  });
+  Object.keys(videoPlayers).forEach(videoId => pauseRequiredPlayer(videoId));
   if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
 });
 
@@ -2085,6 +2431,7 @@ function openModule(id) {
 
   renderQuizReviewPanel(id);
   renderRequiredVideos(id);
+  renderAllenActivities(id);
   renderModuleOutline(id);
 
   // Hide legacy manual timer UI inside module content (time is auto now)

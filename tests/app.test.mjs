@@ -199,12 +199,24 @@ test('server validator rejects fabricated completion and requires known video du
   });
   assert.deepEqual(fabricated.completed, []);
 
-  const moduleOne = recordLibrary.sanitizeTrainingState({
+  const moduleOneWithoutVideos = recordLibrary.sanitizeTrainingState({
     mine: 'Boonesboro Quarry',
     timerElapsed: { 1: 5400 },
     timersDone: { 1: true },
     scrollDone: { 1: true },
     scores: { 1: 100 }
+  });
+  assert.deepEqual(moduleOneWithoutVideos.completed, []);
+
+  const moduleOneVideos = recordLibrary.MODULE_REQUIREMENTS[1].videos;
+  assert.deepEqual(Object.keys(moduleOneVideos), ['allen-m1-1', 'allen-m1-2', 'allen-m1-4', 'allen-m1-5']);
+  const moduleOne = recordLibrary.sanitizeTrainingState({
+    mine: 'Boonesboro Quarry',
+    timerElapsed: { 1: 5400 },
+    timersDone: { 1: true },
+    scrollDone: { 1: true },
+    scores: { 1: 100 },
+    videoProgress: { 1: Object.fromEntries(Object.entries(moduleOneVideos).map(([id, seconds]) => [id, { watchedSeconds: seconds, complete: true }])) }
   });
   assert.deepEqual(moduleOne.completed, [1]);
 
@@ -288,7 +300,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 104 active videos are unique and retired submissions are documented', () => {
+test('all 126 active videos (104 embedded + 22 self-hosted) are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -297,8 +309,9 @@ test('all 104 active videos are unique and retired submissions are documented', 
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 104);
-  assert.equal(new Set(ids).size, 104);
+  assert.equal(context.videos.length, 126);
+  assert.equal(new Set(ids).size, 126);
+  assert.equal(context.videos.filter(video => video.provider === 'self').length, 22);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 13);
@@ -525,7 +538,7 @@ test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.guidance = VIDEO_TRAINING_GUIDANCE;')
     .runInNewContext(context);
-  assert.deepEqual([...context.sequences[3]], ['kbHxdV_uZV8', 'WTKCluA6lgE', '106597590', '1JfkPpr6sRM', 'tAE5lPOPm8w']);
+  assert.deepEqual([...context.sequences[3]], ['kbHxdV_uZV8', 'WTKCluA6lgE', '106597590', '1JfkPpr6sRM', 'tAE5lPOPm8w', 'allen-m3-1']);
   const cleveland = context.videos.find(video => video.id === '106597590');
   assert.equal(cleveland.provider, 'vimeo');
   assert.equal(cleveland.durationSeconds, 332);
@@ -533,7 +546,8 @@ test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 
   const ncb = context.videos.find(video => video.id === '1JfkPpr6sRM');
   assert.equal(ncb.durationSeconds, 408);
   assert.match(ncb.title, /1980 NCB/);
-  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 5);
+  assert.equal(context.videos.filter(video => video.moduleId === 3 && video.provider !== 'self').length, 5);
+  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 6);
   const arrowsmith = context.videos.find(video => video.id === 'tAE5lPOPm8w');
   assert.equal(arrowsmith.durationSeconds, 1749);
   assert.match(arrowsmith.author, /Arrowsmith/);
@@ -607,7 +621,7 @@ test('long modules get an on-this-page menu that does not bypass completion gate
   assert.match(html, /<nav class="module-outline hidden" id="module-outline" aria-label="On this page">/);
   assert.match(html, /id="module-outline-return"/);
   assert.match(app, /const MODULE_OUTLINE_MIN_SECTIONS = 4;/);
-  assert.match(app, /renderRequiredVideos\(id\);\n\s*renderModuleOutline\(id\);/);
+  assert.match(app, /renderRequiredVideos\(id\);\n\s*(?:renderAllenActivities\(id\);\n\s*)?renderModuleOutline\(id\);/);
   assert.match(app, /teardownModuleOutline\(\);/);
   assert.match(app, /aria-current', 'location'/);
   assert.doesNotMatch(app, /scroll-end-marker[^\n]*module-outline|module-outline[^\n]*scroll-end-marker/);
@@ -634,8 +648,9 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   };
   const modules = recordLibrary.moduleProgress(storedState);
   assert.equal(modules.length, 13);
-  assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 0, bestScore: 100, quizAttempts: 1 });
-  assert.equal(modules[1].videosRequired, 8);
+  assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 4, bestScore: 100, quizAttempts: 1 });
+  // A module already recorded complete stays complete after new required videos are added.
+  assert.equal(modules[1].videosRequired, 9);
 
   const csv = exporter.buildRecordsCsv([{
     learner: { id: 'u1', name: '=HYPERLINK("http://evil")', email: 'pat@example.com' },
@@ -658,7 +673,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.match(row, /,1 of 13,1\.5,No,No,No,/);
   assert.match(row, /,Yes,Jane Instructor,2026-10-02 \d\d:00,/);
   assert.match(row, /"Line one, with comma\nLine two ""quoted"""/);
-  assert.match(row, /,Complete,100,1,90 of 90,,In progress,80,1,10 of 120,0 of 8,Not started,/);
+  assert.match(row, /,Complete,100,1,90 of 90,0 of 4,In progress,80,1,10 of 120,0 of 9,Not started,/);
   assert.doesNotMatch(row, /\b\d+\/\d+\b/, 'no slash counts that Excel would turn into dates');
   assert.match(exporter.recordsExportFilename(new Date(2026, 9, 22)), /^msha-part48-trainee-records-2026-10-22\.csv$/);
 
@@ -698,4 +713,33 @@ test('Netlify accounts and records migrate to Supabase safely', () => {
   assert.match(migration, /alreadyCopied\.has\(netlifyUser\.id\)/, 're-running skips copied records');
   assert.match(migration, /migratedFrom: 'netlify-blobs'/);
   assert.doesNotMatch(migration, /consistency: 'strong'/, 'classic functions cannot use strong Blobs consistency');
+});
+
+test('self-hosted Allen Company videos ship with media, captions, posters and the tracked HTML5 player', async () => {
+  const { statSync, existsSync } = await import('node:fs');
+  const context = {};
+  new vm.Script(videoLibrary + '\nthis.selfVideos = SELF_HOSTED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE;').runInNewContext(context);
+  assert.equal(context.selfVideos.length, 22);
+  const perModule = {};
+  for (const video of context.selfVideos) {
+    assert.equal(video.provider, 'self');
+    assert.match(video.id, /^allen-m\d+-\d+$/);
+    for (const key of ['src', 'captions', 'poster']) {
+      const file = path.join(root, video[key]);
+      assert.ok(existsSync(file), `${video.id} is missing ${key}`);
+    }
+    assert.ok(statSync(path.join(root, video.src)).size <= 10 * 1024 * 1024, `${video.id} is over 10 MB`);
+    assert.ok(context.sequences[video.moduleId].includes(video.id), `${video.id} is not in the Module ${video.moduleId} sequence`);
+    perModule[video.moduleId] = (perModule[video.moduleId] || 0) + 1;
+  }
+  assert.deepEqual(perModule, { 1: 4, 2: 1, 3: 1, 6: 3, 8: 1, 9: 1, 10: 4, 11: 1, 12: 6 });
+  assert.ok(!/\blex\b|lexington quarry/i.test(JSON.stringify(context.selfVideos)));
+  assert.match(app, /function initializeSelfHostedVideo/);
+  assert.match(app, /addEventListener\('seeking'/);
+  assert.match(app, /element\.playbackRate = 1/);
+  assert.match(app, /record\.watchedSeconds >= duration \* 0\.95/);
+  assert.match(app, /addEventListener\('ended', \(\) => completeSelfHostedVideo/);
+  assert.match(app, /if \(document\.hidden\) \{\s*element\.pause\(\)/);
+  assert.match(read('scripts/build.mjs'), /path\.join\(root, 'media'\)/);
+  assert.ok(read('index.html').indexOf('js/allen-activities.js') < read('index.html').indexOf('js/app.js'));
 });
