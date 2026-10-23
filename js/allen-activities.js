@@ -634,10 +634,10 @@ const ALLEN_ACTIVITIES = {
     "type": "scenario_short_answer",
     "minutes": 4,
     "prompt": "Your cab's door seal is torn on a dry, dusty day. What do you do?",
-    "model_answer": "Report it on your pre-op inspection and to your supervisor so it gets repaired. Keep the doors and windows shut. If dust is getting in, ask your supervisor whether you need respiratory protection until it's fixed.",
+    "model_answer": "Report it to your supervisor and on your pre-trip inspection list or app so it gets repaired. Keep the doors and windows shut. If dust is getting in, ask your supervisor whether you need respiratory protection until it's fixed.",
     "must_include": [
      "report it",
-     "pre-op",
+     "pre-trip",
      "keep doors shut",
      "repair",
      "respiratory protection"
