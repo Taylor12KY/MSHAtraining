@@ -2,6 +2,8 @@
 // Counts are written as "3 of 17" because Excel turns "3/17" into a date.
 
 export const SIGNOFF_COLUMNS = [
+  ['classroomW65Session', 'Classroom session: W65 hands-on (1 h)'],
+  ['classroomFirstAidSession', 'Classroom session: first aid hands-on (1.5 h)'],
   ['siteTraining', 'Mine-site training (~8 h)'],
   ['mineTour', 'Mine tour'],
   ['plansProcedures', 'Plans, escapeways & procedures'],

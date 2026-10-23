@@ -428,7 +428,8 @@ test('server seat-time requirements are generated from client module hours', asy
   new vm.Script(`${modulesSource}\nthis.modules = MODULES;`).runInNewContext(context);
   assert.deepEqual(Object.keys(recordLibrary.MODULE_REQUIREMENTS).map(Number), [...context.modules].map(module => module.id));
   for (const module of context.modules) {
-    assert.equal(recordLibrary.MODULE_REQUIREMENTS[module.id].seconds, Math.round(module.hours * 3600), `Module ${module.id} server seat time differs from client hours`);
+    const instructorMinutes = module.instructorLed?.minutes || 0;
+    assert.equal(recordLibrary.MODULE_REQUIREMENTS[module.id].seconds, Math.round(module.hours * 3600 - instructorMinutes * 60), `Module ${module.id} server seat time differs from client hours`);
   }
   const generator = await import(pathToFileURL(path.join(root, 'scripts/generate-requirements.mjs')).href);
   assert.equal(read('netlify/lib/module-requirements.mjs'), generator.renderRequirements(await generator.buildRequirements()),
@@ -742,4 +743,37 @@ test('self-hosted Allen Company videos ship with media, captions, posters and th
   assert.match(app, /if \(document\.hidden\) \{\s*element\.pause\(\)/);
   assert.match(read('scripts/build.mjs'), /path\.join\(root, 'media'\)/);
   assert.ok(read('index.html').indexOf('js/allen-activities.js') < read('index.html').indexOf('js/app.js'));
+});
+
+test('instructor-led classroom sessions count toward classroom hours only when signed off', () => {
+  const { CLASSROOM_SESSIONS, MODULE_REQUIREMENTS, SIGNOFF_KEYS, trainingSummary } = recordLibrary;
+  assert.deepEqual(CLASSROOM_SESSIONS.map(session => [session.moduleId, session.key, session.minutes]),
+    [[3, 'classroomW65Session', 60], [10, 'classroomFirstAidSession', 90]]);
+  assert.ok(SIGNOFF_KEYS.includes('classroomW65Session') && SIGNOFF_KEYS.includes('classroomFirstAidSession'));
+  assert.equal(MODULE_REQUIREMENTS[3].seconds, 2.5 * 3600, 'Module 3 self-paced time is 3.5 h minus the 1 h session');
+  assert.equal(MODULE_REQUIREMENTS[10].seconds, 1.5 * 3600, 'Module 10 self-paced time is 3.0 h minus the 1.5 h session');
+
+  const allModules = Object.keys(MODULE_REQUIREMENTS).map(Number);
+  const state = { mine: 'Boonesboro Quarry', completed: allModules, scores: Object.fromEntries(allModules.map(id => [id, 100])) };
+  const unsigned = trainingSummary(state, {});
+  assert.equal(unsigned.classroomHours, 29.5, 'all modules done but no sessions signed: 32 - 2.5');
+  assert.equal(unsigned.classroomComplete, false);
+  const oneSigned = trainingSummary(state, { classroomW65Session: true });
+  assert.equal(oneSigned.classroomHours, 30.5);
+  assert.equal(oneSigned.classroomComplete, false);
+  const bothSigned = trainingSummary(state, { classroomW65Session: true, classroomFirstAidSession: true });
+  assert.equal(bothSigned.classroomHours, 32);
+  assert.equal(bothSigned.classroomComplete, true);
+
+  assert.match(app, /function moduleSeatSeconds\(m\)/);
+  assert.match(app, /missingSessions/, 'certificate waits for instructor-led sessions');
+  assert.doesNotMatch(app, /\.hours \* 3600\)/, 'seat timers use moduleSeatSeconds, not raw module hours');
+  assert.match(instructorAuth, /Classroom sessions \(count toward the 32 classroom hours\)/);
+});
+
+test('build versions every self-hosted media URL so re-rendered videos are never served stale', () => {
+  const build = read('scripts/build.mjs');
+  assert.match(build, /async function stampMediaVersions/);
+  assert.match(build, /mp4\|webm\|vtt/);
+  assert.match(netlifyConfig, /for = "\/media\/\*"[\s\S]*?max-age=2592000/);
 });

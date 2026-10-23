@@ -2,7 +2,13 @@ import { MODULE_REQUIREMENTS } from './module-requirements.mjs';
 
 export { MODULE_REQUIREMENTS };
 
-export const SIGNOFF_KEYS = [
+// Instructor-led classroom sessions (hands-on practice inside a module's credited hours).
+// They count toward the classroom hours only once an instructor signs them off.
+export const CLASSROOM_SESSIONS = Object.entries(MODULE_REQUIREMENTS)
+  .filter(([, requirement]) => requirement.instructorLed)
+  .map(([id, requirement]) => ({ moduleId: Number(id), ...requirement.instructorLed }));
+
+const SITE_SIGNOFF_KEYS = [
   'siteTraining',
   'mineTour',
   'plansProcedures',
@@ -12,6 +18,8 @@ export const SIGNOFF_KEYS = [
   'taskTraining',
   'form5000_23'
 ];
+
+export const SIGNOFF_KEYS = [...CLASSROOM_SESSIONS.map(session => session.key), ...SITE_SIGNOFF_KEYS];
 
 const VALID_MINES = new Set(['Boonesboro Quarry', 'Clover Bottom Quarry', 'Dix River Stone']);
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, Number(value) || 0));
@@ -183,13 +191,17 @@ export function trainingSummary(stateCandidate = {}, signoffsCandidate = {}) {
   const signoffs = sanitizeSignoffs(signoffsCandidate);
   const completedModules = state.completed.length;
   const totalModules = Object.keys(MODULE_REQUIREMENTS).length;
-  const classroomHours = state.completed.reduce((sum, id) => sum + MODULE_REQUIREMENTS[id].seconds / 3600, 0);
+  const signedSessions = CLASSROOM_SESSIONS.filter(session => signoffs[session.key]);
+  const classroomHours = state.completed.reduce((sum, id) => sum + MODULE_REQUIREMENTS[id].seconds / 3600, 0)
+    + signedSessions.reduce((sum, session) => sum + session.minutes / 60, 0);
+  const classroomSessionsComplete = signedSessions.length === CLASSROOM_SESSIONS.length;
   const signoffsComplete = SIGNOFF_KEYS.every(key => signoffs[key]);
   return {
     completedModules,
     totalModules,
     classroomHours,
-    classroomComplete: completedModules === totalModules,
+    classroomSessionsComplete,
+    classroomComplete: completedModules === totalModules && classroomSessionsComplete,
     signoffsComplete,
     readyForOperatorReview: completedModules === totalModules && signoffsComplete
   };

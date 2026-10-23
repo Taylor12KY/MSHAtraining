@@ -286,6 +286,7 @@ const MODULES_PART_2 = [
     id: 10,
     title: "First Aid",
     hours: 3.0,
+    instructorLed: { key: "classroomFirstAidSession", minutes: 90, title: "Hands-on first aid practice: bleeding control and tourniquet, splinting, CPR/AED, burns and eye flushing" },
     objectives: [
       "Recall basic first-aid principles acceptable to MSHA",
       "Know the location of first-aid equipment and how to activate emergency medical response",

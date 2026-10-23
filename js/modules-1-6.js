@@ -125,6 +125,9 @@ const MODULES_PART_1 = [
     id: 3,
     title: "Self-Rescue & Respiratory Devices",
     hours: 3.5,
+    // Part of the credited time is hands-on practice the instructor runs in the classroom;
+    // it counts toward the 32 hours only when the instructor signs it off.
+    instructorLed: { key: "classroomW65Session", minutes: 60, title: "Hands-on MSA W65 donning, inspection, and escape practice" },
     objectives: [
       "Explain the purpose and limitations of the MSA W65 filter self-rescuer used at these operations",
       "Describe inspection, carrying, storage, and basic donning requirements for the W65",
