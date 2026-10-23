@@ -1295,3 +1295,10 @@ body.app-dialog-open { overflow: hidden; }
 .allen-activity-feedback.ok { color: var(--success); }
 .allen-activity-feedback.retry { color: var(--warning); }
 .allen-activity-feedback ul { margin: 6px 0 0 18px; }
+
+/* Instructor-led classroom sessions inside a module */
+.instructor-led-session { margin: 0 0 14px; padding: 14px 16px; border: 1px solid #c9ddcf; border-left: 5px solid var(--accent); border-radius: 12px; background: #f4f9f5; }
+.instructor-led-session p { margin: 6px 0 0; font-size: 0.9rem; }
+.instructor-led-status { color: var(--warning); font-weight: 700; }
+.instructor-led-session.signed .instructor-led-status { color: var(--success); }
+.signoff-group { margin: 14px 0 4px; color: var(--accent); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }

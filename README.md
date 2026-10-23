@@ -108,6 +108,10 @@ The server re-checks every learner's progress against the same module hours and 
 
 Script and stylesheet `?v=` values in `index.html` are placeholders; the build replaces them with content hashes, so there is no version string to bump by hand.
 
+**Instructor-led classroom sessions.** A module can carry `instructorLed: { key, minutes, title }`. Those minutes come out of the module's self-paced seat timer and count toward the 32 classroom hours only when an instructor signs off that key on the trainee's record (Module 3: 1 h W65 hands-on; Module 10: 1.5 h first aid hands-on). The certificate stays locked until every session is signed.
+
+**Self-hosted videos (`media/`).** The build stamps every `/media/...` URL in `dist/js` with a content hash (`?v=`), so `/media/*` is cached for 30 days and a re-rendered video reaches trainees on the next deploy. To replace a video, overwrite the file in place under the same name rather than adding a copy, so the repo does not grow with old renders. Videos stay on Netlify: the Supabase Free plan allows about 5 GB of uncached egress a month, and one trainee watching the full set uses about 130 MB.
+
 ## How to run locally
 
 1. Download or clone this repo.

@@ -420,6 +420,15 @@ async function authorizeInstructorPage() {
   }
 }
 
+// Instructor-led classroom sessions come from the module definitions (course content
+// scripts load before this bundle); signing one adds its time to the classroom hours.
+const CLASSROOM_SESSION_LABELS = typeof MODULES !== 'undefined'
+  ? Object.fromEntries(MODULES.filter(module => module.instructorLed).map(module => [
+    module.instructorLed.key,
+    `Module ${module.id}, ${module.instructorLed.minutes / 60} h: ${module.instructorLed.title}`
+  ]))
+  : {};
+
 const SIGNOFF_LABELS = {
   siteTraining: 'Approximately 8 hours of mine-site training',
   mineTour: 'Mine tour and observation of the mining method',
@@ -461,6 +470,10 @@ function renderInstructorRecordList() {
   });
 }
 
+function signoffRow(record, key, label) {
+  return `<label class="signoff-row"><input type="checkbox" data-signoff-key="${key}" ${record.signoffs?.[key] ? 'checked' : ''}><span>${escapeHtml(label)}</span></label>`;
+}
+
 function selectInstructorRecord(recordId) {
   selectedRecordId = recordId;
   renderInstructorRecordList();
@@ -484,7 +497,10 @@ function selectInstructorRecord(recordId) {
     <form id="instructor-signoff-form" class="signoff-form">
       <h4>Instructor verification</h4>
       <p>Check only items personally verified under the approved training plan. Each change is time-stamped to your instructor account.</p>
-      ${Object.entries(SIGNOFF_LABELS).map(([key, label]) => `<label class="signoff-row"><input type="checkbox" data-signoff-key="${key}" ${record.signoffs?.[key] ? 'checked' : ''}><span>${escapeHtml(label)}</span></label>`).join('')}
+      ${Object.keys(CLASSROOM_SESSION_LABELS).length ? `<h5 class="signoff-group">Classroom sessions (count toward the 32 classroom hours)</h5>
+      ${Object.entries(CLASSROOM_SESSION_LABELS).map(([key, label]) => signoffRow(record, key, label)).join('')}
+      <h5 class="signoff-group">Mine-site and plan verification</h5>` : ''}
+      ${Object.entries(SIGNOFF_LABELS).map(([key, label]) => signoffRow(record, key, label)).join('')}
       <label for="instructor-record-notes">Instructor notes</label>
       <textarea id="instructor-record-notes" maxlength="4000" rows="4" placeholder="Document dates, locations, demonstrations, or follow-up needed.">${escapeHtml(record.instructorNotes || '')}</textarea>
       <div class="record-save-row"><button class="btn" type="submit">Save Verified Signoffs</button><span id="record-save-status" role="status"></span></div>

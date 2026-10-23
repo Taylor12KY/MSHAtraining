@@ -24,6 +24,23 @@ function getModule(id) {
   return base;
 }
 
+// Self-paced seat time for a module: its credited hours minus any instructor-led session,
+// which counts toward the classroom hours only once an instructor signs it off.
+function moduleSeatSeconds(m) {
+  if (!m) return 0;
+  return Math.round(m.hours * 3600 - (m.instructorLed ? m.instructorLed.minutes * 60 : 0));
+}
+
+function instructorSessionSigned(m) {
+  return Boolean(m && m.instructorLed && learnerRecordMeta && learnerRecordMeta.signoffs &&
+    learnerRecordMeta.signoffs[m.instructorLed.key] === true);
+}
+
+function moduleHoursEarned(m) {
+  const selfPaced = state.completed.includes(m.id) ? moduleSeatSeconds(m) / 3600 : 0;
+  return selfPaced + (instructorSessionSigned(m) ? m.instructorLed.minutes / 60 : 0);
+}
+
 function getModules() {
   return MODULES.map(m => getModule(m.id));
 }
@@ -257,7 +274,7 @@ function sanitizeState(candidate) {
 
   modules.forEach(m => {
     const id = m.id;
-    const total = Math.round(m.hours * 3600);
+    const total = moduleSeatSeconds(m);
     const score = Number(candidate.scores && candidate.scores[id]);
     const elapsed = Math.max(0, Math.min(total, Number(candidate.timerElapsed && candidate.timerElapsed[id]) || 0));
     clean.timerElapsed[id] = elapsed;
@@ -638,11 +655,7 @@ function showDashboard() {
 
   const modules = getModules();
   const totalHours = modules.reduce((sum, m) => sum + m.hours, 0);
-  let hoursDone = 0;
-  state.completed.forEach(id => {
-    const m = modules.find(x => x.id === id);
-    if (m) hoursDone += m.hours;
-  });
+  const hoursDone = modules.reduce((sum, m) => sum + moduleHoursEarned(m), 0);
   document.getElementById('dash-hours').textContent = instructorPreviewMode
     ? totalHours.toFixed(1) + ' hrs total'
     : hoursDone.toFixed(1) + ' / ' + totalHours.toFixed(1) + ' hrs';
@@ -1237,7 +1250,7 @@ function completeSelfHostedVideo(videoId) {
     saveState();
     setRequiredVideoNote(videoId, 'Video complete ✓', false);
     updateRequiredVideoUI(meta.moduleId, videoId);
-    updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+    updateProgressUI(meta.moduleId, moduleSeatSeconds(getModule(meta.moduleId)));
   } else if (!record.complete) {
     element.currentTime = record.watchedSeconds;
     setRequiredVideoNote(videoId, 'Forward jump blocked. Resume from your last verified position.', true);
@@ -1844,7 +1857,7 @@ function onRequiredVideoStateChange(event, videoId) {
       saveState();
       setRequiredVideoNote(videoId, 'Video complete ✓', false);
       updateRequiredVideoUI(meta.moduleId, videoId);
-      updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+      updateProgressUI(meta.moduleId, moduleSeatSeconds(getModule(meta.moduleId)));
     } else {
       meta.suppressSeekUntil = Date.now() + 2000;
       event.target.seekTo(record.watchedSeconds, true);
@@ -1900,7 +1913,7 @@ function completeVimeoRequiredVideo(videoId, data) {
     saveState();
     setRequiredVideoNote(videoId, 'Video complete ✓', false);
     updateRequiredVideoUI(meta.moduleId, videoId);
-    updateProgressUI(meta.moduleId, Math.round((getModule(meta.moduleId)?.hours || 0) * 3600));
+    updateProgressUI(meta.moduleId, moduleSeatSeconds(getModule(meta.moduleId)));
   } else {
     meta.suppressSeekUntil = Date.now() + 2000;
     player.setCurrentTime(record.watchedSeconds).catch(() => {});
@@ -2052,11 +2065,11 @@ document.addEventListener('visibilitychange', () => {
   const note = document.getElementById('tab-pause-note');
   if (note) note.hidden = !document.hidden;
   if (!document.hidden) {
-    if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
+    if (currentModuleId) updateProgressUI(currentModuleId, moduleSeatSeconds(getModule(currentModuleId)));
     return;
   }
   Object.keys(videoPlayers).forEach(videoId => pauseRequiredPlayer(videoId));
-  if (currentModuleId) updateProgressUI(currentModuleId, Math.round((getModule(currentModuleId)?.hours || 0) * 3600));
+  if (currentModuleId) updateProgressUI(currentModuleId, moduleSeatSeconds(getModule(currentModuleId)));
 });
 
 function getQuizReviewItems(id) {
@@ -2339,7 +2352,7 @@ function setupScrollTracking(id) {
         state.scrollDone[id] = true;
         saveState();
         const m = getModule(id);
-        const totalSec = Math.round((m ? m.hours : 1) * 3600);
+        const totalSec = m ? moduleSeatSeconds(m) : 3600;
         updateProgressUI(id, totalSec);
         try { scrollObserver.disconnect(); } catch (e) {}
       }
@@ -2396,7 +2409,8 @@ function openModule(id) {
   document.getElementById('mod-breadcrumb').textContent = 'Module ' + m.id + ' of ' + getModules().length;
   document.getElementById('mod-title').textContent = m.title;
   document.getElementById('mod-hours').textContent = m.hours + ' classroom hours' +
-    (instructorPreviewMode ? ' · Instructor preview' : ' (required seat time)') +
+    (m.instructorLed ? ' (' + (moduleSeatSeconds(m) / 3600) + ' self-paced + ' + (m.instructorLed.minutes / 60) + ' instructor-led)' : '') +
+    (instructorPreviewMode ? ' · Instructor preview' : (m.instructorLed ? '' : ' (required seat time)')) +
     (state.mine ? ' · ' + state.mine : '');
 
   // Ensure state bags exist (older saved sessions)
@@ -2407,6 +2421,13 @@ function openModule(id) {
   let html = '<div class="card"><strong>Learning Objectives</strong><ul style="margin-top:8px;">';
   m.objectives.forEach(o => { html += '<li>' + o + '</li>'; });
   html += '</ul></div>';
+  if (m.instructorLed) {
+    const signed = instructorSessionSigned(m);
+    html += '<div class="instructor-led-session' + (signed ? ' signed' : '') + '"><strong>Instructor-led classroom session · ' +
+      (m.instructorLed.minutes / 60) + ' hour' + (m.instructorLed.minutes === 60 ? '' : 's') + '</strong><p>' + escapeHtml(m.instructorLed.title) +
+      '. Your instructor runs this hands-on practice in person and records it on your training record. It counts toward your 32 classroom hours once signed off.</p><p class="instructor-led-status">' +
+      (signed ? '✓ Signed off by your instructor' : 'Not yet signed off. Ask your instructor when this session is scheduled.') + '</p></div>';
+  }
   html += m.content;
   html += '<div class="scroll-marker" id="scroll-end-marker"></div>';
   html += instructorPreviewMode
@@ -2445,10 +2466,10 @@ function openModule(id) {
   });
 
   if (instructorPreviewMode) {
-    updateProgressUI(id, Math.round(m.hours * 3600));
+    updateProgressUI(id, moduleSeatSeconds(m));
   } else {
     setupScrollTracking(id);
-    autoStartModuleTimer(id, m.hours);
+    autoStartModuleTimer(id, moduleSeatSeconds(m) / 3600);
   }
   initializeRequiredVideos(id);
   updateQuizButton(id);
@@ -2469,7 +2490,7 @@ function formatTimer(sec) {
 function startTimer(id, minutes) {
   if (instructorPreviewMode) return;
   const m = getModule(id);
-  autoStartModuleTimer(id, m ? m.hours : (minutes / 60));
+  autoStartModuleTimer(id, m ? moduleSeatSeconds(m) / 3600 : (minutes / 60));
 }
 
 async function showQuiz() {
@@ -2655,6 +2676,12 @@ async function showCertificate() {
     state.completed.includes(m.id) &&
     Number(state.scores[m.id]) === QUIZ_PASSING_SCORE
   );
+  const missingSessions = modules.filter(m => m.instructorLed && !instructorSessionSigned(m));
+  if (validCompletion && missingSessions.length) {
+    showAppAlert('All modules are complete. Your instructor still needs to sign off: ' +
+      missingSessions.map(m => m.instructorLed.title + ' (Module ' + m.id + ')').join('; ') + '.');
+    return;
+  }
   if (!validCompletion) {
     showAppAlert('Every module must have completed seat time, content review, required videos, and a perfect 100% quiz score before a certificate can be generated.');
     return;
@@ -2746,7 +2773,11 @@ async function downloadTrainingRecord() {
       title: m.title,
       creditedHours: m.hours,
       completed: state.completed.includes(m.id),
-      seatTimeSeconds: Math.min(Math.round(m.hours * 3600), Number(state.timerElapsed[m.id]) || 0),
+      seatTimeSeconds: Math.min(moduleSeatSeconds(m), Number(state.timerElapsed[m.id]) || 0),
+      requiredSelfPacedSeconds: moduleSeatSeconds(m),
+      instructorLedSession: m.instructorLed
+        ? { title: m.instructorLed.title, minutes: m.instructorLed.minutes, signedOff: instructorSessionSigned(m) }
+        : null,
       seatTimeComplete: state.timersDone[m.id] === true,
       contentReviewed: state.scrollDone[m.id] === true,
       requiredVideos: getRequiredVideos(m.id).map(video => {

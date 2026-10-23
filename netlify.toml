@@ -30,10 +30,11 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+# The build versions every /media URL (?v=<content hash>), so files can be cached long.
 [[headers]]
   for = "/media/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=2592000"
 
 [[headers]]
   for = "/js/*"

@@ -26,7 +26,7 @@ function publicRecord(record) {
     mine: record.state?.mine || '',
     startedAt: record.state?.startedAt || null,
     scores: record.state?.scores || {},
-    summary: record.summary?.totalModules ? record.summary : trainingSummary(record.state, record.signoffs),
+    summary: trainingSummary(record.state, record.signoffs),
     modules: moduleProgress(record.state),
     signoffs: record.signoffs || {},
     signoffDetails: record.signoffDetails || {},
