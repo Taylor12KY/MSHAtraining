@@ -1289,6 +1289,10 @@ body.app-dialog-open { overflow: hidden; }
 .allen-activity-option, .allen-activity-row { display: block; margin: 6px 0; line-height: 1.4; }
 .allen-activity-row select { margin-right: 8px; max-width: 100%; }
 .allen-activity-hint { font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 8px; }
+.allen-activity-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 6px 0 10px; }
+.allen-activity-photo { margin: 0; }
+.allen-activity-photo img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; display: block; }
+.allen-activity-photo figcaption { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
 .allen-activity textarea { width: 100%; box-sizing: border-box; margin: 6px 0; font: inherit; }
 .allen-activity .btn { margin-top: 8px; }
 .allen-activity-feedback { margin-top: 8px; font-size: 0.9rem; }

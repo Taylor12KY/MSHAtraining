@@ -89,7 +89,7 @@ const ALLEN_ACTIVITIES = {
     "id": "M1-g",
     "type": "find_the_hazard",
     "minutes": 5,
-    "prompt": "Name these five landmarks at your own site (illustrated stand-ins until site photos arrive).",
+    "prompt": "Name these five landmarks at your own site. Real site photos are shown for Dix River Stone and Clover Bottom where we have them; the rest are still illustrated stand-ins.",
     "count": 5,
     "photoPending": true,
     "answer": [
@@ -98,6 +98,45 @@ const ALLEN_ACTIVITIES = {
      "Breakroom (SDS binder)",
      "Eyewash station",
      "Your gathering point"
+    ],
+    "photoCoverage": "Photos so far: Dix River Stone tag board (breakroom), explosive magazines, ANFO trailer and fuel tank; Clover Bottom tag board. Still pending: Boonesboro, scale houses, eyewash stations and the other gathering points.",
+    "photos": [
+     {
+      "src": "/media/photos/allen-drs-tag-board.jpg",
+      "site": "Dix River Stone",
+      "alt": "Tag board with OUT, IN, OUT columns and brass tags beside a time clock on a tiled breakroom wall",
+      "answer": "Tag board in the breakroom (also the Dix River gathering point)"
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-1.jpg",
+      "site": "Dix River Stone",
+      "alt": "White steel box on the quarry floor by the highwall with a red fire extinguisher stand beside it",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)"
+     },
+     {
+      "src": "/media/photos/allen-drs-magazine-2.jpg",
+      "site": "Dix River Stone",
+      "alt": "Second white steel box with a hinged, latched door in front of the highwall, red extinguisher stand at left",
+      "answer": "Explosive magazine (keep away unless assigned; no smoking or flames within 50 ft)"
+     },
+     {
+      "src": "/media/photos/allen-drs-anfo-trailer.jpg",
+      "site": "Dix River Stone",
+      "alt": "White trailer with an orange placard parked at an underground heading, two orange cones in front",
+      "answer": "ANFO trailer (cones mean keep clear; no smoking or flames within 50 ft)"
+     },
+     {
+      "src": "/media/photos/allen-drs-fuel-tank.jpg",
+      "site": "Dix River Stone",
+      "alt": "Horizontal white tank marked NO OPEN FLAMES with a hazard diamond, hose and a fire extinguisher on a stand",
+      "answer": "Fuel tank (no open flames; extinguisher on the stand)"
+     },
+     {
+      "src": "/media/photos/allen-cbq-tag-board.jpg",
+      "site": "Clover Bottom Quarry",
+      "alt": "Tag board with three panels labeled IN MINE #1, OUT and IN MINE #2, numbered black tags",
+      "answer": "Tag board: IN MINE #1 | OUT | IN MINE #2 (also a Clover Bottom gathering point)"
+     }
     ]
    },
    {

@@ -1317,9 +1317,18 @@ function renderAllenActivityItem(item) {
       Array.from({ length: rows }, () => `<tr>${columns.map(column => `<td><textarea rows="2" aria-label="${escapeHtml(column)}" data-free-text></textarea></td>`).join('')}</tr>`).join('') +
       `</tbody></table></div><button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the answer key</button>`;
   } else {
+    // Real site photos are shown only to trainees at the site they were taken at.
+    const sitePhotos = (item.photos || []).filter(photo => photo && photo.site && photo.site === state.mine);
     const photoNote = item.photoPending || item.type === 'find_the_hazard' || item.type === 'map_trace' || item.type === 'site_map_marking'
-      ? '<p class="allen-activity-hint">Site photo/map pending. Work from the video and your site tour, or complete this with your instructor.</p>' : '';
-    body = photoNote + `<textarea rows="3" class="allen-activity-text" data-free-text aria-label="Your answer"></textarea>` +
+      ? `<p class="allen-activity-hint">${sitePhotos.length
+        ? 'Some landmarks below are real photos from your site; the rest are still pending. Work from the video and your site tour, or complete this with your instructor.'
+        : 'Site photo/map pending. Work from the video and your site tour, or complete this with your instructor.'}</p>` : '';
+    const photoGrid = sitePhotos.length
+      ? `<div class="allen-activity-photos">${sitePhotos.map((photo, index) =>
+        `<figure class="allen-activity-photo"><img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || '')}" loading="lazy" decoding="async">` +
+        `<figcaption>${escapeHtml(photo.site)} · photo ${index + 1}<details><summary>What is it?</summary>${escapeHtml(photo.answer || '')}</details></figcaption></figure>`).join('')}</div>`
+      : '';
+    body = photoNote + photoGrid + `<textarea rows="3" class="allen-activity-text" data-free-text aria-label="Your answer"></textarea>` +
       `<button type="button" class="btn btn-sm" data-act-check="${escapeHtml(item.id)}">Compare with the model answer</button>`;
   }
   return `<div class="allen-activity" id="${id}" data-activity-id="${escapeHtml(item.id)}">${prompt}${body}${feedback}</div>`;
