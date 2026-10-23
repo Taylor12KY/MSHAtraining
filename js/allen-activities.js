@@ -487,7 +487,7 @@ const ALLEN_ACTIVITIES = {
     "id": "M6-l",
     "type": "multiple_choice",
     "minutes": 1.5,
-    "prompt": "When should you barricade?",
+    "prompt": "In general MSHA training, when is barricading considered?",
     "options": [
      "As soon as you smell smoke",
      "Only when every escape route is cut off",
@@ -495,7 +495,7 @@ const ALLEN_ACTIVITIES = {
      "When you can't find your partner"
     ],
     "answer": 1,
-    "explanation": "Escape is always the first choice. Barricading is the last resort, when both escapeways are cut off."
+    "explanation": "At Allen, escape is the plan: our mines keep no refuge or barricading materials, and your site's emergency plan governs. In general MSHA training, barricading is only a last resort when every escape route is cut off."
    }
   ]
  },
@@ -534,7 +534,7 @@ const ALLEN_ACTIVITIES = {
     "id": "M8-c",
     "type": "sds_lookup",
     "minutes": 6,
-    "prompt": "Open the diesel fuel SDS (the SDS library on this site, or the binder in your breakroom). Find: (1) the product name in section 1, and check it matches the label; (2) the signal word; (3) first aid for eye contact (section 4); (4) the gloves to wear (section 8); (5) the extinguisher to use (section 5).",
+    "prompt": "Open the SDS for the hydraulic oil used at your site (the paper SDS binder in your breakroom). Find: (1) the product name in section 1, and check it matches the label; (2) the signal word, if there is one; (3) first aid for eye contact (section 4); (4) the gloves to wear (section 8); (5) the extinguisher to use (section 5).",
     "answer": "From the SDS for the product; reference copy until Allen's supplier SDS is added"
    },
    {
