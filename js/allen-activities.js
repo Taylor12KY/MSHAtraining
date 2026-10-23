@@ -99,25 +99,25 @@ const ALLEN_ACTIVITIES = {
      "Eyewash station",
      "Your gathering point"
     ],
-    "photoCoverage": "Photos cover: the tag boards at all three sites; Boonesboro breakroom (PPE sign, contractor tag board, first aid cabinet and SDS station), outdoor tag board and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
+    "photoCoverage": "Photos cover: the tag boards at all three sites; Boonesboro miners' outdoor tag board, breakroom contractor/visitor boards with the PPE sign, first aid cabinet and SDS station, and Level 2 fuel tank; Clover Bottom Emergency Assembly Area 1 at the tag-board trailer, screen plant and primary crusher; Dix River explosive magazines, ANFO trailer, fuel tank and escape-map box. Still pending: scale houses, eyewash stations, the other gathering points.",
     "photos": [
-     {
-      "src": "/media/photos/allen-bbq-tag-board-ppe-sign.jpg",
-      "site": "Boonesboro Quarry",
-      "alt": "Breakroom tag board labeled IN and OUT with brass tags, under a red sign: before you leave this room make sure you have safety glasses, hard hat, hi-vis, self-rescuer, brass tag, any other required PPE",
-      "answer": "Tag board in the breakroom. The sign over it: before you leave, have your safety glasses, hard hat, hi-vis, self-rescuer, brass tag and any other required PPE."
-     },
-     {
-      "src": "/media/photos/allen-bbq-contractor-tag-board.jpg",
-      "site": "Boonesboro Quarry",
-      "alt": "Second breakroom tag board labeled IN, CONTRACTORS and OUT with numbered pegs and brass tags, clipboard below",
-      "answer": "Contractor tag board in the breakroom (IN / CONTRACTORS / OUT)."
-     },
      {
       "src": "/media/photos/allen-bbq-outdoor-tag-board.jpg",
       "site": "Boonesboro Quarry",
       "alt": "Outdoor covered tag board on a block wall: IN and OUT pegboard panels with tags and a CHOOSE TO BE SAFE poster in a glass case between them",
-      "answer": "Outdoor tag board (covered, IN and OUT) outside the building."
+      "answer": "The miners' tag board: the covered IN / OUT board outside. Tag in and out here every shift."
+     },
+     {
+      "src": "/media/photos/allen-bbq-contractor-visitor-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Breakroom contractor and visitor check-in board labeled IN and OUT with brass tags, under a red sign: before you leave this room make sure you have safety glasses, hard hat, hi-vis, self-rescuer, brass tag, any other required PPE",
+      "answer": "Contractor and visitor check-in board in the breakroom. The sign over it: before you leave this room, have your safety glasses, hard hat, hi-vis, self-rescuer, brass tag and any other required PPE."
+     },
+     {
+      "src": "/media/photos/allen-bbq-contractor-tag-board.jpg",
+      "site": "Boonesboro Quarry",
+      "alt": "Breakroom contractor board labeled IN, CONTRACTORS and OUT with numbered pegs and brass tags, clipboard below",
+      "answer": "Contractor check-in board in the breakroom (IN / CONTRACTORS / OUT)."
      },
      {
       "src": "/media/photos/allen-bbq-first-aid-sds-station.jpg",
