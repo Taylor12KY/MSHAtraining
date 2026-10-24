@@ -297,8 +297,8 @@ const ALLEN_ACTIVITIES = {
   ]
  },
  "2": {
-  "title": "Module 2 · Miners' rights and the Mine Act",
-  "minutes": 6.5,
+  "title": "Module 2 · Miners' rights, the Mine Act, MSHA history and your training rights",
+  "minutes": 17.5,
   "items": [
    {
     "id": "M2-a",
@@ -362,12 +362,127 @@ const ALLEN_ACTIVITIES = {
     ],
     "answer": 1,
     "explanation": "Under Part 40, a representative can accompany inspectors and request inspections."
+   },
+   {
+    "id": "M2-e",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "Your lead tells you to skip the workplace exam to make up time. What can you do?",
+    "model_answer": "Say the exam is required before work starts in the place, and ask for it to be done first. If it's still being skipped, tell the next level of supervision. You can also report the hazard to MSHA through the hazard hotline or online without giving your name, or ask for an inspection under section 103(g). You are protected from retaliation under section 105(c).",
+    "must_include": [
+     "exam before work",
+     "tell supervisor",
+     "report to MSHA",
+     "103(g) or hotline",
+     "105(c) protection"
+    ]
+   },
+   {
+    "id": "M2-f",
+    "type": "matching",
+    "minutes": 3,
+    "prompt": "Match each situation to where the right comes from.",
+    "left": [
+     "Ask MSHA to inspect because you believe a violation or imminent danger exists",
+     "Complain because you were punished for raising a safety concern",
+     "Be trained before you are assigned to work",
+     "Check the courses and dates on your training certificate",
+     "See that your working place was examined and hazards were fixed"
+    ],
+    "right": [
+     "Mine Act section 103(g)",
+     "Mine Act section 105(c)",
+     "30 CFR Part 48 (48.5 and 48.25)",
+     "Form 5000-23 (48.9 and 48.29)",
+     "Workplace exam record (57.18002)"
+    ],
+    "pairs": [
+     [
+      "Ask MSHA to inspect because you believe a violation or imminent danger exists",
+      "Mine Act section 103(g)"
+     ],
+     [
+      "Complain because you were punished for raising a safety concern",
+      "Mine Act section 105(c)"
+     ],
+     [
+      "Be trained before you are assigned to work",
+      "30 CFR Part 48 (48.5 and 48.25)"
+     ],
+     [
+      "Check the courses and dates on your training certificate",
+      "Form 5000-23 (48.9 and 48.29)"
+     ],
+     [
+      "See that your working place was examined and hazards were fixed",
+      "Workplace exam record (57.18002)"
+     ]
+    ],
+    "answer": [
+     [
+      "Ask MSHA to inspect because you believe a violation or imminent danger exists",
+      "Mine Act section 103(g)"
+     ],
+     [
+      "Complain because you were punished for raising a safety concern",
+      "Mine Act section 105(c)"
+     ],
+     [
+      "Be trained before you are assigned to work",
+      "30 CFR Part 48 (48.5 and 48.25)"
+     ],
+     [
+      "Check the courses and dates on your training certificate",
+      "Form 5000-23 (48.9 and 48.29)"
+     ],
+     [
+      "See that your working place was examined and hazards were fixed",
+      "Workplace exam record (57.18002)"
+     ]
+    ]
+   },
+   {
+    "id": "M2-g",
+    "type": "ordering",
+    "minutes": 2.5,
+    "prompt": "You think you were punished for using a safety right. Put the steps for a 105(c) complaint in order.",
+    "items": [
+     "Write down what happened, with dates, names, places and times",
+     "Keep copies of anything you sent or received",
+     "Contact MSHA within 60 days",
+     "Give MSHA the details",
+     "MSHA investigates",
+     "MSHA tells you its decision in writing"
+    ],
+    "answer": [
+     "Write down what happened, with dates, names, places and times",
+     "Keep copies of anything you sent or received",
+     "Contact MSHA within 60 days",
+     "Give MSHA the details",
+     "MSHA investigates",
+     "MSHA tells you its decision in writing"
+    ],
+    "explanation": "Steps from MSHA's Guide to Miners' Rights, as covered in the video."
+   },
+   {
+    "id": "M2-h",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "What is MSHA Form 5000-23 for?",
+    "options": [
+     "Reporting a hazard to MSHA",
+     "Recording and certifying the training you completed, with a copy for you",
+     "Requesting an inspection",
+     "Applying for a job"
+    ],
+    "answer": 1,
+    "explanation": "30 CFR 48.9 and 48.29: the operator records and certifies each training program on Form 5000-23, gives you a copy when you complete it, and lets you examine your record."
    }
   ]
  },
  "3": {
-  "title": "Module 3 · MSA W65 self-rescuer care and inspection",
-  "minutes": 9.5,
+  "title": "Module 3 · MSA W65 self-rescuer care, inspection and limits",
+  "minutes": 15.5,
   "items": [
    {
     "id": "M3-a",
@@ -436,6 +551,82 @@ const ALLEN_ACTIVITIES = {
      "Belt loop secure"
     ],
     "answer": "Completion only"
+   },
+   {
+    "id": "M3-f",
+    "type": "scenario_short_answer",
+    "minutes": 3,
+    "prompt": "Your W65 is getting hot and your mouth is dry. What do you do?",
+    "model_answer": "Keep it on. Hot, dry air is normal and means the W65 is converting carbon monoxide. Keep your lips sealed and the nose clip on, don't take a breath of the surrounding air, stay calm, and keep moving toward fresh air by your escapeway.",
+    "must_include": [
+     "keep it on",
+     "hot and dry is normal",
+     "lips sealed",
+     "nose clip",
+     "toward fresh air"
+    ]
+   },
+   {
+    "id": "M3-g",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "What does the W65 protect against?",
+    "options": [
+     "Any toxic gas",
+     "Low oxygen",
+     "Carbon monoxide, for escape only",
+     "Dust only"
+    ],
+    "answer": 2,
+    "explanation": "MSA W65 manual: approved only for self-rescue from carbon monoxide."
+   },
+   {
+    "id": "M3-h",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Which of these is NOT something the W65 does?",
+    "options": [
+     "Convert carbon monoxide to carbon dioxide",
+     "Supply oxygen",
+     "Filter dust",
+     "Give hot, dry air when it is working on carbon monoxide"
+    ],
+    "answer": 1,
+    "explanation": "The W65 supplies no oxygen. It is not for air with less than 19.5 percent oxygen."
+   }
+  ]
+ },
+ "5": {
+  "title": "Module 5 · Work environment and hazard recognition at our operations",
+  "minutes": 5.5,
+  "items": [
+   {
+    "id": "M5-a",
+    "type": "find_the_hazard",
+    "minutes": 4,
+    "prompt": "Find the hazards in this working place at one of our sites (illustrated stand-in until site photos arrive).",
+    "count": 4,
+    "photoPending": true,
+    "answer": [
+     "Person working without required PPE",
+     "Low or broken berm at a drop-off",
+     "Trip hazard across a walkway",
+     "Guard missing or open on moving machinery"
+    ]
+   },
+   {
+    "id": "M5-b",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Why is PPE called the last layer of protection?",
+    "options": [
+     "Because it is the cheapest",
+     "Because it only protects the wearer after the hazard still exists, so removing or guarding the hazard comes first",
+     "Because only supervisors need it",
+     "Because it is optional"
+    ],
+    "answer": 1,
+    "explanation": "The module's order of controls: remove the hazard, guard or lock it out, follow procedures, then PPE. PPE does not make the hazard go away."
    }
   ]
  },
@@ -680,6 +871,61 @@ const ALLEN_ACTIVITIES = {
     ],
     "answer": 1,
     "explanation": "At Allen, escape is the plan: our mines keep no refuge or barricading materials, and your site's emergency plan governs. In general MSHA training, barricading is only a last resort when every escape route is cut off."
+   }
+  ]
+ },
+ "7": {
+  "title": "Module 7 · Ground control: checking and scaling the back",
+  "minutes": 6.0,
+  "items": [
+   {
+    "id": "M7-a",
+    "type": "find_the_hazard",
+    "minutes": 3,
+    "prompt": "Find the problems in this underground working place (illustrated stand-in until site photos arrive).",
+    "count": 4,
+    "photoPending": true,
+    "answer": [
+     "Loose rock hanging from the back",
+     "Cracked pillar or rib",
+     "Person standing under ground that has not been scaled or supported",
+     "No warning sign or barrier at the unscaled area"
+    ]
+   },
+   {
+    "id": "M7-b",
+    "type": "ordering",
+    "minutes": 1.5,
+    "prompt": "Put the ground-checking steps in order.",
+    "items": [
+     "Look up and around before you go in",
+     "Listen for ticking or cracking",
+     "Stay out from under anything loose and report it",
+     "Authorized person scales from a safe position",
+     "Area is re-examined before work or travel"
+    ],
+    "answer": [
+     "Look up and around before you go in",
+     "Listen for ticking or cracking",
+     "Stay out from under anything loose and report it",
+     "Authorized person scales from a safe position",
+     "Area is re-examined before work or travel"
+    ],
+    "explanation": "As covered in the video (see its notes for the standards). Only trained and authorized people scale."
+   },
+   {
+    "id": "M7-c",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "You hear the back ticking and cracking. What do you do?",
+    "options": [
+     "Keep working but watch it",
+     "Tap it with a bar to see if it's loose",
+     "Back out to supported ground, keep others out, and report it",
+     "Wait to see whether anything falls"
+    ],
+    "answer": 2,
+    "explanation": "Ground that talks is a warning. Move to ground you know is supported, keep others out, and report it right away."
    }
   ]
  },
@@ -1207,8 +1453,8 @@ const ALLEN_ACTIVITIES = {
   ]
  },
  "11": {
-  "title": "Module 11 · Surface operations hazards",
-  "minutes": 8.5,
+  "title": "Module 11 · Blasting, explosives, mine gases and surface hazards",
+  "minutes": 24.5,
   "items": [
    {
     "id": "M11-a",
@@ -1264,6 +1510,149 @@ const ALLEN_ACTIVITIES = {
     ],
     "answer": 1,
     "explanation": "Report lights that are out; work areas must be lit well enough to work safely."
+   },
+   {
+    "id": "M11-e",
+    "type": "ordering",
+    "minutes": 3,
+    "prompt": "Shot day, from your point of view: put these in order.",
+    "items": [
+     "Hear your site's warning signal before the shot",
+     "Move out of the blast area to where you were told",
+     "Stay out while the guards stop everyone at every entrance",
+     "The blaster fires the shot",
+     "Wait while the area is examined and, underground, the air is cleared and tested",
+     "Go back only after the blaster gives the all-clear"
+    ],
+    "answer": [
+     "Hear your site's warning signal before the shot",
+     "Move out of the blast area to where you were told",
+     "Stay out while the guards stop everyone at every entrance",
+     "The blaster fires the shot",
+     "Wait while the area is examined and, underground, the air is cleared and tested",
+     "Go back only after the blaster gives the all-clear"
+    ],
+    "explanation": "30 CFR 56/57.6306: everyone is out of the blast area and warned before firing; work does not resume until a person with the ability and experience has examined it. Your site's actual signals come from your site training."
+   },
+   {
+    "id": "M11-f",
+    "type": "scenario_short_answer",
+    "minutes": 4,
+    "prompt": "After the all-clear, you find a hole at the face with wire still in it. What do you do?",
+    "model_answer": "Don't touch it or move it. Back away the way you came, keep anyone else from going closer, and tell the blaster in charge or your supervisor right away, by radio from a safe distance, with the exact location. Don't dig, drill, load or haul near it.",
+    "must_include": [
+     "don't touch",
+     "back away",
+     "keep others out",
+     "tell the blaster",
+     "exact location"
+    ]
+   },
+   {
+    "id": "M11-g",
+    "type": "matching",
+    "minutes": 3,
+    "prompt": "Match each gas to its main hazard and where it tends to collect.",
+    "left": [
+     "Carbon monoxide (CO)",
+     "Nitrogen dioxide (NO2)",
+     "Methane (CH4)",
+     "Hydrogen sulfide (H2S)",
+     "Low oxygen"
+    ],
+    "right": [
+     "Colorless, odorless poison from blasting, fires and exhaust; builds up in poorly ventilated headings",
+     "Orange-brown blast fumes; severe lung irritant, with effects that can be delayed",
+     "Flammable and explosive; lighter than air, so it can reach roof pockets",
+     "Highly toxic and flammable; somewhat heavier than air, so low areas and sumps; smell fades fast",
+     "No color or smell; found in tanks, dead-end headings and sealed or abandoned areas"
+    ],
+    "pairs": [
+     [
+      "Carbon monoxide (CO)",
+      "Colorless, odorless poison from blasting, fires and exhaust; builds up in poorly ventilated headings"
+     ],
+     [
+      "Nitrogen dioxide (NO2)",
+      "Orange-brown blast fumes; severe lung irritant, with effects that can be delayed"
+     ],
+     [
+      "Methane (CH4)",
+      "Flammable and explosive; lighter than air, so it can reach roof pockets"
+     ],
+     [
+      "Hydrogen sulfide (H2S)",
+      "Highly toxic and flammable; somewhat heavier than air, so low areas and sumps; smell fades fast"
+     ],
+     [
+      "Low oxygen",
+      "No color or smell; found in tanks, dead-end headings and sealed or abandoned areas"
+     ]
+    ],
+    "answer": [
+     [
+      "Carbon monoxide (CO)",
+      "Colorless, odorless poison from blasting, fires and exhaust; builds up in poorly ventilated headings"
+     ],
+     [
+      "Nitrogen dioxide (NO2)",
+      "Orange-brown blast fumes; severe lung irritant, with effects that can be delayed"
+     ],
+     [
+      "Methane (CH4)",
+      "Flammable and explosive; lighter than air, so it can reach roof pockets"
+     ],
+     [
+      "Hydrogen sulfide (H2S)",
+      "Highly toxic and flammable; somewhat heavier than air, so low areas and sumps; smell fades fast"
+     ],
+     [
+      "Low oxygen",
+      "No color or smell; found in tanks, dead-end headings and sealed or abandoned areas"
+     ]
+    ]
+   },
+   {
+    "id": "M11-h",
+    "type": "find_the_hazard",
+    "minutes": 3,
+    "prompt": "Find the problems with this blast-area entrance (illustrated stand-in until site photos arrive).",
+    "count": 4,
+    "photoPending": true,
+    "answer": [
+     "No guard posted at the road into the blast area",
+     "A truck driving toward the shot while the strobes flash",
+     "A person standing inside the blast area",
+     "Phone or radio left near loaded holes"
+    ]
+   },
+   {
+    "id": "M11-i",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "A gas monitor alarms near you. What is your response?",
+    "options": [
+     "Check your own sense of smell first",
+     "Stop, warn others, withdraw toward fresh air, and report",
+     "Turn the monitor off so it stops beeping",
+     "Keep working but move slowly"
+    ],
+    "answer": 1,
+    "explanation": "Module 11: stop, warn, withdraw, report. The alarm is real until a qualified person says otherwise, and you never rely on smell."
+   },
+   {
+    "id": "M11-j",
+    "type": "multiple_choice",
+    "minutes": 1.5,
+    "prompt": "Who deals with a misfire?",
+    "options": [
+     "Whoever finds it, if they're careful",
+     "The loader operator, by pushing it clear",
+     "Only the blaster and authorized people, after the required wait",
+     "The next shift"
+    ],
+    "answer": 2,
+    "explanation": "30 CFR 56/57.6310 and 6311: misfires are handled by authorized persons after the required wait. A trainee's job is to stay out, keep others out, and report it to the blaster."
    }
   ]
  },
