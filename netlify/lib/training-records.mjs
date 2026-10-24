@@ -105,6 +105,11 @@ export function sanitizeTrainingState(candidate = {}, { trustCompleted = false }
         complete: incoming.complete === true && watchedSeconds >= durationSeconds - 3,
         updatedAt: validDate(incoming.updatedAt)
       };
+      // Best per-video quiz score; only kept once the video itself is complete.
+      const quizBest = Number(incoming.quizBest);
+      if (clean.videoProgress[id][videoId].complete && Number.isFinite(quizBest)) {
+        clean.videoProgress[id][videoId].quizBest = Math.round(clamp(quizBest, 0, 100));
+      }
     }
 
     const videosComplete = requiredVideoEntries.every(([videoId]) => clean.videoProgress[id]?.[videoId]?.complete === true);
@@ -158,6 +163,8 @@ export function mergeTrainingStates(previousCandidate = {}, incomingCandidate = 
         complete: watchedSeconds >= durationSeconds - 3 && Boolean(oldVideo?.complete || newVideo?.complete),
         updatedAt: [oldVideo?.updatedAt, newVideo?.updatedAt].filter(Boolean).sort().at(-1) || ''
       };
+      const quizScores = [oldVideo?.quizBest, newVideo?.quizBest].filter(Number.isFinite);
+      if (quizScores.length) merged.videoProgress[id][videoId].quizBest = Math.max(...quizScores);
     }
   }
   return sanitizeTrainingState(merged, { trustCompleted: true });

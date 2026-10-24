@@ -1303,3 +1303,14 @@ body.app-dialog-open { overflow: hidden; }
 .objectives-card li:last-child { margin-bottom: 0; }
 .objectives-card li::marker { color: var(--accent); }
 .progress-meta .preview-note { color: var(--text-muted); }
+
+/* Per-video quizzes (js/video-quizzes.js): locked until the tracked player marks the video watched. */
+.video-quiz { margin-top: 14px; padding: 12px 14px; border: 1px solid #d6dbe1; border-radius: 8px; background: #f8fafc; }
+.video-quiz-title { margin: 0 0 8px; font-size: 1rem; }
+.video-quiz-locked { margin: 0; color: #5b6573; }
+.video-quiz-best { margin: 0 0 8px; font-weight: 600; }
+.video-quiz-question { margin: 10px 0 14px; }
+.video-quiz-question p { margin: 0 0 6px; }
+.video-quiz-feedback.ok, .video-quiz-result.ok { color: #1f6f3f; }
+.video-quiz-feedback.retry, .video-quiz-result.retry { color: #a33a1f; }
+.video-quiz-result { margin-top: 10px; font-weight: 600; }
