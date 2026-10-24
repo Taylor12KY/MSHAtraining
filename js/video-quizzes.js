@@ -8,15 +8,15 @@ const VIDEO_QUIZZES = {
  "allen-m1-1": {
   "questions": [
    {
-    "q": "Why do you hang your tag on the tag board when you arrive at Boonesboro?",
+    "q": "Why do you move your tag on the tag board at Boonesboro?",
     "options": [
-     "So the site knows who is on site in an emergency",
+     "So the site knows who is underground in an emergency",
      "To clock in for pay",
      "To reserve a piece of equipment",
      "To sign out a radio"
     ],
     "answer": 0,
-    "explanation": "The video says hanging your tag (and taking it down when you leave) is how the site knows who is on site in an emergency."
+    "explanation": "The video says you move your tag to in when you go underground and back to out when you come out, so the site knows who is underground in an emergency. Never tag in or out for anyone else."
    },
    {
     "q": "What are the Boonesboro speed limits stated in the video?",
@@ -798,10 +798,10 @@ const VIDEO_QUIZZES = {
      "Walk around to stay warm",
      "Shout continuously",
      "Use all lights at once",
-     "Stay calm and still, use one light at a time, keep your self-rescuer ready, and tap on pipes or bolts at intervals"
+     "Stay calm and still, use one light at a time, keep your self-rescuer ready, and follow the mine rescue team's instructions"
     ],
     "answer": 3,
-    "explanation": "Conserve air and light, keep your self-rescuer ready, and signal by tapping at intervals."
+    "explanation": "Conserve air and light and keep your self-rescuer ready. Allen has no set signaling procedure, so follow the mine rescue team's instructions. The video presents barricading as general awareness only, not an Allen procedure; at Allen, escape is the plan."
    }
   ]
  },
