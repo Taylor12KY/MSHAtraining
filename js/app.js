@@ -291,6 +291,10 @@ function sanitizeState(candidate) {
         complete: saved && saved.complete === true && watchedSeconds >= video.durationSeconds - 3,
         updatedAt: saved && typeof saved.updatedAt === 'string' ? saved.updatedAt : ''
       };
+      const quizBest = Number(saved && saved.quizBest);
+      if (clean.videoProgress[id][video.id].complete && Number.isFinite(quizBest) && quizBest >= 0) {
+        clean.videoProgress[id][video.id].quizBest = Math.round(Math.min(100, quizBest));
+      }
     });
     if (Number.isFinite(score) && score >= 0 && score <= 100) clean.scores[id] = Math.round(score);
     if (candidate.quizAttempts && Array.isArray(candidate.quizAttempts[id])) {
@@ -1112,6 +1116,7 @@ function buildSelfHostedVideoBox(video) {
     </div>
     ${requiredVideoControls(video)}
     <p class="video-fallback self-hosted-video-note">Captions are built into the picture and are also available with the CC button. Your site's plans always override this video.</p>
+    ${videoQuizFor(video.id) ? `<section class="video-quiz" id="video-quiz-${escapeHtml(video.id)}" data-video-quiz="${escapeHtml(video.id)}" aria-live="polite"></section>` : ''}
   `;
   const element = box.querySelector('video');
   if (element) element.addEventListener('contextmenu', event => event.preventDefault());
@@ -1401,6 +1406,100 @@ function renderAllenActivities(moduleId) {
     });
   });
   marker.before(section);
+}
+
+// Per-video knowledge checks (js/video-quizzes.js). A quiz unlocks only after the tracked
+// player marks the video complete; the best score is saved on that video's progress record.
+// They do not change module completion, seat time, the module quiz or sign-offs.
+function videoQuizFor(videoId) {
+  return typeof VIDEO_QUIZZES !== 'undefined' && VIDEO_QUIZZES[videoId] && VIDEO_QUIZZES[videoId].questions && VIDEO_QUIZZES[videoId].questions.length
+    ? VIDEO_QUIZZES[videoId] : null;
+}
+
+function videoQuizPassingScore() {
+  return typeof VIDEO_QUIZ_PASSING_SCORE === 'number' ? VIDEO_QUIZ_PASSING_SCORE : 80;
+}
+
+function scoreVideoQuiz(quiz, selections) {
+  const total = quiz.questions.length;
+  const correct = quiz.questions.filter((question, index) => Number(selections[index]) === Number(question.answer)).length;
+  const score = total ? Math.round((correct / total) * 100) : 0;
+  return { correct, total, score, passed: score >= videoQuizPassingScore() };
+}
+
+function shuffledOptionOrder(length) {
+  const order = Array.from({ length }, (_, index) => index);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
+function renderVideoQuiz(moduleId, videoId) {
+  const container = document.getElementById('video-quiz-' + videoId);
+  const quiz = videoQuizFor(videoId);
+  const video = getRequiredVideos(moduleId).find(item => item.id === videoId);
+  if (!container || !quiz || !video) return;
+  const record = ensureVideoProgress(moduleId, video);
+  const unlocked = record.complete === true;
+  const best = Number.isFinite(Number(record.quizBest)) ? Number(record.quizBest) : null;
+  const pass = videoQuizPassingScore();
+  const stateKey = unlocked ? 'open' : 'locked';
+  if (container.dataset.quizState === stateKey && stateKey === 'locked') return;
+  if (container.dataset.quizState === 'open' && unlocked) return;
+  container.dataset.quizState = stateKey;
+  const heading = `<h4 class="video-quiz-title">Video quiz · ${quiz.questions.length} questions · pass mark ${pass}%</h4>`;
+  if (!unlocked) {
+    container.innerHTML = heading + '<p class="video-quiz-locked">🔒 Finish watching this video to unlock its quiz.</p>';
+    return;
+  }
+  const bestLine = best === null ? '' : `<p class="video-quiz-best">Best score so far: ${best}%${best >= pass ? ' ✓ passed' : ''}</p>`;
+  container.innerHTML = heading + bestLine + quiz.questions.map((question, index) => {
+    const name = `vq-${videoId}-${index}`;
+    const options = shuffledOptionOrder(question.options.length).map(optionIndex =>
+      `<label class="allen-activity-option"><input type="radio" name="${escapeHtml(name)}" value="${optionIndex}"> ${escapeHtml(question.options[optionIndex])}</label>`).join('');
+    return `<div class="video-quiz-question" data-question-index="${index}"><p><strong>${index + 1}.</strong> ${escapeHtml(question.q)}</p>${options}<div class="video-quiz-feedback"></div></div>`;
+  }).join('') + `<button type="button" class="btn btn-sm" data-video-quiz-submit>Submit quiz</button><div class="video-quiz-result" aria-live="polite"></div>`;
+  container.querySelector('[data-video-quiz-submit]').addEventListener('click', () => submitVideoQuiz(moduleId, videoId));
+}
+
+function submitVideoQuiz(moduleId, videoId) {
+  const container = document.getElementById('video-quiz-' + videoId);
+  const quiz = videoQuizFor(videoId);
+  const video = getRequiredVideos(moduleId).find(item => item.id === videoId);
+  if (!container || !quiz || !video) return;
+  const record = ensureVideoProgress(moduleId, video);
+  const result = container.querySelector('.video-quiz-result');
+  if (record.complete !== true) return;
+  const selections = quiz.questions.map((_, index) => {
+    const picked = container.querySelector(`input[name="vq-${videoId}-${index}"]:checked`);
+    return picked ? Number(picked.value) : null;
+  });
+  if (selections.some(value => value === null)) {
+    result.className = 'video-quiz-result info';
+    result.textContent = 'Answer every question first.';
+    return;
+  }
+  lastActivityAt = Date.now();
+  const outcome = scoreVideoQuiz(quiz, selections);
+  container.querySelectorAll('.video-quiz-question').forEach((block, index) => {
+    const question = quiz.questions[index];
+    const ok = selections[index] === Number(question.answer);
+    const feedback = block.querySelector('.video-quiz-feedback');
+    feedback.className = 'video-quiz-feedback ' + (ok ? 'ok' : 'retry');
+    feedback.textContent = ok ? '✓ Correct. ' + (question.explanation || '') : 'Not quite. Review this part of the video and try again.';
+  });
+  record.quizBest = Math.max(Number(record.quizBest) || 0, outcome.score);
+  saveState();
+  result.className = 'video-quiz-result ' + (outcome.passed ? 'ok' : 'retry');
+  result.innerHTML = `${outcome.correct} of ${outcome.total} correct (${outcome.score}%). ` +
+    (outcome.passed ? 'Passed ✓' : `You need ${videoQuizPassingScore()}% to pass. `) +
+    ' <button type="button" class="btn btn-sm" data-video-quiz-retry>Retake</button>';
+  result.querySelector('[data-video-quiz-retry]').addEventListener('click', () => {
+    container.dataset.quizState = '';
+    renderVideoQuiz(moduleId, videoId);
+  });
 }
 
 function loadYouTubeApi() {
@@ -1767,6 +1866,7 @@ function initializeRequiredVideos(moduleId) {
       ensureRequiredVideoLoaded(video.id, { autoplay: false }).catch(() => {});
     }
   });
+  videos.forEach(video => renderVideoQuiz(moduleId, video.id));
   updateVideoProgressRail(moduleId);
 }
 
@@ -2061,6 +2161,7 @@ function updateRequiredVideoUI(moduleId, videoId) {
   if (track) track.setAttribute('aria-valuenow', String(Math.round(pct)));
   updateRequiredVideoButton(videoId);
   updateVideoProgressRail(moduleId);
+  renderVideoQuiz(moduleId, videoId);
 }
 
 function setRequiredVideoNote(videoId, message, isWarning) {

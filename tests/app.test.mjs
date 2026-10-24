@@ -14,6 +14,7 @@ const modulesSource = modulesPartOne + '\n' + modulesPartTwo;
 const siteContent = read('js/site-content.js');
 const quizExpansions = read('js/quiz-expansions.js');
 const videoLibrary = read('js/video-library.js');
+const videoQuizzes = read('js/video-quizzes.js');
 const app = read('js/app.js');
 const instructorAuth = read('src/instructor-auth.js');
 const instructorSession = read('netlify/functions/instructor-session.mjs');
@@ -36,6 +37,7 @@ test('JavaScript files parse', () => {
   new vm.Script(siteContent, { filename: 'js/site-content.js' });
   new vm.Script(quizExpansions, { filename: 'js/quiz-expansions.js' });
   new vm.Script(videoLibrary, { filename: 'js/video-library.js' });
+  new vm.Script(videoQuizzes, { filename: 'js/video-quizzes.js' });
   new vm.Script(app, { filename: 'js/app.js' });
 });
 
@@ -776,4 +778,47 @@ test('build versions every self-hosted media URL so re-rendered videos are never
   assert.match(build, /async function stampMediaVersions/);
   assert.match(build, /mp4\|webm\|vtt/);
   assert.match(netlifyConfig, /for = "\/media\/\*"[\s\S]*?max-age=2592000/);
+});
+
+test('every self-hosted video has a valid quiz that unlocks only after the video is watched', () => {
+  const context = {};
+  new vm.Script(videoLibrary + '\n' + videoQuizzes + '\nthis.selfVideos = SELF_HOSTED_VIDEOS; this.quizzes = VIDEO_QUIZZES; this.pass = VIDEO_QUIZ_PASSING_SCORE;').runInNewContext(context);
+  assert.equal(context.pass, 80);
+  const videoIds = [...context.selfVideos.map(video => video.id)].sort();
+  assert.deepEqual([...Object.keys(context.quizzes)].sort(), [...videoIds], 'quiz ids must match the self-hosted videos exactly');
+  for (const id of videoIds) {
+    const quiz = context.quizzes[id];
+    assert.ok(Array.isArray(quiz.questions), `${id} has no questions`);
+    if (quiz.questions.length < 5) assert.ok(quiz.thinSource, `${id} has fewer than 5 questions without a thinSource note`);
+    assert.ok(quiz.questions.length >= 3, `${id} needs at least 3 questions`);
+    for (const [index, question] of quiz.questions.entries()) {
+      const label = `${id} question ${index + 1}`;
+      assert.ok(question.q && question.q.trim(), `${label} has no prompt`);
+      assert.equal(question.options.length, 4, `${label} needs 4 options`);
+      assert.equal(new Set(question.options).size, 4, `${label} has duplicate options`);
+      assert.ok(Number.isInteger(question.answer) && question.answer >= 0 && question.answer < question.options.length, `${label} answer index is invalid`);
+      assert.ok(question.explanation && question.explanation.trim(), `${label} has no explanation`);
+    }
+  }
+  const html = read('index.html');
+  assert.match(html, /<script src="\/js\/video-quizzes\.js\?v=dev"><\/script>/);
+  assert.ok(html.indexOf('js/video-quizzes.js') < html.indexOf('js/app.js'));
+  assert.match(app, /data-video-quiz=/);
+  assert.match(app, /const unlocked = record\.complete === true;/);
+  assert.match(app, /if \(record\.complete !== true\) return;/);
+  assert.match(app, /renderVideoQuiz\(moduleId, videoId\);\n\}/);
+});
+
+test('video quiz best scores are saved only for watched videos and never lower on merge', () => {
+  const watched = { watchedSeconds: 100000, complete: true, quizBest: 80, updatedAt: '2026-10-01T00:00:00.000Z' };
+  const kept = recordLibrary.sanitizeTrainingState({ videoProgress: { 2: { 'allen-m2-1': watched } } });
+  assert.equal(kept.videoProgress[2]['allen-m2-1'].quizBest, 80);
+  const unwatched = recordLibrary.sanitizeTrainingState({ videoProgress: { 2: { 'allen-m2-1': { watchedSeconds: 1, complete: false, quizBest: 100 } } } });
+  assert.equal(unwatched.videoProgress[2]['allen-m2-1'].quizBest, undefined);
+  const merged = recordLibrary.mergeTrainingStates(
+    { videoProgress: { 2: { 'allen-m2-1': { ...watched, quizBest: 100 } } } },
+    { videoProgress: { 2: { 'allen-m2-1': { ...watched, quizBest: 60 } } } }
+  );
+  assert.equal(merged.videoProgress[2]['allen-m2-1'].quizBest, 100);
+  assert.ok(!merged.completed.includes(2), 'a video quiz never completes a module on its own');
 });
