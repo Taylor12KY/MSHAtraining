@@ -302,7 +302,7 @@ test('classroom completion requires an explicit instructor and official-record h
   assert.match(app, /instructorSignoffs/);
 });
 
-test('all 148 active videos (104 embedded + 44 self-hosted) are unique and retired submissions are documented', () => {
+test('all 158 active videos (104 embedded + 54 self-hosted) are unique and retired submissions are documented', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.firstIds = Array.from(FIRST_VIDEO_BATCH_IDS); this.secondIds = Array.from(SECOND_VIDEO_BATCH_IDS); this.thirdIds = Array.from(THIRD_VIDEO_BATCH_IDS); this.thirdSubmittedIds = Array.from(THIRD_SUBMITTED_VIDEO_IDS); this.contentDuplicates = VIDEO_CONTENT_DUPLICATES; this.preExistingIds = Array.from(PRE_EXISTING_VIDEO_IDS); this.retiredIds = RETIRED_VIDEO_IDS; this.currentIds = Array.from(CURRENT_RESOURCE_VIDEO_IDS);')
     .runInNewContext(context);
@@ -311,9 +311,9 @@ test('all 148 active videos (104 embedded + 44 self-hosted) are unique and retir
   const secondBatch = context.videos.filter(video => context.secondIds.includes(video.id));
   const thirdBatch = context.videos.filter(video => context.thirdIds.includes(video.id));
   const currentResources = context.videos.filter(video => context.currentIds.includes(video.id));
-  assert.equal(context.videos.length, 148);
-  assert.equal(new Set(ids).size, 148);
-  assert.equal(context.videos.filter(video => video.provider === 'self').length, 44);
+  assert.equal(context.videos.length, 158);
+  assert.equal(new Set(ids).size, 158);
+  assert.equal(context.videos.filter(video => video.provider === 'self').length, 54);
   assert.ok(context.videos.every(video => video.moduleId >= 1 && video.moduleId <= 13));
   assert.ok(context.videos.every(video => video.durationSeconds > 0));
   assert.equal(firstBatch.length, 13);
@@ -537,11 +537,11 @@ test('all 8 retained pre-existing embeds use the tracked managed player system',
   assert.match(app, /iframe\.setAttribute\('tabindex', '-1'\)/);
 });
 
-test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 NCB filter self-rescuer, then Arrowsmith extended lesson', () => {
+test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 NCB filter self-rescuer, Arrowsmith extended lesson, then the Allen W65 lessons', () => {
   const context = {};
   new vm.Script(videoLibrary + '\nthis.videos = REQUIRED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE; this.guidance = VIDEO_TRAINING_GUIDANCE;')
     .runInNewContext(context);
-  assert.deepEqual([...context.sequences[3]], ['kbHxdV_uZV8', 'WTKCluA6lgE', '106597590', '1JfkPpr6sRM', 'tAE5lPOPm8w', 'allen-m3-1']);
+  assert.deepEqual([...context.sequences[3]], ['kbHxdV_uZV8', 'WTKCluA6lgE', '106597590', '1JfkPpr6sRM', 'tAE5lPOPm8w', 'allen-m3-1', 'allen-m3-2']);
   const cleveland = context.videos.find(video => video.id === '106597590');
   assert.equal(cleveland.provider, 'vimeo');
   assert.equal(cleveland.durationSeconds, 332);
@@ -550,7 +550,7 @@ test('Module 3 sequence is Sunshine sting, Sunshine, Cleveland Potash W65, 1980 
   assert.equal(ncb.durationSeconds, 408);
   assert.match(ncb.title, /1980 NCB/);
   assert.equal(context.videos.filter(video => video.moduleId === 3 && video.provider !== 'self').length, 5);
-  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 6);
+  assert.equal(context.videos.filter(video => video.moduleId === 3).length, 7);
   const arrowsmith = context.videos.find(video => video.id === 'tAE5lPOPm8w');
   assert.equal(arrowsmith.durationSeconds, 1749);
   assert.match(arrowsmith.author, /Arrowsmith/);
@@ -653,7 +653,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.equal(modules.length, 13);
   assert.deepEqual({ ...modules[0] }, { id: 1, completed: true, seatSeconds: 5400, requiredSeconds: 5400, videosComplete: 0, videosRequired: 8, bestScore: 100, quizAttempts: 1 });
   // A module already recorded complete stays complete after new required videos are added.
-  assert.equal(modules[1].videosRequired, 9);
+  assert.equal(modules[1].videosRequired, 12);
 
   const csv = exporter.buildRecordsCsv([{
     learner: { id: 'u1', name: '=HYPERLINK("http://evil")', email: 'pat@example.com' },
@@ -676,7 +676,7 @@ test('instructors can download every trainee record as a spreadsheet', async () 
   assert.match(row, /,1 of 13,1\.5,No,No,No,/);
   assert.match(row, /,Yes,Jane Instructor,2026-10-02 \d\d:00,/);
   assert.match(row, /"Line one, with comma\nLine two ""quoted"""/);
-  assert.match(row, /,Complete,100,1,90 of 90,0 of 8,In progress,80,1,10 of 120,0 of 9,Not started,/);
+  assert.match(row, /,Complete,100,1,90 of 90,0 of 8,In progress,80,1,10 of 120,0 of 12,Not started,/);
   assert.doesNotMatch(row, /\b\d+\/\d+\b/, 'no slash counts that Excel would turn into dates');
   assert.match(exporter.recordsExportFilename(new Date(2026, 9, 22)), /^msha-part48-trainee-records-2026-10-22\.csv$/);
 
@@ -722,7 +722,7 @@ test('self-hosted Allen Company videos ship with media, captions, posters and th
   const { statSync, existsSync } = await import('node:fs');
   const context = {};
   new vm.Script(videoLibrary + '\nthis.selfVideos = SELF_HOSTED_VIDEOS; this.sequences = MODULE_VIDEO_SEQUENCE;').runInNewContext(context);
-  assert.equal(context.selfVideos.length, 44);
+  assert.equal(context.selfVideos.length, 54);
   const perModule = {};
   for (const video of context.selfVideos) {
     assert.equal(video.provider, 'self');
@@ -735,7 +735,7 @@ test('self-hosted Allen Company videos ship with media, captions, posters and th
     assert.ok(context.sequences[video.moduleId].includes(video.id), `${video.id} is not in the Module ${video.moduleId} sequence`);
     perModule[video.moduleId] = (perModule[video.moduleId] || 0) + 1;
   }
-  assert.deepEqual(perModule, { 1: 8, 2: 1, 3: 1, 6: 8, 8: 5, 9: 5, 10: 4, 11: 1, 12: 11 });
+  assert.deepEqual(perModule, { 1: 8, 2: 4, 3: 2, 5: 1, 6: 8, 7: 1, 8: 5, 9: 5, 10: 4, 11: 5, 12: 11 });
   assert.ok(!/\blex\b|lexington quarry/i.test(JSON.stringify(context.selfVideos)));
   assert.match(app, /function initializeSelfHostedVideo/);
   assert.match(app, /addEventListener\('seeking'/);

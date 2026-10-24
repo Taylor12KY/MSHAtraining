@@ -2689,5 +2689,705 @@ const VIDEO_QUIZZES = {
     "explanation": "The video says MSHA will keep your name confidential if you ask (Mine Act section 103(g))."
    }
   ]
+ },
+ "allen-m11-2": {
+  "questions": [
+   {
+    "q": "Who decides when it is safe to go back into a blast area?",
+    "options": [
+     "Whoever is closest to the face",
+     "Any supervisor who is in a hurry",
+     "The first truck driver through",
+     "The blaster in charge, who gives the all-clear"
+    ],
+    "answer": 3,
+    "explanation": "The video says only the blaster in charge gives the all-clear, and until you hear it the area is closed."
+   },
+   {
+    "q": "What does the video say you do when you hear the siren or see the strobes?",
+    "options": [
+     "Stop what you're doing and get out of the blast area to where your site told you to go",
+     "Finish the job, then leave",
+     "Drive in to check on the crew",
+     "Wait to be told twice"
+    ],
+    "answer": 0,
+    "explanation": "The surface warning at Allen is a siren and strobe beacons. Don't finish the job first, and don't drive in."
+   },
+   {
+    "q": "If you are ever assigned as a guard, what do you do?",
+    "options": [
+     "Wave through anyone in a hurry",
+     "Stay at your post and stop everyone, including trucks, pickups and supervisors, until the all-clear",
+     "Leave when the siren stops",
+     "Go look for people in the area"
+    ],
+    "answer": 1,
+    "explanation": "Every road into the blast area gets a guard. You do not leave your post until the blaster in charge gives the all-clear, and only trained, assigned people guard."
+   },
+   {
+    "q": "You realize somebody is still inside the blast area. What do you do?",
+    "options": [
+     "Go in and find them yourself",
+     "Assume the guards already know",
+     "Tell the blaster right away from a safe place, and don't go in to find them yourself",
+     "Wait to see if the shot goes off"
+    ],
+    "answer": 2,
+    "explanation": "The video says to tell the blaster in charge right away, by radio if you have one, from a safe place."
+   },
+   {
+    "q": "Why is the blast area bigger than the hole pattern?",
+    "options": [
+     "A shot can throw pieces a long way and sends a pressure wave and noise through the air",
+     "So visitors have a better view",
+     "Because the drill crew needs room to park",
+     "Because the blaster likes extra room"
+    ],
+    "answer": 0,
+    "explanation": "The blaster in charge sets the area for each shot, and it can change from one shot to the next."
+   },
+   {
+    "q": "What does MSHA's rule (56/57.6306) require about access routes into the blast area?",
+    "options": [
+     "Nothing, it is up to each driver",
+     "Every access route into the blast area has to be guarded or barricaded",
+     "Only a sign at the main gate",
+     "Only underground routes need it"
+    ],
+    "answer": 1,
+    "explanation": "The video quotes the rule: everyone is out of the blast area before the shot, with ample warning, and every access route is guarded or barricaded."
+   }
+  ]
+ },
+ "allen-m11-3": {
+  "questions": [
+   {
+    "q": "What is a misfire?",
+    "options": [
+     "A shot that is louder than usual",
+     "A complete or partial failure of the explosive to detonate as planned",
+     "A drill that stops working",
+     "A truck that backfires"
+    ],
+    "answer": 1,
+    "explanation": "The video defines a misfire as a complete or partial failure to detonate as planned, a whole round or a single hole."
+   },
+   {
+    "q": "You see a length of wire coming out of the muck after the all-clear. What is your job?",
+    "options": [
+     "Don't touch it, back away, keep others out, and tell the blaster in charge exactly where it is",
+     "Pull on it to see what it is",
+     "Push it clear with the loader bucket",
+     "Mark it yourself with paint"
+    ],
+    "answer": 0,
+    "explanation": "Don't touch it or move it, back away the way you came, keep others from going closer, and tell the blaster or your supervisor by radio from a safe distance."
+   },
+   {
+    "q": "Why must you never just nudge a suspected misfire out of the way?",
+    "options": [
+     "It is against company dress code",
+     "The blaster would be annoyed",
+     "Any disturbance, like a bucket, drill steel, bar or boot, can set it off",
+     "It wastes fuel"
+    ],
+    "answer": 2,
+    "explanation": "A bucket, a drill steel hitting an old hole or a bar prying at a socket can set off explosive that didn't fire the first time."
+   },
+   {
+    "q": "Who handles a misfire, and how long is the waiting period?",
+    "options": [
+     "Any miner, after about five minutes",
+     "The blaster in charge, after a waiting period of 15 or 30 minutes depending on the detonator, or longer if the manufacturer says so",
+     "The loader operator, right away",
+     "Nobody, it is just left until next week"
+    ],
+    "answer": 1,
+    "explanation": "The video says the blaster follows MSHA's wait of fifteen or thirty minutes depending on the detonator, or longer if the manufacturer says, and your site's procedure says who does what."
+   },
+   {
+    "q": "What is a bootleg, and what does the video say about drilling near one?",
+    "options": [
+     "A type of safety boot; wear it near holes",
+     "A kind of detonator; store it cold",
+     "A drilling tip; it is fine to drill into it",
+     "What is left of a drilled hole after a shot; nobody drills into a bootleg or where a charged or misfired hole could be hit"
+    ],
+    "answer": 3,
+    "explanation": "A bootleg can still hold explosive. The drilling rules forbid drilling where there is a danger of hitting a charged or misfired hole and starting a new hole inside a bootleg."
+   },
+   {
+    "q": "Someone pressures you to ignore a suspected misfire because the crew is behind schedule. What do you do?",
+    "options": [
+     "Refuse, stay out, tell the blaster, and use the stop-work right from Module 12",
+     "Go along with it",
+     "Mark it yourself",
+     "Wait for another miner to mention it"
+    ],
+    "answer": 0,
+    "explanation": "The video lists \"We're behind schedule\" as an excuse to refuse: no schedule is worth it, and that is the moment to use the stop-work right."
+   }
+  ]
+ },
+ "allen-m11-4": {
+  "questions": [
+   {
+    "q": "Which gases does the video say to know about from blast fumes?",
+    "options": [
+     "Argon and neon",
+     "Only dust",
+     "Carbon monoxide and the oxides of nitrogen",
+     "Helium and hydrogen"
+    ],
+    "answer": 2,
+    "explanation": "Production blasting is the main source of toxic gas in many underground stone mines; the main gases are carbon monoxide and the oxides of nitrogen."
+   },
+   {
+    "q": "Why can't you judge blast fumes by sight or smell?",
+    "options": [
+     "Fumes always smell strong",
+     "Carbon monoxide has no color or smell, and a clear-looking heading can still hold gas",
+     "Fumes are always orange",
+     "Fumes disappear in one minute"
+    ],
+    "answer": 1,
+    "explanation": "Never sniff to check the air and never walk in to see if it has cleared. The worst effects of nitrogen dioxide may not show for hours."
+   },
+   {
+    "q": "What three things does re-entry take?",
+    "options": [
+     "The ventilation has run long enough, the air is tested with the right instrument, and an authorized supervisor releases the area",
+     "A coworker says it looks clear, a quick look, and a wristwatch",
+     "Waiting one hour, no matter what",
+     "A trainee walks in and checks"
+    ],
+    "answer": 0,
+    "explanation": "A clock on the wall is not a clearance. Ventilation, testing and an authorized supervisor's release are all required."
+   },
+   {
+    "q": "The supervisor's four-gas ALTAIR monitor is quiet. What does the video say that proves?",
+    "options": [
+     "That the area is completely safe",
+     "That the W65 can be used to go in",
+     "That the wait can be skipped",
+     "Not that the air is safe from everything; it doesn't read nitrogen dioxide"
+    ],
+    "answer": 3,
+    "explanation": "The four-gas monitor reads oxygen, flammable gas, carbon monoxide and hydrogen sulfide. It doesn't read nitrogen dioxide, which is why the wait, testing and supervisor's release all count."
+   },
+   {
+    "q": "What does the video say about using your W65 in fresh blast fumes?",
+    "options": [
+     "It protects against all blast gases",
+     "The W65 protects against carbon monoxide only and isn't a way to walk into blast fumes",
+     "It supplies oxygen",
+     "It is fine for checking the heading"
+    ],
+    "answer": 1,
+    "explanation": "It isn't approved for low oxygen or for other toxic gases, including the nitrogen oxides in blast fumes."
+   },
+   {
+    "q": "You feel fine after being around blast fumes but earlier had coughing and chest tightness. What does the video say to do?",
+    "options": [
+     "Nothing, you feel fine now",
+     "Go back in to finish the job",
+     "Get to fresh air, tell your supervisor, and get a medical evaluation, even if you feel better",
+     "Wait until tomorrow to mention it"
+    ],
+    "answer": 2,
+    "explanation": "With nitrogen dioxide, serious effects can be delayed, so feeling fine doesn't mean you are fine."
+   }
+  ]
+ },
+ "allen-m11-5": {
+  "questions": [
+   {
+    "q": "Who operates, tests and calibrates the gas monitor at our sites?",
+    "options": [
+     "Every new miner",
+     "People your company designates; supervisors carry the ALTAIR 4X",
+     "Whoever is nearest",
+     "Only contractors"
+    ],
+    "answer": 1,
+    "explanation": "You won't be asked to run one as a new miner. If one looks damaged, wet or isn't working, tell your supervisor."
+   },
+   {
+    "q": "What does the video say to do when a monitor alarms?",
+    "options": [
+     "Stop, warn, withdraw, report",
+     "Silence it, then carry on",
+     "Go closer to see what set it off",
+     "Sniff the air to check"
+    ],
+    "answer": 0,
+    "explanation": "Treat the alarm as real: stop what you're doing, warn people loudly, withdraw toward fresh air, and report."
+   },
+   {
+    "q": "Which of these is something you never do when a monitor alarms?",
+    "options": [
+     "Warn people nearby",
+     "Withdraw with your partner",
+     "Silence the alarm and carry on",
+     "Report on the radio once you're clear"
+    ],
+    "answer": 2,
+    "explanation": "Never silence the alarm, go closer to look, try to smell the air, or make a spark or flame in an alarming area."
+   },
+   {
+    "q": "The four-gas monitor reads which gases?",
+    "options": [
+     "Dust, noise, heat and light",
+     "Nitrogen dioxide only",
+     "Every gas that exists",
+     "Oxygen, flammable gas, carbon monoxide and hydrogen sulfide"
+    ],
+    "answer": 3,
+    "explanation": "It doesn't read nitrogen dioxide from blasting, so a quiet monitor isn't proof the air is safe from everything."
+   },
+   {
+    "q": "The alarm comes with smoke or a carbon monoxide alarm in an emergency. What do you do?",
+    "options": [
+     "Go look for the smoke",
+     "Put on your W65 right away and escape through your escapeway",
+     "Take the W65 out of its case only if you see flames",
+     "Wait for the monitor to stop"
+    ],
+    "answer": 1,
+    "explanation": "That's an escape situation. The W65 protects against carbon monoxide only and doesn't make oxygen."
+   },
+   {
+    "q": "A coworker is down in an area that is alarming. What do you do?",
+    "options": [
+     "Call for help, say where you are and what you see, and let trained people go in with the right equipment",
+     "Rush in to pull them out",
+     "Hold your breath and run in",
+     "Wait for the alarm to stop"
+    ],
+    "answer": 0,
+    "explanation": "A rescuer who collapses is a second victim."
+   }
+  ]
+ },
+ "allen-m2-2": {
+  "questions": [
+   {
+    "q": "Who does the video say its findings come from, and what kind of mine was Upper Big Branch?",
+    "options": [
+     "A newspaper article; it was a limestone mine",
+     "MSHA's public investigation report; it was a coal mine, ours are limestone",
+     "An internal Allen memo; it was a quarry",
+     "Company rumors; it was a gold mine"
+    ],
+    "answer": 1,
+    "explanation": "Everything comes from MSHA's public investigation, and the video notes the gases and machines differ at our limestone mines."
+   },
+   {
+    "q": "According to MSHA, how did the disaster happen?",
+    "options": [
+     "A methane ignition, a small methane explosion, then a massive coal dust explosion",
+     "A roof fall that hit a conveyor",
+     "A fire in a parking lot",
+     "A flood in a shaft"
+    ],
+    "answer": 0,
+    "explanation": "MSHA concluded that if basic safety measures had stopped any one of the three events, there would have been no loss of life."
+   },
+   {
+    "q": "Why does rock dust matter?",
+    "options": [
+     "It makes the mine look brighter",
+     "It cools the air",
+     "Crushed limestone mixes with coal dust and keeps it from burning",
+     "It holds the roof up"
+    ],
+    "answer": 2,
+    "explanation": "MSHA found rock dust was grossly inadequate in parts of the mine, where surfaces were dark."
+   },
+   {
+    "q": "What did MSHA say about the operator's examination records?",
+    "options": [
+     "Records were perfect",
+     "Records were kept on a whiteboard only",
+     "MSHA wrote them for the operator",
+     "The operator kept two sets of books, and hazards were sometimes left out of the required book"
+    ],
+    "answer": 3,
+    "explanation": "A record that leaves out the hazard doesn't protect anyone. The Mine Act makes it a crime to knowingly make a false record."
+   },
+   {
+    "q": "What did MSHA find about miners speaking up?",
+    "options": [
+     "Miners called the hotline every day",
+     "Miners were intimidated, and MSHA received no complaint about underground conditions for about four years",
+     "Every miner was encouraged to speak up",
+     "The operator held weekly safety talks that MSHA praised"
+    ],
+    "answer": 1,
+    "explanation": "MSHA has a toll-free hotline that can be used without giving a name, yet miners feared retaliation."
+   },
+   {
+    "q": "What does the workplace examination rule for metal and nonmetal mines require?",
+    "options": [
+     "A competent person examines each working place at least once each shift, before miners begin work there, and a record is made",
+     "A manager looks at the mine once a year",
+     "Nobody needs to examine before work",
+     "The record can be written next week"
+    ],
+    "answer": 0,
+    "explanation": "Hazards found are corrected, and the record is made before the end of the shift with the examiner's name, date, areas and conditions found."
+   }
+  ]
+ },
+ "allen-m2-3": {
+  "questions": [
+   {
+    "q": "What is the fastest way to get a hazard fixed in most cases?",
+    "options": [
+     "Tell somebody who can fix it, such as your supervisor",
+     "Wait for MSHA to find it",
+     "Post about it online",
+     "Write it on your hand and forget it"
+    ],
+    "answer": 0,
+    "explanation": "At Allen, any hazard can be reported verbally to your supervisor. You never need permission to contact MSHA."
+   },
+   {
+    "q": "What is true about the MSHA hazard hotline?",
+    "options": [
+     "It is only open on weekdays",
+     "You must give your employer's permission",
+     "It is open every hour of every day and you do not have to give your name",
+     "It only takes written complaints"
+    ],
+    "answer": 2,
+    "explanation": "The hotline is 1-800-746-1553. You can also report a hazard on MSHA's website."
+   },
+   {
+    "q": "What is a Section 103(g) request?",
+    "options": [
+     "A form to ask for time off",
+     "A training certificate",
+     "A vote to elect a safety rep",
+     "A written, signed request for an inspection; MSHA keeps your name confidential"
+    ],
+    "answer": 3,
+    "explanation": "It's for when you believe there is an imminent danger or a violation of the Act or a mandatory standard. If MSHA does not inspect, you get a written notice and can appeal in writing within ten days."
+   },
+   {
+    "q": "What does Section 105(c) protect you from?",
+    "options": [
+     "Having to wear PPE",
+     "Retaliation for using your safety and health rights",
+     "Being assigned overtime",
+     "Annual refresher training"
+    ],
+    "answer": 1,
+    "explanation": "It includes reporting a hazard, taking part in an inspection, withdrawing for lack of training, and refusing work you reasonably believe is unsafe."
+   },
+   {
+    "q": "If you think you were punished for using your rights, how soon should you contact MSHA?",
+    "options": [
+     "Within 60 days",
+     "Within 24 hours",
+     "Within 5 years",
+     "There's no deadline"
+    ],
+    "answer": 0,
+    "explanation": "Write it down, keep copies, contact MSHA within sixty days, give details; MSHA investigates and tells you its decision in writing."
+   },
+   {
+    "q": "Which of these is a good practice from MSHA's advice in the video?",
+    "options": [
+     "Take company documents home",
+     "Break rules to prove a point",
+     "Hold important conversations with management with other people present",
+     "Keep no records at all"
+    ],
+    "answer": 2,
+    "explanation": "Keep a calendar and records, don't take employer documents, and don't break the law while exercising your rights."
+   }
+  ]
+ },
+ "allen-m2-4": {
+  "questions": [
+   {
+    "q": "How many hours of training does a new surface miner need under Part 48?",
+    "options": [
+     "At least 2",
+     "At least 24, with at least 8 before being assigned to work",
+     "At least 8 in total",
+     "None until the second week"
+    ],
+    "answer": 1,
+    "explanation": "A new underground miner needs at least 40 hours, with about 8 at the mine site."
+   },
+   {
+    "q": "When and at what pay does the training take place, according to MSHA's guide?",
+    "options": [
+     "During normal working hours, at your regular rate of pay, if you work for the operator",
+     "On your own time, unpaid",
+     "Only on weekends",
+     "At half pay"
+    ],
+    "answer": 0,
+    "explanation": "If the training is somewhere other than your normal workplace, you must be paid added costs such as mileage, meals and lodging."
+   },
+   {
+    "q": "You haven't had the required training. What can you do?",
+    "options": [
+     "Do the job anyway",
+     "Sign for the training anyway",
+     "Withdraw from the mine without being punished or losing pay",
+     "Skip it and hope"
+    ],
+    "answer": 2,
+    "explanation": "If MSHA withdraws you because you lack training, you are entitled to pay until you have received the training and the inspector has verified it."
+   },
+   {
+    "q": "What is Form 5000-23?",
+    "options": [
+     "An MSHA fine notice",
+     "A time card",
+     "An accident report",
+     "The certificate that records each completed MSHA-approved training program; you get a copy"
+    ],
+    "answer": 3,
+    "explanation": "Certificates are kept at the mine site where miners and MSHA can examine them. Check yours for correct name, mine, course, date and hours."
+   },
+   {
+    "q": "How much annual refresher training does every miner get?",
+    "options": [
+     "One hour every five years",
+     "At least eight hours every year",
+     "None, once you pass the first course",
+     "Four hours every ten years"
+    ],
+    "answer": 1,
+    "explanation": "At Allen it's called ART, annual refresher training."
+   },
+   {
+    "q": "If you were away from the same mine for more than twelve months, what does the video say?",
+    "options": [
+     "You must be retrained",
+     "You can start work immediately",
+     "Nothing changes",
+     "You only need a safety talk"
+    ],
+    "answer": 0,
+    "explanation": "If away twelve months or less at the same mine, you must be trained on major changes."
+   }
+  ]
+ },
+ "allen-m3-2": {
+  "questions": [
+   {
+    "q": "What does the W65 do?",
+    "options": [
+     "Supplies oxygen for 60 minutes",
+     "Removes every toxic gas",
+     "Converts toxic carbon monoxide into carbon dioxide for escape; it also filters dust",
+     "Lets you work in bad air"
+    ],
+    "answer": 2,
+    "explanation": "It works with the oxygen already in the air around you. It is a one-time escape device."
+   },
+   {
+    "q": "Does the W65 supply oxygen?",
+    "options": [
+     "No, it does not make or store oxygen",
+     "Yes, for one hour",
+     "Yes, but only underground",
+     "Yes, if the lever is pulled twice"
+    ],
+    "answer": 0,
+    "explanation": "It can't protect in air with less than 19.5 percent oxygen, per the manufacturer's manual."
+   },
+   {
+    "q": "Hot, dry air is coming through your W65 while you escape. What does that mean?",
+    "options": [
+     "The unit is broken; take it out",
+     "It's normal; the catalyst is working on carbon monoxide, so keep it in",
+     "It's time to remove the mouthpiece",
+     "Open your lips for a cooler breath"
+    ],
+    "answer": 1,
+    "explanation": "The manual warns that opening your lips can give an overexposure to carbon monoxide."
+   },
+   {
+    "q": "When does the W65 come out?",
+    "options": [
+     "As soon as it is uncomfortable",
+     "When your mouth is dry",
+     "When a coworker says so",
+     "When you reach fresh air, not before"
+    ],
+    "answer": 3,
+    "explanation": "If you are not sure the air is safe, leave it in and follow your emergency plan."
+   },
+   {
+    "q": "When should you put it on?",
+    "options": [
+     "At the first sign of a fire or an explosion, even if you don't see smoke",
+     "Only once you see smoke",
+     "Only if your supervisor tells you",
+     "After you have walked to the surface"
+    ],
+    "answer": 0,
+    "explanation": "Carbon monoxide has no color or smell and can be ahead of the smoke."
+   },
+   {
+    "q": "Before you go underground, you see the W65 case is dented. What do you do?",
+    "options": [
+     "Use it anyway",
+     "Report it and get it replaced",
+     "Open it to check inside",
+     "Tape it up"
+    ],
+    "answer": 1,
+    "explanation": "A dented container might keep the device from coming out easily. Never open a service unit for practice; use the training unit."
+   }
+  ]
+ },
+ "allen-m5-1": {
+  "questions": [
+   {
+    "q": "What source does the video use for what has hurt people at our operations?",
+    "options": [
+     "Rumors",
+     "MSHA's public records, as of mid-October 2026",
+     "Insurance quotes",
+     "Social media"
+    ],
+    "answer": 1,
+    "explanation": "The time periods differ by site because Allen took the sites over in different years, so the sites aren't compared with each other."
+   },
+   {
+    "q": "What kind of event caused most of the injuries on record?",
+    "options": [
+     "Ordinary tasks like climbing down, handling steel and tools, and walking on steps",
+     "Explosions",
+     "Fires",
+     "Floods"
+    ],
+    "answer": 0,
+    "explanation": "The surprise is that most didn't come from explosions or major failures."
+   },
+   {
+    "q": "What is the simple control for stepping down from equipment?",
+    "options": [
+     "Jump the last step",
+     "Carry tools in both hands",
+     "Face the machine and keep three points of contact all the way to the ground",
+     "Back down quickly"
+    ],
+    "answer": 2,
+    "explanation": "The shift isn't over until you're in your vehicle."
+   },
+   {
+    "q": "What is the pattern for ground falls at the old Clover Bottom mine?",
+    "options": [
+     "They all happened while sleeping",
+     "They all happened on weekends",
+     "They all happened at night in the shop",
+     "Four times rock fell from the face or back during scaling, checking a room or preparing a shot"
+    ],
+    "answer": 3,
+    "explanation": "Ground falls are fewer but the most serious pattern; the video covers them in Module 7."
+   },
+   {
+    "q": "What should you do when you spot a hazard?",
+    "options": [
+     "Fix it yourself",
+     "Stay clear, keep others away if you can, and tell your supervisor",
+     "Ignore it",
+     "Post it on social media"
+    ],
+    "answer": 1,
+    "explanation": "You shouldn't try to fix it unless you're trained and authorized."
+   },
+   {
+    "q": "Why is PPE called the last layer?",
+    "options": [
+     "Remove the hazard, guard or lock it out, and follow procedures first; PPE protects when the hazard is still there",
+     "It's optional",
+     "It's cheap",
+     "Only visitors need it"
+    ],
+    "answer": 0,
+    "explanation": "The module's controls: take hazards away if you can, guard or lock out, follow procedures, wear protective equipment."
+   }
+  ]
+ },
+ "allen-m7-1": {
+  "questions": [
+   {
+    "q": "What does Part 57 say about ground that creates a hazard?",
+    "options": [
+     "Fix it at the end of the shift",
+     "Work under it carefully",
+     "It has to be taken down or supported before other work or travel is allowed there, and the area posted against entry",
+     "Leave it for next week"
+    ],
+    "answer": 2,
+    "explanation": "If the area is left unattended, a barrier has to be installed to keep people out."
+   },
+   {
+    "q": "What do the Clover Bottom ground falls have in common?",
+    "options": [
+     "Each happened while someone was scaling, checking a room or preparing a shot",
+     "Each happened during lunch",
+     "Each happened on the haul road",
+     "Each happened while sleeping"
+    ],
+    "answer": 0,
+    "explanation": "The most dangerous moments are often the ones where you're trying to make the ground safe."
+   },
+   {
+    "q": "You hear ticking or cracking from the back. What do you do?",
+    "options": [
+     "Keep working",
+     "Back out to supported ground, keep others out, and report it right away",
+     "Tap it with a bar",
+     "Wait for a rock to fall"
+    ],
+    "answer": 1,
+    "explanation": "Ground talks. Ticking, cracking or a rock dropping from above are warnings."
+   },
+   {
+    "q": "Who scales loose ground at our sites?",
+    "options": [
+     "Any miner with a bar",
+     "Whoever is nearest",
+     "Visitors",
+     "Only people who are trained and authorized"
+    ],
+    "answer": 3,
+    "explanation": "Otherwise you report it and stay clear. Even trained people plan their exit before pulling the first rock."
+   },
+   {
+    "q": "A scaler loses a tooth near the face. What does the video say?",
+    "options": [
+     "Never walk up to a face to retrieve a tool; report it and let the area be examined and scaled first",
+     "Go and get it quickly",
+     "Send a visitor",
+     "Hold your breath"
+    ],
+    "answer": 0,
+    "explanation": "At Boonesboro in 2020 a rock fell from the face onto the operator's shoulder as he walked up to get the tooth."
+   },
+   {
+    "q": "After a shot, who looks at the new face?",
+    "options": [
+     "Any miner who is curious",
+     "The designated person, after the air is cleared as covered in Module 11",
+     "Nobody",
+     "The next truck driver"
+    ],
+    "answer": 1,
+    "explanation": "A face that looks fine from a distance can still have loose rock hanging in it."
+   }
+  ]
  }
 };

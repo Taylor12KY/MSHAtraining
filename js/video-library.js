@@ -1428,6 +1428,42 @@ const SELF_HOSTED_VIDEOS = [
     "poster": "/media/posters/allen-m2-1.jpg"
   },
   {
+    "id": "allen-m2-2",
+    "moduleId": 2,
+    "provider": "self",
+    "title": "Case study: Upper Big Branch, and why your voice matters",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 584,
+    "description": "A coal mine explosion in 2010 that killed 29 miners, as described in MSHA's public Report of Investigation (released December 2011): examinations that were not done or recorded truthfully, miners afraid to speak up, and what changed afterward. Coal, but the human lessons apply at every mine.",
+    "src": "/media/videos/allen-m2-2.mp4",
+    "captions": "/media/captions/allen-m2-2.vtt",
+    "poster": "/media/posters/allen-m2-2.jpg"
+  },
+  {
+    "id": "allen-m2-3",
+    "moduleId": 2,
+    "provider": "self",
+    "title": "Using your rights: reporting a hazard, asking for an inspection, and protection from retaliation",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 426,
+    "description": "How to report a hazard, how to ask MSHA for an inspection under section 103(g), how to file a discrimination complaint under section 105(c), and the protections that apply. Uses public information from msha.gov.",
+    "src": "/media/videos/allen-m2-3.mp4",
+    "captions": "/media/captions/allen-m2-3.vtt",
+    "poster": "/media/posters/allen-m2-3.jpg"
+  },
+  {
+    "id": "allen-m2-4",
+    "moduleId": 2,
+    "provider": "self",
+    "title": "Your training rights and your Form 5000-23",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 277,
+    "description": "Training before you are assigned to work, task training, annual refresher training, pay for training time, and the MSHA Form 5000-23 certificate you receive and should keep (30 CFR 48.5, 48.7, 48.8, 48.9, 48.25, 48.27, 48.28, 48.29).",
+    "src": "/media/videos/allen-m2-4.mp4",
+    "captions": "/media/captions/allen-m2-4.vtt",
+    "poster": "/media/posters/allen-m2-4.jpg"
+  },
+  {
     "id": "allen-m3-1",
     "moduleId": 3,
     "provider": "self",
@@ -1438,6 +1474,18 @@ const SELF_HOSTED_VIDEOS = [
     "src": "/media/videos/allen-m3-1.mp4",
     "captions": "/media/captions/allen-m3-1.vtt",
     "poster": "/media/posters/allen-m3-1.jpg"
+  },
+  {
+    "id": "allen-m3-2",
+    "moduleId": 3,
+    "provider": "self",
+    "title": "What the W65 does and doesn't do",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 300,
+    "description": "The MSA W65 is a filter self-rescuer: it converts carbon monoxide and supplies no oxygen. What it protects against, what it does not, why hot dry air is normal, and when it comes out. Based on MSA's W65 instruction manual.",
+    "src": "/media/videos/allen-m3-2.mp4",
+    "captions": "/media/captions/allen-m3-2.vtt",
+    "poster": "/media/posters/allen-m3-2.jpg"
   },
   {
     "id": "allen-m6-1",
@@ -1716,6 +1764,54 @@ const SELF_HOSTED_VIDEOS = [
     "poster": "/media/posters/allen-m11-1.jpg"
   },
   {
+    "id": "allen-m11-2",
+    "moduleId": 11,
+    "provider": "self",
+    "title": "Blast-area security: warning, guarding, and the all-clear",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 389,
+    "description": "Who controls the blast area, how it is cleared and guarded, why warning signals and the all-clear matter, and what a trainee does on a shot day (30 CFR 56/57.6306 and related blasting standards). Your site's own signals and guard positions come from your site's training.",
+    "src": "/media/videos/allen-m11-2.mp4",
+    "captions": "/media/captions/allen-m11-2.vtt",
+    "poster": "/media/posters/allen-m11-2.jpg"
+  },
+  {
+    "id": "allen-m11-3",
+    "moduleId": 11,
+    "provider": "self",
+    "title": "Misfires and bootlegs: what to do, and what never to do",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 268,
+    "description": "What a misfire is, why a trainee never goes near one, who handles it and after what wait, and why no one drills into or near old holes and bootlegs (30 CFR 56/57.6310, 6311, 7055 and 7056).",
+    "src": "/media/videos/allen-m11-3.mp4",
+    "captions": "/media/captions/allen-m11-3.vtt",
+    "poster": "/media/posters/allen-m11-3.jpg"
+  },
+  {
+    "id": "allen-m11-4",
+    "moduleId": 11,
+    "provider": "self",
+    "title": "After the shot: blast fumes and re-entry",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 345,
+    "description": "What gases a blast makes (carbon monoxide and nitrogen oxides), where they collect, and why nobody goes back in until the area has been ventilated, tested and cleared by the person in charge.",
+    "src": "/media/videos/allen-m11-4.mp4",
+    "captions": "/media/captions/allen-m11-4.vtt",
+    "poster": "/media/posters/allen-m11-4.jpg"
+  },
+  {
+    "id": "allen-m11-5",
+    "moduleId": 11,
+    "provider": "self",
+    "title": "When the gas monitor alarms",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 284,
+    "description": "What the four-gas monitor that supervisors carry looks and sounds like when it alarms, and the response every miner follows: stop, warn, withdraw, report. Alarm levels are set by your site.",
+    "src": "/media/videos/allen-m11-5.mp4",
+    "captions": "/media/captions/allen-m11-5.vtt",
+    "poster": "/media/posters/allen-m11-5.jpg"
+  },
+  {
     "id": "allen-m12-1",
     "moduleId": 12,
     "provider": "self",
@@ -1846,11 +1942,35 @@ const SELF_HOSTED_VIDEOS = [
     "src": "/media/videos/allen-m12-11.mp4",
     "captions": "/media/captions/allen-m12-11.vtt",
     "poster": "/media/posters/allen-m12-11.jpg"
+  },
+  {
+    "id": "allen-m5-1",
+    "moduleId": 5,
+    "provider": "self",
+    "title": "What hurts people at our operations",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 402,
+    "description": "The injury patterns in MSHA's public records for Boonesboro, Clover Bottom and Dix River as of mid-October 2026, matched to the controls this module teaches: three points of contact, lockout, guarding, pre-shift checks and staying out from under loose ground.",
+    "src": "/media/videos/allen-m5-1.mp4",
+    "captions": "/media/captions/allen-m5-1.vtt",
+    "poster": "/media/posters/allen-m5-1.jpg"
+  },
+  {
+    "id": "allen-m7-1",
+    "moduleId": 7,
+    "provider": "self",
+    "title": "Checking and scaling the back at our mines",
+    "author": "Allen Company training (draft v1)",
+    "durationSeconds": 352,
+    "description": "Why checking ground matters at our mines, what the rule says about hazardous ground, who examines it, what to look and listen for, and why you scale only if you are trained and authorized (30 CFR 57.3200, 57.3201, 57.3202, 57.3360, 57.3401).",
+    "src": "/media/videos/allen-m7-1.mp4",
+    "captions": "/media/captions/allen-m7-1.vtt",
+    "poster": "/media/posters/allen-m7-1.jpg"
   }
 ];
 REQUIRED_VIDEOS.push(...SELF_HOSTED_VIDEOS);
 const SELF_HOSTED_VIDEO_IDS = new Set(SELF_HOSTED_VIDEOS.map(video => video.id));
-Object.entries({"1": ["allen-m1-1", "allen-m1-2", "allen-m1-4", "allen-m1-5", "allen-m1-6", "allen-m1-7", "allen-m1-8", "allen-m1-9"], "2": ["allen-m2-1"], "3": ["allen-m3-1"], "6": ["allen-m6-1", "allen-m6-2", "allen-m6-3", "allen-m6-4", "allen-m6-5", "allen-m6-6", "allen-m6-7", "allen-m6-8"], "8": ["allen-m8-1", "allen-m8-2", "allen-m8-3", "allen-m8-4", "allen-m8-5"], "9": ["allen-m9-1", "allen-m9-2", "allen-m9-3", "allen-m9-4", "allen-m9-5"], "10": ["allen-m10-1", "allen-m10-2", "allen-m10-3", "allen-m10-4"], "11": ["allen-m11-1"], "12": ["allen-m12-1", "allen-m12-2", "allen-m12-3", "allen-m12-4", "allen-m12-5", "allen-m12-6", "allen-m12-7", "allen-m12-8", "allen-m12-9", "allen-m12-10", "allen-m12-11"]}).forEach(([moduleId, ids]) => {
+Object.entries({"1": ["allen-m1-1", "allen-m1-2", "allen-m1-4", "allen-m1-5", "allen-m1-6", "allen-m1-7", "allen-m1-8", "allen-m1-9"], "2": ["allen-m2-1", "allen-m2-2", "allen-m2-3", "allen-m2-4"], "3": ["allen-m3-1", "allen-m3-2"], "6": ["allen-m6-1", "allen-m6-2", "allen-m6-3", "allen-m6-4", "allen-m6-5", "allen-m6-6", "allen-m6-7", "allen-m6-8"], "8": ["allen-m8-1", "allen-m8-2", "allen-m8-3", "allen-m8-4", "allen-m8-5"], "9": ["allen-m9-1", "allen-m9-2", "allen-m9-3", "allen-m9-4", "allen-m9-5"], "10": ["allen-m10-1", "allen-m10-2", "allen-m10-3", "allen-m10-4"], "11": ["allen-m11-1", "allen-m11-2", "allen-m11-3", "allen-m11-4", "allen-m11-5"], "12": ["allen-m12-1", "allen-m12-2", "allen-m12-3", "allen-m12-4", "allen-m12-5", "allen-m12-6", "allen-m12-7", "allen-m12-8", "allen-m12-9", "allen-m12-10", "allen-m12-11"], "5": ["allen-m5-1"], "7": ["allen-m7-1"]}).forEach(([moduleId, ids]) => {
   MODULE_VIDEO_SEQUENCE[moduleId] = (MODULE_VIDEO_SEQUENCE[moduleId] || []).concat(ids);
 });
 Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
@@ -1863,7 +1983,11 @@ Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
   "allen-m1-8": "Then a closer look at Dix River Stone.",
   "allen-m1-9": "Whichever site you're at, your first day follows the same steps.",
   "allen-m2-1": "Now see how this applies at Allen Company sites. With emergencies covered, here's the law that protects you and how to speak up about hazards.",
+  "allen-m2-2": "History shows what happens when voices go unheard. Next, a modern disaster and what MSHA found.",
+  "allen-m2-3": "Knowing your rights is one thing; using them is another. Here are the steps.",
+  "allen-m2-4": "Finally, your own training rights, and the form that proves your training.",
   "allen-m3-1": "Now see how this applies at Allen Company sites. Underground, your W65 is your escape lifeline, so here's how to keep it ready.",
+  "allen-m3-2": "One more point before your hands-on practice: know exactly what the W65 can and can't do.",
   "allen-m6-1": "Now see how this applies at Allen Company sites. Your W65 gets you out of bad air; now learn how you'll know it's time to go.",
   "allen-m6-2": "Once the alarm is raised, a small fire may be one you can put out, if you know how.",
   "allen-m6-3": "If escape by either escapeway is cut off, here's the last resort.",
@@ -1887,6 +2011,10 @@ Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
   "allen-m10-3": "Chemical burns often involve the eyes; here's what to do in the first seconds.",
   "allen-m10-4": "Summer in the pit brings one more first-aid risk: heat.",
   "allen-m11-1": "Now see how this applies at Allen Company sites. Back to the surface: the pit, water, stockpiles and lighting hazards around our sites.",
+  "allen-m11-2": "You've seen how explosives are handled; now see how the blast area is kept clear on shot day.",
+  "allen-m11-3": "Not every shot goes as planned. Here is what to do when one doesn't.",
+  "allen-m11-4": "After the shot comes the air: when it is, and isn't, safe to go back.",
+  "allen-m11-5": "Last in this module: what you do when a gas monitor goes off.",
   "allen-m12-1": "Now see how this applies at Allen Company sites. Now task training, starting with the trucks that move rock from the face to the plant.",
   "allen-m12-2": "The loader feeds those trucks; here's how to run it safely.",
   "allen-m12-3": "The rock ends up at the plant; learn its hazards before you work there.",
@@ -1897,7 +2025,9 @@ Object.assign(VIDEO_SEQUENCE_TRANSITIONS, {
   "allen-m12-8": "When an exam misses loose ground, the result can be fatal; this real MSHA report shows how.",
   "allen-m12-9": "From the face to the dump: a second MSHA report, this time about a berm that couldn't stop a truck.",
   "allen-m12-10": "The third report moves to the plant, where a conveyor started while a miner was working on it.",
-  "allen-m12-11": "In each of these cases, someone could have stopped the job; here's how you do it."
+  "allen-m12-11": "In each of these cases, someone could have stopped the job; here's how you do it.",
+  "allen-m5-1": "After the general hazards, here is what has actually hurt people at our own operations.",
+  "allen-m7-1": "Now bring ground control down to our own mines: what we check and how."
 });
 Object.assign(VIDEO_TRAINING_GUIDANCE, {
   "allen-m1-1": {
@@ -1936,9 +2066,25 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
     "focus": "Your rights and how to report a hazard.",
     "scope": "Awareness only; your site's plans and procedures control. Your site's plans always override this video."
   },
+  "allen-m2-2": {
+    "focus": "Examinations and records must be true, and miners must be free to speak up.",
+    "scope": "Case study from MSHA's public report; lessons only, no claim about any current operator. Your site's plans always override this video."
+  },
+  "allen-m2-3": {
+    "focus": "Tell your supervisor first; know how to reach MSHA; know the 105(c) steps and deadline.",
+    "scope": "Awareness only; this is not legal advice. Contact MSHA or an attorney for your situation. Your site's plans always override this video."
+  },
+  "allen-m2-4": {
+    "focus": "Training before work, annual refresher, and keeping your 5000-23.",
+    "scope": "Task-training support; your site's approved training plan controls. Your site's plans always override this video."
+  },
   "allen-m3-1": {
     "focus": "Keep your W65 ready: check it every shift, keep it within 25 feet.",
     "scope": "Awareness; the hands-on W65 practical is done in person. Awareness only; your site's plans and procedures control. Your site's plans always override this video. The MSA W65 protects against carbon monoxide only and does not make oxygen."
+  },
+  "allen-m3-2": {
+    "focus": "CO only; no oxygen supply; not for low oxygen; keep it in until fresh air.",
+    "scope": "Awareness only; hands-on practice, the manufacturer's instructions and your site's emergency plan control. Your site's plans always override this video."
   },
   "allen-m6-1": {
     "focus": "Recognize the fire warning and get out.",
@@ -2032,6 +2178,22 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
     "focus": "The hazards that come with working in the pit, near water and in poor light.",
     "scope": "Highwalls are covered in Module 7. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
   },
+  "allen-m11-2": {
+    "focus": "Your part on shot day: know the warning, get clear, stay out until the all-clear.",
+    "scope": "Awareness only; the licensed blaster and your site's blasting procedures control. Your site's plans always override this video."
+  },
+  "allen-m11-3": {
+    "focus": "Stay out, keep others out, and report any misfire or bootleg to the blaster.",
+    "scope": "Awareness only; only the blaster and authorized persons handle misfires. Your site's plans always override this video."
+  },
+  "allen-m11-4": {
+    "focus": "Fumes collect in dead ends and low spots; re-entry only after ventilation and testing.",
+    "scope": "Awareness only; your site's ventilation, testing and re-entry procedures control. Your site's plans always override this video."
+  },
+  "allen-m11-5": {
+    "focus": "Recognize a gas alarm and respond: stop, warn, withdraw, report. Never rely on smell.",
+    "scope": "Awareness only; your site's alarm levels and emergency plan control. Your site's plans always override this video."
+  },
   "allen-m12-1": {
     "focus": "Inspect it, make contact, and follow your site's haul-road rules.",
     "scope": "Task-training support; on-the-job training with a qualified person is separate. Awareness only; your site's plans and procedures control. Your site's plans always override this video."
@@ -2075,6 +2237,14 @@ Object.assign(VIDEO_TRAINING_GUIDANCE, {
   "allen-m12-11": {
     "focus": "When and how to stop unsafe work.",
     "scope": "Awareness of miners' rights; your site's reporting procedure controls. Your site's plans always override this video."
+  },
+  "allen-m5-1": {
+    "focus": "Everyday tasks cause most injuries here; the controls are simple habits.",
+    "scope": "Based on public MSHA records as of mid-October 2026; awareness only. Your site's plans always override this video."
+  },
+  "allen-m7-1": {
+    "focus": "Look, listen, stay out from under, and report; scale only if authorized.",
+    "scope": "Awareness only; your site's ground control plan controls. Your site's plans always override this video."
   }
 });
 
